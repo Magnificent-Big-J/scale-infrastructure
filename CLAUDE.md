@@ -190,7 +190,7 @@ Vite proxies in `vite.config.js`. VITE_AUTH_BASE defaults to `/auth`.
 
 - No `@core` / `@layouts` — all components are owned and explicitly placed
 - API utility is `ofetch` from `resources/js/app/utils/api.js` — credentials included by default
-- Stores use absolute API paths (`/api/v1/...`), not relative path helpers
+- Two `ofetch` instances in `utils/api.js`: `api` (no baseURL, used by auth/session stores) and `v1` (baseURL `/api/v1`, used by profile and admin stores with short paths like `profile`, `users/1`)
 - `ProfileResource` wraps the authenticated user for the profile endpoint (includes avatar_url from media)
 - `AuthUserResource` wraps the session user for `/api/v1/me` (lighter, same avatar logic)
 - `UserAdminService` is dependency-injected; bind to `UserAdminServiceInterface` in AppServiceProvider

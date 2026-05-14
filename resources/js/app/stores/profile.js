@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { api } from '../utils/api';
+import { v1 } from '../utils/api';
 import { useSessionStore } from './session';
 
 export const useProfileStore = defineStore('profileAuth', {
@@ -13,7 +13,7 @@ export const useProfileStore = defineStore('profileAuth', {
             this.loading = true;
 
             try {
-                const response = await api('/api/v1/profile');
+                const response = await v1('profile');
 
                 this.profile = response?.data ?? response;
 
@@ -51,7 +51,7 @@ export const useProfileStore = defineStore('profileAuth', {
                     requestBody = { name: payload.name, email: payload.email };
                 }
 
-                const response = await api('/api/v1/profile', {
+                const response = await v1('profile', {
                     method: 'PATCH',
                     body: requestBody,
                 });
@@ -79,7 +79,7 @@ export const useProfileStore = defineStore('profileAuth', {
             this.loading = true;
 
             try {
-                return await api('/api/v1/profile/password', {
+                return await v1('profile/password', {
                     method: 'PUT',
                     body: payload,
                 });

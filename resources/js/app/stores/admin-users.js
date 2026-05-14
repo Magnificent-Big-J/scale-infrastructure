@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { api } from '../utils/api';
+import { v1 } from '../utils/api';
 
 const normalizePayload = (payload) => {
     const data = { ...payload };
@@ -38,7 +38,7 @@ export const useAdminUsersStore = defineStore('adminUsers', {
                 if (search) params.set('search', search);
                 if (role) params.set('role', role);
 
-                const response = await api(`/api/v1/users?${params}`);
+                const response = await v1(`users?${params}`);
 
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
@@ -54,7 +54,7 @@ export const useAdminUsersStore = defineStore('adminUsers', {
             this.loading = true;
 
             try {
-                const response = await api('/api/v1/users', {
+                const response = await v1('users', {
                     method: 'POST',
                     body: normalizePayload(payload),
                 });
@@ -69,7 +69,7 @@ export const useAdminUsersStore = defineStore('adminUsers', {
             this.loading = true;
 
             try {
-                const response = await api(`/api/v1/users/${userId}`, {
+                const response = await v1(`users/${userId}`, {
                     method: 'PATCH',
                     body: normalizePayload(payload),
                 });
