@@ -35,8 +35,8 @@ router.beforeEach(async (to) => {
 
 router.afterEach((to) => {
     document.title = to.meta.title
-        ? `${to.meta.title} | Rainwaves Starter`
-        : 'Rainwaves Starter';
+        ? `${to.meta.title} | Scale Infrastructure`
+        : 'Scale Infrastructure';
 });
 
 if (import.meta.hot) {

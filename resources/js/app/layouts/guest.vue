@@ -11,11 +11,10 @@
             <div class="guest-shell__body">
                 <header class="guest-header">
                     <RouterLink to="/" class="guest-logo">
-                        <span class="guest-logo__badge">RW</span>
-                        <span class="guest-logo__name">Rainwaves</span>
+                        <span class="guest-logo__badge">SI</span>
+                        <span class="guest-logo__name">Scale Infrastructure</span>
                     </RouterLink>
                     <nav class="guest-links">
-                        <RouterLink to="/about" class="guest-links__item">About</RouterLink>
                         <RouterLink to="/auth/register" class="guest-links__item">Register</RouterLink>
                         <RouterLink to="/auth/login" class="guest-links__cta">Sign in</RouterLink>
                     </nav>
@@ -26,7 +25,7 @@
                 </main>
 
                 <footer class="guest-footer">
-                    <span>Rainwaves Starter &mdash; Laravel 13</span>
+                    <span>Scale Infrastructure - Code Scale Tech</span>
                 </footer>
             </div>
         </div>

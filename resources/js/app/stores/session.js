@@ -27,7 +27,15 @@ export const useSessionStore = defineStore('sessionAuth', {
     getters: {
         isAuthenticated: (state) => Boolean(state.user),
         isAdminSurface: (state) =>
-            state.user?.roles?.some((role) => ['super-admin', 'admin'].includes(role)) ?? false,
+            state.user?.roles?.some((role) => [
+                'administrator',
+                'executive',
+                'operations',
+                'finance',
+                'sales',
+                'support',
+                'technical',
+            ].includes(role)) ?? false,
         activeSurface() {
             if (!this.isAuthenticated) {
                 return 'guest';
@@ -36,7 +44,7 @@ export const useSessionStore = defineStore('sessionAuth', {
             return this.isAdminSurface ? 'admin' : 'customer';
         },
         homeRoute() {
-            return this.isAdminSurface ? '/dashboard' : '/customer/home';
+            return '/dashboard';
         },
     },
     actions: {

@@ -36,7 +36,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
                 return false;
             }
 
-            if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['super-admin', 'admin'])) {
+            if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['administrator', 'technical'])) {
                 return true;
             }
 

@@ -1,21 +1,15 @@
 <template>
     <div class="dashboard">
         <AppPageHeader
-            :eyebrow="greeting"
-            :title="`${firstName}.`"
-            subtitle="The starter dashboard now demonstrates reusable billing, activity, and security-ready surfaces as first-class starter assets."
+            eyebrow="Scale Infrastructure"
+            :title="`Good ${dayPart}, ${firstName}.`"
+            subtitle="Operational control centre for clients, deployments, infrastructure, monitoring, support, billing, releases, and profitability."
         >
             <template #metrics>
-                <AppStatusBadge status="active" label="Starter ready" />
-                <AppStatusBadge status="processing" :label="today" />
+                <AppStatusBadge status="active" label="Phase 0" />
+                <AppStatusBadge status="processing" label="Foundation shell" />
             </template>
         </AppPageHeader>
-
-        <AppBanner
-            title="Admin surface baseline"
-            message="This page now follows the same starter-first language as the component catalog: stat rows, sectional cards, domain widgets, and clear module entry points."
-            type="success"
-        />
 
         <div class="stat-row">
             <AppStatCard
@@ -31,7 +25,7 @@
         </div>
 
         <div class="dashboard__body">
-            <AppSectionCard title="Platform modules" subtitle="Every major starter surface is discoverable from the dashboard.">
+            <AppSectionCard title="Build sequence" subtitle="The registry will be built in complete operational slices.">
                 <div class="module-grid">
                     <RouterLink
                         v-for="mod in modules"
@@ -43,9 +37,7 @@
                             <span class="module-card__icon">
                                 <v-icon size="20" :color="mod.color">{{ mod.icon }}</v-icon>
                             </span>
-                            <span class="module-card__arrow">
-                                <v-icon size="14" color="var(--rw-dim)">mdi-arrow-right</v-icon>
-                            </span>
+                            <span class="module-card__status">{{ mod.status }}</span>
                         </div>
                         <h3 class="module-card__title">{{ mod.title }}</h3>
                         <p class="module-card__text">{{ mod.text }}</p>
@@ -73,46 +65,16 @@
                     </div>
                 </AppSectionCard>
 
-                <AppSectionCard title="Stack">
+                <AppSectionCard title="Foundation status">
                     <ul class="stack-list">
-                        <li v-for="item in stackItems" :key="item.name" class="stack-list__item">
+                        <li v-for="item in foundationItems" :key="item.name" class="stack-list__item">
                             <span class="stack-list__name">{{ item.name }}</span>
-                            <span class="stack-list__ver">{{ item.ver }}</span>
+                            <span class="stack-list__ver">{{ item.status }}</span>
                         </li>
                     </ul>
                 </AppSectionCard>
             </aside>
         </div>
-
-        <div class="dashboard__commerce">
-            <PaymentStatusCard
-                title="One-time payment"
-                subtitle="Starter billing summary primitive"
-                amount="R 1,499.00"
-                reference="Order #RW-10027"
-                status="processing"
-                provider="PayFast"
-                customer="Starter Owner"
-                requested-at="Today, 10:40"
-                settled-at="Awaiting ITN"
-            />
-
-            <SubscriptionStatusCard
-                title="Recurring subscription"
-                subtitle="Starter subscription surface"
-                amount="R 299.00 / month"
-                plan="Growth plan"
-                status="active"
-                billing-date="01 May 2026"
-                cycles="0"
-            />
-        </div>
-
-        <PaymentEventList
-            title="Recent payment events"
-            subtitle="Use this list for ITN history, billing audit, and support tooling."
-            :events="paymentEvents"
-        />
     </div>
 </template>
 
@@ -134,19 +96,15 @@ import AppPageHeader from '../components/AppPageHeader.vue';
 import AppSectionCard from '../components/AppSectionCard.vue';
 import AppStatCard from '../components/AppStatCard.vue';
 import AppStatusBadge from '../components/AppStatusBadge.vue';
-import AppBanner from '../components/AppBanner.vue';
-import PaymentEventList from '../components/PaymentEventList.vue';
-import PaymentStatusCard from '../components/PaymentStatusCard.vue';
-import SubscriptionStatusCard from '../components/SubscriptionStatusCard.vue';
 import { useSessionStore } from '../stores/session';
 
 const session = useSessionStore();
 
-const greeting = computed(() => {
+const dayPart = computed(() => {
     const h = new Date().getHours();
-    if (h < 12) return 'Good morning';
-    if (h < 17) return 'Good afternoon';
-    return 'Good evening';
+    if (h < 12) return 'morning';
+    if (h < 17) return 'afternoon';
+    return 'evening';
 });
 
 const firstName = computed(() =>
@@ -154,7 +112,7 @@ const firstName = computed(() =>
 );
 
 const userInitials = computed(() =>
-    (session.user?.name || 'RW')
+    (session.user?.name || 'SI')
         .split(' ')
         .filter(Boolean)
         .slice(0, 2)
@@ -162,293 +120,230 @@ const userInitials = computed(() =>
         .join('')
 );
 
-const today = computed(() =>
-    new Date().toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-);
-
 const stats = [
-    { label: 'Active roles', value: '4', helper: 'Seeded platform roles', icon: 'mdi-shield-account-outline', bg: 'rgba(0,106,74,0.08)', iconColor: 'var(--rw-600)' },
-    { label: 'Permissions seeded', value: '21', helper: 'Authorization baseline', icon: 'mdi-key-outline', bg: 'rgba(180,83,9,0.08)', iconColor: 'var(--rw-amber)' },
-    { label: 'Queue backend', value: 'Redis', helper: 'Horizon-ready workload', icon: 'mdi-database-outline', bg: 'rgba(3,105,161,0.08)', iconColor: '#0369a1' },
-    { label: 'Storage backend', value: 'MinIO', helper: 'Media and uploads', icon: 'mdi-cloud-outline', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
+    { label: 'Roles seeded', value: '7', helper: 'Operations, finance, sales, support and admin access', icon: 'mdi-shield-account-outline', bg: 'rgba(0,106,74,0.08)', iconColor: 'var(--rw-600)' },
+    { label: 'Database', value: 'PostgreSQL', helper: 'Default registry database target', icon: 'mdi-database-outline', bg: 'rgba(3,105,161,0.08)', iconColor: '#0369a1' },
+    { label: 'Queue backend', value: 'Redis', helper: 'Horizon-ready operational jobs', icon: 'mdi-sync-circle', bg: 'rgba(180,83,9,0.08)', iconColor: 'var(--rw-amber)' },
+    { label: 'Storage backend', value: 'S3', helper: 'Media and future operational documents', icon: 'mdi-cloud-outline', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
 ];
 
 const modules = [
     {
-        to: '/auth/profile',
-        title: 'Profile & 2FA',
-        text: 'Update your name, email, avatar, and manage two-factor authentication.',
-        icon: 'mdi-account-circle-outline',
+        to: '/clients',
+        title: 'Clients and contacts',
+        text: 'Account master data, contacts, client status, and ownership.',
+        icon: 'mdi-domain',
         color: 'var(--rw-600)',
+        status: 'Module 01',
     },
     {
-        to: '/admin/users',
-        title: 'User management',
-        text: 'Create and manage users, assign roles and granular permissions.',
-        icon: 'mdi-account-group-outline',
-        color: 'var(--rw-amber)',
-    },
-    {
-        to: '/foundation',
-        title: 'Starter foundation',
-        text: 'Review the broader starter baseline, page chrome, widgets, interaction patterns, and rollout guidance.',
-        icon: 'mdi-toy-brick-outline',
+        to: '/operations/deployments',
+        title: 'Deployments and infrastructure',
+        text: 'Product environments, hosting assets, domains, versions, and status.',
+        icon: 'mdi-server-network',
         color: '#0369a1',
+        status: 'Module 02',
     },
     {
-        to: '/components',
-        title: 'Component catalog',
-        text: 'Open the live inventory of shared inputs, cards, feedback surfaces, and domain primitives.',
-        icon: 'mdi-shape-outline',
+        to: '/support/tickets',
+        title: 'Support and incidents',
+        text: 'Retainers, support work, severity, incidents, and SLA visibility.',
+        icon: 'mdi-ticket-confirmation-outline',
+        color: 'var(--rw-amber)',
+        status: 'Module 03',
+    },
+    {
+        to: '/commercial/billing',
+        title: 'Commercial operations',
+        text: 'Contracts, billing records, invoices, payments, and revenue visibility.',
+        icon: 'mdi-cash-multiple',
         color: '#7c3aed',
+        status: 'Module 04',
     },
 ];
 
-const stackItems = [
-    { name: 'Laravel', ver: '13' },
-    { name: 'lara-auth-suite', ver: '2' },
-    { name: 'payfast-payment', ver: '1' },
-    { name: 'Vue + Vuetify', ver: '3' },
-    { name: 'Pinia', ver: '2' },
-    { name: 'Horizon', ver: '5' },
-];
-
-const paymentEvents = [
-    {
-        id: 1,
-        title: 'Checkout initiated',
-        time: 'Today, 10:40',
-        text: 'One-time order RW-10027 was sent to PayFast for customer redirect.',
-        type: 'info',
-    },
-    {
-        id: 2,
-        title: 'ITN received',
-        time: 'Today, 10:43',
-        text: 'Provider callback validated the merchant signature and queued reconciliation.',
-        type: 'warning',
-    },
-    {
-        id: 3,
-        title: 'Payment completed',
-        time: 'Today, 10:45',
-        text: 'Payment settled successfully and the starter payment aggregate moved to paid.',
-        type: 'success',
-    },
+const foundationItems = [
+    { name: 'Laravel', status: '13' },
+    { name: 'Vue and Vuetify', status: 'Ready' },
+    { name: 'Sanctum auth', status: 'Ready' },
+    { name: 'Permission model', status: 'Seeded' },
+    { name: 'Activity log', status: 'Ready' },
+    { name: 'Horizon', status: 'Ready' },
 ];
 </script>
 
 <style scoped>
 .dashboard {
-    padding: 2.25rem 2rem 4rem;
-    max-width: 1180px;
+    width: min(100%, 1180px);
     margin: 0 auto;
+    padding: 2.25rem 2rem 4rem;
     display: grid;
     gap: 2rem;
 }
 
 .stat-row {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.875rem;
 }
 
 .dashboard__body {
     display: grid;
+    grid-template-columns: minmax(0, 1fr) 21rem;
     gap: 1.5rem;
     align-items: start;
 }
 
-.dashboard__commerce {
+.dashboard__aside {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.section-title {
-    margin: 0 0 0.3rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--rw-ink);
-}
-
-.section-sub {
-    margin: 0 0 1.25rem;
-    font-size: 0.85rem;
-    color: var(--rw-muted);
 }
 
 .module-grid {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.875rem;
 }
 
 .module-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.1rem 1.25rem;
-    background: var(--rw-surface);
-    border-radius: 1rem;
+    display: grid;
+    gap: 0.8rem;
+    padding: 1rem;
     border: 1px solid var(--rw-border);
-    text-decoration: none;
-    color: inherit;
-    box-shadow: var(--rw-shadow-xs);
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-}
-
-.module-card:hover {
-    border-color: var(--rw-100);
-    box-shadow: var(--rw-shadow);
-    transform: translateY(-1px);
+    border-radius: 12px;
+    background: var(--rw-surface-2);
+    color: var(--rw-ink);
 }
 
 .module-card__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
 }
 
 .module-card__icon {
-    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    background: var(--rw-surface-2);
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid var(--rw-border);
+}
+
+.module-card__status {
+    color: var(--rw-muted);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .module-card__title {
     margin: 0;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--rw-ink);
+    font-size: 1rem;
+    line-height: 1.25;
 }
 
 .module-card__text {
     margin: 0;
-    font-size: 0.8rem;
     color: var(--rw-muted);
-    line-height: 1.5;
+    font-size: 0.88rem;
+    line-height: 1.55;
 }
 
 .identity {
     display: flex;
+    gap: 0.8rem;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.875rem;
 }
 
 .identity__avatar {
-    display: flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 12px;
+    background: var(--rw-700);
+    color: #fff;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--rw-700), var(--rw-500));
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
+    font-weight: 800;
 }
 
 .identity__info {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.3;
     min-width: 0;
+    display: grid;
+}
+
+.identity__name,
+.identity__email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .identity__name {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--rw-ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-weight: 700;
 }
 
-.identity__email {
-    font-size: 0.775rem;
+.identity__email,
+.role-none {
     color: var(--rw-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.84rem;
 }
 
 .role-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
-}
-
-.role-none {
-    font-size: 0.78rem;
-    color: var(--rw-dim);
+    gap: 0.45rem;
+    margin-top: 1rem;
 }
 
 .stack-list {
+    display: grid;
+    gap: 0.65rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    display: grid;
-    gap: 0.5rem;
 }
 
 .stack-list__item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.8rem;
+    gap: 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--rw-border);
+}
+
+.stack-list__item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
 }
 
 .stack-list__name {
-    color: var(--rw-ink-2);
-    font-weight: 500;
+    color: var(--rw-muted);
 }
 
 .stack-list__ver {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--rw-muted);
-    background: var(--rw-surface-2);
-    padding: 0.1rem 0.5rem;
-    border-radius: 999px;
-    border: 1px solid var(--rw-border);
+    font-weight: 700;
 }
 
-@media (min-width: 640px) {
-    .stat-row {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (min-width: 860px) {
+@media (max-width: 1020px) {
     .dashboard__body {
-        grid-template-columns: 1fr 260px;
-    }
-
-    .module-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 860px) {
-    .dashboard {
-        padding: 1.75rem 1rem 3rem;
-    }
-
-    .dashboard__commerce {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 720px) {
     .dashboard {
-        padding-inline: 0.75rem;
+        padding: 1.35rem 1rem 3rem;
+    }
+
+    .stat-row,
+    .module-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>

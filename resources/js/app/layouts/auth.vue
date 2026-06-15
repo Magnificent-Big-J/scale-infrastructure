@@ -13,8 +13,8 @@
             <div class="auth-shell__body">
                 <div class="auth-header">
                     <RouterLink to="/" class="auth-logo">
-                        <span class="auth-logo__badge">RW</span>
-                        <span class="auth-logo__name">Rainwaves</span>
+                        <span class="auth-logo__badge">SI</span>
+                        <span class="auth-logo__name">Scale Infrastructure</span>
                     </RouterLink>
                 </div>
 
@@ -23,7 +23,7 @@
                 </div>
 
                 <footer class="auth-footer">
-                    <span>Rainwaves Starter &mdash; Laravel 13</span>
+                    <span>Scale Infrastructure - Code Scale Tech</span>
                 </footer>
             </div>
         </div>

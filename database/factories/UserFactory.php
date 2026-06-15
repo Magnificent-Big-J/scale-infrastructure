@@ -44,42 +44,42 @@ class UserFactory extends Factory
         ]);
     }
 
-    public function owner(): static
+    public function administrator(): static
     {
         return $this
             ->state(fn () => [
-                'name' => 'Starter Owner',
-                'email' => 'owner@rainwaves.test',
+                'name' => 'Scale Infrastructure Admin',
+                'email' => 'admin@codescaletech.test',
                 'email_verified_at' => Carbon::now(),
             ])
             ->afterCreating(function (User $user): void {
-                $user->syncRoles(['super-admin']);
+                $user->syncRoles(['administrator']);
             });
     }
 
-    public function ops(): static
+    public function operations(): static
     {
         return $this
             ->state(fn () => [
-                'name' => 'Starter Ops',
-                'email' => 'ops@rainwaves.test',
+                'name' => 'Operations Lead',
+                'email' => 'operations@codescaletech.test',
                 'email_verified_at' => Carbon::now(),
             ])
             ->afterCreating(function (User $user): void {
-                $user->syncRoles(['admin']);
+                $user->syncRoles(['operations']);
             });
     }
 
-    public function customer(): static
+    public function finance(): static
     {
         return $this
             ->state(fn () => [
-                'name' => 'Starter Customer',
-                'email' => 'customer@rainwaves.test',
+                'name' => 'Finance User',
+                'email' => 'finance@codescaletech.test',
                 'email_verified_at' => Carbon::now(),
             ])
             ->afterCreating(function (User $user): void {
-                $user->syncRoles(['customer']);
+                $user->syncRoles(['finance']);
             });
     }
 }

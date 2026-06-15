@@ -2,45 +2,35 @@
     <v-app>
         <div :class="['shell', session.isAuthenticated && 'shell--auth']">
 
-            <!-- ── Authenticated sidebar ──────────────────────── -->
             <aside v-if="session.isAuthenticated" :class="['sidebar', mobileOpen && 'sidebar--open']">
                 <div class="sidebar__inner">
 
                     <div class="sidebar__brand">
                         <RouterLink to="/" class="brand-mark" @click="mobileOpen = false">
                             <span class="brand-mark__badge">
-                                <span class="brand-mark__letters">RW</span>
+                                <span class="brand-mark__letters">SI</span>
                             </span>
                             <div class="brand-mark__text">
-                                <span class="brand-mark__name">Rainwaves</span>
-                                <span class="brand-mark__sub">Starter</span>
+                                <span class="brand-mark__name">Scale</span>
+                                <span class="brand-mark__sub">Infrastructure</span>
                             </div>
                         </RouterLink>
                     </div>
 
                     <nav class="sidebar__nav">
-                        <div class="nav-group">
-                            <NavItem
-                                v-for="item in mainNav"
-                                :key="item.to"
-                                :item="item"
-                                @click="mobileOpen = false"
-                            />
-                        </div>
-
-                        <template v-if="isAdmin">
-                            <div class="nav-divider">
-                                <span class="nav-divider__label">Admin</span>
+                        <div v-for="group in visibleNavGroups" :key="group.label" class="nav-group-wrap">
+                            <div v-if="group.label" class="nav-divider">
+                                <span class="nav-divider__label">{{ group.label }}</span>
                             </div>
                             <div class="nav-group">
                                 <NavItem
-                                    v-for="item in adminNav"
+                                    v-for="item in group.items"
                                     :key="item.to"
                                     :item="item"
                                     @click="mobileOpen = false"
                                 />
                             </div>
-                        </template>
+                        </div>
                     </nav>
 
                     <div class="sidebar__footer">
@@ -85,11 +75,10 @@
                 <!-- Guest topbar -->
                 <header v-else class="guest-bar">
                     <RouterLink to="/" class="guest-brand">
-                        <span class="guest-brand__badge">RW</span>
-                        <span class="guest-brand__name">Rainwaves <em>Starter</em></span>
+                        <span class="guest-brand__badge">SI</span>
+                        <span class="guest-brand__name">Scale <em>Infrastructure</em></span>
                     </RouterLink>
                     <nav class="guest-nav">
-                        <RouterLink to="/about" class="guest-nav__link">About</RouterLink>
                         <RouterLink to="/auth/register" class="guest-nav__link">Register</RouterLink>
                         <RouterLink to="/auth/login" class="guest-nav__cta">Sign in</RouterLink>
                     </nav>
@@ -118,22 +107,65 @@ const router = useRouter();
 const route = useRoute();
 const mobileOpen = ref(false);
 
-const mainNav = [
-    { label: 'Dashboard', to: '/dashboard',    icon: 'mdi-view-dashboard-outline' },
-    { label: 'Profile',   to: '/auth/profile', icon: 'mdi-account-circle-outline' },
+const navGroups = [
+    {
+        label: null,
+        items: [
+            { label: 'Dashboard', to: '/dashboard', icon: 'mdi-view-dashboard-outline', permission: 'dashboard.view' },
+            { label: 'Clients', to: '/clients', icon: 'mdi-domain', permission: 'clients.view' },
+        ],
+    },
+    {
+        label: 'Commercial',
+        items: [
+            { label: 'Opportunities', to: '/commercial/opportunities', icon: 'mdi-chart-timeline-variant', permission: 'opportunities.view' },
+            { label: 'Contracts', to: '/commercial/contracts', icon: 'mdi-file-sign', permission: 'contracts.view' },
+            { label: 'Billing', to: '/commercial/billing', icon: 'mdi-cash-multiple', permission: 'billing.view' },
+            { label: 'Profitability', to: '/commercial/profitability', icon: 'mdi-finance', permission: 'profitability.view' },
+        ],
+    },
+    {
+        label: 'Operations',
+        items: [
+            { label: 'Deployments', to: '/operations/deployments', icon: 'mdi-rocket-launch-outline', permission: 'deployments.view' },
+            { label: 'Infrastructure', to: '/operations/infrastructure', icon: 'mdi-server-network', permission: 'infrastructure.view' },
+            { label: 'Monitoring', to: '/operations/monitoring', icon: 'mdi-pulse', permission: 'monitoring.view' },
+            { label: 'Incidents', to: '/operations/incidents', icon: 'mdi-alert-octagon-outline', permission: 'incidents.view' },
+            { label: 'Releases', to: '/operations/releases', icon: 'mdi-source-branch', permission: 'releases.view' },
+        ],
+    },
+    {
+        label: 'Support',
+        items: [
+            { label: 'Agreements', to: '/support/agreements', icon: 'mdi-handshake-outline', permission: 'support_agreements.view' },
+            { label: 'Tickets', to: '/support/tickets', icon: 'mdi-ticket-confirmation-outline', permission: 'support_tickets.view' },
+            { label: 'SLA Overview', to: '/support/sla-overview', icon: 'mdi-timer-sand', permission: 'support_tickets.view' },
+        ],
+    },
+    {
+        label: 'Administration',
+        items: [
+            { label: 'Products', to: '/admin/products', icon: 'mdi-package-variant-closed', permission: 'products.view' },
+            { label: 'Packages', to: '/admin/packages', icon: 'mdi-tag-multiple-outline', permission: 'packages.view' },
+            { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline', permission: 'users.view' },
+            { label: 'Profile', to: '/auth/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
+        ],
+    },
 ];
 
-const adminNav = [
-    { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline' },
-    { label: 'Components', to: '/components', icon: 'mdi-toy-brick-outline' },
-];
+const can = (permission) => session.user?.permissions?.includes(permission) ?? false;
 
-const isAdmin = computed(() =>
-    session.user?.roles?.some((r) => ['super-admin', 'admin'].includes(r))
+const visibleNavGroups = computed(() =>
+    navGroups
+        .map((group) => ({
+            ...group,
+            items: group.items.filter((item) => !item.permission || can(item.permission)),
+        }))
+        .filter((group) => group.items.length > 0)
 );
 
 const userInitials = computed(() =>
-    (session.user?.name || 'RW')
+    (session.user?.name || 'SI')
         .split(' ')
         .filter(Boolean)
         .slice(0, 2)
@@ -156,7 +188,6 @@ watch(
     { immediate: true }
 );
 
-// ── Inline NavItem to keep this file self-contained ──
 const NavItem = defineComponent({
     props: { item: Object },
     emits: ['click'],

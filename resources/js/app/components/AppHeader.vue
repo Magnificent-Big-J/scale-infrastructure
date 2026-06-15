@@ -3,7 +3,7 @@
         <div class="starter-brand">
             <span class="starter-badge">RW</span>
             <div>
-                <div class="starter-brand__title">Rainwaves Starter</div>
+                <div class="starter-brand__title">Scale Infrastructure</div>
                 <div class="starter-brand__meta">Laravel 13 + Vue + Vuetify</div>
             </div>
         </div>

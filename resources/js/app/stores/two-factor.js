@@ -134,7 +134,7 @@ export const useTwoFactorStore = defineStore('twoFactorAuth', {
                 }
 
                 if (!otpauthUrl) {
-                    const issuer = import.meta.env.VITE_APP_NAME || 'Rainwaves Starter';
+                    const issuer = import.meta.env.VITE_APP_NAME || 'Scale Infrastructure';
                     otpauthUrl = buildOtpAuthUri({ secret, account, issuer });
                 }
 

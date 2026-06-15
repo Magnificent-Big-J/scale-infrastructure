@@ -37,9 +37,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/about': RouteRecordInfo<
-      '/about',
-      '/about',
+    '/admin/packages': RouteRecordInfo<
+      '/admin/packages',
+      '/admin/packages',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/admin/products': RouteRecordInfo<
+      '/admin/products',
+      '/admin/products',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -93,16 +100,37 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/components': RouteRecordInfo<
-      '/components',
-      '/components',
+    '/clients/': RouteRecordInfo<
+      '/clients/',
+      '/clients',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/customer/home': RouteRecordInfo<
-      '/customer/home',
-      '/customer/home',
+    '/commercial/billing': RouteRecordInfo<
+      '/commercial/billing',
+      '/commercial/billing',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/commercial/contracts': RouteRecordInfo<
+      '/commercial/contracts',
+      '/commercial/contracts',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/commercial/opportunities': RouteRecordInfo<
+      '/commercial/opportunities',
+      '/commercial/opportunities',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/commercial/profitability': RouteRecordInfo<
+      '/commercial/profitability',
+      '/commercial/profitability',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -114,9 +142,58 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/foundation': RouteRecordInfo<
-      '/foundation',
-      '/foundation',
+    '/operations/deployments': RouteRecordInfo<
+      '/operations/deployments',
+      '/operations/deployments',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/operations/incidents': RouteRecordInfo<
+      '/operations/incidents',
+      '/operations/incidents',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/operations/infrastructure': RouteRecordInfo<
+      '/operations/infrastructure',
+      '/operations/infrastructure',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/operations/monitoring': RouteRecordInfo<
+      '/operations/monitoring',
+      '/operations/monitoring',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/operations/releases': RouteRecordInfo<
+      '/operations/releases',
+      '/operations/releases',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/support/agreements': RouteRecordInfo<
+      '/support/agreements',
+      '/support/agreements',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/support/sla-overview': RouteRecordInfo<
+      '/support/sla-overview',
+      '/support/sla-overview',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/support/tickets': RouteRecordInfo<
+      '/support/tickets',
+      '/support/tickets',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -140,9 +217,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/about.vue': {
+    'resources/js/app/pages/admin/packages.vue': {
       routes:
-        | '/about'
+        | '/admin/packages'
+      views:
+        | never
+    }
+    'resources/js/app/pages/admin/products.vue': {
+      routes:
+        | '/admin/products'
       views:
         | never
     }
@@ -188,15 +271,33 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/components.vue': {
+    'resources/js/app/pages/clients/index.vue': {
       routes:
-        | '/components'
+        | '/clients/'
       views:
         | never
     }
-    'resources/js/app/pages/customer/home.vue': {
+    'resources/js/app/pages/commercial/billing.vue': {
       routes:
-        | '/customer/home'
+        | '/commercial/billing'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/contracts.vue': {
+      routes:
+        | '/commercial/contracts'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/opportunities.vue': {
+      routes:
+        | '/commercial/opportunities'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/profitability.vue': {
+      routes:
+        | '/commercial/profitability'
       views:
         | never
     }
@@ -206,9 +307,51 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/foundation.vue': {
+    'resources/js/app/pages/operations/deployments.vue': {
       routes:
-        | '/foundation'
+        | '/operations/deployments'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/incidents.vue': {
+      routes:
+        | '/operations/incidents'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/infrastructure.vue': {
+      routes:
+        | '/operations/infrastructure'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/monitoring.vue': {
+      routes:
+        | '/operations/monitoring'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/releases.vue': {
+      routes:
+        | '/operations/releases'
+      views:
+        | never
+    }
+    'resources/js/app/pages/support/agreements.vue': {
+      routes:
+        | '/support/agreements'
+      views:
+        | never
+    }
+    'resources/js/app/pages/support/sla-overview.vue': {
+      routes:
+        | '/support/sla-overview'
+      views:
+        | never
+    }
+    'resources/js/app/pages/support/tickets.vue': {
+      routes:
+        | '/support/tickets'
       views:
         | never
     }

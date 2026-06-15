@@ -5,17 +5,16 @@
             <div class="landing-hero__kicker">
                 <span class="landing-kicker-badge">
                     <v-icon size="13" color="rgba(0,200,140,0.9)">mdi-check-circle-outline</v-icon>
-                    Production-ready starter
+                    Internal operations platform
                 </span>
             </div>
 
             <h1 class="landing-hero__title">
-                The platform foundation<br>your app deserves.
+                Scale Infrastructure<br>for Code Scale Tech.
             </h1>
             <p class="landing-hero__text">
-                Rainwaves Starter ships with authentication, two-factor security,
-                role-based access, payments, media, and a complete UI shell —
-                so your team starts building features on day one.
+                Manage clients, deployments, infrastructure, monitoring, support,
+                billing, releases, and profitability from one internal control centre.
             </p>
             <div class="landing-hero__cta">
                 <RouterLink to="/auth/login" class="cta-primary">Sign in</RouterLink>
@@ -71,72 +70,73 @@ const features = [
     {
         icon: 'mdi-shield-lock-outline',
         iconColor: '#4ade80',
-        title: 'Auth & two-factor',
-        text: 'Session-based auth via Laravel Sanctum with full 2FA support out of the box.',
+        title: 'Secure internal access',
+        text: 'Session-based auth with two-factor support and role-based access for Code Scale Tech teams.',
         bullets: [
-            'Email / password with CSRF protection',
-            'TOTP authenticator app + email OTP',
-            'Recovery codes for account fallback',
-            'Registration disabled by default',
+            'Executive, operations, finance, sales, support, technical, and admin roles',
+            'Two-factor authentication support',
+            'Granular permissions for sensitive finance and infrastructure actions',
+            'Activity logging for operational accountability',
         ],
     },
     {
         icon: 'mdi-account-group-outline',
         iconColor: '#fbbf24',
-        title: 'Roles & permissions',
-        text: 'Granular access control that ships pre-seeded and is ready to enforce immediately.',
+        title: 'Operating model',
+        text: 'The app is structured around the Scale Infrastructure lifecycle and operating model plan.',
         bullets: [
-            'super-admin, admin, staff, customer roles',
-            'Namespaced permissions (users.view, …)',
-            'Route-level and policy-level enforcement',
-            'Permission data embedded in session payload',
+            'Clients and contacts',
+            'Deployments and infrastructure',
+            'Monitoring and incidents',
+            'Support, billing, releases, and profitability',
         ],
     },
     {
         icon: 'mdi-image-outline',
         iconColor: '#60a5fa',
-        title: 'Media & avatars',
-        text: 'File management via Spatie Media Library, stored on MinIO (S3-compatible) by default.',
+        title: 'Deployment visibility',
+        text: 'Track client environments, domains, hosting assets, versions, and health signals.',
         bullets: [
-            'Avatar upload with live preview',
-            'Automatic 320×320 conversion on upload',
-            'Remove avatar support',
-            'Storage abstracted via .env',
+            'Client and product links',
+            'Production, QA, and development environments',
+            'Infrastructure cost capture',
+            'Monitoring checks for operational risk',
         ],
     },
     {
         icon: 'mdi-credit-card-outline',
         iconColor: '#f97316',
-        title: 'PayFast payments',
-        text: 'One-time and subscription payment flows ready to wire to your domain features.',
+        title: 'Commercial control',
+        text: 'Bring contracts, billing, invoices, payments, and profitability into the same operational context.',
         bullets: [
-            'One-time and subscription checkout',
-            'ITN webhook with signature validation',
-            'Idempotent event log — safe to replay',
-            'Typed enum statuses on every record',
+            'Contracts linked to clients and packages',
+            'Billing commitments and invoice status',
+            'Payment recording',
+            'MRR, ARR, and profitability reporting',
         ],
     },
     {
         icon: 'mdi-clipboard-text-clock-outline',
         iconColor: '#34d399',
-        title: 'Activity log',
-        text: 'Audit trail via Spatie Activity Log. Admin actions are logged automatically.',
+        title: 'Support operations',
+        text: 'Track support agreements, tickets, incidents, response expectations, and service review inputs.',
         bullets: [
-            'CausedBy + performedOn on every event',
-            'Custom event names and properties',
-            'Queryable for audit dashboards',
+            'Support tiers and included hours',
+            'Ticket severity and ownership',
+            'Incident root cause and resolution',
+            'SLA and escalation visibility',
         ],
     },
     {
         icon: 'mdi-layers-outline',
         iconColor: '#a78bfa',
-        title: 'Owned UI shell',
-        text: 'No vendor template overrides — every component is explicitly placed and easy to change.',
+        title: 'Automation-ready',
+        text: 'Provisioning and release automation come after the manual operating model is stable.',
         bullets: [
-            'Custom CSS sidebar, no v-navigation-drawer',
-            'Pinia stores + ofetch API layer',
-            'AppDataTable, MediaUploader, FormActions',
-            'Vuetify 3 with a custom Rainwaves theme',
+            'Release tracking',
+            'Change approvals',
+            'Provisioning templates',
+            'Auditable automation runs',
         ],
     },
 ];

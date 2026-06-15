@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesAndPermissionsSeeder::class,
-            StarterUsersSeeder::class,
+            ScaleInfrastructureUsersSeeder::class,
         ]);
     }
 }

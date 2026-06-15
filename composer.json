@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "magnificent-big-j/rainwaves-starter",
+    "name": "code-scale-tech/scale-infrastructure",
     "type": "project",
-    "description": "Secure Laravel 13 + Vue starter template for Rainwaves apps, with auth, roles, media, and PayFast integration.",
-    "keywords": ["laravel", "vue", "starter", "rainwaves"],
+    "description": "Internal Code Scale Tech infrastructure operating platform for clients, deployments, support, billing, monitoring, releases, and profitability.",
+    "keywords": ["laravel", "vue", "scale-infrastructure", "operations", "infrastructure"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
