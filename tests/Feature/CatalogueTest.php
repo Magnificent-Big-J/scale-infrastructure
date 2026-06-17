@@ -29,7 +29,16 @@ class CatalogueTest extends TestCase
 
         $this->assertSame('ScaleLens', $product->name);
         $this->assertSame(3, $product->packages()->count());
-        $this->assertDatabaseHas('packages', ['code' => 'SCALELENS-GROWTH', 'product_id' => $product->id]);
+        $this->assertDatabaseHas('packages', [
+            'code' => 'SCALELENS-GROWTH',
+            'product_id' => $product->id,
+            'billing_interval' => 'once_off',
+            'price_min' => '300000.00',
+            'price_max' => '600000.00',
+        ]);
+
+        // Enterprise is an open-ended "from" tier — no upper bound.
+        $this->assertDatabaseHas('packages', ['code' => 'SCALELENS-ENTERPRISE', 'price_min' => '600000.00', 'price_max' => null]);
     }
 
     public function test_admin_can_list_products(): void
@@ -75,18 +84,37 @@ class CatalogueTest extends TestCase
 
         $response = $this->actingAs($this->admin(), 'sanctum')
             ->postJson("/api/v1/products/{$product->id}/packages", [
-                'code' => 'SCALELENS-ENTERPRISE',
-                'name' => 'Enterprise',
-                'billing_interval' => 'annual',
-                'price' => 150000,
+                'code' => 'SCALELENS-CUSTOM',
+                'name' => 'Custom',
+                'billing_interval' => 'once_off',
+                'price_min' => 150000,
+                'price_max' => 250000,
             ]);
 
-        $response->assertCreated()->assertJsonFragment(['code' => 'SCALELENS-ENTERPRISE']);
+        $response->assertCreated()->assertJsonFragment(['code' => 'SCALELENS-CUSTOM']);
         $this->assertDatabaseHas('packages', [
-            'code' => 'SCALELENS-ENTERPRISE',
+            'code' => 'SCALELENS-CUSTOM',
             'product_id' => $product->id,
-            'billing_interval' => 'annual',
+            'billing_interval' => 'once_off',
         ]);
+    }
+
+    public function test_package_price_max_cannot_be_below_price_min(): void
+    {
+        $this->seed();
+
+        $product = Product::where('code', 'SCALELENS')->firstOrFail();
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->postJson("/api/v1/products/{$product->id}/packages", [
+                'code' => 'SCALELENS-BAD',
+                'name' => 'Bad range',
+                'billing_interval' => 'once_off',
+                'price_min' => 300000,
+                'price_max' => 100000,
+            ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors('price_max');
     }
 
     public function test_admin_can_archive_product(): void

@@ -21,29 +21,32 @@ class CatalogueSeeder extends Seeder
             ],
         );
 
+        // Packages are feature-based, once-off implementations with indicative
+        // price ranges (confirmed after a Project Visibility Assessment).
+        // Source: Documentation 26 - ScaleLens Packages, Features & Pricing.
         $packages = [
             [
                 'code' => 'SCALELENS-STARTER',
                 'name' => 'Starter',
-                'description' => 'Entry package for a single deployment with core monitoring.',
-                'billing_interval' => BillingInterval::Monthly,
-                'price' => 2500.00,
+                'description' => 'Smaller teams and consultancies getting projects under control: clients, projects, stages, dashboards, health scoring, standard reports, and audit trail.',
+                'price_min' => 200000.00,
+                'price_max' => 300000.00,
                 'sort_order' => 1,
             ],
             [
                 'code' => 'SCALELENS-GROWTH',
                 'name' => 'Growth',
-                'description' => 'Expanded monitoring, infrastructure tracking, and standard support.',
-                'billing_interval' => BillingInterval::Monthly,
-                'price' => 6500.00,
+                'description' => 'Multi-project organisations and PMOs needing governance. Everything in Starter, plus risk, action and stakeholder registers, meetings and decision log, and advanced reporting.',
+                'price_min' => 300000.00,
+                'price_max' => 600000.00,
                 'sort_order' => 2,
             ],
             [
-                'code' => 'SCALELENS-SCALE',
-                'name' => 'Scale',
-                'description' => 'Full operational coverage with priority support and incident management.',
-                'billing_interval' => BillingInterval::Monthly,
-                'price' => 12500.00,
+                'code' => 'SCALELENS-ENTERPRISE',
+                'name' => 'Enterprise',
+                'description' => 'Large organisations and programme offices needing full document control and portfolio oversight. Everything in Growth, plus document register and version control, approvals and transmittals, portfolio dashboards, custom workflows, and integration APIs.',
+                'price_min' => 600000.00,
+                'price_max' => null,
                 'sort_order' => 3,
             ],
         ];
@@ -55,8 +58,9 @@ class CatalogueSeeder extends Seeder
                     'product_id' => $scaleLens->id,
                     'name' => $package['name'],
                     'description' => $package['description'],
-                    'billing_interval' => $package['billing_interval'],
-                    'price' => $package['price'],
+                    'billing_interval' => BillingInterval::OnceOff,
+                    'price_min' => $package['price_min'],
+                    'price_max' => $package['price_max'],
                     'currency' => config('catalogue.default_currency'),
                     'status' => CatalogueStatus::Active,
                     'sort_order' => $package['sort_order'],

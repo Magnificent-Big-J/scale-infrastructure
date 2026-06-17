@@ -23,7 +23,8 @@ class Package extends Model
         'name',
         'description',
         'billing_interval',
-        'price',
+        'price_min',
+        'price_max',
         'currency',
         'status',
         'sort_order',
@@ -34,7 +35,8 @@ class Package extends Model
         return [
             'billing_interval' => BillingInterval::class,
             'status' => CatalogueStatus::class,
-            'price' => 'decimal:2',
+            'price_min' => 'decimal:2',
+            'price_max' => 'decimal:2',
             'sort_order' => 'integer',
         ];
     }
