@@ -5,6 +5,7 @@
         scope="Module 03 will build support ticket lifecycle tracking and client support tabs."
         status="Module 03"
         icon="mdi-ticket-confirmation-outline"
+        page-key="support.tickets"
     />
 </template>
 

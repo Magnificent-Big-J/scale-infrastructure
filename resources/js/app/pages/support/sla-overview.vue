@@ -5,6 +5,7 @@
         scope="Module 03 and Module 07 will turn support agreements and tickets into service-review controls."
         status="Planned"
         icon="mdi-timer-sand"
+        page-key="support.sla-overview"
     />
 </template>
 

@@ -5,6 +5,7 @@
         scope="Module 04 will build contract tracking, renewal visibility, approval permissions, and client contract tabs."
         status="Module 04"
         icon="mdi-file-sign"
+        page-key="commercial.contracts"
     />
 </template>
 

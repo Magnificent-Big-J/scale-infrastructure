@@ -5,6 +5,7 @@
         scope="Module 05 will build profitability records, margin calculations, and executive reporting."
         status="Module 05"
         icon="mdi-finance"
+        page-key="commercial.profitability"
     />
 </template>
 

@@ -5,6 +5,7 @@
         scope="Module 01 will build client CRUD, contact management, primary contact handling, status filters, and activity logging."
         status="Module 01"
         icon="mdi-domain"
+        page-key="clients"
     />
 </template>
 

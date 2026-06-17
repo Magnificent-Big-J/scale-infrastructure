@@ -5,6 +5,7 @@
         scope="Module 02 will build monitoring checks, status tracking, and operations dashboard summaries."
         status="Module 02"
         icon="mdi-pulse"
+        page-key="operations.monitoring"
     />
 </template>
 

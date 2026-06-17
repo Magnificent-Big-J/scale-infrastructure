@@ -45,4 +45,17 @@ class ScaleInfrastructureFoundationTest extends TestCase
         $this->assertContains('settings.update', $payload['permissions']);
         $this->assertNull($payload['avatar_url']);
     }
+
+    public function test_admin_can_view_seeded_module_demo_records(): void
+    {
+        $this->seed();
+
+        $administrator = User::where('email', 'admin@codescaletech.test')->firstOrFail();
+
+        $this->actingAs($administrator, 'sanctum')
+            ->getJson('/api/v1/module-demo/operations.deployments')
+            ->assertOk()
+            ->assertJsonPath('summary.total', 3)
+            ->assertJsonFragment(['headline' => 'ScaleLens Production']);
+    }
 }

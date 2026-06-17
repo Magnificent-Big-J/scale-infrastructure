@@ -5,6 +5,7 @@
         scope="Opportunities are planned for the commercial module after the operational registry foundation is stable."
         status="Planned"
         icon="mdi-chart-timeline-variant"
+        page-key="commercial.opportunities"
     />
 </template>
 

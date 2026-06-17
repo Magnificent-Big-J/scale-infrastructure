@@ -5,6 +5,7 @@
         scope="Module 02 will build infrastructure asset records linked to deployments."
         status="Module 02"
         icon="mdi-server-network"
+        page-key="operations.infrastructure"
     />
 </template>
 

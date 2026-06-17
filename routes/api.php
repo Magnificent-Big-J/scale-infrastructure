@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
+use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::get('profile', [ProfileController::class, 'show']);
     Route::patch('profile', [ProfileController::class, 'update']);
     Route::put('profile/password', [ProfileController::class, 'updatePassword']);
+
+    Route::get('module-demo/{pageKey}', [ModuleDemoRecordController::class, 'index'])
+        ->where('pageKey', '[A-Za-z0-9_.-]+');
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
