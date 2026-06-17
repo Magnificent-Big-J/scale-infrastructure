@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ScaleInfrastructureUsersSeeder::class,
             CatalogueSeeder::class,
             ClientSeeder::class,
+            DeploymentSeeder::class,
             ModuleDemoSeeder::class,
         ]);
     }
