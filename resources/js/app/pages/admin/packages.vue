@@ -363,7 +363,7 @@ onMounted(load);
 
 <style scoped>
 .admin-catalogue-page {
-    padding: 2rem 1.25rem 4rem;
+    padding: 2.25rem 2rem 4rem;
 }
 
 .page-wrap {
