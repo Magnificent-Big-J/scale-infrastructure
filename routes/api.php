@@ -7,7 +7,10 @@ use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\DeploymentController;
+use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
+use App\Http\Controllers\Api\MonitoringCheckController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +40,18 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::middleware('can:contacts.update')->match(['put', 'patch'], 'contacts/{contact}', [ContactController::class, 'update']);
         Route::middleware('can:contacts.delete')->delete('contacts/{contact}', [ContactController::class, 'destroy']);
     });
+
+    Route::middleware('can:deployments.view')->group(function () {
+        Route::get('deployments', [DeploymentController::class, 'index']);
+        Route::middleware('can:deployments.create')->post('deployments', [DeploymentController::class, 'store']);
+        Route::middleware('can:deployments.update')->match(['put', 'patch'], 'deployments/{deployment}', [DeploymentController::class, 'update']);
+        Route::middleware('can:deployments.delete')->delete('deployments/{deployment}', [DeploymentController::class, 'destroy']);
+        Route::middleware('can:infrastructure.create')->post('deployments/{deployment}/infrastructure-assets', [InfrastructureAssetController::class, 'store']);
+        Route::middleware('can:monitoring.create')->post('deployments/{deployment}/monitoring-checks', [MonitoringCheckController::class, 'store']);
+    });
+
+    Route::middleware('can:infrastructure.view')->get('infrastructure-assets', [InfrastructureAssetController::class, 'index']);
+    Route::middleware('can:monitoring.view')->get('monitoring-checks', [MonitoringCheckController::class, 'index']);
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
