@@ -44,6 +44,7 @@ class PackageController extends Controller
             'options' => [
                 'statuses' => CatalogueStatus::options(),
                 'billing_intervals' => BillingInterval::options(),
+                'default_currency' => config('catalogue.default_currency'),
                 'products' => Product::query()
                     ->orderBy('name')
                     ->get(['id', 'name'])

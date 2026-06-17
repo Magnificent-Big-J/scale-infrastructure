@@ -14,6 +14,7 @@ export const usePackagesStore = defineStore('packages', {
         options: {
             statuses: [],
             billing_intervals: [],
+            default_currency: '',
             products: [],
         },
         loading: false,

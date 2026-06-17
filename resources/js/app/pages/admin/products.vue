@@ -166,7 +166,9 @@ const columns = [
 
 const filters = reactive({ search: '', status: '', page: 1 });
 
-const emptyForm = () => ({ code: '', name: '', description: '', status: 'active' });
+const emptyForm = () => ({ code: '', name: '', description: '', status: '' });
+
+const defaultStatus = () => store.options.statuses[0]?.value ?? '';
 
 const dialog = reactive({
     open: false,
@@ -203,7 +205,10 @@ const onPage = (page) => {
 };
 
 const openCreate = () => {
-    Object.assign(dialog, { open: true, mode: 'create', editId: null, form: emptyForm(), errors: {}, message: '' });
+    const form = emptyForm();
+    form.status = defaultStatus();
+
+    Object.assign(dialog, { open: true, mode: 'create', editId: null, form, errors: {}, message: '' });
 };
 
 const openEdit = (row) => {

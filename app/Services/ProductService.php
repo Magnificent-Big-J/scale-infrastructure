@@ -13,13 +13,8 @@ class ProductService implements ProductServiceInterface
     {
         return Product::query()
             ->withCount('packages')
-            ->when($search, function ($query, $term) {
-                $query->where(function ($inner) use ($term) {
-                    $inner->where('name', 'like', "%{$term}%")
-                        ->orWhere('code', 'like', "%{$term}%");
-                });
-            })
-            ->when($status, fn ($query, $value) => $query->where('status', $value))
+            ->search($search)
+            ->withStatus($status)
             ->orderBy('name')
             ->paginate($perPage);
     }
@@ -62,7 +57,7 @@ class ProductService implements ProductServiceInterface
             return;
         }
 
-        activity('products')
+        activity($product->getTable())
             ->performedOn($product)
             ->causedBy(auth()->user())
             ->withProperties($properties)

@@ -57,7 +57,7 @@ class CatalogueSeeder extends Seeder
                     'description' => $package['description'],
                     'billing_interval' => $package['billing_interval'],
                     'price' => $package['price'],
-                    'currency' => 'ZAR',
+                    'currency' => config('catalogue.default_currency'),
                     'status' => CatalogueStatus::Active,
                     'sort_order' => $package['sort_order'],
                 ],

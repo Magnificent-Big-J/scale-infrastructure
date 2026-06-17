@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\CatalogueStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('status')->default('active');
+            $table->string('status')->default(CatalogueStatus::Active->value);
             $table->timestamps();
             $table->softDeletes();
         });

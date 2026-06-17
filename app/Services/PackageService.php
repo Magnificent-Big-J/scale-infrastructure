@@ -14,14 +14,9 @@ class PackageService implements PackageServiceInterface
     {
         return Package::query()
             ->with('product')
-            ->when($product, fn ($query, $value) => $query->where('product_id', $value->getKey()))
-            ->when($search, function ($query, $term) {
-                $query->where(function ($inner) use ($term) {
-                    $inner->where('name', 'like', "%{$term}%")
-                        ->orWhere('code', 'like', "%{$term}%");
-                });
-            })
-            ->when($status, fn ($query, $value) => $query->where('status', $value))
+            ->forProduct($product)
+            ->search($search)
+            ->withStatus($status)
             ->orderBy('sort_order')
             ->orderBy('name')
             ->paginate($perPage);
@@ -69,7 +64,7 @@ class PackageService implements PackageServiceInterface
             return;
         }
 
-        activity('packages')
+        activity($package->getTable())
             ->performedOn($package)
             ->causedBy(auth()->user())
             ->withProperties($properties)

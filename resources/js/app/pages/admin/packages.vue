@@ -221,10 +221,10 @@ const emptyForm = () => ({
     code: '',
     name: '',
     description: '',
-    billing_interval: 'monthly',
+    billing_interval: '',
     price: '',
-    currency: 'ZAR',
-    status: 'active',
+    currency: '',
+    status: '',
 });
 
 const dialog = reactive({
@@ -272,6 +272,9 @@ const onPage = (page) => {
 const openCreate = () => {
     const form = emptyForm();
     form.product_id = filters.productId || store.options.products[0]?.value || '';
+    form.status = store.options.statuses[0]?.value ?? '';
+    form.billing_interval = store.options.billing_intervals[0]?.value ?? '';
+    form.currency = store.options.default_currency ?? '';
 
     Object.assign(dialog, { open: true, mode: 'create', editId: null, form, errors: {}, message: '' });
 };
