@@ -174,7 +174,8 @@ const foundationItems = [
 
 <style scoped>
 .dashboard {
-    width: min(100%, 1180px);
+    width: 100%;
+    max-width: var(--rw-content-max);
     margin: 0 auto;
     padding: 2.25rem 2rem 4rem;
     display: grid;

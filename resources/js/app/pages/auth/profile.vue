@@ -383,7 +383,7 @@ onMounted(async () => {
 <style scoped>
 .profile-page {
     padding: 2.25rem 2rem 4rem;
-    max-width: 1180px;
+    max-width: var(--rw-content-max);
     margin: 0 auto;
     display: grid;
     gap: 1.5rem;

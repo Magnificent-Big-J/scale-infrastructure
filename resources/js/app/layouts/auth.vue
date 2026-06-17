@@ -32,6 +32,9 @@
 
 <style scoped>
 .auth-shell {
+    /* Fluid column width shared by the header and the auth card; scales with
+       the viewport between a comfortable min and max instead of a fixed px. */
+    --auth-width: clamp(22rem, 42vw, 34rem);
     min-height: 100vh;
     display: flex;
     align-items: stretch;
@@ -106,7 +109,7 @@
 /* ── Header ────────────────────────────────────────── */
 .auth-header {
     width: 100%;
-    max-width: 480px;
+    max-width: var(--auth-width);
     margin-bottom: 2.25rem;
 }
 

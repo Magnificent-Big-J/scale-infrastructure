@@ -42,6 +42,11 @@
     --rw-sidebar: 252px;
     --rw-topbar:  58px;
 
+    /* Fluid content width — single source of truth for every authenticated
+       page shell. Pages fill the available width instead of a fixed column;
+       change this once to reintroduce a max for readability if ever needed. */
+    --rw-content-max: 100%;
+
     /* Legacy aliases kept for existing pages */
     --starter-ink:          var(--rw-ink);
     --starter-muted:        var(--rw-muted);
