@@ -8,6 +8,7 @@ use App\Contracts\DeploymentServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
 use App\Contracts\ProductServiceInterface;
+use App\Contracts\SupportOperationsServiceInterface;
 use App\Contracts\SupportTierServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
 use App\Services\CatalogueFeatureService;
@@ -16,6 +17,7 @@ use App\Services\DeploymentService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
 use App\Services\ProductService;
+use App\Services\SupportOperationsService;
 use App\Services\SupportTierService;
 use App\Services\UserAdminService;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SupportTierServiceInterface::class, SupportTierService::class);
         $this->app->bind(ClientServiceInterface::class, ClientService::class);
         $this->app->bind(DeploymentServiceInterface::class, DeploymentService::class);
+        $this->app->bind(SupportOperationsServiceInterface::class, SupportOperationsService::class);
     }
 
     public function boot(): void

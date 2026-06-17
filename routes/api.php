@@ -8,10 +8,13 @@ use App\Http\Controllers\Api\Admin\UserAdminController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\DeploymentController;
+use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\MonitoringCheckController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\SupportAgreementController;
+use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +55,21 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::middleware('can:infrastructure.view')->get('infrastructure-assets', [InfrastructureAssetController::class, 'index']);
     Route::middleware('can:monitoring.view')->get('monitoring-checks', [MonitoringCheckController::class, 'index']);
+
+    Route::middleware('can:support_agreements.view')->group(function () {
+        Route::get('support-agreements', [SupportAgreementController::class, 'index']);
+        Route::middleware('can:support_agreements.create')->post('support-agreements', [SupportAgreementController::class, 'store']);
+    });
+
+    Route::middleware('can:support_tickets.view')->group(function () {
+        Route::get('support-tickets', [SupportTicketController::class, 'index']);
+        Route::middleware('can:support_tickets.create')->post('support-tickets', [SupportTicketController::class, 'store']);
+    });
+
+    Route::middleware('can:incidents.view')->group(function () {
+        Route::get('incidents', [IncidentController::class, 'index']);
+        Route::middleware('can:incidents.create')->post('incidents', [IncidentController::class, 'store']);
+    });
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
