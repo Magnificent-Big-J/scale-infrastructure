@@ -147,6 +147,8 @@ const navGroups = [
         items: [
             { label: 'Products', to: '/admin/products', icon: 'mdi-package-variant-closed', permission: 'products.view' },
             { label: 'Packages', to: '/admin/packages', icon: 'mdi-tag-multiple-outline', permission: 'packages.view' },
+            { label: 'Package Features', to: '/admin/catalogue-features', icon: 'mdi-format-list-checks', permission: 'catalogue_features.view' },
+            { label: 'Support Tiers', to: '/admin/support-tiers', icon: 'mdi-handshake-outline', permission: 'support_tiers.view' },
             { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline', permission: 'users.view' },
             { label: 'Profile', to: '/auth/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
         ],

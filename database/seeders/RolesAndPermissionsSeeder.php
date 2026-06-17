@@ -96,6 +96,14 @@ class RolesAndPermissionsSeeder extends Seeder
         'packages.create',
         'packages.update',
         'packages.delete',
+        'catalogue_features.view',
+        'catalogue_features.create',
+        'catalogue_features.update',
+        'catalogue_features.delete',
+        'support_tiers.view',
+        'support_tiers.create',
+        'support_tiers.update',
+        'support_tiers.delete',
         'users.view',
         'users.create',
         'users.update',
@@ -142,6 +150,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'packages.create',
             'packages.update',
             'packages.delete',
+            'catalogue_features.view',
+            'catalogue_features.create',
+            'catalogue_features.update',
+            'catalogue_features.delete',
+            'support_tiers.view',
+            'support_tiers.create',
+            'support_tiers.update',
+            'support_tiers.delete',
             'settings.view',
             'settings.update',
             'activity.view',
@@ -313,7 +329,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'guard_name' => 'web',
             ]);
 
-            $role->syncPermissions($permissions);
+            $role->syncPermissions($roleName === 'administrator' ? $this->permissions : $permissions);
         }
 
         app(PermissionRegistrar::class)->forgetCachedPermissions();

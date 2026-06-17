@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\CatalogueFeatureController;
 use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Resources\AuthUserResource;
@@ -36,5 +38,21 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::middleware('can:packages.create')->post('products/{product}/packages', [PackageController::class, 'store']);
         Route::middleware('can:packages.update')->match(['put', 'patch'], 'packages/{package}', [PackageController::class, 'update']);
         Route::middleware('can:packages.delete')->delete('packages/{package}', [PackageController::class, 'destroy']);
+    });
+
+    Route::middleware('can:catalogue_features.view')->group(function () {
+        Route::get('catalogue-features', [CatalogueFeatureController::class, 'index']);
+        Route::get('products/{product}/catalogue-features', [CatalogueFeatureController::class, 'index']);
+        Route::middleware('can:catalogue_features.create')->post('catalogue-features', [CatalogueFeatureController::class, 'store']);
+        Route::middleware('can:catalogue_features.create')->post('products/{product}/catalogue-features', [CatalogueFeatureController::class, 'store']);
+        Route::middleware('can:catalogue_features.update')->match(['put', 'patch'], 'catalogue-features/{catalogueFeature}', [CatalogueFeatureController::class, 'update']);
+        Route::middleware('can:catalogue_features.delete')->delete('catalogue-features/{catalogueFeature}', [CatalogueFeatureController::class, 'destroy']);
+    });
+
+    Route::middleware('can:support_tiers.view')->group(function () {
+        Route::get('support-tiers', [SupportTierController::class, 'index']);
+        Route::middleware('can:support_tiers.create')->post('support-tiers', [SupportTierController::class, 'store']);
+        Route::middleware('can:support_tiers.update')->match(['put', 'patch'], 'support-tiers/{supportTier}', [SupportTierController::class, 'update']);
+        Route::middleware('can:support_tiers.delete')->delete('support-tiers/{supportTier}', [SupportTierController::class, 'destroy']);
     });
 });

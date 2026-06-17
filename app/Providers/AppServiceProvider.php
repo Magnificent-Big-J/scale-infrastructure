@@ -2,13 +2,17 @@
 
 namespace App\Providers;
 
+use App\Contracts\CatalogueFeatureServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
 use App\Contracts\ProductServiceInterface;
+use App\Contracts\SupportTierServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
+use App\Services\CatalogueFeatureService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
 use App\Services\ProductService;
+use App\Services\SupportTierService;
 use App\Services\UserAdminService;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PayFastCheckoutServiceInterface::class, PayFastCheckoutService::class);
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
         $this->app->bind(PackageServiceInterface::class, PackageService::class);
+        $this->app->bind(CatalogueFeatureServiceInterface::class, CatalogueFeatureService::class);
+        $this->app->bind(SupportTierServiceInterface::class, SupportTierService::class);
     }
 
     public function boot(): void
