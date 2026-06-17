@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             ScaleInfrastructureUsersSeeder::class,
             CatalogueSeeder::class,
+            ClientSeeder::class,
             ModuleDemoSeeder::class,
         ]);
     }

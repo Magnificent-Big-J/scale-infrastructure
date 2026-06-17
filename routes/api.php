@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Resources\AuthUserResource;
@@ -21,6 +23,20 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::get('module-demo/{pageKey}', [ModuleDemoRecordController::class, 'index'])
         ->where('pageKey', '[A-Za-z0-9_.-]+');
+
+    Route::middleware('can:clients.view')->group(function () {
+        Route::get('clients', [ClientController::class, 'index']);
+        Route::get('clients/{client}', [ClientController::class, 'show']);
+        Route::middleware('can:clients.create')->post('clients', [ClientController::class, 'store']);
+        Route::middleware('can:clients.update')->match(['put', 'patch'], 'clients/{client}', [ClientController::class, 'update']);
+        Route::middleware('can:clients.delete')->delete('clients/{client}', [ClientController::class, 'destroy']);
+    });
+
+    Route::middleware('can:contacts.view')->group(function () {
+        Route::middleware('can:contacts.create')->post('clients/{client}/contacts', [ContactController::class, 'store']);
+        Route::middleware('can:contacts.update')->match(['put', 'patch'], 'contacts/{contact}', [ContactController::class, 'update']);
+        Route::middleware('can:contacts.delete')->delete('contacts/{contact}', [ContactController::class, 'destroy']);
+    });
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
