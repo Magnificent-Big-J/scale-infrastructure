@@ -27,7 +27,7 @@ defineProps({
 .auth-card {
     position: relative;
     width: 100%;
-    max-width: 440px;
+    max-width: var(--auth-width, 27.5rem);
     background: rgba(255, 255, 255, 0.97);
     border-radius: 1.25rem;
     padding: 2rem 2.25rem 2.25rem;
