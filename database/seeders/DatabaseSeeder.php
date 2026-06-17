@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CatalogueSeeder::class,
             ClientSeeder::class,
             DeploymentSeeder::class,
+            SupportOperationsSeeder::class,
             ModuleDemoSeeder::class,
         ]);
     }
