@@ -37,6 +37,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/admin/catalogue-features': RouteRecordInfo<
+      '/admin/catalogue-features',
+      '/admin/catalogue-features',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/admin/packages': RouteRecordInfo<
       '/admin/packages',
       '/admin/packages',
@@ -47,6 +54,13 @@ declare module 'vue-router/auto-routes' {
     '/admin/products': RouteRecordInfo<
       '/admin/products',
       '/admin/products',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/admin/support-tiers': RouteRecordInfo<
+      '/admin/support-tiers',
+      '/admin/support-tiers',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -217,6 +231,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'resources/js/app/pages/admin/catalogue-features.vue': {
+      routes:
+        | '/admin/catalogue-features'
+      views:
+        | never
+    }
     'resources/js/app/pages/admin/packages.vue': {
       routes:
         | '/admin/packages'
@@ -226,6 +246,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/admin/products.vue': {
       routes:
         | '/admin/products'
+      views:
+        | never
+    }
+    'resources/js/app/pages/admin/support-tiers.vue': {
+      routes:
+        | '/admin/support-tiers'
       views:
         | never
     }

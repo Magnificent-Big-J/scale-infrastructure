@@ -145,15 +145,23 @@
                                 :error-messages="dialog.errors.billing_interval"
                             />
                         </v-col>
-                        <v-col cols="6" sm="3">
+                        <v-col cols="6" sm="4">
                             <AppTextField
-                                v-model="dialog.form.price"
-                                label="Price"
+                                v-model="dialog.form.price_min"
+                                label="Price from"
                                 type="number"
-                                :error-messages="dialog.errors.price"
+                                :error-messages="dialog.errors.price_min"
                             />
                         </v-col>
-                        <v-col cols="6" sm="3">
+                        <v-col cols="6" sm="4">
+                            <AppTextField
+                                v-model="dialog.form.price_max"
+                                label="Price to (optional)"
+                                type="number"
+                                :error-messages="dialog.errors.price_max"
+                            />
+                        </v-col>
+                        <v-col cols="12" sm="4">
                             <AppTextField v-model="dialog.form.currency" label="Currency" :error-messages="dialog.errors.currency" />
                         </v-col>
                         <v-col cols="12">
@@ -222,7 +230,8 @@ const emptyForm = () => ({
     name: '',
     description: '',
     billing_interval: '',
-    price: '',
+    price_min: '',
+    price_max: '',
     currency: '',
     status: '',
 });
@@ -244,10 +253,20 @@ const productItems = computed(() => store.options.products.map((p) => ({ title: 
 const statusFilterItems = computed(() => [{ title: 'All statuses', value: '' }, ...statusItems.value]);
 const productFilterItems = computed(() => [{ title: 'All products', value: '' }, ...productItems.value]);
 
-const formatPrice = (row) => {
-    if (row.price === null || row.price === undefined || row.price === '') return '—';
+const has = (value) => value !== null && value !== undefined && value !== '';
 
-    return `${row.currency || ''} ${Number(row.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}`.trim();
+const formatAmount = (value, currency) =>
+    `${currency || ''} ${Number(value).toLocaleString(undefined, { maximumFractionDigits: 0 })}`.trim();
+
+const formatPrice = (row) => {
+    if (has(row.price_min) && has(row.price_max)) {
+        return `${formatAmount(row.price_min, row.currency)} – ${formatAmount(row.price_max, row.currency)}`;
+    }
+
+    if (has(row.price_min)) return `From ${formatAmount(row.price_min, row.currency)}`;
+    if (has(row.price_max)) return `Up to ${formatAmount(row.price_max, row.currency)}`;
+
+    return '—';
 };
 
 const load = () =>
@@ -290,8 +309,9 @@ const openEdit = (row) => {
             name: row.name,
             description: row.description ?? '',
             billing_interval: row.billing_interval,
-            price: row.price ?? '',
-            currency: row.currency ?? 'ZAR',
+            price_min: row.price_min ?? '',
+            price_max: row.price_max ?? '',
+            currency: row.currency ?? '',
             status: row.status,
         },
         errors: {},
@@ -308,7 +328,8 @@ const submitDialog = async () => {
     dialog.message = '';
 
     const payload = { ...dialog.form };
-    if (payload.price === '') payload.price = null;
+    if (payload.price_min === '') payload.price_min = null;
+    if (payload.price_max === '') payload.price_max = null;
 
     try {
         if (dialog.mode === 'create') {
@@ -342,7 +363,7 @@ onMounted(load);
 
 <style scoped>
 .admin-catalogue-page {
-    padding: 2rem 1.25rem 4rem;
+    padding: 2.25rem 2rem 4rem;
 }
 
 .page-wrap {

@@ -5,6 +5,7 @@
         scope="Module 02 will build deployment CRUD, client/product links, environment tracking, and status indicators."
         status="Module 02"
         icon="mdi-rocket-launch-outline"
+        page-key="operations.deployments"
     />
 </template>
 

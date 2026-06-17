@@ -5,6 +5,7 @@
         scope="Module 04 will build billing commitments, invoice tracking, payment recording, and finance dashboard inputs."
         status="Module 04"
         icon="mdi-cash-multiple"
+        page-key="commercial.billing"
     />
 </template>
 

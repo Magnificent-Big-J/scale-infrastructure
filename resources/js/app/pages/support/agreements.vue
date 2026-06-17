@@ -5,6 +5,7 @@
         scope="Module 03 will build support agreement records linked to clients and contracts."
         status="Module 03"
         icon="mdi-handshake-outline"
+        page-key="support.agreements"
     />
 </template>
 

@@ -33,4 +33,9 @@ class Product extends Model
     {
         return $this->hasMany(Package::class);
     }
+
+    public function catalogueFeatures(): HasMany
+    {
+        return $this->hasMany(CatalogueFeature::class);
+    }
 }

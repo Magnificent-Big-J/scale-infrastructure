@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('billing_interval')->default(BillingInterval::Monthly->value);
-            $table->decimal('price', 12, 2)->nullable();
+            // Indicative pricing is a range; max is null for open-ended "from" tiers.
+            $table->decimal('price_min', 12, 2)->nullable();
+            $table->decimal('price_max', 12, 2)->nullable();
             $table->string('currency', 3)->default(config('catalogue.default_currency'));
             $table->string('status')->default(CatalogueStatus::Active->value);
             $table->unsignedInteger('sort_order')->default(0);

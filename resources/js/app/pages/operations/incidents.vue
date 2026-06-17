@@ -5,6 +5,7 @@
         scope="Module 03 will build incident lifecycle tracking and dashboard visibility for critical events."
         status="Module 03"
         icon="mdi-alert-octagon-outline"
+        page-key="operations.incidents"
     />
 </template>
 

@@ -5,6 +5,7 @@
         scope="Module 06 will build release tracking after the manual deployment process is stable."
         status="Module 06"
         icon="mdi-source-branch"
+        page-key="operations.releases"
     />
 </template>
 
