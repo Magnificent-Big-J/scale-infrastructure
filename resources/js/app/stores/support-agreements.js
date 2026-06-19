@@ -29,5 +29,29 @@ export const useSupportAgreementsStore = defineStore('support-agreements', {
                 this.loading = false;
             }
         },
+
+        async create(payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1('support-agreements', { method: 'POST', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async update(agreementId, payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1(`support-agreements/${agreementId}`, { method: 'PATCH', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
     },
 });

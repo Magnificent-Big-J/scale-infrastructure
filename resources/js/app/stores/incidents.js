@@ -30,5 +30,29 @@ export const useIncidentsStore = defineStore('incidents', {
                 this.loading = false;
             }
         },
+
+        async create(payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1('incidents', { method: 'POST', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async update(incidentId, payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1(`incidents/${incidentId}`, { method: 'PATCH', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
     },
 });

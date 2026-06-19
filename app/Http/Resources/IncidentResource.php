@@ -16,7 +16,9 @@ class IncidentResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'client_id' => $this->client_id,
             'client_name' => $this->whenLoaded('client', fn () => $this->client?->name),
+            'deployment_id' => $this->deployment_id,
             'deployment_name' => $this->whenLoaded('deployment', fn () => $this->deployment?->name),
             'reference' => $this->reference,
             'title' => $this->title,

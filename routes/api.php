@@ -59,16 +59,19 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::middleware('can:support_agreements.view')->group(function () {
         Route::get('support-agreements', [SupportAgreementController::class, 'index']);
         Route::middleware('can:support_agreements.create')->post('support-agreements', [SupportAgreementController::class, 'store']);
+        Route::middleware('can:support_agreements.update')->match(['put', 'patch'], 'support-agreements/{supportAgreement}', [SupportAgreementController::class, 'update']);
     });
 
     Route::middleware('can:support_tickets.view')->group(function () {
         Route::get('support-tickets', [SupportTicketController::class, 'index']);
         Route::middleware('can:support_tickets.create')->post('support-tickets', [SupportTicketController::class, 'store']);
+        Route::middleware('can:support_tickets.update')->match(['put', 'patch'], 'support-tickets/{supportTicket}', [SupportTicketController::class, 'update']);
     });
 
     Route::middleware('can:incidents.view')->group(function () {
         Route::get('incidents', [IncidentController::class, 'index']);
         Route::middleware('can:incidents.create')->post('incidents', [IncidentController::class, 'store']);
+        Route::middleware('can:incidents.update')->match(['put', 'patch'], 'incidents/{incident}', [IncidentController::class, 'update']);
     });
 
     Route::middleware('can:users.view')->group(function () {

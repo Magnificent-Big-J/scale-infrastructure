@@ -17,7 +17,13 @@ interface SupportOperationsServiceInterface
 
     public function createAgreement(array $data): SupportAgreement;
 
+    public function updateAgreement(SupportAgreement $agreement, array $data): SupportAgreement;
+
     public function createTicket(array $data): SupportTicket;
 
+    public function updateTicket(SupportTicket $ticket, array $data): SupportTicket;
+
     public function createIncident(array $data): Incident;
+
+    public function updateIncident(Incident $incident, array $data): Incident;
 }
