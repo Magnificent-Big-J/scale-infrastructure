@@ -41,7 +41,7 @@ export const useReportsStore = defineStore('reports', {
             const link = document.createElement('a');
 
             link.href = url;
-            link.download = `${type}-${new Date().toISOString().slice(0, 10)}.csv`;
+            link.download = `${type}-${new Date().toISOString().slice(0, 10)}.xlsx`;
             document.body.appendChild(link);
             link.click();
             link.remove();

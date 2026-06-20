@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\ClientStatus;
 use App\Enums\IncidentStatus;
 use App\Enums\SupportTicketStatus;
+use App\Exports\ReportExport;
 use App\Models\Client;
 use App\Models\Deployment;
 use App\Models\Incident;
@@ -12,6 +13,7 @@ use App\Models\ProfitabilityRecord;
 use App\Models\SupportTicket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
 class ProfitabilityDashboardTest extends TestCase
@@ -127,16 +129,19 @@ class ProfitabilityDashboardTest extends TestCase
             ->assertJsonPath('data.columns.0', 'Client');
     }
 
-    public function test_report_export_streams_csv(): void
+    public function test_report_export_downloads_a_spreadsheet(): void
     {
         $this->seed();
+        Excel::fake();
 
-        $response = $this->actingAs($this->admin(), 'sanctum')
-            ->get('/api/v1/reports/finance_summary/export');
+        $this->actingAs($this->admin(), 'sanctum')
+            ->get('/api/v1/reports/finance_summary/export')
+            ->assertOk();
 
-        $response->assertOk();
-        $this->assertStringContainsString('text/csv', $response->headers->get('content-type'));
-        $this->assertStringContainsString('Client,Invoiced,Paid,Outstanding', $response->streamedContent());
+        Excel::assertDownloaded(
+            'finance_summary-'.now()->format('Y-m-d').'.xlsx',
+            fn (ReportExport $export) => $export->headings() === ['Client', 'Invoiced', 'Paid', 'Outstanding']
+        );
     }
 
     public function test_unknown_report_type_returns_not_found(): void
