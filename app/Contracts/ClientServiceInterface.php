@@ -10,6 +10,11 @@ interface ClientServiceInterface
 {
     public function paginate(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $tier = null): LengthAwarePaginator;
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function summary(Client $client): array;
+
     public function create(array $data): Client;
 
     public function update(Client $client, array $data): Client;

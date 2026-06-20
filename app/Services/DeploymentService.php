@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class DeploymentService implements DeploymentServiceInterface
 {
-    public function paginateDeployments(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $environment = null): LengthAwarePaginator
+    public function paginateDeployments(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $environment = null, ?string $clientId = null): LengthAwarePaginator
     {
         return Deployment::query()
             ->with(['client', 'product', 'package'])
@@ -20,6 +20,7 @@ class DeploymentService implements DeploymentServiceInterface
             ->search($search)
             ->withStatus($status)
             ->withEnvironment($environment)
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw("case when environment = 'production' then 0 else 1 end")
             ->orderBy('name')
             ->paginate($perPage);

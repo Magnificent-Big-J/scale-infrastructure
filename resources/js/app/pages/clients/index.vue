@@ -75,7 +75,7 @@
                     empty-title="No clients found"
                     empty-text="Create the first client account record."
                     @page-change="onPage"
-                    @row-click="openEdit"
+                    @row-click="goToDetail"
                 >
                     <template #row="{ row }">
                         <td>
@@ -110,8 +110,9 @@
                                 <small>{{ row.primary_contact?.email || '' }}</small>
                             </div>
                         </td>
-                        <td>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                        <td class="text-right">
+                            <v-btn icon="mdi-eye-outline" size="small" variant="text" title="View detail" @click.stop="goToDetail(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>
@@ -254,6 +255,7 @@
 
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
@@ -263,6 +265,9 @@ import AppTextField from '../../components/AppTextField.vue';
 import { useClientsStore } from '../../stores/clients';
 
 const store = useClientsStore();
+const router = useRouter();
+
+const goToDetail = (row) => router.push(`/clients/${row.id}`);
 
 const columns = [
     { key: 'client', label: 'Client' },

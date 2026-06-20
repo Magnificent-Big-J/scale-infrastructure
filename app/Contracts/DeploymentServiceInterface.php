@@ -9,7 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface DeploymentServiceInterface
 {
-    public function paginateDeployments(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $environment = null): LengthAwarePaginator;
+    public function paginateDeployments(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $environment = null, ?string $clientId = null): LengthAwarePaginator;
 
     public function paginateInfrastructureAssets(int $perPage = 15, ?string $search = null, ?string $type = null): LengthAwarePaginator;
 

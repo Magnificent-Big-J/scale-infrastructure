@@ -3,8 +3,15 @@
 namespace App\Services;
 
 use App\Contracts\ClientServiceInterface;
+use App\Enums\SupportAgreementStatus;
+use App\Enums\SupportTicketStatus;
 use App\Models\Client;
 use App\Models\Contact;
+use App\Models\Contract;
+use App\Models\Deployment;
+use App\Models\Invoice;
+use App\Models\SupportAgreement;
+use App\Models\SupportTicket;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +28,40 @@ class ClientService implements ClientServiceInterface
             ->withTier($tier)
             ->orderBy('name')
             ->paginate($perPage);
+    }
+
+    public function summary(Client $client): array
+    {
+        $deployments = Deployment::query()->where('client_id', $client->id)->count();
+
+        $activeAgreements = SupportAgreement::query()
+            ->where('client_id', $client->id)
+            ->where('status', SupportAgreementStatus::Active->value)
+            ->count();
+
+        $openTickets = SupportTicket::query()
+            ->where('client_id', $client->id)
+            ->whereNotIn('status', [SupportTicketStatus::Resolved->value, SupportTicketStatus::Closed->value])
+            ->count();
+
+        $contracts = Contract::query()->where('client_id', $client->id)->count();
+
+        $outstanding = (float) Invoice::query()
+            ->where('client_id', $client->id)
+            ->open()
+            ->selectRaw('coalesce(sum(amount - amount_paid), 0) as total')
+            ->value('total');
+
+        $overdue = Invoice::query()->where('client_id', $client->id)->overdue()->count();
+
+        return [
+            'deployments_count' => $deployments,
+            'active_agreements' => $activeAgreements,
+            'open_tickets' => $openTickets,
+            'contracts_count' => $contracts,
+            'outstanding_total' => round($outstanding, 2),
+            'overdue_count' => $overdue,
+        ];
     }
 
     public function create(array $data): Client

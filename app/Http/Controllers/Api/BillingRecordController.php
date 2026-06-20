@@ -26,6 +26,7 @@ class BillingRecordController extends Controller
             $request->string('search')->toString() ?: null,
             $request->string('type')->toString() ?: null,
             $request->string('cadence')->toString() ?: null,
+            $request->string('client_id')->toString() ?: null,
         );
 
         return response()->json([

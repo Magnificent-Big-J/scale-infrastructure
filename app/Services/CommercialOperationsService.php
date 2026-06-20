@@ -14,35 +14,38 @@ use Illuminate\Support\Facades\DB;
 
 class CommercialOperationsService implements CommercialOperationsServiceInterface
 {
-    public function paginateContracts(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator
+    public function paginateContracts(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator
     {
         return Contract::query()
             ->with(['client', 'product', 'package'])
             ->search($search)
             ->when($status, fn ($query) => $query->where('status', $status))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw("case when status = 'active' then 0 when status = 'renewing' then 1 else 2 end")
             ->orderBy('name')
             ->paginate($perPage);
     }
 
-    public function paginateBillingRecords(int $perPage = 15, ?string $search = null, ?string $type = null, ?string $cadence = null): LengthAwarePaginator
+    public function paginateBillingRecords(int $perPage = 15, ?string $search = null, ?string $type = null, ?string $cadence = null, ?string $clientId = null): LengthAwarePaginator
     {
         return BillingRecord::query()
             ->with(['client', 'contract'])
             ->search($search)
             ->when($type, fn ($query) => $query->where('type', $type))
             ->when($cadence, fn ($query) => $query->where('cadence', $cadence))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw('case when is_active then 0 else 1 end')
             ->latest('starts_on')
             ->paginate($perPage);
     }
 
-    public function paginateInvoices(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator
+    public function paginateInvoices(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator
     {
         return Invoice::query()
             ->with(['client', 'contract'])
             ->search($search)
             ->when($status, fn ($query) => $query->where('status', $status))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw("case when status in ('sent', 'partially_paid', 'overdue') then 0 else 1 end")
             ->latest('issued_on')
             ->paginate($perPage);
