@@ -121,6 +121,7 @@ const navGroups = [
             { label: 'Opportunities', to: '/commercial/opportunities', icon: 'mdi-chart-timeline-variant', permission: 'opportunities.view' },
             { label: 'Contracts', to: '/commercial/contracts', icon: 'mdi-file-sign', permission: 'contracts.view' },
             { label: 'Billing', to: '/commercial/billing', icon: 'mdi-cash-multiple', permission: 'billing.view' },
+            { label: 'Invoices', to: '/commercial/invoices', icon: 'mdi-receipt-text-outline', permission: 'invoices.view' },
             { label: 'Profitability', to: '/commercial/profitability', icon: 'mdi-finance', permission: 'profitability.view' },
         ],
     },

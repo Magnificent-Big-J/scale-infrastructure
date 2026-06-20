@@ -135,6 +135,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/commercial/invoices': RouteRecordInfo<
+      '/commercial/invoices',
+      '/commercial/invoices',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/commercial/opportunities': RouteRecordInfo<
       '/commercial/opportunities',
       '/commercial/opportunities',
@@ -312,6 +319,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/commercial/contracts.vue': {
       routes:
         | '/commercial/contracts'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/invoices.vue': {
+      routes:
+        | '/commercial/invoices'
       views:
         | never
     }
