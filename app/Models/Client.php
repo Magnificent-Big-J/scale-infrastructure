@@ -73,6 +73,31 @@ class Client extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function deployments(): HasMany
+    {
+        return $this->hasMany(Deployment::class);
+    }
+
+    public function supportAgreements(): HasMany
+    {
+        return $this->hasMany(SupportAgreement::class);
+    }
+
+    public function supportTickets(): HasMany
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
+
+    public function incidents(): HasMany
+    {
+        return $this->hasMany(Incident::class);
+    }
+
+    public function profitabilityRecords(): HasMany
+    {
+        return $this->hasMany(ProfitabilityRecord::class);
+    }
+
     public function scopeSearch(Builder $query, ?string $term): Builder
     {
         return $query->when($term, function (Builder $query) use ($term) {

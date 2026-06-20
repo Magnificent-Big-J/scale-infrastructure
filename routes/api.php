@@ -10,14 +10,18 @@ use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ContractController;
 use App\Http\Controllers\Api\DeploymentController;
+use App\Http\Controllers\Api\ExecutiveDashboardController;
 use App\Http\Controllers\Api\FinanceDashboardController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\MonitoringCheckController;
+use App\Http\Controllers\Api\OperationsDashboardController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ProfitabilityController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Resources\AuthUserResource;
@@ -100,6 +104,20 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     });
 
     Route::middleware('can:billing.view')->get('dashboard/finance', [FinanceDashboardController::class, 'show']);
+    Route::middleware('can:dashboard.view')->get('dashboard/executive', [ExecutiveDashboardController::class, 'show']);
+    Route::middleware('can:dashboard.view')->get('dashboard/operations', [OperationsDashboardController::class, 'show']);
+
+    Route::middleware('can:profitability.view')->group(function () {
+        Route::get('profitability-records', [ProfitabilityController::class, 'index']);
+        Route::middleware('can:profitability.create')->post('profitability-records', [ProfitabilityController::class, 'store']);
+        Route::middleware('can:profitability.update')->match(['put', 'patch'], 'profitability-records/{profitabilityRecord}', [ProfitabilityController::class, 'update']);
+    });
+
+    Route::middleware('can:reports.view')->group(function () {
+        Route::get('reports', [ReportController::class, 'index']);
+        Route::get('reports/{type}', [ReportController::class, 'show']);
+        Route::middleware('can:reports.export')->get('reports/{type}/export', [ReportController::class, 'export']);
+    });
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
