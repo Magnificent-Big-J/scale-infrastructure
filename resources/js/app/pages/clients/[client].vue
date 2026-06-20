@@ -28,6 +28,7 @@
                     <v-tab value="deployments">Deployments</v-tab>
                     <v-tab value="support">Support</v-tab>
                     <v-tab value="commercial">Commercial</v-tab>
+                    <v-tab value="profitability">Profitability</v-tab>
                 </v-tabs>
 
                 <v-window v-model="tab" class="detail-window">
@@ -98,6 +99,18 @@
                             </template>
                         </AppDataTable>
                     </v-window-item>
+
+                    <v-window-item value="profitability">
+                        <AppDataTable title="Profitability" :columns="profitabilityColumns" :rows="tabs.profitability.rows" :meta="noMeta" :loading="loading.profitability" empty-title="No records" empty-text="No profitability records for this client.">
+                            <template #row="{ row }">
+                                <td><div class="detail-cell"><strong>{{ row.period }}</strong></div></td>
+                                <td><span class="text-sm">{{ formatAmount(row.revenue) }}</span></td>
+                                <td><span class="text-sm">{{ formatAmount(row.total_cost) }}</span></td>
+                                <td><span class="text-sm">{{ formatAmount(row.profit) }}</span></td>
+                                <td><AppStatusBadge :status="Number(row.margin) >= 0 ? 'active' : 'suspended'" :label="`${Number(row.margin).toFixed(1)}%`" /></td>
+                            </template>
+                        </AppDataTable>
+                    </v-window-item>
                 </v-window>
             </AppSectionCard>
         </div>
@@ -123,14 +136,15 @@ const tab = ref('overview');
 const client = ref(null);
 const contacts = ref([]);
 const summary = reactive({ deployments_count: 0, active_agreements: 0, open_tickets: 0, contracts_count: 0, outstanding_total: 0, overdue_count: 0 });
-const loading = reactive({ client: false, deployments: false, support: false, commercial: false });
-const loaded = reactive({ deployments: false, support: false, commercial: false });
+const loading = reactive({ client: false, deployments: false, support: false, commercial: false, profitability: false });
+const loaded = reactive({ deployments: false, support: false, commercial: false, profitability: false });
 const tabs = reactive({
     deployments: { rows: [] },
     agreements: { rows: [] },
     tickets: { rows: [] },
     contracts: { rows: [] },
     invoices: { rows: [] },
+    profitability: { rows: [] },
 });
 
 const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
@@ -141,6 +155,7 @@ const agreementColumns = [{ key: 'agreement', label: 'Agreement' }, { key: 'mont
 const ticketColumns = [{ key: 'ticket', label: 'Ticket' }, { key: 'severity', label: 'Severity' }, { key: 'status', label: 'Status' }];
 const contractColumns = [{ key: 'contract', label: 'Contract' }, { key: 'total', label: 'Total' }, { key: 'renewal', label: 'Renewal' }, { key: 'status', label: 'Status' }];
 const invoiceColumns = [{ key: 'invoice', label: 'Invoice' }, { key: 'amount', label: 'Amount' }, { key: 'outstanding', label: 'Outstanding' }, { key: 'status', label: 'Status' }];
+const profitabilityColumns = [{ key: 'period', label: 'Period' }, { key: 'revenue', label: 'Revenue' }, { key: 'cost', label: 'Cost' }, { key: 'profit', label: 'Profit' }, { key: 'margin', label: 'Margin' }];
 
 const formatAmount = (value) => (value ? `ZAR ${Number(value).toLocaleString(undefined, { maximumFractionDigits: 0 })}` : '-');
 const listRows = (response) => response?.data?.map((item) => item?.data ?? item) ?? [];
@@ -198,6 +213,18 @@ const loadTab = async (name) => {
             loaded.commercial = true;
         } finally {
             loading.commercial = false;
+        }
+    }
+
+    if (name === 'profitability' && !loaded.profitability) {
+        loading.profitability = true;
+        try {
+            tabs.profitability.rows = listRows(await v1(`profitability-records?client_id=${clientId}&per_page=100`));
+            loaded.profitability = true;
+        } catch {
+            tabs.profitability.rows = [];
+        } finally {
+            loading.profitability = false;
         }
     }
 };

@@ -113,6 +113,7 @@ const navGroups = [
         items: [
             { label: 'Dashboard', to: '/dashboard', icon: 'mdi-view-dashboard-outline', permission: 'dashboard.view' },
             { label: 'Clients', to: '/clients', icon: 'mdi-domain', permission: 'clients.view' },
+            { label: 'Reports', to: '/reports', icon: 'mdi-file-chart-outline', permission: 'reports.view' },
         ],
     },
     {
@@ -128,6 +129,7 @@ const navGroups = [
     {
         label: 'Operations',
         items: [
+            { label: 'Ops Dashboard', to: '/operations/dashboard', icon: 'mdi-monitor-dashboard', permission: 'dashboard.view' },
             { label: 'Deployments', to: '/operations/deployments', icon: 'mdi-rocket-launch-outline', permission: 'deployments.view' },
             { label: 'Infrastructure', to: '/operations/infrastructure', icon: 'mdi-server-network', permission: 'infrastructure.view' },
             { label: 'Monitoring', to: '/operations/monitoring', icon: 'mdi-pulse', permission: 'monitoring.view' },

@@ -170,6 +170,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/operations/dashboard': RouteRecordInfo<
+      '/operations/dashboard',
+      '/operations/dashboard',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/operations/deployments': RouteRecordInfo<
       '/operations/deployments',
       '/operations/deployments',
@@ -201,6 +208,13 @@ declare module 'vue-router/auto-routes' {
     '/operations/releases': RouteRecordInfo<
       '/operations/releases',
       '/operations/releases',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/reports': RouteRecordInfo<
+      '/reports',
+      '/reports',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -359,6 +373,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'resources/js/app/pages/operations/dashboard.vue': {
+      routes:
+        | '/operations/dashboard'
+      views:
+        | never
+    }
     'resources/js/app/pages/operations/deployments.vue': {
       routes:
         | '/operations/deployments'
@@ -386,6 +406,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/operations/releases.vue': {
       routes:
         | '/operations/releases'
+      views:
+        | never
+    }
+    'resources/js/app/pages/reports.vue': {
+      routes:
+        | '/reports'
       views:
         | never
     }

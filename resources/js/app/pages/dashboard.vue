@@ -6,8 +6,8 @@
             subtitle="Operational control centre for clients, deployments, infrastructure, monitoring, support, billing, releases, and profitability."
         >
             <template #metrics>
-                <AppStatusBadge status="active" label="Phase 0" />
-                <AppStatusBadge status="processing" label="Foundation shell" />
+                <AppStatusBadge status="active" :label="`${exec.active_clients} active clients`" />
+                <AppStatusBadge :status="exec.open_incidents ? 'suspended' : 'processing'" :label="`${exec.open_incidents} open incidents`" />
             </template>
         </AppPageHeader>
 
@@ -90,15 +90,19 @@
 </route>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 import AppPageHeader from '../components/AppPageHeader.vue';
 import AppSectionCard from '../components/AppSectionCard.vue';
 import AppStatCard from '../components/AppStatCard.vue';
 import AppStatusBadge from '../components/AppStatusBadge.vue';
+import { useDashboardsStore } from '../stores/dashboards';
 import { useSessionStore } from '../stores/session';
 
 const session = useSessionStore();
+const dashboards = useDashboardsStore();
+
+const formatAmount = (value) => `ZAR ${Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
 const dayPart = computed(() => {
     const h = new Date().getHours();
@@ -120,12 +124,16 @@ const userInitials = computed(() =>
         .join('')
 );
 
-const stats = [
-    { label: 'Roles seeded', value: '7', helper: 'Operations, finance, sales, support and admin access', icon: 'mdi-shield-account-outline', bg: 'rgba(0,106,74,0.08)', iconColor: 'var(--rw-600)' },
-    { label: 'Database', value: 'PostgreSQL', helper: 'Default registry database target', icon: 'mdi-database-outline', bg: 'rgba(3,105,161,0.08)', iconColor: '#0369a1' },
-    { label: 'Queue backend', value: 'Redis', helper: 'Horizon-ready operational jobs', icon: 'mdi-sync-circle', bg: 'rgba(180,83,9,0.08)', iconColor: 'var(--rw-amber)' },
-    { label: 'Storage backend', value: 'S3', helper: 'Media and future operational documents', icon: 'mdi-cloud-outline', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
-];
+const exec = computed(() => dashboards.executive);
+
+const stats = computed(() => [
+    { label: 'Active clients', value: String(exec.value.active_clients), helper: `${exec.value.at_risk_clients} at risk · ${exec.value.average_client_health}% avg health`, icon: 'mdi-domain', bg: 'rgba(0,106,74,0.08)', iconColor: 'var(--rw-600)' },
+    { label: 'Active deployments', value: String(exec.value.active_deployments), helper: 'Live product environments', icon: 'mdi-server-network', bg: 'rgba(3,105,161,0.08)', iconColor: '#0369a1' },
+    { label: 'MRR', value: formatAmount(exec.value.mrr), helper: `ARR ${formatAmount(exec.value.arr)} · ${formatAmount(exec.value.outstanding_total)} outstanding`, icon: 'mdi-cash-multiple', bg: 'rgba(180,83,9,0.08)', iconColor: 'var(--rw-amber)' },
+    { label: 'Open work', value: String(exec.value.open_tickets + exec.value.open_incidents), helper: `${exec.value.open_tickets} tickets · ${exec.value.open_incidents} incidents`, icon: 'mdi-lifebuoy', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
+]);
+
+onMounted(() => dashboards.fetchExecutive());
 
 const modules = [
     {
