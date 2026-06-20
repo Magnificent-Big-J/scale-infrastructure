@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SupportOperationsSeeder::class,
             CommercialSeeder::class,
             ProfitabilitySeeder::class,
+            ReleaseOperationsSeeder::class,
             ModuleDemoSeeder::class,
         ]);
     }

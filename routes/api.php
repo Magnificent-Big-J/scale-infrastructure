@@ -5,7 +5,9 @@ use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
+use App\Http\Controllers\Api\AutomationRunController;
 use App\Http\Controllers\Api\BillingRecordController;
+use App\Http\Controllers\Api\ChangeRequestController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ContractController;
@@ -21,6 +23,8 @@ use App\Http\Controllers\Api\OperationsDashboardController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProfitabilityController;
+use App\Http\Controllers\Api\ProvisioningTemplateController;
+use App\Http\Controllers\Api\ReleaseController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
@@ -81,6 +85,28 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('incidents', [IncidentController::class, 'index']);
         Route::middleware('can:incidents.create')->post('incidents', [IncidentController::class, 'store']);
         Route::middleware('can:incidents.update')->match(['put', 'patch'], 'incidents/{incident}', [IncidentController::class, 'update']);
+    });
+
+    Route::middleware('can:releases.view')->group(function () {
+        Route::get('releases', [ReleaseController::class, 'index']);
+        Route::middleware('can:releases.create')->post('releases', [ReleaseController::class, 'store']);
+        Route::middleware('can:releases.update')->match(['put', 'patch'], 'releases/{release}', [ReleaseController::class, 'update']);
+        Route::middleware('can:releases.approve')->post('releases/{release}/approve', [ReleaseController::class, 'approve']);
+        Route::middleware('can:releases.deploy')->post('releases/{release}/deploy', [ReleaseController::class, 'deploy']);
+        Route::middleware('can:releases.rollback')->post('releases/{release}/rollback', [ReleaseController::class, 'rollback']);
+
+        Route::get('change-requests', [ChangeRequestController::class, 'index']);
+        Route::middleware('can:releases.create')->post('change-requests', [ChangeRequestController::class, 'store']);
+        Route::middleware('can:releases.update')->match(['put', 'patch'], 'change-requests/{changeRequest}', [ChangeRequestController::class, 'update']);
+        Route::middleware('can:releases.approve')->post('change-requests/{changeRequest}/approve', [ChangeRequestController::class, 'approve']);
+        Route::middleware('can:releases.approve')->post('change-requests/{changeRequest}/reject', [ChangeRequestController::class, 'reject']);
+
+        Route::get('provisioning-templates', [ProvisioningTemplateController::class, 'index']);
+        Route::middleware('can:deployments.provision')->post('provisioning-templates', [ProvisioningTemplateController::class, 'store']);
+        Route::middleware('can:deployments.provision')->match(['put', 'patch'], 'provisioning-templates/{provisioningTemplate}', [ProvisioningTemplateController::class, 'update']);
+
+        Route::get('automation-runs', [AutomationRunController::class, 'index']);
+        Route::middleware('can:deployments.provision')->post('automation-runs', [AutomationRunController::class, 'store']);
     });
 
     Route::middleware('can:contracts.view')->group(function () {
