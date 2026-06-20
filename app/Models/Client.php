@@ -58,6 +58,21 @@ class Client extends Model
         return $this->hasOne(Contact::class)->where('is_primary', true)->oldest();
     }
 
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(Contract::class);
+    }
+
+    public function billingRecords(): HasMany
+    {
+        return $this->hasMany(BillingRecord::class);
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function scopeSearch(Builder $query, ?string $term): Builder
     {
         return $query->when($term, function (Builder $query) use ($term) {
