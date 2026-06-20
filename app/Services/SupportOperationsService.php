@@ -14,25 +14,27 @@ use Illuminate\Support\Facades\DB;
 
 class SupportOperationsService implements SupportOperationsServiceInterface
 {
-    public function paginateAgreements(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator
+    public function paginateAgreements(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator
     {
         return SupportAgreement::query()
             ->with(['client', 'supportTier'])
             ->withCount('tickets')
             ->search($search)
             ->when($status, fn ($query) => $query->where('status', $status))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw("case when status = 'active' then 0 else 1 end")
             ->orderBy('name')
             ->paginate($perPage);
     }
 
-    public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null): LengthAwarePaginator
+    public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null, ?string $clientId = null): LengthAwarePaginator
     {
         return SupportTicket::query()
             ->with(['client', 'deployment', 'supportAgreement', 'assignedUser'])
             ->search($search)
             ->when($status, fn ($query) => $query->where('status', $status))
             ->when($severity, fn ($query) => $query->where('severity', $severity))
+            ->when($clientId, fn ($query) => $query->where('client_id', $clientId))
             ->orderByRaw("case when severity = 'critical' then 0 when severity = 'high' then 1 else 2 end")
             ->latest('opened_at')
             ->paginate($perPage);

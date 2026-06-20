@@ -42,6 +42,16 @@ export const useClientsStore = defineStore('clients', {
             }
         },
 
+        async show(clientId) {
+            this.loading = true;
+
+            try {
+                return await v1(`clients/${clientId}`);
+            } finally {
+                this.loading = false;
+            }
+        },
+
         async create(payload) {
             this.loading = true;
 

@@ -25,6 +25,7 @@ class ContractController extends Controller
             max(1, min((int) $request->integer('per_page', 10), 100)),
             $request->string('search')->toString() ?: null,
             $request->string('status')->toString() ?: null,
+            $request->string('client_id')->toString() ?: null,
         );
 
         return response()->json([

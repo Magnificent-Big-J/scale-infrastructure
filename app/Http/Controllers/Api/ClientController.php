@@ -43,9 +43,14 @@ class ClientController extends Controller
         ]);
     }
 
-    public function show(Client $client): ClientResource
+    public function show(Client $client): JsonResponse
     {
-        return new ClientResource($client->load(['package.product', 'owner', 'primaryContact', 'contacts'])->loadCount('contacts'));
+        $client->load(['package.product', 'owner', 'primaryContact', 'contacts'])->loadCount('contacts');
+
+        return response()->json([
+            'data' => new ClientResource($client),
+            'summary' => $this->service->summary($client),
+        ]);
     }
 
     public function store(StoreClientRequest $request): JsonResponse

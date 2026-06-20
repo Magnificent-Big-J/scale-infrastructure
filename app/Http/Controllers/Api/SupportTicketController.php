@@ -28,6 +28,7 @@ class SupportTicketController extends Controller
             $request->string('search')->toString() ?: null,
             $request->string('status')->toString() ?: null,
             $request->string('severity')->toString() ?: null,
+            $request->string('client_id')->toString() ?: null,
         );
 
         return response()->json([

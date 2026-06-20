@@ -121,6 +121,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/clients/[client]': RouteRecordInfo<
+      '/clients/[client]',
+      '/clients/:client',
+      { client: ParamValue<true> },
+      { client: ParamValue<false> },
+      | never
+    >,
     '/commercial/billing': RouteRecordInfo<
       '/commercial/billing',
       '/commercial/billing',
@@ -307,6 +314,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/clients/index.vue': {
       routes:
         | '/clients/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/clients/[client].vue': {
+      routes:
+        | '/clients/[client]'
       views:
         | never
     }

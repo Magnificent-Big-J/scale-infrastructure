@@ -10,11 +10,11 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface CommercialOperationsServiceInterface
 {
-    public function paginateContracts(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator;
+    public function paginateContracts(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator;
 
-    public function paginateBillingRecords(int $perPage = 15, ?string $search = null, ?string $type = null, ?string $cadence = null): LengthAwarePaginator;
+    public function paginateBillingRecords(int $perPage = 15, ?string $search = null, ?string $type = null, ?string $cadence = null, ?string $clientId = null): LengthAwarePaginator;
 
-    public function paginateInvoices(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator;
+    public function paginateInvoices(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator;
 
     public function createContract(array $data): Contract;
 

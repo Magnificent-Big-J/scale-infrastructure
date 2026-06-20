@@ -29,8 +29,9 @@ class DeploymentController extends Controller
         $search = $request->string('search')->toString() ?: null;
         $status = $request->string('status')->toString() ?: null;
         $environment = $request->string('environment')->toString() ?: null;
+        $clientId = $request->string('client_id')->toString() ?: null;
 
-        $deployments = $this->service->paginateDeployments($perPage, $search, $status, $environment);
+        $deployments = $this->service->paginateDeployments($perPage, $search, $status, $environment, $clientId);
 
         return response()->json([
             'data' => DeploymentResource::collection($deployments->items()),

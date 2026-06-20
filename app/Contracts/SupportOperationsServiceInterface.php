@@ -9,9 +9,9 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface SupportOperationsServiceInterface
 {
-    public function paginateAgreements(int $perPage = 15, ?string $search = null, ?string $status = null): LengthAwarePaginator;
+    public function paginateAgreements(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $clientId = null): LengthAwarePaginator;
 
-    public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null): LengthAwarePaginator;
+    public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null, ?string $clientId = null): LengthAwarePaginator;
 
     public function paginateIncidents(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null): LengthAwarePaginator;
 
