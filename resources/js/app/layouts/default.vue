@@ -135,6 +135,9 @@ const navGroups = [
             { label: 'Monitoring', to: '/operations/monitoring', icon: 'mdi-pulse', permission: 'monitoring.view' },
             { label: 'Incidents', to: '/operations/incidents', icon: 'mdi-alert-octagon-outline', permission: 'incidents.view' },
             { label: 'Releases', to: '/operations/releases', icon: 'mdi-source-branch', permission: 'releases.view' },
+            { label: 'Change Requests', to: '/operations/change-requests', icon: 'mdi-clipboard-text-outline', permission: 'releases.view' },
+            { label: 'Provisioning', to: '/operations/provisioning', icon: 'mdi-cog-outline', permission: 'releases.view' },
+            { label: 'Automation', to: '/operations/automation', icon: 'mdi-robot-outline', permission: 'releases.view' },
         ],
     },
     {
