@@ -7,9 +7,11 @@ use App\Enums\IncidentStatus;
 use App\Enums\SupportSeverity;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Support\StoreIncidentRequest;
+use App\Http\Requests\Support\UpdateIncidentRequest;
 use App\Http\Resources\IncidentResource;
 use App\Models\Client;
 use App\Models\Deployment;
+use App\Models\Incident;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -46,5 +48,10 @@ class IncidentController extends Controller
     public function store(StoreIncidentRequest $request): JsonResponse
     {
         return response()->json(new IncidentResource($this->service->createIncident($request->validated())), 201);
+    }
+
+    public function update(UpdateIncidentRequest $request, Incident $incident): JsonResponse
+    {
+        return response()->json(new IncidentResource($this->service->updateIncident($incident, $request->validated())));
     }
 }

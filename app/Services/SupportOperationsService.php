@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\Contracts\SupportOperationsServiceInterface;
+use App\Enums\IncidentStatus;
+use App\Enums\SupportTicketStatus;
 use App\Models\Incident;
 use App\Models\SupportAgreement;
 use App\Models\SupportTicket;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class SupportOperationsService implements SupportOperationsServiceInterface
@@ -49,16 +52,93 @@ class SupportOperationsService implements SupportOperationsServiceInterface
 
     public function createAgreement(array $data): SupportAgreement
     {
-        return DB::transaction(fn () => SupportAgreement::query()->create($data)->load(['client', 'supportTier'])->loadCount('tickets'));
+        return DB::transaction(function () use ($data) {
+            $agreement = SupportAgreement::query()->create($data);
+
+            $this->log('support_agreements', $agreement, 'created', 'Created support agreement');
+
+            return $agreement->load(['client', 'supportTier'])->loadCount('tickets');
+        });
+    }
+
+    public function updateAgreement(SupportAgreement $agreement, array $data): SupportAgreement
+    {
+        return DB::transaction(function () use ($agreement, $data) {
+            $agreement->fill($data)->save();
+
+            $this->log('support_agreements', $agreement, 'updated', 'Updated support agreement', ['changes' => array_keys($agreement->getChanges())]);
+
+            return $agreement->refresh()->load(['client', 'supportTier'])->loadCount('tickets');
+        });
     }
 
     public function createTicket(array $data): SupportTicket
     {
-        return DB::transaction(fn () => SupportTicket::query()->create($data)->load(['client', 'deployment', 'supportAgreement', 'assignedUser']));
+        return DB::transaction(function () use ($data) {
+            $ticket = SupportTicket::query()->create($data);
+
+            $this->log('support_tickets', $ticket, 'created', 'Logged support ticket');
+
+            return $ticket->load(['client', 'deployment', 'supportAgreement', 'assignedUser']);
+        });
+    }
+
+    public function updateTicket(SupportTicket $ticket, array $data): SupportTicket
+    {
+        return DB::transaction(function () use ($ticket, $data) {
+            $ticket->fill($data);
+
+            if (in_array($ticket->status, [SupportTicketStatus::Resolved, SupportTicketStatus::Closed], true) && $ticket->resolved_at === null) {
+                $ticket->resolved_at = now();
+            }
+
+            $ticket->save();
+
+            $this->log('support_tickets', $ticket, 'updated', 'Updated support ticket', ['changes' => array_keys($ticket->getChanges())]);
+
+            return $ticket->refresh()->load(['client', 'deployment', 'supportAgreement', 'assignedUser']);
+        });
     }
 
     public function createIncident(array $data): Incident
     {
-        return DB::transaction(fn () => Incident::query()->create($data)->load(['client', 'deployment']));
+        return DB::transaction(function () use ($data) {
+            $incident = Incident::query()->create($data);
+
+            $this->log('incidents', $incident, 'created', 'Logged incident');
+
+            return $incident->load(['client', 'deployment']);
+        });
+    }
+
+    public function updateIncident(Incident $incident, array $data): Incident
+    {
+        return DB::transaction(function () use ($incident, $data) {
+            $incident->fill($data);
+
+            if (in_array($incident->status, [IncidentStatus::Resolved, IncidentStatus::Closed], true) && $incident->resolved_at === null) {
+                $incident->resolved_at = now();
+            }
+
+            $incident->save();
+
+            $this->log('incidents', $incident, 'updated', 'Updated incident', ['changes' => array_keys($incident->getChanges())]);
+
+            return $incident->refresh()->load(['client', 'deployment']);
+        });
+    }
+
+    private function log(string $domain, Model $subject, string $event, string $message, array $properties = []): void
+    {
+        if (! function_exists('activity')) {
+            return;
+        }
+
+        activity($domain)
+            ->performedOn($subject)
+            ->causedBy(auth()->user())
+            ->withProperties($properties)
+            ->event($event)
+            ->log($message);
     }
 }

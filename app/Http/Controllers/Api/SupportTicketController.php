@@ -7,10 +7,12 @@ use App\Enums\SupportSeverity;
 use App\Enums\SupportTicketStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Support\StoreSupportTicketRequest;
+use App\Http\Requests\Support\UpdateSupportTicketRequest;
 use App\Http\Resources\SupportTicketResource;
 use App\Models\Client;
 use App\Models\Deployment;
 use App\Models\SupportAgreement;
+use App\Models\SupportTicket;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,6 +45,11 @@ class SupportTicketController extends Controller
     public function store(StoreSupportTicketRequest $request): JsonResponse
     {
         return response()->json(new SupportTicketResource($this->service->createTicket($request->validated())), 201);
+    }
+
+    public function update(UpdateSupportTicketRequest $request, SupportTicket $supportTicket): JsonResponse
+    {
+        return response()->json(new SupportTicketResource($this->service->updateTicket($supportTicket, $request->validated())));
     }
 
     private function options(): array

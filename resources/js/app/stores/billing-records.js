@@ -2,24 +2,24 @@ import { defineStore } from 'pinia';
 
 import { v1 } from '../utils/api';
 
-export const useIncidentsStore = defineStore('incidents', {
+export const useBillingRecordsStore = defineStore('billing-records', {
     state: () => ({
         rows: [],
         meta: { current_page: 1, last_page: 1, per_page: 10, total: 0 },
-        options: { statuses: [], severities: [], clients: [], deployments: [] },
+        options: { types: [], cadences: [], clients: [], contracts: [] },
         loading: false,
     }),
     actions: {
-        async fetch({ page = 1, perPage = 10, search = '', status = '', severity = '' } = {}) {
+        async fetch({ page = 1, perPage = 10, search = '', type = '', cadence = '' } = {}) {
             this.loading = true;
 
             try {
                 const params = new URLSearchParams({ page, per_page: perPage });
                 if (search) params.set('search', search);
-                if (status) params.set('status', status);
-                if (severity) params.set('severity', severity);
+                if (type) params.set('type', type);
+                if (cadence) params.set('cadence', cadence);
 
-                const response = await v1(`incidents?${params}`);
+                const response = await v1(`billing-records?${params}`);
 
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
@@ -35,7 +35,7 @@ export const useIncidentsStore = defineStore('incidents', {
             this.loading = true;
 
             try {
-                const response = await v1('incidents', { method: 'POST', body: payload });
+                const response = await v1('billing-records', { method: 'POST', body: payload });
 
                 return response?.data ?? response;
             } finally {
@@ -43,11 +43,11 @@ export const useIncidentsStore = defineStore('incidents', {
             }
         },
 
-        async update(incidentId, payload) {
+        async update(recordId, payload) {
             this.loading = true;
 
             try {
-                const response = await v1(`incidents/${incidentId}`, { method: 'PATCH', body: payload });
+                const response = await v1(`billing-records/${recordId}`, { method: 'PATCH', body: payload });
 
                 return response?.data ?? response;
             } finally {

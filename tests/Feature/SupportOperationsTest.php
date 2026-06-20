@@ -148,4 +148,91 @@ class SupportOperationsTest extends TestCase
 
         $this->assertDatabaseHas('incidents', ['reference' => 'INC-2100']);
     }
+
+    public function test_resolving_a_ticket_stamps_resolved_at(): void
+    {
+        $this->seed();
+
+        $ticket = SupportTicket::where('reference', 'TCK-1002')->firstOrFail();
+        $supportUser = User::where('email', 'support@codescaletech.test')->firstOrFail();
+        $this->assertNull($ticket->resolved_at);
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->patchJson("/api/v1/support-tickets/{$ticket->id}", [
+                'client_id' => $ticket->client_id,
+                'assigned_user_id' => $supportUser->id,
+                'reference' => $ticket->reference,
+                'subject' => $ticket->subject,
+                'severity' => $ticket->severity->value,
+                'status' => 'resolved',
+                'hours_logged' => 3.5,
+            ])
+            ->assertOk()
+            ->assertJsonFragment(['status' => 'resolved']);
+
+        $ticket->refresh();
+        $this->assertNotNull($ticket->resolved_at);
+        $this->assertSame($supportUser->id, $ticket->assigned_user_id);
+    }
+
+    public function test_admin_can_update_support_agreement(): void
+    {
+        $this->seed();
+
+        $agreement = SupportAgreement::where('code', 'AGR-NALA-PRIORITY')->firstOrFail();
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->patchJson("/api/v1/support-agreements/{$agreement->id}", [
+                'client_id' => $agreement->client_id,
+                'support_tier_id' => $agreement->support_tier_id,
+                'code' => $agreement->code,
+                'name' => $agreement->name,
+                'monthly_fee' => 41000,
+                'included_hours' => $agreement->included_hours,
+                'status' => 'active',
+            ])
+            ->assertOk();
+
+        $this->assertDatabaseHas('support_agreements', ['id' => $agreement->id, 'monthly_fee' => 41000, 'status' => 'active']);
+    }
+
+    public function test_resolving_an_incident_stamps_resolved_at(): void
+    {
+        $this->seed();
+
+        $incident = Incident::where('reference', 'INC-2001')->firstOrFail();
+        $this->assertNull($incident->resolved_at);
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->patchJson("/api/v1/incidents/{$incident->id}", [
+                'client_id' => $incident->client_id,
+                'reference' => $incident->reference,
+                'title' => $incident->title,
+                'severity' => $incident->severity->value,
+                'status' => 'resolved',
+                'resolution_summary' => 'Mitigated by scaling the worker pool.',
+            ])
+            ->assertOk()
+            ->assertJsonFragment(['status' => 'resolved']);
+
+        $this->assertNotNull($incident->refresh()->resolved_at);
+    }
+
+    public function test_user_without_update_permission_cannot_update_ticket(): void
+    {
+        $this->seed();
+
+        $ticket = SupportTicket::where('reference', 'TCK-1002')->firstOrFail();
+        $sales = User::where('email', 'sales@codescaletech.test')->firstOrFail();
+
+        $this->actingAs($sales, 'sanctum')
+            ->patchJson("/api/v1/support-tickets/{$ticket->id}", [
+                'client_id' => $ticket->client_id,
+                'reference' => $ticket->reference,
+                'subject' => $ticket->subject,
+                'severity' => $ticket->severity->value,
+                'status' => 'closed',
+            ])
+            ->assertForbidden();
+    }
 }

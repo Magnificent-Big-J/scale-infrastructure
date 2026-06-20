@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             DeploymentSeeder::class,
             SupportOperationsSeeder::class,
+            CommercialSeeder::class,
             ModuleDemoSeeder::class,
         ]);
     }

@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Contracts\CatalogueFeatureServiceInterface;
 use App\Contracts\ClientServiceInterface;
+use App\Contracts\CommercialOperationsServiceInterface;
 use App\Contracts\DeploymentServiceInterface;
+use App\Contracts\FinanceDashboardServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
 use App\Contracts\ProductServiceInterface;
@@ -13,7 +15,9 @@ use App\Contracts\SupportTierServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
 use App\Services\CatalogueFeatureService;
 use App\Services\ClientService;
+use App\Services\CommercialOperationsService;
 use App\Services\DeploymentService;
+use App\Services\FinanceDashboardService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
 use App\Services\ProductService;
@@ -35,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ClientServiceInterface::class, ClientService::class);
         $this->app->bind(DeploymentServiceInterface::class, DeploymentService::class);
         $this->app->bind(SupportOperationsServiceInterface::class, SupportOperationsService::class);
+        $this->app->bind(CommercialOperationsServiceInterface::class, CommercialOperationsService::class);
+        $this->app->bind(FinanceDashboardServiceInterface::class, FinanceDashboardService::class);
     }
 
     public function boot(): void

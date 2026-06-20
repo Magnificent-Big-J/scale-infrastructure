@@ -16,9 +16,13 @@ class SupportTicketResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'client_id' => $this->client_id,
             'client_name' => $this->whenLoaded('client', fn () => $this->client?->name),
+            'deployment_id' => $this->deployment_id,
             'deployment_name' => $this->whenLoaded('deployment', fn () => $this->deployment?->name),
+            'support_agreement_id' => $this->support_agreement_id,
             'agreement_name' => $this->whenLoaded('supportAgreement', fn () => $this->supportAgreement?->name),
+            'assigned_user_id' => $this->assigned_user_id,
             'assigned_user_name' => $this->whenLoaded('assignedUser', fn () => $this->assignedUser?->name),
             'reference' => $this->reference,
             'subject' => $this->subject,

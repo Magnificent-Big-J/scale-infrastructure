@@ -30,5 +30,29 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
                 this.loading = false;
             }
         },
+
+        async create(payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1('support-tickets', { method: 'POST', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async update(ticketId, payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1(`support-tickets/${ticketId}`, { method: 'PATCH', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
     },
 });

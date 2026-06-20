@@ -5,13 +5,18 @@ use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SupportTierController;
 use App\Http\Controllers\Api\Admin\UserAdminController;
+use App\Http\Controllers\Api\BillingRecordController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\ContractController;
 use App\Http\Controllers\Api\DeploymentController;
+use App\Http\Controllers\Api\FinanceDashboardController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
+use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\MonitoringCheckController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
@@ -59,17 +64,42 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::middleware('can:support_agreements.view')->group(function () {
         Route::get('support-agreements', [SupportAgreementController::class, 'index']);
         Route::middleware('can:support_agreements.create')->post('support-agreements', [SupportAgreementController::class, 'store']);
+        Route::middleware('can:support_agreements.update')->match(['put', 'patch'], 'support-agreements/{supportAgreement}', [SupportAgreementController::class, 'update']);
     });
 
     Route::middleware('can:support_tickets.view')->group(function () {
         Route::get('support-tickets', [SupportTicketController::class, 'index']);
         Route::middleware('can:support_tickets.create')->post('support-tickets', [SupportTicketController::class, 'store']);
+        Route::middleware('can:support_tickets.update')->match(['put', 'patch'], 'support-tickets/{supportTicket}', [SupportTicketController::class, 'update']);
     });
 
     Route::middleware('can:incidents.view')->group(function () {
         Route::get('incidents', [IncidentController::class, 'index']);
         Route::middleware('can:incidents.create')->post('incidents', [IncidentController::class, 'store']);
+        Route::middleware('can:incidents.update')->match(['put', 'patch'], 'incidents/{incident}', [IncidentController::class, 'update']);
     });
+
+    Route::middleware('can:contracts.view')->group(function () {
+        Route::get('contracts', [ContractController::class, 'index']);
+        Route::middleware('can:contracts.create')->post('contracts', [ContractController::class, 'store']);
+        Route::middleware('can:contracts.update')->match(['put', 'patch'], 'contracts/{contract}', [ContractController::class, 'update']);
+    });
+
+    Route::middleware('can:billing.view')->group(function () {
+        Route::get('billing-records', [BillingRecordController::class, 'index']);
+        Route::middleware('can:billing.create')->post('billing-records', [BillingRecordController::class, 'store']);
+        Route::middleware('can:billing.update')->match(['put', 'patch'], 'billing-records/{billingRecord}', [BillingRecordController::class, 'update']);
+    });
+
+    Route::middleware('can:invoices.view')->group(function () {
+        Route::get('invoices', [InvoiceController::class, 'index']);
+        Route::get('invoices/{invoice}', [InvoiceController::class, 'show']);
+        Route::middleware('can:invoices.create')->post('invoices', [InvoiceController::class, 'store']);
+        Route::middleware('can:invoices.update')->match(['put', 'patch'], 'invoices/{invoice}', [InvoiceController::class, 'update']);
+        Route::middleware('can:payments.create')->post('invoices/{invoice}/payments', [PaymentController::class, 'store']);
+    });
+
+    Route::middleware('can:billing.view')->get('dashboard/finance', [FinanceDashboardController::class, 'show']);
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);

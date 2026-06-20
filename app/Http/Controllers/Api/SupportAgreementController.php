@@ -6,8 +6,10 @@ use App\Contracts\SupportOperationsServiceInterface;
 use App\Enums\SupportAgreementStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Support\StoreSupportAgreementRequest;
+use App\Http\Requests\Support\UpdateSupportAgreementRequest;
 use App\Http\Resources\SupportAgreementResource;
 use App\Models\Client;
+use App\Models\SupportAgreement;
 use App\Models\SupportTier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,5 +45,10 @@ class SupportAgreementController extends Controller
     public function store(StoreSupportAgreementRequest $request): JsonResponse
     {
         return response()->json(new SupportAgreementResource($this->service->createAgreement($request->validated())), 201);
+    }
+
+    public function update(UpdateSupportAgreementRequest $request, SupportAgreement $supportAgreement): JsonResponse
+    {
+        return response()->json(new SupportAgreementResource($this->service->updateAgreement($supportAgreement, $request->validated())));
     }
 }

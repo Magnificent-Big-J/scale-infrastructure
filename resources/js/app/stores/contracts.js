@@ -2,24 +2,23 @@ import { defineStore } from 'pinia';
 
 import { v1 } from '../utils/api';
 
-export const useIncidentsStore = defineStore('incidents', {
+export const useContractsStore = defineStore('contracts', {
     state: () => ({
         rows: [],
         meta: { current_page: 1, last_page: 1, per_page: 10, total: 0 },
-        options: { statuses: [], severities: [], clients: [], deployments: [] },
+        options: { statuses: [], clients: [], products: [], packages: [] },
         loading: false,
     }),
     actions: {
-        async fetch({ page = 1, perPage = 10, search = '', status = '', severity = '' } = {}) {
+        async fetch({ page = 1, perPage = 10, search = '', status = '' } = {}) {
             this.loading = true;
 
             try {
                 const params = new URLSearchParams({ page, per_page: perPage });
                 if (search) params.set('search', search);
                 if (status) params.set('status', status);
-                if (severity) params.set('severity', severity);
 
-                const response = await v1(`incidents?${params}`);
+                const response = await v1(`contracts?${params}`);
 
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
@@ -35,7 +34,7 @@ export const useIncidentsStore = defineStore('incidents', {
             this.loading = true;
 
             try {
-                const response = await v1('incidents', { method: 'POST', body: payload });
+                const response = await v1('contracts', { method: 'POST', body: payload });
 
                 return response?.data ?? response;
             } finally {
@@ -43,11 +42,11 @@ export const useIncidentsStore = defineStore('incidents', {
             }
         },
 
-        async update(incidentId, payload) {
+        async update(contractId, payload) {
             this.loading = true;
 
             try {
-                const response = await v1(`incidents/${incidentId}`, { method: 'PATCH', body: payload });
+                const response = await v1(`contracts/${contractId}`, { method: 'PATCH', body: payload });
 
                 return response?.data ?? response;
             } finally {
