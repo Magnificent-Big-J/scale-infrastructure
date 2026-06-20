@@ -10,6 +10,4 @@ interface ReportServiceInterface
      * @return array<string, mixed>
      */
     public function generate(ReportType $type): array;
-
-    public function toCsv(ReportType $type): string;
 }

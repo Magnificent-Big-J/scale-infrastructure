@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\ReportServiceInterface;
 use App\Enums\ReportType;
+use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ReportController extends Controller
 {
@@ -20,24 +22,21 @@ class ReportController extends Controller
 
     public function show(string $type): JsonResponse
     {
-        $reportType = ReportType::tryFrom($type);
-
-        abort_if($reportType === null, Response::HTTP_NOT_FOUND);
-
-        return response()->json(['data' => $this->service->generate($reportType)]);
+        return response()->json(['data' => $this->service->generate($this->resolve($type))]);
     }
 
-    public function export(string $type): StreamedResponse
+    public function export(string $type): BinaryFileResponse
     {
-        $reportType = ReportType::tryFrom($type);
+        $reportType = $this->resolve($type);
 
-        abort_if($reportType === null, Response::HTTP_NOT_FOUND);
+        return Excel::download(
+            new ReportExport($reportType, $this->service),
+            "{$reportType->value}-".now()->format('Y-m-d').'.xlsx',
+        );
+    }
 
-        $csv = $this->service->toCsv($reportType);
-        $filename = "{$reportType->value}-".now()->format('Y-m-d').'.csv';
-
-        return response()->streamDownload(fn () => print ($csv), $filename, [
-            'Content-Type' => 'text/csv',
-        ]);
+    private function resolve(string $type): ReportType
+    {
+        return ReportType::tryFrom($type) ?? abort(Response::HTTP_NOT_FOUND);
     }
 }

@@ -36,24 +36,6 @@ class ReportService implements ReportServiceInterface
         ];
     }
 
-    public function toCsv(ReportType $type): string
-    {
-        $report = $this->generate($type);
-
-        $handle = fopen('php://temp', 'r+');
-        fputcsv($handle, $report['columns'], ',', '"', '');
-
-        foreach ($report['rows'] as $row) {
-            fputcsv($handle, $row, ',', '"', '');
-        }
-
-        rewind($handle);
-        $csv = stream_get_contents($handle);
-        fclose($handle);
-
-        return $csv;
-    }
-
     private function clientPortfolio(): array
     {
         $rows = Client::query()
