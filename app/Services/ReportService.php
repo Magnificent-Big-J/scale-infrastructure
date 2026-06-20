@@ -41,10 +41,10 @@ class ReportService implements ReportServiceInterface
         $report = $this->generate($type);
 
         $handle = fopen('php://temp', 'r+');
-        fputcsv($handle, $report['columns']);
+        fputcsv($handle, $report['columns'], ',', '"', '');
 
         foreach ($report['rows'] as $row) {
-            fputcsv($handle, $row);
+            fputcsv($handle, $row, ',', '"', '');
         }
 
         rewind($handle);
