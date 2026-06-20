@@ -6,10 +6,14 @@ use App\Contracts\CatalogueFeatureServiceInterface;
 use App\Contracts\ClientServiceInterface;
 use App\Contracts\CommercialOperationsServiceInterface;
 use App\Contracts\DeploymentServiceInterface;
+use App\Contracts\ExecutiveDashboardServiceInterface;
 use App\Contracts\FinanceDashboardServiceInterface;
+use App\Contracts\OperationsDashboardServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
 use App\Contracts\ProductServiceInterface;
+use App\Contracts\ProfitabilityServiceInterface;
+use App\Contracts\ReportServiceInterface;
 use App\Contracts\SupportOperationsServiceInterface;
 use App\Contracts\SupportTierServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
@@ -17,10 +21,14 @@ use App\Services\CatalogueFeatureService;
 use App\Services\ClientService;
 use App\Services\CommercialOperationsService;
 use App\Services\DeploymentService;
+use App\Services\ExecutiveDashboardService;
 use App\Services\FinanceDashboardService;
+use App\Services\OperationsDashboardService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
 use App\Services\ProductService;
+use App\Services\ProfitabilityService;
+use App\Services\ReportService;
 use App\Services\SupportOperationsService;
 use App\Services\SupportTierService;
 use App\Services\UserAdminService;
@@ -41,6 +49,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SupportOperationsServiceInterface::class, SupportOperationsService::class);
         $this->app->bind(CommercialOperationsServiceInterface::class, CommercialOperationsService::class);
         $this->app->bind(FinanceDashboardServiceInterface::class, FinanceDashboardService::class);
+        $this->app->bind(ProfitabilityServiceInterface::class, ProfitabilityService::class);
+        $this->app->bind(ExecutiveDashboardServiceInterface::class, ExecutiveDashboardService::class);
+        $this->app->bind(OperationsDashboardServiceInterface::class, OperationsDashboardService::class);
+        $this->app->bind(ReportServiceInterface::class, ReportService::class);
     }
 
     public function boot(): void
