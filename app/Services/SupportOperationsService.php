@@ -27,6 +27,42 @@ class SupportOperationsService implements SupportOperationsServiceInterface
             ->paginate($perPage);
     }
 
+    /**
+     * Tickets opened vs resolved per month over the last N months. Bucketed in
+     * PHP so it is portable across sqlite (tests) and pgsql (production).
+     *
+     * @return list<array{period: string, opened: int, resolved: int}>
+     */
+    public function throughput(int $months = 6): array
+    {
+        $earliest = now()->startOfMonth()->subMonths($months - 1);
+        $buckets = [];
+        $cursor = $earliest->copy();
+
+        for ($i = 0; $i < $months; $i++) {
+            $buckets[$cursor->format('Y-m')] = ['period' => $cursor->format('M Y'), 'opened' => 0, 'resolved' => 0];
+            $cursor->addMonth();
+        }
+
+        SupportTicket::query()
+            ->where(fn ($query) => $query->where('opened_at', '>=', $earliest)->orWhere('resolved_at', '>=', $earliest))
+            ->get(['opened_at', 'resolved_at'])
+            ->each(function (SupportTicket $ticket) use (&$buckets) {
+                $openedKey = $ticket->opened_at?->format('Y-m');
+                $resolvedKey = $ticket->resolved_at?->format('Y-m');
+
+                if ($openedKey !== null && isset($buckets[$openedKey])) {
+                    $buckets[$openedKey]['opened']++;
+                }
+
+                if ($resolvedKey !== null && isset($buckets[$resolvedKey])) {
+                    $buckets[$resolvedKey]['resolved']++;
+                }
+            });
+
+        return array_values($buckets);
+    }
+
     public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null, ?string $clientId = null): LengthAwarePaginator
     {
         return SupportTicket::query()

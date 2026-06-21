@@ -46,6 +46,7 @@ class SupportTicketController extends Controller
                 'total' => $tickets->total(),
             ],
             'options' => $this->options(),
+            'throughput' => $this->service->throughput(),
         ]);
     }
 

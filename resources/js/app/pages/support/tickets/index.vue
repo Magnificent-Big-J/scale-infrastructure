@@ -13,6 +13,16 @@
                 <AppStatCard label="Open risk" :value="String(openRisk)" helper="High or critical open tickets" icon="mdi-alert-circle-outline" status="pending" />
                 <AppStatCard label="Hours logged" :value="String(hoursLogged)" helper="Current result set" icon="mdi-clock-outline" status="processing" />
             </div>
+
+            <AppBarChart
+                v-if="store.throughput.length"
+                title="Ticket throughput"
+                subtitle="Tickets opened vs resolved per month."
+                :categories="throughputCategories"
+                :series="throughputSeries"
+                :colors="['#2563eb', '#16a34a']"
+            />
+
             <AppSectionCard title="Support ticket queue" subtitle="Log, assign, resolve, and close support requests linked to clients, deployments, and agreements.">
                 <AppFilterBar>
                     <AppTextField v-model="filters.search" label="Search tickets" prepend-inner-icon="mdi-magnify" class="support__search" @update:model-value="onSearch" />
@@ -77,6 +87,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import AppBarChart from '../../../components/AppBarChart.vue';
 import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
@@ -91,6 +102,12 @@ const toast = useToast();
 const goToDetail = (row) => router.push(`/support/tickets/${row.id}`);
 const store = useSupportTicketsStore();
 const inlineBusy = ref(null);
+
+const throughputCategories = computed(() => store.throughput.map((row) => row.period));
+const throughputSeries = computed(() => [
+    { name: 'Opened', data: store.throughput.map((row) => row.opened) },
+    { name: 'Resolved', data: store.throughput.map((row) => row.resolved) },
+]);
 const filters = reactive({ search: '', status: '', severity: '', page: 1 });
 const columns = [
     { key: 'ticket', label: 'Ticket' },
