@@ -29,6 +29,7 @@
                     <v-tab value="support">Support</v-tab>
                     <v-tab value="commercial">Commercial</v-tab>
                     <v-tab value="profitability">Profitability</v-tab>
+                    <v-tab v-if="canViewActivity" value="activity">Activity</v-tab>
                 </v-tabs>
 
                 <v-window v-model="tab" class="detail-window">
@@ -111,6 +112,16 @@
                             </template>
                         </AppDataTable>
                     </v-window-item>
+
+                    <v-window-item v-if="canViewActivity" value="activity">
+                        <AppActivityFeed
+                            v-if="tab === 'activity'"
+                            subject-type="Client"
+                            :subject-id="clientId"
+                            :per-page="12"
+                            empty-text="No activity recorded for this client yet."
+                        />
+                    </v-window-item>
                 </v-window>
             </AppSectionCard>
         </div>
@@ -122,15 +133,20 @@
 </route>
 
 <script setup>
-import { onMounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import AppActivityFeed from '../../components/AppActivityFeed.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
+import { useSessionStore } from '../../stores/session';
 import { v1 } from '../../utils/api';
 
 const route = useRoute();
 const router = useRouter();
+const session = useSessionStore();
 const clientId = route.params.client;
+
+const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
 
 const tab = ref('overview');
 const client = ref(null);
