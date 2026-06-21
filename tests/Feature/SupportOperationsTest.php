@@ -83,6 +83,21 @@ class SupportOperationsTest extends TestCase
             ->assertJsonPath('meta.total', 3);
     }
 
+    public function test_support_tickets_index_returns_monthly_throughput(): void
+    {
+        $this->seed();
+
+        $response = $this->actingAs($this->admin(), 'sanctum')
+            ->getJson('/api/v1/support-tickets')
+            ->assertOk()
+            ->assertJsonStructure(['throughput' => [['period', 'opened', 'resolved']]]);
+
+        // Six monthly buckets, and every seeded ticket is counted as opened.
+        $throughput = $response->json('throughput');
+        $this->assertCount(6, $throughput);
+        $this->assertSame(3, array_sum(array_column($throughput, 'opened')));
+    }
+
     public function test_admin_can_create_support_ticket(): void
     {
         $this->seed();

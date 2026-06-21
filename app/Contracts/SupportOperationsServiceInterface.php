@@ -13,6 +13,11 @@ interface SupportOperationsServiceInterface
 
     public function paginateTickets(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null, ?string $clientId = null): LengthAwarePaginator;
 
+    /**
+     * @return list<array{period: string, opened: int, resolved: int}>
+     */
+    public function throughput(int $months = 6): array;
+
     public function paginateIncidents(int $perPage = 15, ?string $search = null, ?string $status = null, ?string $severity = null): LengthAwarePaginator;
 
     public function createAgreement(array $data): SupportAgreement;

@@ -7,6 +7,7 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
         rows: [],
         meta: { current_page: 1, last_page: 1, per_page: 10, total: 0 },
         options: { statuses: [], severities: [], categories: [], clients: [], deployments: [], agreements: [], users: [] },
+        throughput: [],
         loading: false,
     }),
     actions: {
@@ -46,6 +47,7 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
                 this.options = response?.options ?? this.options;
+                this.throughput = response?.throughput ?? this.throughput;
 
                 return response;
             } finally {
