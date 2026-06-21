@@ -32,6 +32,10 @@
                 left-link-to="/auth/forgot-password"
             />
         </v-form>
+
+        <p class="auth-help">
+            Need access? Ask an administrator to create your account. Public registration is disabled.
+        </p>
     </AuthCard>
 </template>
 
@@ -47,13 +51,12 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 import AppTextField from '../../components/AppTextField.vue';
 import { useSessionStore } from '../../stores/session';
 
 const router = useRouter();
-const route = useRoute();
 const session = useSessionStore();
 
 const form = reactive({
@@ -61,12 +64,8 @@ const form = reactive({
     password: '',
 });
 
-const formMessage = ref(
-    route.query.registered === '1'
-        ? 'Account created. Sign in to continue.'
-        : ''
-);
-const formMessageType = ref(route.query.registered === '1' ? 'success' : 'error');
+const formMessage = ref('');
+const formMessageType = ref('error');
 
 const submit = async () => {
     formMessage.value = '';
@@ -92,5 +91,12 @@ const submit = async () => {
 .auth-form {
     display: grid;
     gap: 1rem;
+}
+
+.auth-help {
+    margin: 1.75rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--rw-muted);
 }
 </style>

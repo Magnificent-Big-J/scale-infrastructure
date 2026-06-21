@@ -15,7 +15,6 @@
                         <span class="guest-logo__name">Scale Infrastructure</span>
                     </RouterLink>
                     <nav class="guest-links">
-                        <RouterLink to="/auth/register" class="guest-links__item">Register</RouterLink>
                         <RouterLink to="/auth/login" class="guest-links__cta">Sign in</RouterLink>
                     </nav>
                 </header>

@@ -27,18 +27,10 @@ defineProps({
 .auth-card {
     position: relative;
     width: 100%;
-    max-width: var(--auth-width, 27.5rem);
-    background: rgba(255, 255, 255, 0.97);
-    border-radius: 1.25rem;
-    padding: 2rem 2.25rem 2.25rem;
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.06),
-        0 24px 56px rgba(0, 0, 0, 0.45),
-        0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .auth-card__head {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .auth-card__eyebrow {
