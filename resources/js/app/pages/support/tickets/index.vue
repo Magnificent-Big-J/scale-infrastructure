@@ -4,6 +4,7 @@
             <AppPageHeader eyebrow="Module 03" title="Support Tickets" subtitle="Client requests, issue categories, severity, assignment, hours logged, and resolution.">
                 <template #metrics><AppStatusBadge status="active" :label="`${store.meta.total} tickets`" /></template>
                 <template #actions>
+                    <v-btn variant="tonal" prepend-icon="mdi-view-column-outline" to="/support/board">Board view</v-btn>
                     <v-btn color="primary" prepend-icon="mdi-ticket-outline" @click="openCreate">New ticket</v-btn>
                 </template>
             </AppPageHeader>

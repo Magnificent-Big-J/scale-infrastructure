@@ -275,6 +275,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/support/board': RouteRecordInfo<
+      '/support/board',
+      '/support/board',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/support/sla-overview': RouteRecordInfo<
       '/support/sla-overview',
       '/support/sla-overview',
@@ -516,6 +523,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/support/agreements.vue': {
       routes:
         | '/support/agreements'
+      views:
+        | never
+    }
+    'resources/js/app/pages/support/board.vue': {
+      routes:
+        | '/support/board'
       views:
         | never
     }

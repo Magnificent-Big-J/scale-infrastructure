@@ -41,6 +41,7 @@ export const navGroups = [
         items: [
             { label: 'Agreements', to: '/support/agreements', icon: 'mdi-handshake-outline', permission: 'support_agreements.view' },
             { label: 'Tickets', to: '/support/tickets', icon: 'mdi-ticket-confirmation-outline', permission: 'support_tickets.view' },
+            { label: 'Ticket Board', to: '/support/board', icon: 'mdi-view-column-outline', permission: 'support_tickets.view' },
             { label: 'SLA Overview', to: '/support/sla-overview', icon: 'mdi-timer-sand', permission: 'support_tickets.view' },
         ],
     },
