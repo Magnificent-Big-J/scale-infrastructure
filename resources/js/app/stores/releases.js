@@ -10,6 +10,19 @@ export const useReleasesStore = defineStore('releases', {
         loading: false,
     }),
     actions: {
+        upsertRow(record) {
+            if (!record?.id) return;
+
+            const index = this.rows.findIndex((row) => row.id === record.id);
+
+            if (index === -1) {
+                this.rows.unshift(record);
+                this.meta.total += 1;
+            } else {
+                this.rows.splice(index, 1, { ...this.rows[index], ...record });
+            }
+        },
+
         async fetch({ page = 1, perPage = 10, search = '', status = '' } = {}) {
             this.loading = true;
 

@@ -118,10 +118,12 @@ import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import AppTextarea from '../../../components/AppTextarea.vue';
 import AppTextField from '../../../components/AppTextField.vue';
+import { useToast } from '../../../composables/useToast';
 import { useFinanceStore } from '../../../stores/finance';
 import { useInvoicesStore } from '../../../stores/invoices';
 
 const router = useRouter();
+const toast = useToast();
 const goToDetail = (row) => router.push(`/commercial/invoices/${row.id}`);
 const store = useInvoicesStore();
 const finance = useFinanceStore();
@@ -208,11 +210,14 @@ const submitDialog = async () => {
     try {
         if (dialog.mode === 'create') {
             await store.create(normalizePayload());
+            await Promise.all([load(), finance.fetchMetrics()]);
+            toast.success('Invoice created.');
         } else {
-            await store.update(dialog.editId, normalizePayload());
+            store.upsertRow(await store.update(dialog.editId, normalizePayload()));
+            finance.fetchMetrics();
+            toast.success('Invoice updated.');
         }
         closeDialog();
-        await Promise.all([load(), finance.fetchMetrics()]);
     } catch (error) {
         dialog.errors = error?.data?.errors ?? {};
         dialog.message = error?.data?.message || 'Something went wrong.';
@@ -248,6 +253,7 @@ const submitPayment = async () => {
         await store.recordPayment(payment.invoice.id, body);
         closePayment();
         await Promise.all([load(), finance.fetchMetrics()]);
+        toast.success('Payment recorded.');
     } catch (error) {
         payment.errors = error?.data?.errors ?? {};
         payment.message = error?.data?.message || 'Something went wrong.';
