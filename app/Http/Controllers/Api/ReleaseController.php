@@ -44,6 +44,13 @@ class ReleaseController extends Controller
         ]);
     }
 
+    public function show(Release $release): JsonResponse
+    {
+        $release->load(['deployment.client', 'changeRequest', 'approver', 'deployer']);
+
+        return response()->json(['data' => new ReleaseResource($release)]);
+    }
+
     public function store(StoreReleaseRequest $request): JsonResponse
     {
         return response()->json(new ReleaseResource($this->service->createRelease($request->validated())), 201);

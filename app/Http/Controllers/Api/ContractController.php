@@ -40,6 +40,14 @@ class ContractController extends Controller
         ]);
     }
 
+    public function show(Contract $contract): JsonResponse
+    {
+        $contract->load(['client', 'product', 'package', 'billingRecords', 'invoices'])
+            ->loadCount(['billingRecords', 'invoices']);
+
+        return response()->json(['data' => new ContractResource($contract)]);
+    }
+
     public function store(StoreContractRequest $request): JsonResponse
     {
         return response()->json(new ContractResource($this->service->createContract($request->validated())), 201);

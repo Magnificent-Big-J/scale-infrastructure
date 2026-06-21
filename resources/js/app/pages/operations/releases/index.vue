@@ -16,7 +16,7 @@
                     <AppSelect v-model="filters.status" :items="statusFilterItems" label="Status" class="ops__filter" @update:model-value="onFilter" />
                 </AppFilterBar>
 
-                <AppDataTable title="All releases" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No releases found" empty-text="Record the first release." @page-change="onPage" @row-click="openEdit">
+                <AppDataTable title="All releases" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No releases found" empty-text="Record the first release." @page-change="onPage" @row-click="goToDetail">
                     <template #row="{ row }">
                         <td><div class="ops-cell"><strong>{{ row.version }}</strong><small>{{ row.deployment_name }}{{ row.client_name ? ` · ${row.client_name}` : '' }}</small></div></td>
                         <td><span class="text-sm">{{ row.change_request_reference || '-' }}</span></td>
@@ -72,13 +72,16 @@
 
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppModal from '../../components/AppModal.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useReleasesStore } from '../../stores/releases';
+import { useRouter } from 'vue-router';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppModal from '../../../components/AppModal.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppTextarea from '../../../components/AppTextarea.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useReleasesStore } from '../../../stores/releases';
 
+const router = useRouter();
+const goToDetail = (row) => router.push(`/operations/releases/${row.id}`);
 const store = useReleasesStore();
 const filters = reactive({ search: '', status: '', page: 1 });
 const columns = [

@@ -22,7 +22,7 @@
                     <AppSelect v-model="filters.status" :items="statusFilterItems" label="Status" class="commercial__filter" @update:model-value="onFilter" />
                 </AppFilterBar>
 
-                <AppDataTable title="All invoices" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No invoices found" empty-text="Create the first invoice." @page-change="onPage" @row-click="openEdit">
+                <AppDataTable title="All invoices" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No invoices found" empty-text="Create the first invoice." @page-change="onPage" @row-click="goToDetail">
                     <template #row="{ row }">
                         <td><div class="commercial-cell"><strong>{{ row.number }}</strong><small>{{ row.client_name }}{{ row.contract_name ? ` · ${row.contract_name}` : '' }}</small></div></td>
                         <td><AppStatusBadge :status="row.is_overdue ? 'suspended' : (row.status_color || row.status)" :label="row.is_overdue ? 'Overdue' : (row.status_label || row.status)" /></td>
@@ -111,15 +111,18 @@
 
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppModal from '../../components/AppModal.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useFinanceStore } from '../../stores/finance';
-import { useInvoicesStore } from '../../stores/invoices';
+import { useRouter } from 'vue-router';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppModal from '../../../components/AppModal.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import AppTextarea from '../../../components/AppTextarea.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useFinanceStore } from '../../../stores/finance';
+import { useInvoicesStore } from '../../../stores/invoices';
 
+const router = useRouter();
+const goToDetail = (row) => router.push(`/commercial/invoices/${row.id}`);
 const store = useInvoicesStore();
 const finance = useFinanceStore();
 const filters = reactive({ search: '', status: '', page: 1 });
