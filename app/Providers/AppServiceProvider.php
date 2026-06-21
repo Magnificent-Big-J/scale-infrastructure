@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\ActivityFeedServiceInterface;
 use App\Contracts\CatalogueFeatureServiceInterface;
 use App\Contracts\ClientServiceInterface;
 use App\Contracts\CommercialOperationsServiceInterface;
@@ -19,6 +20,7 @@ use App\Contracts\ReportServiceInterface;
 use App\Contracts\SupportOperationsServiceInterface;
 use App\Contracts\SupportTierServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
+use App\Services\ActivityFeedService;
 use App\Services\CatalogueFeatureService;
 use App\Services\ClientService;
 use App\Services\CommercialOperationsService;
@@ -59,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ReportServiceInterface::class, ReportService::class);
         $this->app->bind(ReleaseOperationsServiceInterface::class, ReleaseOperationsService::class);
         $this->app->bind(LookupOptionServiceInterface::class, LookupOptionService::class);
+        $this->app->bind(ActivityFeedServiceInterface::class, ActivityFeedService::class);
     }
 
     public function boot(): void

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\Admin\CatalogueFeatureController;
 use App\Http\Controllers\Api\Admin\LookupOptionController;
 use App\Http\Controllers\Api\Admin\PackageController;
@@ -47,6 +48,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::get('lookups/{type}', [LookupController::class, 'show'])
         ->where('type', '[a-z0-9_]+');
+
+    Route::middleware('can:activity.view')->get('activities', [ActivityController::class, 'index']);
 
     Route::middleware('can:clients.view')->group(function () {
         Route::get('clients', [ClientController::class, 'index']);

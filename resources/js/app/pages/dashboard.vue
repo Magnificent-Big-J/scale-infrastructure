@@ -24,6 +24,23 @@
             />
         </div>
 
+        <div v-if="hasCharts" class="chart-row">
+            <AppDonutChart
+                v-if="deploymentDist.series.length"
+                title="Deployment health"
+                subtitle="Environments by current status"
+                :labels="deploymentDist.labels"
+                :series="deploymentDist.series"
+            />
+            <AppDonutChart
+                v-if="ticketDist.series.length"
+                title="Support tickets"
+                subtitle="Tickets by current status"
+                :labels="ticketDist.labels"
+                :series="ticketDist.series"
+            />
+        </div>
+
         <div class="dashboard__body">
             <AppSectionCard title="Build sequence" subtitle="The registry will be built in complete operational slices.">
                 <div class="module-grid">
@@ -65,7 +82,11 @@
                     </div>
                 </AppSectionCard>
 
-                <AppSectionCard title="Foundation status">
+                <AppSectionCard v-if="canViewActivity" title="Recent activity" subtitle="Latest changes across the platform">
+                    <AppActivityFeed :per-page="8" />
+                </AppSectionCard>
+
+                <AppSectionCard v-else title="Foundation status">
                     <ul class="stack-list">
                         <li v-for="item in foundationItems" :key="item.name" class="stack-list__item">
                             <span class="stack-list__name">{{ item.name }}</span>
@@ -92,6 +113,8 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 
+import AppActivityFeed from '../components/AppActivityFeed.vue';
+import AppDonutChart from '../components/AppDonutChart.vue';
 import AppPageHeader from '../components/AppPageHeader.vue';
 import AppSectionCard from '../components/AppSectionCard.vue';
 import AppStatCard from '../components/AppStatCard.vue';
@@ -101,6 +124,8 @@ import { useSessionStore } from '../stores/session';
 
 const session = useSessionStore();
 const dashboards = useDashboardsStore();
+
+const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
 
 const formatAmount = (value) => `ZAR ${Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
@@ -125,6 +150,11 @@ const userInitials = computed(() =>
 );
 
 const exec = computed(() => dashboards.executive);
+
+const emptyDist = { labels: [], series: [] };
+const deploymentDist = computed(() => exec.value.distributions?.deployments_by_status ?? emptyDist);
+const ticketDist = computed(() => exec.value.distributions?.tickets_by_status ?? emptyDist);
+const hasCharts = computed(() => deploymentDist.value.series.length > 0 || ticketDist.value.series.length > 0);
 
 const stats = computed(() => [
     { label: 'Active clients', value: String(exec.value.active_clients), helper: `${exec.value.at_risk_clients} at risk · ${exec.value.average_client_health}% avg health`, icon: 'mdi-domain', bg: 'rgba(37,99,235,0.08)', iconColor: 'var(--rw-600)' },
@@ -194,6 +224,12 @@ const foundationItems = [
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.875rem;
+}
+
+.chart-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
 }
 
 .dashboard__body {
@@ -351,6 +387,7 @@ const foundationItems = [
     }
 
     .stat-row,
+    .chart-row,
     .module-grid {
         grid-template-columns: 1fr;
     }
