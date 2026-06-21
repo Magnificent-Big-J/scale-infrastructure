@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DeploymentSeeder::class,
             SupportOperationsSeeder::class,
             CommercialSeeder::class,
+            OpportunitySeeder::class,
             ProfitabilitySeeder::class,
             ReleaseOperationsSeeder::class,
             ModuleDemoSeeder::class,

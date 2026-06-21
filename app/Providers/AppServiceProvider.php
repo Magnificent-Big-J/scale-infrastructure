@@ -12,6 +12,7 @@ use App\Contracts\FinanceDashboardServiceInterface;
 use App\Contracts\IntakeServiceInterface;
 use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\OperationsDashboardServiceInterface;
+use App\Contracts\OpportunityServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
 use App\Contracts\ProductServiceInterface;
@@ -33,6 +34,7 @@ use App\Services\FinanceDashboardService;
 use App\Services\IntakeService;
 use App\Services\LookupOptionService;
 use App\Services\OperationsDashboardService;
+use App\Services\OpportunityService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
 use App\Services\ProductService;
@@ -71,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TicketCommentServiceInterface::class, TicketCommentService::class);
         $this->app->bind(SlaServiceInterface::class, SlaService::class);
         $this->app->bind(IntakeServiceInterface::class, IntakeService::class);
+        $this->app->bind(OpportunityServiceInterface::class, OpportunityService::class);
     }
 
     public function boot(): void

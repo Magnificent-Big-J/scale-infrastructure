@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\LookupController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\MonitoringCheckController;
 use App\Http\Controllers\Api\OperationsDashboardController;
+use App\Http\Controllers\Api\OpportunityController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ProfitabilityController;
@@ -131,6 +132,15 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
         Route::get('automation-runs', [AutomationRunController::class, 'index']);
         Route::middleware('can:deployments.provision')->post('automation-runs', [AutomationRunController::class, 'store']);
+    });
+
+    Route::middleware('can:opportunities.view')->group(function () {
+        Route::get('opportunities', [OpportunityController::class, 'index']);
+        Route::get('opportunities/{opportunity}', [OpportunityController::class, 'show']);
+        Route::middleware('can:opportunities.create')->post('opportunities', [OpportunityController::class, 'store']);
+        Route::middleware('can:opportunities.update')->match(['put', 'patch'], 'opportunities/{opportunity}', [OpportunityController::class, 'update']);
+        Route::middleware('can:opportunities.update')->post('opportunities/{opportunity}/win', [OpportunityController::class, 'win']);
+        Route::middleware('can:opportunities.delete')->delete('opportunities/{opportunity}', [OpportunityController::class, 'destroy']);
     });
 
     Route::middleware('can:contracts.view')->group(function () {
