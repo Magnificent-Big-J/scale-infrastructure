@@ -53,6 +53,20 @@ class DeploymentController extends Controller
         return response()->json(['data' => new DeploymentResource($deployment)]);
     }
 
+    public function generateIntakeToken(Deployment $deployment): JsonResponse
+    {
+        $token = $deployment->regenerateIntakeToken();
+
+        return response()->json(['data' => ['intake_token' => $token]]);
+    }
+
+    public function revokeIntakeToken(Deployment $deployment): JsonResponse
+    {
+        $deployment->forceFill(['intake_token' => null])->save();
+
+        return response()->json(['data' => ['intake_token' => null]]);
+    }
+
     public function store(StoreDeploymentRequest $request): JsonResponse
     {
         $deployment = $this->service->createDeployment($request->validated());

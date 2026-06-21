@@ -26,6 +26,7 @@ class SupportTicketResource extends JsonResource
             'assigned_user_id' => $this->assigned_user_id,
             'assigned_user_name' => $this->whenLoaded('assignedUser', fn () => $this->assignedUser?->name),
             'reference' => $this->reference,
+            'source' => $this->source,
             'subject' => $this->subject,
             'category' => $this->category,
             'severity' => $severity?->value,

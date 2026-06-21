@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\ExecutiveDashboardController;
 use App\Http\Controllers\Api\FinanceDashboardController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
+use App\Http\Controllers\Api\IntakeTicketController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\LookupController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
@@ -35,6 +36,9 @@ use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\TicketCommentController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Route;
+
+// Public, token-authenticated external ticket intake (inbound create only).
+Route::middleware(['intake.token', 'throttle:60,1'])->post('intake/tickets', [IntakeTicketController::class, 'store']);
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::get('ping', fn () => response()->json(['status' => 'ok']));
@@ -71,6 +75,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('deployments', [DeploymentController::class, 'index']);
         Route::get('deployments/{deployment}', [DeploymentController::class, 'show']);
         Route::middleware('can:deployments.create')->post('deployments', [DeploymentController::class, 'store']);
+        Route::middleware('can:deployments.update')->post('deployments/{deployment}/intake-token', [DeploymentController::class, 'generateIntakeToken']);
+        Route::middleware('can:deployments.update')->delete('deployments/{deployment}/intake-token', [DeploymentController::class, 'revokeIntakeToken']);
         Route::middleware('can:deployments.update')->match(['put', 'patch'], 'deployments/{deployment}', [DeploymentController::class, 'update']);
         Route::middleware('can:deployments.delete')->delete('deployments/{deployment}', [DeploymentController::class, 'destroy']);
         Route::middleware('can:infrastructure.create')->post('deployments/{deployment}/infrastructure-assets', [InfrastructureAssetController::class, 'store']);
