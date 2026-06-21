@@ -79,7 +79,6 @@
                         <span class="guest-brand__name">Scale <em>Infrastructure</em></span>
                     </RouterLink>
                     <nav class="guest-nav">
-                        <RouterLink to="/auth/register" class="guest-nav__link">Register</RouterLink>
                         <RouterLink to="/auth/login" class="guest-nav__cta">Sign in</RouterLink>
                     </nav>
                 </header>

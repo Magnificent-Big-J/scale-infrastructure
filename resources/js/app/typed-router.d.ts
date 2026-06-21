@@ -100,13 +100,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/auth/register': RouteRecordInfo<
-      '/auth/register',
-      '/auth/register',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/auth/reset-password': RouteRecordInfo<
       '/auth/reset-password',
       '/auth/reset-password',
@@ -338,12 +331,6 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/auth/profile.vue': {
       routes:
         | '/auth/profile'
-      views:
-        | never
-    }
-    'resources/js/app/pages/auth/register.vue': {
-      routes:
-        | '/auth/register'
       views:
         | never
     }

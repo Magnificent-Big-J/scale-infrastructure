@@ -18,7 +18,6 @@
             </p>
             <div class="landing-hero__cta">
                 <RouterLink to="/auth/login" class="cta-primary">Sign in</RouterLink>
-                <RouterLink to="/auth/register" class="cta-ghost">Request access</RouterLink>
             </div>
         </section>
 
