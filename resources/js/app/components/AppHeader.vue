@@ -34,7 +34,7 @@ defineProps({
     padding-inline: 1rem;
     background: rgba(247, 243, 234, 0.86);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(17, 34, 51, 0.08);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .starter-brand {

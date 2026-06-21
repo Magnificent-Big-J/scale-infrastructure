@@ -34,7 +34,7 @@ defineEmits(['update:modelValue']);
 
 <style scoped>
 .app-drawer {
-    border-left: 1px solid rgba(17, 34, 51, 0.08);
+    border-left: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .app-drawer__header {
@@ -42,7 +42,7 @@ defineEmits(['update:modelValue']);
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: 1px solid rgba(17, 34, 51, 0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .app-drawer__title {

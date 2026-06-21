@@ -48,7 +48,7 @@ const icon = computed(() => ({
     gap: 1rem;
     padding: 0.9rem 1rem;
     border-radius: 1rem;
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .app-banner--success { background: rgba(22, 163, 74, 0.08); }

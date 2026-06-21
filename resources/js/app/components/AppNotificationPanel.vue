@@ -71,8 +71,8 @@ const selectItem = (item) => {
     width: min(420px, calc(100vw - 2rem));
     max-height: min(640px, 80vh);
     overflow: hidden;
-    background: rgba(255, 253, 248, 0.98);
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .notification-panel__header {
@@ -80,7 +80,7 @@ const selectItem = (item) => {
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: 1px solid rgba(17, 34, 51, 0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .notification-panel__header p {

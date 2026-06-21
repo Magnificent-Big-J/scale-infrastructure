@@ -36,12 +36,12 @@ defineEmits(['select']);
     text-align: left;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(17, 34, 51, 0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
     cursor: pointer;
 }
 
 .notification-item:hover {
-    background: rgba(17, 34, 51, 0.03);
+    background: rgba(15, 23, 42, 0.03);
 }
 
 .notification-item--read {

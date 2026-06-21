@@ -5,7 +5,7 @@
             <aside class="auth-brand">
                 <div class="auth-brand__inner">
                     <RouterLink to="/" class="auth-logo">
-                        <span class="auth-logo__badge">SI</span>
+                        <img :src="'/logo-mark.png'" alt="Scale Infrastructure" class="auth-logo__img">
                         <span class="auth-logo__name">Scale Infrastructure</span>
                     </RouterLink>
 
@@ -30,7 +30,7 @@
             <!-- ── Form pane ─────────────────────────────────── -->
             <main class="auth-panel">
                 <RouterLink to="/" class="auth-panel__logo">
-                    <span class="auth-logo__badge">SI</span>
+                    <img :src="'/logo-mark.png'" alt="Scale Infrastructure" class="auth-logo__img">
                     <span class="auth-logo__name auth-logo__name--dark">Scale Infrastructure</span>
                 </RouterLink>
 
@@ -153,19 +153,10 @@ const features = [
     text-decoration: none;
 }
 
-.auth-logo__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 9px;
-    background: linear-gradient(145deg, #1c3a6e, #3b82f6);
-    color: #fff;
-    font-size: 0.74rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 2px 10px rgba(37, 99, 235, 0.45);
+.auth-logo__img {
+    height: 2.6rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .auth-logo__name {

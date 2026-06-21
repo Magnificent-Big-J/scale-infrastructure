@@ -25,7 +25,7 @@ defineProps({
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 253, 248, 0.72);
+    background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(4px);
     border-radius: inherit;
     z-index: 3;

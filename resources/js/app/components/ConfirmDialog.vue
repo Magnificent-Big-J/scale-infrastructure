@@ -32,8 +32,8 @@ defineEmits(['update:modelValue', 'confirm', 'cancel']);
 
 <style scoped>
 .confirm-dialog {
-    background: rgba(255, 253, 248, 0.98);
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .confirm-dialog__title {
@@ -48,7 +48,7 @@ defineEmits(['update:modelValue', 'confirm', 'cancel']);
 
 .confirm-dialog__text {
     margin: 0;
-    color: var(--starter-muted, rgba(17, 34, 51, 0.7));
+    color: var(--starter-muted, rgba(15, 23, 42, 0.7));
     line-height: 1.65;
 }
 

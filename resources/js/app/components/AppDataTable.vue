@@ -96,8 +96,8 @@ const onSearch = (val) => {
 .data-table {
     border-radius: 1.25rem;
     overflow: hidden;
-    border: 1px solid rgba(17, 34, 51, 0.08);
-    background: rgba(255, 253, 248, 0.9);
+    border: 1px solid var(--rw-border);
+    background: var(--rw-surface);
 }
 
 .data-table__toolbar {
@@ -139,11 +139,11 @@ const onSearch = (val) => {
 }
 
 .data-table__row:hover td {
-    background: rgba(0, 106, 82, 0.04);
+    background: rgba(37, 99, 235, 0.05);
 }
 
 .data-table__pagination {
     padding: 0.9rem 1.25rem;
-    border-top: 1px solid rgba(17, 34, 51, 0.06);
+    border-top: 1px solid var(--rw-border);
 }
 </style>
