@@ -16,11 +16,18 @@
                     </div>
 
                     <nav class="sidebar__nav">
-                        <div v-for="group in visibleNavGroups" :key="group.label" class="nav-group-wrap">
-                            <div v-if="group.label" class="nav-divider">
+                        <div v-for="group in visibleNavGroups" :key="group.label || 'main'" class="nav-group-wrap">
+                            <button
+                                v-if="group.label"
+                                type="button"
+                                class="nav-divider"
+                                :class="{ 'nav-divider--open': isGroupOpen(group) }"
+                                @click="toggleGroup(group.label)"
+                            >
                                 <span class="nav-divider__label">{{ group.label }}</span>
-                            </div>
-                            <div class="nav-group">
+                                <v-icon class="nav-divider__chevron" size="16">mdi-chevron-down</v-icon>
+                            </button>
+                            <div v-show="isGroupOpen(group)" class="nav-group">
                                 <NavItem
                                     v-for="item in group.items"
                                     :key="item.to"
@@ -133,6 +140,33 @@ const userInitials = computed(() =>
 );
 
 const pageTitle = computed(() => route.meta?.title ?? null);
+
+// Collapsible nav groups. Labelled groups collapse; the group containing the
+// current route auto-opens. The flat (label-less) group is always shown.
+const matchesRoute = (to) => (to === '/dashboard' ? route.path === '/dashboard' : route.path.startsWith(to));
+
+const activeGroupLabel = computed(() => {
+    const group = visibleNavGroups.value.find((g) => g.label && g.items.some((item) => matchesRoute(item.to)));
+    return group?.label ?? null;
+});
+
+const openGroups = ref(new Set());
+const isGroupOpen = (group) => !group.label || openGroups.value.has(group.label);
+const toggleGroup = (label) => {
+    const next = new Set(openGroups.value);
+    next.has(label) ? next.delete(label) : next.add(label);
+    openGroups.value = next;
+};
+
+watch(
+    activeGroupLabel,
+    (label) => {
+        if (label && !openGroups.value.has(label)) {
+            openGroups.value = new Set(openGroups.value).add(label);
+        }
+    },
+    { immediate: true }
+);
 
 const logout = async () => {
     await session.logout();
@@ -317,8 +351,14 @@ const NavItem = defineComponent({
 .nav-divider {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
+    width: 100%;
     padding: 0.875rem 0.875rem 0.375rem;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
 }
 
 .nav-divider__label {
@@ -327,6 +367,21 @@ const NavItem = defineComponent({
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--rw-dim);
+    transition: color 0.12s;
+}
+
+.nav-divider:hover .nav-divider__label {
+    color: var(--rw-muted);
+}
+
+.nav-divider__chevron {
+    color: var(--rw-dim);
+    transition: transform 0.18s ease;
+    transform: rotate(-90deg);
+}
+
+.nav-divider--open .nav-divider__chevron {
+    transform: rotate(0deg);
 }
 
 /* Footer ───────────────────────────────────────────── */
