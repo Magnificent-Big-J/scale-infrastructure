@@ -17,6 +17,15 @@
                 <AppStatCard label="Avg margin" :value="`${Number(store.summary.margin_avg || 0).toFixed(1)}%`" helper="Blended margin" icon="mdi-percent-outline" status="active" />
             </div>
 
+            <AppLineChart
+                v-if="store.trend.length"
+                title="Revenue, cost & profit by period"
+                subtitle="Totals across all clients, oldest to newest."
+                :categories="trendCategories"
+                :series="trendSeries"
+                :colors="['#2563eb', '#d97706', '#16a34a']"
+            />
+
             <AppSectionCard title="Profitability records" subtitle="Per-client, per-period revenue and cost breakdown with computed margin.">
                 <AppFilterBar>
                     <AppTextField v-model="filters.search" label="Search records" prepend-inner-icon="mdi-magnify" class="commercial__search" @update:model-value="onSearch" />
@@ -79,6 +88,7 @@
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
+import AppLineChart from '../../components/AppLineChart.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
@@ -88,6 +98,13 @@ import { useProfitabilityStore } from '../../stores/profitability';
 
 const store = useProfitabilityStore();
 const filters = reactive({ search: '', period: '', page: 1 });
+
+const trendCategories = computed(() => store.trend.map((row) => row.period));
+const trendSeries = computed(() => [
+    { name: 'Revenue', data: store.trend.map((row) => Number(row.revenue)) },
+    { name: 'Cost', data: store.trend.map((row) => Number(row.cost)) },
+    { name: 'Profit', data: store.trend.map((row) => Number(row.profit)) },
+]);
 const columns = [
     { key: 'record', label: 'Client / period' },
     { key: 'revenue', label: 'Revenue' },

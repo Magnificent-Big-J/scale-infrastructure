@@ -74,6 +74,24 @@ class ProfitabilityDashboardTest extends TestCase
             ->assertJsonPath('summary.records', 5);
     }
 
+    public function test_profitability_index_returns_period_trend(): void
+    {
+        $this->seed();
+
+        $response = $this->actingAs($this->admin(), 'sanctum')
+            ->getJson('/api/v1/profitability-records')
+            ->assertOk()
+            ->assertJsonStructure(['trend' => [['period', 'revenue', 'cost', 'profit']]]);
+
+        $trend = $response->json('trend');
+        $periods = array_column($trend, 'period');
+
+        // Ordered oldest-first.
+        $sorted = $periods;
+        sort($sorted);
+        $this->assertSame($sorted, $periods);
+    }
+
     public function test_executive_dashboard_aggregates(): void
     {
         $this->seed();

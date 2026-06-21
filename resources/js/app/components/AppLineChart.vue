@@ -10,7 +10,7 @@
 
         <apexchart
             type="line"
-            height="100%"
+            height="300"
             :options="chartOptions"
             :series="series"
         />
