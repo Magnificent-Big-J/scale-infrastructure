@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Deployment extends Model
 {
@@ -27,6 +28,7 @@ class Deployment extends Model
         'current_version',
         'go_live_date',
         'status',
+        'intake_token',
         'notes',
     ];
 
@@ -37,6 +39,13 @@ class Deployment extends Model
             'status' => DeploymentStatus::class,
             'go_live_date' => 'date',
         ];
+    }
+
+    public function regenerateIntakeToken(): string
+    {
+        $this->forceFill(['intake_token' => 'dit_'.Str::random(40)])->save();
+
+        return $this->intake_token;
     }
 
     public function client(): BelongsTo

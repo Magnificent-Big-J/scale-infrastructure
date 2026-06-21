@@ -32,6 +32,7 @@ class DeploymentResource extends JsonResource
             'status' => $status?->value,
             'status_label' => $status?->label(),
             'status_color' => $status?->color(),
+            'intake_token' => $this->intake_token,
             'notes' => $this->notes,
             'infrastructure_assets_count' => $this->whenCounted('infrastructureAssets'),
             'monitoring_checks_count' => $this->whenCounted('monitoringChecks'),

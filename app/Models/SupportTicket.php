@@ -24,6 +24,7 @@ class SupportTicket extends Model
         'support_agreement_id',
         'assigned_user_id',
         'reference',
+        'source',
         'subject',
         'category',
         'severity',
