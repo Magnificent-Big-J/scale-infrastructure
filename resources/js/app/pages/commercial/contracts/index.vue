@@ -22,7 +22,7 @@
                     <AppSelect v-model="filters.status" :items="statusFilterItems" label="Status" class="commercial__filter" @update:model-value="onFilter" />
                 </AppFilterBar>
 
-                <AppDataTable title="All contracts" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No contracts found" empty-text="Create the first contract." @page-change="onPage" @row-click="openEdit">
+                <AppDataTable title="All contracts" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No contracts found" empty-text="Create the first contract." @page-change="onPage" @row-click="goToDetail">
                     <template #row="{ row }">
                         <td><div class="commercial-cell"><strong>{{ row.name }}</strong><small>{{ row.code }} · {{ row.client_name }}</small></div></td>
                         <td><span class="text-sm">{{ row.package_name || row.product_name || '-' }}</span></td>
@@ -76,14 +76,17 @@
 
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppModal from '../../components/AppModal.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useContractsStore } from '../../stores/contracts';
+import { useRouter } from 'vue-router';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppModal from '../../../components/AppModal.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import AppTextarea from '../../../components/AppTextarea.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useContractsStore } from '../../../stores/contracts';
 
+const router = useRouter();
+const goToDetail = (row) => router.push(`/commercial/contracts/${row.id}`);
 const store = useContractsStore();
 const filters = reactive({ search: '', status: '', page: 1 });
 const columns = [

@@ -41,7 +41,7 @@ class InvoiceController extends Controller
 
     public function show(Invoice $invoice): JsonResponse
     {
-        return response()->json(new InvoiceResource($invoice->load(['client', 'contract', 'payments.client'])));
+        return response()->json(['data' => new InvoiceResource($invoice->load(['client', 'contract', 'payments.client']))]);
     }
 
     public function store(StoreInvoiceRequest $request): JsonResponse

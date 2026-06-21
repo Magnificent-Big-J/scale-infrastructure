@@ -31,6 +31,10 @@ class ContractResource extends JsonResource
             'status_label' => $status?->label(),
             'status_color' => $status?->color(),
             'notes' => $this->notes,
+            'billing_records_count' => $this->whenCounted('billingRecords'),
+            'invoices_count' => $this->whenCounted('invoices'),
+            'billing_records' => BillingRecordResource::collection($this->whenLoaded('billingRecords')),
+            'invoices' => InvoiceResource::collection($this->whenLoaded('invoices')),
         ];
     }
 }

@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::middleware('can:releases.view')->group(function () {
         Route::get('releases', [ReleaseController::class, 'index']);
+        Route::get('releases/{release}', [ReleaseController::class, 'show']);
         Route::middleware('can:releases.create')->post('releases', [ReleaseController::class, 'store']);
         Route::middleware('can:releases.update')->match(['put', 'patch'], 'releases/{release}', [ReleaseController::class, 'update']);
         Route::middleware('can:releases.approve')->post('releases/{release}/approve', [ReleaseController::class, 'approve']);
@@ -121,6 +122,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::middleware('can:contracts.view')->group(function () {
         Route::get('contracts', [ContractController::class, 'index']);
+        Route::get('contracts/{contract}', [ContractController::class, 'show']);
         Route::middleware('can:contracts.create')->post('contracts', [ContractController::class, 'store']);
         Route::middleware('can:contracts.update')->match(['put', 'patch'], 'contracts/{contract}', [ContractController::class, 'update']);
     });

@@ -135,18 +135,32 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/commercial/contracts': RouteRecordInfo<
-      '/commercial/contracts',
+    '/commercial/contracts/': RouteRecordInfo<
+      '/commercial/contracts/',
       '/commercial/contracts',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/commercial/invoices': RouteRecordInfo<
-      '/commercial/invoices',
+    '/commercial/contracts/[contract]': RouteRecordInfo<
+      '/commercial/contracts/[contract]',
+      '/commercial/contracts/:contract',
+      { contract: ParamValue<true> },
+      { contract: ParamValue<false> },
+      | never
+    >,
+    '/commercial/invoices/': RouteRecordInfo<
+      '/commercial/invoices/',
       '/commercial/invoices',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/commercial/invoices/[invoice]': RouteRecordInfo<
+      '/commercial/invoices/[invoice]',
+      '/commercial/invoices/:invoice',
+      { invoice: ParamValue<true> },
+      { invoice: ParamValue<false> },
       | never
     >,
     '/commercial/opportunities': RouteRecordInfo<
@@ -233,11 +247,18 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/operations/releases': RouteRecordInfo<
-      '/operations/releases',
+    '/operations/releases/': RouteRecordInfo<
+      '/operations/releases/',
       '/operations/releases',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/operations/releases/[release]': RouteRecordInfo<
+      '/operations/releases/[release]',
+      '/operations/releases/:release',
+      { release: ParamValue<true> },
+      { release: ParamValue<false> },
       | never
     >,
     '/reports': RouteRecordInfo<
@@ -378,15 +399,27 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/commercial/contracts.vue': {
+    'resources/js/app/pages/commercial/contracts/index.vue': {
       routes:
-        | '/commercial/contracts'
+        | '/commercial/contracts/'
       views:
         | never
     }
-    'resources/js/app/pages/commercial/invoices.vue': {
+    'resources/js/app/pages/commercial/contracts/[contract].vue': {
       routes:
-        | '/commercial/invoices'
+        | '/commercial/contracts/[contract]'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/invoices/index.vue': {
+      routes:
+        | '/commercial/invoices/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/invoices/[invoice].vue': {
+      routes:
+        | '/commercial/invoices/[invoice]'
       views:
         | never
     }
@@ -462,9 +495,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/operations/releases.vue': {
+    'resources/js/app/pages/operations/releases/index.vue': {
       routes:
-        | '/operations/releases'
+        | '/operations/releases/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/releases/[release].vue': {
+      routes:
+        | '/operations/releases/[release]'
       views:
         | never
     }
