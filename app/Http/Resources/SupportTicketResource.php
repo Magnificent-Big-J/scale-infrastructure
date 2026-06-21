@@ -13,6 +13,7 @@ class SupportTicketResource extends JsonResource
     {
         $status = $this->status instanceof SupportTicketStatus ? $this->status : null;
         $severity = $this->severity instanceof SupportSeverity ? $this->severity : null;
+        $sla = $this->slaSnapshot();
 
         return [
             'id' => $this->id,
@@ -37,6 +38,11 @@ class SupportTicketResource extends JsonResource
             'opened_at' => $this->opened_at,
             'resolved_at' => $this->resolved_at,
             'summary' => $this->summary,
+            'sla_status' => $sla['status']->value,
+            'sla_status_label' => $sla['status']->label(),
+            'sla_status_color' => $sla['status']->color(),
+            'sla_due_at' => $sla['due_at'],
+            'sla_hours_remaining' => $sla['hours_remaining'],
         ];
     }
 }

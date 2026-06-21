@@ -45,6 +45,11 @@
                                 <AppStatusBadge :status="ticket.severity_color || ticket.severity" :label="ticket.severity_label || ticket.severity" />
                             </div>
                             <p class="board-card__subject">{{ ticket.subject }}</p>
+                            <AppStatusBadge
+                                v-if="['breached', 'at_risk'].includes(ticket.sla_status)"
+                                :status="ticket.sla_status_color"
+                                :label="ticket.sla_status_label"
+                            />
                             <div class="board-card__foot">
                                 <span class="board-card__client">{{ ticket.client_name || '—' }}</span>
                                 <span v-if="ticket.assigned_user_name" class="board-card__owner">{{ ticket.assigned_user_name }}</span>

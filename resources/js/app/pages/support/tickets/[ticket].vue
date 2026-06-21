@@ -34,6 +34,7 @@
                             <div><dt>Deployment</dt><dd>{{ ticket?.deployment_name || '-' }}</dd></div>
                             <div><dt>Support agreement</dt><dd>{{ ticket?.agreement_name || '-' }}</dd></div>
                             <div><dt>Category</dt><dd>{{ ticket?.category || '-' }}</dd></div>
+                            <div v-if="ticket"><dt>SLA</dt><dd><AppStatusBadge :status="ticket.sla_status_color" :label="ticket.sla_status_label" /></dd></div>
                             <div><dt>Opened</dt><dd>{{ formatDate(ticket?.opened_at) }}</dd></div>
                             <div><dt>Resolved</dt><dd>{{ formatDate(ticket?.resolved_at) }}</dd></div>
                             <div class="detail-grid__wide"><dt>Summary</dt><dd>{{ ticket?.summary || '-' }}</dd></div>
