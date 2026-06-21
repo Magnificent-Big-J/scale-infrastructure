@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\SupportOperationsServiceInterface;
+use App\Enums\LookupType;
 use App\Enums\SupportSeverity;
 use App\Enums\SupportTicketStatus;
 use App\Http\Controllers\Controller;
@@ -11,6 +13,7 @@ use App\Http\Requests\Support\UpdateSupportTicketRequest;
 use App\Http\Resources\SupportTicketResource;
 use App\Models\Client;
 use App\Models\Deployment;
+use App\Models\LookupOption;
 use App\Models\SupportAgreement;
 use App\Models\SupportTicket;
 use App\Models\User;
@@ -19,7 +22,10 @@ use Illuminate\Http\Request;
 
 class SupportTicketController extends Controller
 {
-    public function __construct(private readonly SupportOperationsServiceInterface $service) {}
+    public function __construct(
+        private readonly SupportOperationsServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
+    ) {}
 
     public function index(Request $request): JsonResponse
     {
@@ -58,6 +64,9 @@ class SupportTicketController extends Controller
         return [
             'statuses' => SupportTicketStatus::options(),
             'severities' => SupportSeverity::options(),
+            'categories' => $this->lookups->optionsFor(LookupType::TicketCategory)
+                ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                ->all(),
             'clients' => Client::query()->orderBy('name')->get(['id', 'name'])->map(fn (Client $client) => ['value' => $client->id, 'label' => $client->name])->all(),
             'deployments' => Deployment::query()->orderBy('name')->get(['id', 'name'])->map(fn (Deployment $deployment) => ['value' => $deployment->id, 'label' => $deployment->name])->all(),
             'agreements' => SupportAgreement::query()->orderBy('name')->get(['id', 'name'])->map(fn (SupportAgreement $agreement) => ['value' => $agreement->id, 'label' => $agreement->name])->all(),

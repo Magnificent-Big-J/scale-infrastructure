@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\CatalogueFeatureController;
+use App\Http\Controllers\Api\Admin\LookupOptionController;
 use App\Http\Controllers\Api\Admin\PackageController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SupportTierController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Api\FinanceDashboardController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\LookupController;
 use App\Http\Controllers\Api\ModuleDemoRecordController;
 use App\Http\Controllers\Api\MonitoringCheckController;
 use App\Http\Controllers\Api\OperationsDashboardController;
@@ -42,6 +44,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::get('module-demo/{pageKey}', [ModuleDemoRecordController::class, 'index'])
         ->where('pageKey', '[A-Za-z0-9_.-]+');
+
+    Route::get('lookups/{type}', [LookupController::class, 'show'])
+        ->where('type', '[a-z0-9_]+');
 
     Route::middleware('can:clients.view')->group(function () {
         Route::get('clients', [ClientController::class, 'index']);
@@ -181,5 +186,12 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::middleware('can:support_tiers.create')->post('support-tiers', [SupportTierController::class, 'store']);
         Route::middleware('can:support_tiers.update')->match(['put', 'patch'], 'support-tiers/{supportTier}', [SupportTierController::class, 'update']);
         Route::middleware('can:support_tiers.delete')->delete('support-tiers/{supportTier}', [SupportTierController::class, 'destroy']);
+    });
+
+    Route::middleware('can:lookups.view')->group(function () {
+        Route::get('reference-data', [LookupOptionController::class, 'index']);
+        Route::middleware('can:lookups.create')->post('reference-data', [LookupOptionController::class, 'store']);
+        Route::middleware('can:lookups.update')->match(['put', 'patch'], 'reference-data/{lookupOption}', [LookupOptionController::class, 'update']);
+        Route::middleware('can:lookups.delete')->delete('reference-data/{lookupOption}', [LookupOptionController::class, 'destroy']);
     });
 });

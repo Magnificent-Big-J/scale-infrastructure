@@ -22,7 +22,7 @@
                     <template #row="{ row }">
                         <td><div class="support-cell"><strong>{{ row.subject }}</strong><small>{{ row.reference }} · {{ row.client_name }}</small></div></td>
                         <td><span class="text-sm">{{ row.deployment_name || '-' }}</span></td>
-                        <td><span class="text-sm">{{ row.category || '-' }}</span></td>
+                        <td><span class="text-sm">{{ categoryLabel(row.category) }}</span></td>
                         <td><AppStatusBadge :status="row.severity_color || row.severity" :label="row.severity_label || row.severity" /></td>
                         <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
                         <td><span class="text-sm">{{ row.hours_logged ?? 0 }}</span></td>
@@ -43,7 +43,7 @@
                 <v-form @submit.prevent="submitDialog">
                     <v-row dense>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.reference" label="Reference" :error-messages="dialog.errors.reference" /></v-col>
-                        <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.category" label="Category" :error-messages="dialog.errors.category" /></v-col>
+                        <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.category" :items="categoryItems" label="Category" :error-messages="dialog.errors.category" /></v-col>
                         <v-col cols="12"><AppTextField v-model="dialog.form.subject" label="Subject" :error-messages="dialog.errors.subject" /></v-col>
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.client_id" :items="clientItems" label="Client" :error-messages="dialog.errors.client_id" /></v-col>
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.deployment_id" :items="deploymentItems" label="Deployment" :error-messages="dialog.errors.deployment_id" /></v-col>
@@ -97,6 +97,8 @@ const clientItems = computed(() => toSelect(store.options.clients, 'Select a cli
 const deploymentItems = computed(() => toSelect(store.options.deployments, 'No deployment'));
 const agreementItems = computed(() => toSelect(store.options.agreements, 'No agreement'));
 const userItems = computed(() => toSelect(store.options.users, 'Unassigned'));
+const categoryItems = computed(() => toSelect(store.options.categories, 'No category'));
+const categoryLabel = (value) => store.options.categories.find((item) => item.value === value)?.label || value || '-';
 const severityItems = computed(() => store.options.severities.map((item) => ({ title: item.label, value: item.value })));
 const statusItems = computed(() => store.options.statuses.map((item) => ({ title: item.label, value: item.value })));
 const statusFilterItems = computed(() => [{ title: 'All statuses', value: '' }, ...statusItems.value]);
