@@ -18,7 +18,7 @@
                     <AppSelect v-model="filters.status" :items="statusFilterItems" label="Status" class="support__filter" @update:model-value="onFilter" />
                     <AppSelect v-model="filters.severity" :items="severityFilterItems" label="Severity" class="support__filter" @update:model-value="onFilter" />
                 </AppFilterBar>
-                <AppDataTable title="All tickets" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No tickets found" empty-text="Log the first support ticket." @page-change="onPage" @row-click="openEdit">
+                <AppDataTable title="All tickets" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No tickets found" empty-text="Log the first support ticket." @page-change="onPage" @row-click="goToDetail">
                     <template #row="{ row }">
                         <td><div class="support-cell"><strong>{{ row.subject }}</strong><small>{{ row.reference }} · {{ row.client_name }}</small></div></td>
                         <td><span class="text-sm">{{ row.deployment_name || '-' }}</span></td>
@@ -71,14 +71,17 @@
 </route>
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppModal from '../../components/AppModal.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useSupportTicketsStore } from '../../stores/support-tickets';
+import { useRouter } from 'vue-router';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppModal from '../../../components/AppModal.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import AppTextarea from '../../../components/AppTextarea.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useSupportTicketsStore } from '../../../stores/support-tickets';
 
+const router = useRouter();
+const goToDetail = (row) => router.push(`/support/tickets/${row.id}`);
 const store = useSupportTicketsStore();
 const filters = reactive({ search: '', status: '', severity: '', page: 1 });
 const columns = [

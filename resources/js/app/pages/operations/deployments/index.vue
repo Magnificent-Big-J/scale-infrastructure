@@ -33,6 +33,7 @@
                     empty-title="No deployments found"
                     empty-text="Seed deployments or create the first client environment."
                     @page-change="onPage"
+                    @row-click="goToDetail"
                 >
                     <template #row="{ row }">
                         <td>
@@ -72,12 +73,16 @@
 
 <script setup>
 import { computed, onMounted, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useDeploymentsStore } from '../../stores/deployments';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useDeploymentsStore } from '../../../stores/deployments';
+
+const router = useRouter();
+const goToDetail = (row) => router.push(`/operations/deployments/${row.id}`);
 
 const store = useDeploymentsStore();
 const filters = reactive({ search: '', status: '', environment: '', page: 1 });

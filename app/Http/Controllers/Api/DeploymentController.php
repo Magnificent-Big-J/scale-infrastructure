@@ -45,6 +45,14 @@ class DeploymentController extends Controller
         ]);
     }
 
+    public function show(Deployment $deployment): JsonResponse
+    {
+        $deployment->load(['client', 'product', 'package', 'infrastructureAssets', 'monitoringChecks', 'releases'])
+            ->loadCount(['infrastructureAssets', 'monitoringChecks', 'releases']);
+
+        return response()->json(['data' => new DeploymentResource($deployment)]);
+    }
+
     public function store(StoreDeploymentRequest $request): JsonResponse
     {
         $deployment = $this->service->createDeployment($request->validated());
