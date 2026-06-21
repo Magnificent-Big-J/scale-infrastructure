@@ -66,6 +66,11 @@
                         <span v-if="pageTitle" class="topbar__page">{{ pageTitle }}</span>
                     </div>
                     <div class="topbar__actions">
+                        <button class="cmdk-trigger" title="Search (Ctrl/⌘ K)" @click="palette.open()">
+                            <v-icon size="16">mdi-magnify</v-icon>
+                            <span class="cmdk-trigger__label">Search</span>
+                            <kbd class="cmdk-trigger__kbd">⌘K</kbd>
+                        </button>
                         <AppNotificationPanel />
                     </div>
                 </header>
@@ -95,69 +100,17 @@ import { computed, defineComponent, h, ref, watch } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 
 import AppNotificationPanel from '../components/AppNotificationPanel.vue';
+import { useCommandPalette } from '../composables/useCommandPalette';
+import { navGroups } from '../config/navigation';
 import { useSessionStore } from '../stores/session';
 import { useNotificationsStore } from '../stores/notifications';
 
 const session = useSessionStore();
+const palette = useCommandPalette();
 const notifications = useNotificationsStore();
 const router = useRouter();
 const route = useRoute();
 const mobileOpen = ref(false);
-
-const navGroups = [
-    {
-        label: null,
-        items: [
-            { label: 'Dashboard', to: '/dashboard', icon: 'mdi-view-dashboard-outline', permission: 'dashboard.view' },
-            { label: 'Clients', to: '/clients', icon: 'mdi-domain', permission: 'clients.view' },
-            { label: 'Reports', to: '/reports', icon: 'mdi-file-chart-outline', permission: 'reports.view' },
-        ],
-    },
-    {
-        label: 'Commercial',
-        items: [
-            { label: 'Opportunities', to: '/commercial/opportunities', icon: 'mdi-chart-timeline-variant', permission: 'opportunities.view' },
-            { label: 'Contracts', to: '/commercial/contracts', icon: 'mdi-file-sign', permission: 'contracts.view' },
-            { label: 'Billing', to: '/commercial/billing', icon: 'mdi-cash-multiple', permission: 'billing.view' },
-            { label: 'Invoices', to: '/commercial/invoices', icon: 'mdi-receipt-text-outline', permission: 'invoices.view' },
-            { label: 'Profitability', to: '/commercial/profitability', icon: 'mdi-finance', permission: 'profitability.view' },
-        ],
-    },
-    {
-        label: 'Operations',
-        items: [
-            { label: 'Ops Dashboard', to: '/operations/dashboard', icon: 'mdi-monitor-dashboard', permission: 'dashboard.view' },
-            { label: 'Deployments', to: '/operations/deployments', icon: 'mdi-rocket-launch-outline', permission: 'deployments.view' },
-            { label: 'Infrastructure', to: '/operations/infrastructure', icon: 'mdi-server-network', permission: 'infrastructure.view' },
-            { label: 'Monitoring', to: '/operations/monitoring', icon: 'mdi-pulse', permission: 'monitoring.view' },
-            { label: 'Incidents', to: '/operations/incidents', icon: 'mdi-alert-octagon-outline', permission: 'incidents.view' },
-            { label: 'Releases', to: '/operations/releases', icon: 'mdi-source-branch', permission: 'releases.view' },
-            { label: 'Change Requests', to: '/operations/change-requests', icon: 'mdi-clipboard-text-outline', permission: 'releases.view' },
-            { label: 'Provisioning', to: '/operations/provisioning', icon: 'mdi-cog-outline', permission: 'releases.view' },
-            { label: 'Automation', to: '/operations/automation', icon: 'mdi-robot-outline', permission: 'releases.view' },
-        ],
-    },
-    {
-        label: 'Support',
-        items: [
-            { label: 'Agreements', to: '/support/agreements', icon: 'mdi-handshake-outline', permission: 'support_agreements.view' },
-            { label: 'Tickets', to: '/support/tickets', icon: 'mdi-ticket-confirmation-outline', permission: 'support_tickets.view' },
-            { label: 'SLA Overview', to: '/support/sla-overview', icon: 'mdi-timer-sand', permission: 'support_tickets.view' },
-        ],
-    },
-    {
-        label: 'Administration',
-        items: [
-            { label: 'Products', to: '/admin/products', icon: 'mdi-package-variant-closed', permission: 'products.view' },
-            { label: 'Packages', to: '/admin/packages', icon: 'mdi-tag-multiple-outline', permission: 'packages.view' },
-            { label: 'Package Features', to: '/admin/catalogue-features', icon: 'mdi-format-list-checks', permission: 'catalogue_features.view' },
-            { label: 'Support Tiers', to: '/admin/support-tiers', icon: 'mdi-handshake-outline', permission: 'support_tiers.view' },
-            { label: 'Reference Data', to: '/admin/reference-data', icon: 'mdi-format-list-bulleted-type', permission: 'lookups.view' },
-            { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline', permission: 'users.view' },
-            { label: 'Profile', to: '/auth/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
-        ],
-    },
-];
 
 const can = (permission) => session.user?.permissions?.includes(permission) ?? false;
 
@@ -528,6 +481,40 @@ const NavItem = defineComponent({
     align-items: center;
     gap: 0.5rem;
     min-width: 0;
+}
+
+.cmdk-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--rw-border);
+    border-radius: 8px;
+    background: var(--rw-surface-2);
+    color: var(--rw-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.12s, color 0.12s;
+}
+
+.cmdk-trigger:hover {
+    border-color: var(--rw-border-strong);
+    color: var(--rw-ink);
+}
+
+.cmdk-trigger__kbd {
+    font-size: 0.68rem;
+    font-weight: 600;
+    background: var(--rw-surface);
+    border: 1px solid var(--rw-border);
+    border-radius: 5px;
+    padding: 0.05rem 0.35rem;
+}
+
+@media (max-width: 640px) {
+    .cmdk-trigger__label {
+        display: none;
+    }
 }
 
 /* Guest bar ─────────────────────────────────────────── */
