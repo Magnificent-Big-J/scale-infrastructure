@@ -186,8 +186,8 @@ const stack = [
     align-items: center;
     gap: 0.4rem;
     padding: 0.3rem 0.875rem;
-    background: rgba(0, 135, 95, 0.15);
-    border: 1px solid rgba(0, 135, 95, 0.3);
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.3);
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: 600;
@@ -223,7 +223,7 @@ const stack = [
     display: inline-flex;
     align-items: center;
     padding: 0.7rem 1.75rem;
-    background: #00875f;
+    background: #2563eb;
     color: #fff;
     font-size: 0.9rem;
     font-weight: 600;
@@ -233,7 +233,7 @@ const stack = [
 }
 
 .cta-primary:hover {
-    background: #006a4a;
+    background: #1d4ed8;
 }
 
 .cta-ghost {
@@ -273,7 +273,7 @@ const stack = [
 
 .feature-card:hover {
     background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(0, 135, 95, 0.3);
+    border-color: rgba(37, 99, 235, 0.3);
 }
 
 .feature-card__icon {
@@ -356,8 +356,8 @@ const stack = [
     font-size: 0.72rem;
     font-weight: 600;
     color: rgba(0, 200, 140, 0.9);
-    background: rgba(0, 135, 95, 0.18);
-    border: 1px solid rgba(0, 135, 95, 0.3);
+    background: rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(37, 99, 235, 0.3);
     padding: 0.1rem 0.45rem;
     border-radius: 999px;
     flex-shrink: 0;

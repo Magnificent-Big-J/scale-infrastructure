@@ -25,7 +25,7 @@ defineProps({
     helper: { type: String, default: null },
     icon: { type: String, default: 'mdi-chart-arc' },
     iconColor: { type: String, default: 'primary' },
-    iconBackground: { type: String, default: 'rgba(0, 106, 74, 0.08)' },
+    iconBackground: { type: String, default: 'rgba(37, 99, 235, 0.08)' },
     status: { type: String, default: null },
     statusLabel: { type: String, default: null },
 });

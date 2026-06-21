@@ -43,10 +43,10 @@ defineProps({
     margin-top: 0.35rem;
 }
 
-.timeline__dot--success { background: #15803d; }
-.timeline__dot--warning { background: #b45309; }
-.timeline__dot--error { background: #b91c1c; }
-.timeline__dot--info { background: #0369a1; }
+.timeline__dot--success { background: #16a34a; }
+.timeline__dot--warning { background: #d97706; }
+.timeline__dot--error { background: #dc2626; }
+.timeline__dot--info { background: #0284c7; }
 
 .timeline__content {
     padding-left: 0.9rem;

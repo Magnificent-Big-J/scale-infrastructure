@@ -127,9 +127,9 @@ const userInitials = computed(() =>
 const exec = computed(() => dashboards.executive);
 
 const stats = computed(() => [
-    { label: 'Active clients', value: String(exec.value.active_clients), helper: `${exec.value.at_risk_clients} at risk · ${exec.value.average_client_health}% avg health`, icon: 'mdi-domain', bg: 'rgba(0,106,74,0.08)', iconColor: 'var(--rw-600)' },
-    { label: 'Active deployments', value: String(exec.value.active_deployments), helper: 'Live product environments', icon: 'mdi-server-network', bg: 'rgba(3,105,161,0.08)', iconColor: '#0369a1' },
-    { label: 'MRR', value: formatAmount(exec.value.mrr), helper: `ARR ${formatAmount(exec.value.arr)} · ${formatAmount(exec.value.outstanding_total)} outstanding`, icon: 'mdi-cash-multiple', bg: 'rgba(180,83,9,0.08)', iconColor: 'var(--rw-amber)' },
+    { label: 'Active clients', value: String(exec.value.active_clients), helper: `${exec.value.at_risk_clients} at risk · ${exec.value.average_client_health}% avg health`, icon: 'mdi-domain', bg: 'rgba(37,99,235,0.08)', iconColor: 'var(--rw-600)' },
+    { label: 'Active deployments', value: String(exec.value.active_deployments), helper: 'Live product environments', icon: 'mdi-server-network', bg: 'rgba(2,132,199,0.08)', iconColor: '#0284c7' },
+    { label: 'MRR', value: formatAmount(exec.value.mrr), helper: `ARR ${formatAmount(exec.value.arr)} · ${formatAmount(exec.value.outstanding_total)} outstanding`, icon: 'mdi-cash-multiple', bg: 'rgba(2,132,199,0.08)', iconColor: 'var(--rw-amber)' },
     { label: 'Open work', value: String(exec.value.open_tickets + exec.value.open_incidents), helper: `${exec.value.open_tickets} tickets · ${exec.value.open_incidents} incidents`, icon: 'mdi-lifebuoy', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
 ]);
 
@@ -149,7 +149,7 @@ const modules = [
         title: 'Deployments and infrastructure',
         text: 'Product environments, hosting assets, domains, versions, and status.',
         icon: 'mdi-server-network',
-        color: '#0369a1',
+        color: '#0284c7',
         status: 'Module 02',
     },
     {

@@ -22,7 +22,7 @@
                     :key="label"
                     class="chart-card__legend-item"
                 >
-                    <span class="chart-card__swatch" :style="{ background: colors[index] || '#006a4a' }" />
+                    <span class="chart-card__swatch" :style="{ background: colors[index] || '#2563eb' }" />
                     <span>{{ label }}</span>
                     <strong>{{ series[index] ?? 0 }}</strong>
                 </div>
@@ -39,7 +39,7 @@ const props = defineProps({
     subtitle: { type: String, default: null },
     labels: { type: Array, default: () => [] },
     series: { type: Array, default: () => [] },
-    colors: { type: Array, default: () => ['#006a4a', '#b45309', '#0369a1', '#9f1239'] },
+    colors: { type: Array, default: () => ['#2563eb', '#38bdf8', '#0284c7', '#9f1239'] },
 });
 
 const chartOptions = computed(() => ({

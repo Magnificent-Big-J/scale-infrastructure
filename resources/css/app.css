@@ -4,39 +4,40 @@
 
 /* ─── Design tokens ──────────────────────────────────── */
 :root {
-    /* Brand greens */
-    --rw-900: #011d12;
-    --rw-800: #003a26;
-    --rw-700: #005237;
-    --rw-600: #006a4a;
-    --rw-500: #00875f;
-    --rw-300: #4db896;
-    --rw-100: #ceeee2;
-    --rw-50:  #eaf7f2;
+    /* Brand ramp — graphite-navy deepening to electric blue.
+       Dark steps read as graphite chrome; 600/500 are the electric accent. */
+    --rw-900: #0a1326;
+    --rw-800: #11203b;
+    --rw-700: #1c3a6e;
+    --rw-600: #2563eb;
+    --rw-500: #3b82f6;
+    --rw-300: #7ea8f8;
+    --rw-100: #d6e4fd;
+    --rw-50:  #eef4ff;
 
-    /* Amber */
-    --rw-amber: #b45309;
-    --rw-amber-soft: #fef3d7;
+    /* Sky — secondary highlight / chart pairing */
+    --rw-amber: #0284c7;
+    --rw-amber-soft: #e0f2fe;
 
-    /* Neutrals */
-    --rw-ink:    #0d1b2a;
-    --rw-ink-2:  #2d3f52;
-    --rw-muted:  #5f7082;
+    /* Neutrals — graphite slate */
+    --rw-ink:    #0b0f19;
+    --rw-ink-2:  #1f2937;
+    --rw-muted:  #64748b;
     --rw-dim:    #94a3b8;
 
-    /* Surfaces */
-    --rw-bg:       #f2efe8;
+    /* Surfaces — cool neutral */
+    --rw-bg:       #f7f8fa;
     --rw-surface:  #ffffff;
-    --rw-surface-2: #f8f6f1;
-    --rw-border:   rgba(13, 27, 42, 0.09);
-    --rw-border-strong: rgba(13, 27, 42, 0.20);
+    --rw-surface-2: #f1f5f9;
+    --rw-border:   rgba(15, 23, 42, 0.09);
+    --rw-border-strong: rgba(15, 23, 42, 0.20);
 
     /* Shadows */
-    --rw-shadow-xs: 0 1px 2px rgba(13,27,42,0.06);
-    --rw-shadow-sm: 0 1px 3px rgba(13,27,42,0.08), 0 1px 2px rgba(13,27,42,0.04);
-    --rw-shadow:    0 4px 14px rgba(13,27,42,0.09), 0 2px 4px rgba(13,27,42,0.04);
-    --rw-shadow-lg: 0 20px 48px rgba(13,27,42,0.12), 0 6px 16px rgba(13,27,42,0.06);
-    --rw-shadow-xl: 0 32px 64px rgba(13,27,42,0.16), 0 8px 24px rgba(13,27,42,0.08);
+    --rw-shadow-xs: 0 1px 2px rgba(15,23,42,0.06);
+    --rw-shadow-sm: 0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
+    --rw-shadow:    0 4px 14px rgba(15,23,42,0.09), 0 2px 4px rgba(15,23,42,0.04);
+    --rw-shadow-lg: 0 20px 48px rgba(15,23,42,0.12), 0 6px 16px rgba(15,23,42,0.06);
+    --rw-shadow-xl: 0 32px 64px rgba(15,23,42,0.16), 0 8px 24px rgba(15,23,42,0.08);
 
     /* Layout */
     --rw-sidebar: 252px;
@@ -51,7 +52,7 @@
     --starter-ink:          var(--rw-ink);
     --starter-muted:        var(--rw-muted);
     --starter-surface:      var(--rw-bg);
-    --starter-surface-strong: #e8e2d5;
+    --starter-surface-strong: #e2e8f0;
     --starter-accent:       var(--rw-600);
     --starter-accent-soft:  var(--rw-50);
     --starter-highlight:    var(--rw-amber);

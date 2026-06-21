@@ -287,7 +287,7 @@ const NavItem = defineComponent({
     border-radius: 10px;
     background: linear-gradient(145deg, var(--rw-700), var(--rw-500));
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0, 106, 74, 0.4);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
 }
 
 .brand-mark__letters {
@@ -473,7 +473,7 @@ const NavItem = defineComponent({
 
 .logout-btn:hover {
     background: #fee2e2;
-    color: #b91c1c;
+    color: #dc2626;
 }
 
 /* Mobile overlay ───────────────────────────────────── */
@@ -504,7 +504,7 @@ const NavItem = defineComponent({
     align-items: center;
     gap: 1rem;
     padding: 0 1.5rem;
-    background: rgba(242, 239, 232, 0.88);
+    background: rgba(247, 248, 250, 0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--rw-border);
 }
@@ -551,7 +551,7 @@ const NavItem = defineComponent({
     display: flex;
     align-items: center;
     padding: 0 2rem;
-    background: rgba(242, 239, 232, 0.92);
+    background: rgba(247, 248, 250, 0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--rw-border);
     position: sticky;

@@ -51,10 +51,10 @@ const icon = computed(() => ({
     border: 1px solid rgba(17, 34, 51, 0.08);
 }
 
-.app-banner--success { background: rgba(21, 128, 61, 0.08); }
-.app-banner--error { background: rgba(185, 28, 28, 0.08); }
-.app-banner--warning { background: rgba(180, 83, 9, 0.08); }
-.app-banner--info { background: rgba(3, 105, 161, 0.08); }
+.app-banner--success { background: rgba(22, 163, 74, 0.08); }
+.app-banner--error { background: rgba(220, 38, 38, 0.08); }
+.app-banner--warning { background: rgba(217, 119, 6, 0.08); }
+.app-banner--info { background: rgba(2, 132, 199, 0.08); }
 
 .app-banner__copy {
     display: flex;

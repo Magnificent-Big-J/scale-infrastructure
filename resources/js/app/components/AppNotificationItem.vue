@@ -57,10 +57,10 @@ defineEmits(['select']);
     justify-content: center;
 }
 
-.notification-item__icon--success { background: rgba(21, 128, 61, 0.12); color: #15803d; }
-.notification-item__icon--error { background: rgba(185, 28, 28, 0.12); color: #b91c1c; }
-.notification-item__icon--warning { background: rgba(180, 83, 9, 0.12); color: #b45309; }
-.notification-item__icon--info { background: rgba(3, 105, 161, 0.12); color: #0369a1; }
+.notification-item__icon--success { background: rgba(22, 163, 74, 0.12); color: #16a34a; }
+.notification-item__icon--error { background: rgba(220, 38, 38, 0.12); color: #dc2626; }
+.notification-item__icon--warning { background: rgba(217, 119, 6, 0.12); color: #d97706; }
+.notification-item__icon--info { background: rgba(2, 132, 199, 0.12); color: #0284c7; }
 
 .notification-item__copy {
     display: grid;

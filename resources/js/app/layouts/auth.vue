@@ -38,7 +38,7 @@
     min-height: 100vh;
     display: flex;
     align-items: stretch;
-    background: #011d12;
+    background: #0a1326;
     position: relative;
     overflow: hidden;
 }
@@ -54,7 +54,7 @@
 .ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(0, 135, 95, 0.18);
+    border: 1px solid rgba(37, 99, 235, 0.18);
 }
 
 .ring--1 {
@@ -63,7 +63,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-color: rgba(0, 135, 95, 0.14);
+    border-color: rgba(37, 99, 235, 0.14);
 }
 
 .ring--2 {
@@ -72,7 +72,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-color: rgba(0, 135, 95, 0.22);
+    border-color: rgba(37, 99, 235, 0.22);
 }
 
 .ring--3 {
@@ -81,7 +81,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(0, 135, 95, 0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.1), transparent 70%);
     border: none;
 }
 
@@ -89,8 +89,8 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(0, 135, 95, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 135, 95, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
     background-size: 48px 48px;
 }
 
@@ -127,7 +127,7 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 8px;
-    background: linear-gradient(145deg, #005237, #00875f);
+    background: linear-gradient(145deg, #1c3a6e, #3b82f6);
     color: #fff;
     font-size: 0.72rem;
     font-weight: 800;
