@@ -4,11 +4,13 @@
     </component>
 
     <AppToastHost />
+    <AppCommandPalette v-if="session.isAuthenticated" />
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import AppCommandPalette from './components/AppCommandPalette.vue';
 import AppToastHost from './components/AppToastHost.vue';
 import { useSessionStore } from './stores/session';
 
