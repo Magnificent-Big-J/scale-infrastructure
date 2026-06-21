@@ -8,20 +8,23 @@ Scale Infrastructure is the operational control centre for managing:
 - products and packages
 - deployments and infrastructure assets
 - monitoring checks
-- support agreements, tickets, and incidents
+- support agreements, tickets, and incidents — with a drag-and-drop ticket
+  board, ticket comments, SLA tracking, and token-authed external intake
+- the sales pipeline (opportunities) with a Kanban board and win → draft contract
 - contracts, billing, invoices, and payments
 - releases, provisioning, and automation
-- profitability and executive reporting
+- profitability and executive/operations reporting with analytics charts
+- managed reference data, an activity timeline, and a ⌘K command palette
 
 ## Stack
 
-- Laravel 13
-- PHP 8.3+
+- Laravel 13, PHP 8.4
 - PostgreSQL
 - Redis and Horizon
 - Sanctum
-- Vue 3, Vuetify, Pinia, Vite
+- Vue 3, Vuetify, Pinia, Vite, apexcharts
 - Spatie Permission, Activity Log, and Media Library
+- maatwebsite/excel for spreadsheet exports
 
 ## Local Setup
 
