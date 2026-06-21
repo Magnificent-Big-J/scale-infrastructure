@@ -35,7 +35,7 @@
 <style scoped>
 .guest-shell {
     min-height: 100vh;
-    background: #011d12;
+    background: #0a1326;
     position: relative;
     overflow-x: hidden;
 }
@@ -58,7 +58,7 @@
     height: 900px;
     top: -200px;
     right: -300px;
-    border: 1px solid rgba(0, 135, 95, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .ring--2 {
@@ -66,7 +66,7 @@
     height: 560px;
     top: -80px;
     right: -100px;
-    border: 1px solid rgba(0, 135, 95, 0.18);
+    border: 1px solid rgba(37, 99, 235, 0.18);
 }
 
 .ring--3 {
@@ -74,16 +74,16 @@
     height: 280px;
     bottom: 10%;
     left: -80px;
-    border: 1px solid rgba(0, 135, 95, 0.12);
-    background: radial-gradient(circle, rgba(0, 135, 95, 0.06), transparent 70%);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 70%);
 }
 
 .guest-shell__grid {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(0, 135, 95, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 135, 95, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
     background-size: 48px 48px;
 }
 
@@ -101,7 +101,7 @@
     display: flex;
     align-items: center;
     padding: 1.25rem 2rem;
-    border-bottom: 1px solid rgba(0, 135, 95, 0.12);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.12);
 }
 
 .guest-logo {
@@ -118,7 +118,7 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 8px;
-    background: linear-gradient(145deg, #005237, #00875f);
+    background: linear-gradient(145deg, #1c3a6e, #3b82f6);
     color: #fff;
     font-size: 0.72rem;
     font-weight: 800;
@@ -160,16 +160,16 @@
     font-size: 0.875rem;
     font-weight: 600;
     color: #fff;
-    background: rgba(0, 135, 95, 0.2);
-    border: 1px solid rgba(0, 135, 95, 0.4);
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(37, 99, 235, 0.4);
     border-radius: 0.5rem;
     text-decoration: none;
     transition: background 0.12s, border-color 0.12s;
 }
 
 .guest-links__cta:hover {
-    background: rgba(0, 135, 95, 0.3);
-    border-color: rgba(0, 135, 95, 0.6);
+    background: rgba(37, 99, 235, 0.3);
+    border-color: rgba(37, 99, 235, 0.6);
 }
 
 /* ── Main ──────────────────────────────────────────── */
@@ -183,7 +183,7 @@
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.2);
     letter-spacing: 0.04em;
-    border-top: 1px solid rgba(0, 135, 95, 0.08);
+    border-top: 1px solid rgba(37, 99, 235, 0.08);
 }
 
 @media (max-width: 720px) {

@@ -25,7 +25,7 @@ const props = defineProps({
     subtitle: { type: String, default: null },
     categories: { type: Array, default: () => [] },
     series: { type: Array, default: () => [] },
-    colors: { type: Array, default: () => ['#006a4a', '#b45309'] },
+    colors: { type: Array, default: () => ['#2563eb', '#38bdf8'] },
 });
 
 const chartOptions = computed(() => ({

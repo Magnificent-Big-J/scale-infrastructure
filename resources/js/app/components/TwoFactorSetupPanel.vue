@@ -272,7 +272,7 @@ const channelLabel = computed(() =>
 }
 
 .twofa-text-btn--danger {
-    color: #b91c1c;
+    color: #dc2626;
 }
 
 .twofa-text-btn--danger:hover {
