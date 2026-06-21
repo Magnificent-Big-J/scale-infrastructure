@@ -1,0 +1,106 @@
+<template>
+    <div class="detail-page">
+        <div class="page-wrap">
+            <RouterLink to="/support/tickets" class="back-link"><v-icon size="16">mdi-arrow-left</v-icon> Back to tickets</RouterLink>
+
+            <AppPageHeader :eyebrow="ticket?.reference || 'Ticket'" :title="ticket?.subject || 'Support ticket'" :subtitle="ticket?.client_name || 'Support request detail and history.'">
+                <template #metrics>
+                    <AppStatusBadge v-if="ticket" :status="ticket.severity_color || ticket.severity" :label="ticket.severity_label || ticket.severity" />
+                    <AppStatusBadge v-if="ticket" :status="ticket.status_color || ticket.status" :label="ticket.status_label || ticket.status" />
+                </template>
+                <template #actions>
+                    <v-btn variant="tonal" prepend-icon="mdi-pencil-outline" @click="goToList">Edit ticket</v-btn>
+                </template>
+            </AppPageHeader>
+
+            <div class="detail__stats">
+                <AppStatCard label="Severity" :value="ticket?.severity_label || '-'" helper="Impact level" icon="mdi-alert-circle-outline" status="pending" />
+                <AppStatCard label="Status" :value="ticket?.status_label || '-'" helper="Current state" icon="mdi-progress-clock" status="processing" />
+                <AppStatCard label="Hours logged" :value="String(ticket?.hours_logged ?? 0)" helper="Recorded effort" icon="mdi-clock-outline" status="active" />
+                <AppStatCard label="Assigned to" :value="ticket?.assigned_user_name || 'Unassigned'" helper="Owner" icon="mdi-account-outline" status="active" />
+            </div>
+
+            <AppSectionCard title="Ticket workspace" subtitle="Overview and full change history.">
+                <v-tabs v-model="tab" class="detail-tabs" color="primary" density="comfortable">
+                    <v-tab value="overview">Overview</v-tab>
+                    <v-tab v-if="canViewActivity" value="activity">Activity</v-tab>
+                </v-tabs>
+
+                <v-window v-model="tab" class="detail-window">
+                    <v-window-item value="overview">
+                        <dl class="detail-grid">
+                            <div><dt>Client</dt><dd>{{ ticket?.client_name || '-' }}</dd></div>
+                            <div><dt>Deployment</dt><dd>{{ ticket?.deployment_name || '-' }}</dd></div>
+                            <div><dt>Support agreement</dt><dd>{{ ticket?.agreement_name || '-' }}</dd></div>
+                            <div><dt>Category</dt><dd>{{ ticket?.category || '-' }}</dd></div>
+                            <div><dt>Opened</dt><dd>{{ formatDate(ticket?.opened_at) }}</dd></div>
+                            <div><dt>Resolved</dt><dd>{{ formatDate(ticket?.resolved_at) }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Summary</dt><dd>{{ ticket?.summary || '-' }}</dd></div>
+                        </dl>
+                    </v-window-item>
+
+                    <v-window-item v-if="canViewActivity" value="activity">
+                        <AppActivityFeed
+                            v-if="tab === 'activity'"
+                            subject-type="SupportTicket"
+                            :subject-id="ticketId"
+                            :per-page="12"
+                            empty-text="No activity recorded for this ticket yet."
+                        />
+                    </v-window-item>
+                </v-window>
+            </AppSectionCard>
+        </div>
+    </div>
+</template>
+
+<route lang="json">
+{"meta":{"layout":"default","title":"Ticket detail","requiresAuth":true,"adminOnly":true}}
+</route>
+
+<script setup>
+import { computed, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import { useSessionStore } from '../../../stores/session';
+import { v1 } from '../../../utils/api';
+
+const route = useRoute();
+const router = useRouter();
+const session = useSessionStore();
+const ticketId = route.params.ticket;
+
+const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
+
+const tab = ref('overview');
+const ticket = ref(null);
+
+const formatDate = (value) => (value ? new Date(value).toLocaleString() : '-');
+
+const goToList = () => router.push('/support/tickets');
+
+const load = async () => {
+    const response = await v1(`support-tickets/${ticketId}`);
+    ticket.value = response?.data ?? response;
+};
+
+onMounted(load);
+</script>
+
+<style scoped>
+.detail-page { padding: 2.25rem 2rem 4rem; }
+.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
+.back-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--rw-muted); font-size: 0.85rem; text-decoration: none; }
+.back-link:hover { color: var(--rw-700); }
+.detail__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
+.detail-tabs { border-bottom: 1px solid var(--rw-border); margin-bottom: 1.25rem; }
+.detail-window { padding-top: 0.25rem; }
+.detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; margin: 0; }
+.detail-grid__wide { grid-column: 1 / -1; }
+.detail-grid dt { color: var(--rw-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.detail-grid dd { margin: 0.2rem 0 0; font-size: 0.92rem; }
+@media (max-width: 1200px) { .detail__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 960px) { .detail-page { padding: 1.75rem 1rem 3rem; } .detail__stats { grid-template-columns: 1fr; } .detail-grid { grid-template-columns: 1fr; } }
+</style>

@@ -35,6 +35,10 @@ class DeploymentResource extends JsonResource
             'notes' => $this->notes,
             'infrastructure_assets_count' => $this->whenCounted('infrastructureAssets'),
             'monitoring_checks_count' => $this->whenCounted('monitoringChecks'),
+            'releases_count' => $this->whenCounted('releases'),
+            'infrastructure_assets' => InfrastructureAssetResource::collection($this->whenLoaded('infrastructureAssets')),
+            'monitoring_checks' => MonitoringCheckResource::collection($this->whenLoaded('monitoringChecks')),
+            'releases' => ReleaseResource::collection($this->whenLoaded('releases')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

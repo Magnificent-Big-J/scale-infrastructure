@@ -49,6 +49,13 @@ class SupportTicketController extends Controller
         ]);
     }
 
+    public function show(SupportTicket $supportTicket): JsonResponse
+    {
+        $supportTicket->load(['client', 'deployment', 'supportAgreement', 'assignedUser']);
+
+        return response()->json(['data' => new SupportTicketResource($supportTicket)]);
+    }
+
     public function store(StoreSupportTicketRequest $request): JsonResponse
     {
         return response()->json(new SupportTicketResource($this->service->createTicket($request->validated())), 201);

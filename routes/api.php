@@ -67,6 +67,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::middleware('can:deployments.view')->group(function () {
         Route::get('deployments', [DeploymentController::class, 'index']);
+        Route::get('deployments/{deployment}', [DeploymentController::class, 'show']);
         Route::middleware('can:deployments.create')->post('deployments', [DeploymentController::class, 'store']);
         Route::middleware('can:deployments.update')->match(['put', 'patch'], 'deployments/{deployment}', [DeploymentController::class, 'update']);
         Route::middleware('can:deployments.delete')->delete('deployments/{deployment}', [DeploymentController::class, 'destroy']);
@@ -85,6 +86,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::middleware('can:support_tickets.view')->group(function () {
         Route::get('support-tickets', [SupportTicketController::class, 'index']);
+        Route::get('support-tickets/{supportTicket}', [SupportTicketController::class, 'show']);
         Route::middleware('can:support_tickets.create')->post('support-tickets', [SupportTicketController::class, 'store']);
         Route::middleware('can:support_tickets.update')->match(['put', 'patch'], 'support-tickets/{supportTicket}', [SupportTicketController::class, 'update']);
     });

@@ -191,11 +191,18 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/operations/deployments': RouteRecordInfo<
-      '/operations/deployments',
+    '/operations/deployments/': RouteRecordInfo<
+      '/operations/deployments/',
       '/operations/deployments',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/operations/deployments/[deployment]': RouteRecordInfo<
+      '/operations/deployments/[deployment]',
+      '/operations/deployments/:deployment',
+      { deployment: ParamValue<true> },
+      { deployment: ParamValue<false> },
       | never
     >,
     '/operations/incidents': RouteRecordInfo<
@@ -254,11 +261,18 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/support/tickets': RouteRecordInfo<
-      '/support/tickets',
+    '/support/tickets/': RouteRecordInfo<
+      '/support/tickets/',
       '/support/tickets',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/support/tickets/[ticket]': RouteRecordInfo<
+      '/support/tickets/[ticket]',
+      '/support/tickets/:ticket',
+      { ticket: ParamValue<true> },
+      { ticket: ParamValue<false> },
       | never
     >,
   }
@@ -412,9 +426,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/operations/deployments.vue': {
+    'resources/js/app/pages/operations/deployments/index.vue': {
       routes:
-        | '/operations/deployments'
+        | '/operations/deployments/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/deployments/[deployment].vue': {
+      routes:
+        | '/operations/deployments/[deployment]'
       views:
         | never
     }
@@ -466,9 +486,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/support/tickets.vue': {
+    'resources/js/app/pages/support/tickets/index.vue': {
       routes:
-        | '/support/tickets'
+        | '/support/tickets/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/support/tickets/[ticket].vue': {
+      routes:
+        | '/support/tickets/[ticket]'
       views:
         | never
     }
