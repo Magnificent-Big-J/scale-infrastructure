@@ -63,6 +63,30 @@ class ProfitabilityService implements ProfitabilityServiceInterface
     }
 
     /**
+     * Per-period totals across all clients, oldest first — feeds the trend chart.
+     *
+     * @return list<array{period: string, revenue: float, cost: float, profit: float}>
+     */
+    public function trend(): array
+    {
+        return ProfitabilityRecord::query()
+            ->selectRaw('period,
+                coalesce(sum(revenue), 0) as revenue,
+                coalesce(sum(hosting_cost + labour_cost + monitoring_cost + other_cost), 0) as cost,
+                coalesce(sum(profit), 0) as profit')
+            ->groupBy('period')
+            ->orderBy('period')
+            ->get()
+            ->map(fn ($row) => [
+                'period' => $row->period,
+                'revenue' => round((float) $row->revenue, 2),
+                'cost' => round((float) $row->cost, 2),
+                'profit' => round((float) $row->profit, 2),
+            ])
+            ->all();
+    }
+
+    /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */

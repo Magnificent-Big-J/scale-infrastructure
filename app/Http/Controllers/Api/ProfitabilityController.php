@@ -34,6 +34,7 @@ class ProfitabilityController extends Controller
                 'total' => $records->total(),
             ],
             'summary' => $this->service->summary(),
+            'trend' => $this->service->trend(),
             'options' => [
                 'clients' => Client::query()->orderBy('name')->get(['id', 'name'])->map(fn (Client $client) => ['value' => $client->id, 'label' => $client->name])->all(),
             ],

@@ -17,4 +17,9 @@ interface ProfitabilityServiceInterface
      * @return array<string, mixed>
      */
     public function summary(): array;
+
+    /**
+     * @return list<array{period: string, revenue: float, cost: float, profit: float}>
+     */
+    public function trend(): array;
 }

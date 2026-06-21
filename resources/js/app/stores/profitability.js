@@ -7,6 +7,7 @@ export const useProfitabilityStore = defineStore('profitability', {
         rows: [],
         meta: { current_page: 1, last_page: 1, per_page: 10, total: 0 },
         summary: { revenue_total: 0, cost_total: 0, profit_total: 0, margin_avg: 0, records: 0 },
+        trend: [],
         options: { clients: [] },
         loading: false,
     }),
@@ -24,6 +25,7 @@ export const useProfitabilityStore = defineStore('profitability', {
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
                 this.summary = response?.summary ?? this.summary;
+                this.trend = response?.trend ?? this.trend;
                 this.options = response?.options ?? this.options;
 
                 return response;
