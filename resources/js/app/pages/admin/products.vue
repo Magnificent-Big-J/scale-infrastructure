@@ -153,8 +153,10 @@ import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../composables/useToast';
 import { useProductsStore } from '../../stores/products';
 
+const toast = useToast();
 const store = useProductsStore();
 
 const columns = [
@@ -233,12 +235,14 @@ const submitDialog = async () => {
     try {
         if (dialog.mode === 'create') {
             await store.create(dialog.form);
+            await load();
+            toast.success('Product created.');
         } else {
-            await store.update(dialog.editId, dialog.form);
+            store.upsertRow(await store.update(dialog.editId, dialog.form));
+            toast.success('Product updated.');
         }
 
         closeDialog();
-        await load();
     } catch (error) {
         dialog.errors = error?.data?.errors ?? {};
         dialog.message = error?.data?.message || 'Something went wrong.';
@@ -247,10 +251,13 @@ const submitDialog = async () => {
 };
 
 const archiveCurrent = async () => {
+    const id = dialog.editId;
+
     try {
-        await store.archive(dialog.editId);
+        await store.archive(id);
+        store.removeRow(id);
         closeDialog();
-        await load();
+        toast.success('Product archived.');
     } catch (error) {
         dialog.message = error?.data?.message || 'Could not archive product.';
         dialog.messageType = 'error';

@@ -26,7 +26,11 @@
                         <td><AppStatusBadge :status="row.severity_color || row.severity" :label="row.severity_label || row.severity" /></td>
                         <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
                         <td><span class="text-sm">{{ row.hours_logged ?? 0 }}</span></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td class="row-actions">
+                            <v-btn v-if="canResolve(row)" size="small" variant="text" color="primary" :loading="inlineBusy === row.id" @click.stop="setStatus(row, 'resolved')">Resolve</v-btn>
+                            <v-btn v-if="row.status === 'resolved'" size="small" variant="text" :loading="inlineBusy === row.id" @click.stop="setStatus(row, 'closed')">Close</v-btn>
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                        </td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>
@@ -70,7 +74,7 @@
 {"meta":{"layout":"default","title":"Support Tickets","requiresAuth":true,"adminOnly":true}}
 </route>
 <script setup>
-import { computed, onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
@@ -78,11 +82,14 @@ import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import AppTextarea from '../../../components/AppTextarea.vue';
 import AppTextField from '../../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../../composables/useToast';
 import { useSupportTicketsStore } from '../../../stores/support-tickets';
 
 const router = useRouter();
+const toast = useToast();
 const goToDetail = (row) => router.push(`/support/tickets/${row.id}`);
 const store = useSupportTicketsStore();
+const inlineBusy = ref(null);
 const filters = reactive({ search: '', status: '', severity: '', page: 1 });
 const columns = [
     { key: 'ticket', label: 'Ticket' },
@@ -165,16 +172,52 @@ const submitDialog = async () => {
 
     try {
         if (dialog.mode === 'create') {
+            // New rows need server-derived fields, so refetch on create only.
             await store.create(normalizePayload());
+            await load();
+            toast.success('Ticket created.');
         } else {
-            await store.update(dialog.editId, normalizePayload());
+            store.upsertRow(await store.update(dialog.editId, normalizePayload()));
+            toast.success('Ticket updated.');
         }
         closeDialog();
-        await load();
     } catch (error) {
         dialog.errors = error?.data?.errors ?? {};
         dialog.message = error?.data?.message || 'Something went wrong.';
         dialog.messageType = 'error';
+    }
+};
+
+const canResolve = (row) => !['resolved', 'closed'].includes(row.status);
+
+// Inline status change reuses the update endpoint (no dedicated transition
+// route); the service stamps resolved_at server-side.
+const setStatus = async (row, status) => {
+    inlineBusy.value = row.id;
+
+    try {
+        const payload = {
+            client_id: row.client_id,
+            deployment_id: row.deployment_id || null,
+            support_agreement_id: row.support_agreement_id || null,
+            assigned_user_id: row.assigned_user_id || null,
+            reference: row.reference,
+            subject: row.subject,
+            category: row.category || null,
+            severity: row.severity,
+            status,
+            hours_logged: row.hours_logged ?? 0,
+            opened_at: row.opened_at || null,
+            resolved_at: row.resolved_at || null,
+            summary: row.summary || null,
+        };
+
+        store.upsertRow(await store.update(row.id, payload));
+        toast.success(`Ticket ${status}.`);
+    } catch (error) {
+        toast.error(errorMessage(error, 'Could not update the ticket.'));
+    } finally {
+        inlineBusy.value = null;
     }
 };
 
@@ -193,6 +236,7 @@ onMounted(load);
 .support-cell { display: grid; gap: 0.1rem; }
 .support-cell small { color: var(--rw-muted); font-size: 0.78rem; }
 .text-sm { font-size: 0.85rem; }
+.row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; }
 .dialog-form { display: grid; gap: 1rem; }
 @media (max-width: 960px) { .support-page { padding: 1.75rem 1rem 3rem; } .support__stats { grid-template-columns: 1fr; } }
 </style>

@@ -10,6 +10,28 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
         loading: false,
     }),
     actions: {
+        upsertRow(record) {
+            if (!record?.id) return;
+
+            const index = this.rows.findIndex((row) => row.id === record.id);
+
+            if (index === -1) {
+                this.rows.unshift(record);
+                this.meta.total += 1;
+            } else {
+                this.rows.splice(index, 1, { ...this.rows[index], ...record });
+            }
+        },
+
+        removeRow(id) {
+            const before = this.rows.length;
+            this.rows = this.rows.filter((row) => row.id !== id);
+
+            if (this.rows.length < before) {
+                this.meta.total = Math.max(0, this.meta.total - 1);
+            }
+        },
+
         async fetch({ page = 1, perPage = 10, search = '', status = '', severity = '' } = {}) {
             this.loading = true;
 

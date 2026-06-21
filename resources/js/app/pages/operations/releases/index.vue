@@ -78,9 +78,11 @@ import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppTextarea from '../../../components/AppTextarea.vue';
 import AppTextField from '../../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../../composables/useToast';
 import { useReleasesStore } from '../../../stores/releases';
 
 const router = useRouter();
+const toast = useToast();
 const goToDetail = (row) => router.push(`/operations/releases/${row.id}`);
 const store = useReleasesStore();
 const filters = reactive({ search: '', status: '', page: 1 });
@@ -130,11 +132,14 @@ const submitDialog = async () => {
     try {
         if (dialog.mode === 'create') {
             await store.create(normalizePayload());
+            await load();
+            toast.success('Release created.');
         } else {
-            await store.update(dialog.editId, normalizePayload());
+            const updated = await store.update(dialog.editId, normalizePayload());
+            store.upsertRow(updated?.data ?? updated);
+            toast.success('Release updated.');
         }
         dialog.open = false;
-        await load();
     } catch (error) {
         dialog.errors = error?.data?.errors ?? {};
         dialog.message = error?.data?.message || 'Something went wrong.';
@@ -143,10 +148,11 @@ const submitDialog = async () => {
 
 const act = async (row, action) => {
     try {
-        await store.transition(row.id, action);
-        await load();
+        const updated = await store.transition(row.id, action);
+        store.upsertRow(updated?.data ?? updated);
+        toast.success(`Release ${action}d.`);
     } catch (error) {
-        window.alert(error?.data?.message || `Could not ${action} the release.`);
+        toast.error(errorMessage(error, `Could not ${action} the release.`));
     }
 };
 
@@ -156,9 +162,10 @@ const submitRollback = async () => {
     rollback.message = '';
 
     try {
-        await store.transition(rollback.releaseId, 'rollback', { rollback_notes: rollback.notes || null });
+        const updated = await store.transition(rollback.releaseId, 'rollback', { rollback_notes: rollback.notes || null });
+        store.upsertRow(updated?.data ?? updated);
         rollback.open = false;
-        await load();
+        toast.success('Release rolled back.');
     } catch (error) {
         rollback.message = error?.data?.message || 'Could not roll back the release.';
     }

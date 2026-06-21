@@ -83,9 +83,11 @@ import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import AppTextarea from '../../../components/AppTextarea.vue';
 import AppTextField from '../../../components/AppTextField.vue';
+import { useToast } from '../../../composables/useToast';
 import { useContractsStore } from '../../../stores/contracts';
 
 const router = useRouter();
+const toast = useToast();
 const goToDetail = (row) => router.push(`/commercial/contracts/${row.id}`);
 const store = useContractsStore();
 const filters = reactive({ search: '', status: '', page: 1 });
@@ -162,11 +164,13 @@ const submitDialog = async () => {
     try {
         if (dialog.mode === 'create') {
             await store.create(normalizePayload());
+            await load();
+            toast.success('Contract created.');
         } else {
-            await store.update(dialog.editId, normalizePayload());
+            store.upsertRow(await store.update(dialog.editId, normalizePayload()));
+            toast.success('Contract updated.');
         }
         closeDialog();
-        await load();
     } catch (error) {
         dialog.errors = error?.data?.errors ?? {};
         dialog.message = error?.data?.message || 'Something went wrong.';
