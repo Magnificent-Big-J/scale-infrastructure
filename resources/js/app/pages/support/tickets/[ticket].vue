@@ -23,6 +23,7 @@
             <AppSectionCard title="Ticket workspace" subtitle="Overview and full change history.">
                 <v-tabs v-model="tab" class="detail-tabs" color="primary" density="comfortable">
                     <v-tab value="overview">Overview</v-tab>
+                    <v-tab value="discussion">Discussion</v-tab>
                     <v-tab v-if="canViewActivity" value="activity">Activity</v-tab>
                 </v-tabs>
 
@@ -37,6 +38,10 @@
                             <div><dt>Resolved</dt><dd>{{ formatDate(ticket?.resolved_at) }}</dd></div>
                             <div class="detail-grid__wide"><dt>Summary</dt><dd>{{ ticket?.summary || '-' }}</dd></div>
                         </dl>
+                    </v-window-item>
+
+                    <v-window-item value="discussion">
+                        <AppTicketComments v-if="tab === 'discussion'" :ticket-id="ticketId" :can-comment="canComment" />
                     </v-window-item>
 
                     <v-window-item v-if="canViewActivity" value="activity">
@@ -64,6 +69,7 @@ import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
+import AppTicketComments from '../../../components/AppTicketComments.vue';
 import { useSessionStore } from '../../../stores/session';
 import { v1 } from '../../../utils/api';
 
@@ -73,6 +79,7 @@ const session = useSessionStore();
 const ticketId = route.params.ticket;
 
 const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
+const canComment = computed(() => session.user?.permissions?.includes('support_tickets.comment') ?? false);
 
 const tab = ref('overview');
 const ticket = ref(null);

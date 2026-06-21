@@ -19,6 +19,7 @@ use App\Contracts\ReleaseOperationsServiceInterface;
 use App\Contracts\ReportServiceInterface;
 use App\Contracts\SupportOperationsServiceInterface;
 use App\Contracts\SupportTierServiceInterface;
+use App\Contracts\TicketCommentServiceInterface;
 use App\Contracts\UserAdminServiceInterface;
 use App\Services\ActivityFeedService;
 use App\Services\CatalogueFeatureService;
@@ -37,6 +38,7 @@ use App\Services\ReleaseOperationsService;
 use App\Services\ReportService;
 use App\Services\SupportOperationsService;
 use App\Services\SupportTierService;
+use App\Services\TicketCommentService;
 use App\Services\UserAdminService;
 use Illuminate\Support\ServiceProvider;
 
@@ -62,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ReleaseOperationsServiceInterface::class, ReleaseOperationsService::class);
         $this->app->bind(LookupOptionServiceInterface::class, LookupOptionService::class);
         $this->app->bind(ActivityFeedServiceInterface::class, ActivityFeedService::class);
+        $this->app->bind(TicketCommentServiceInterface::class, TicketCommentService::class);
     }
 
     public function boot(): void

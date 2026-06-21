@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\ReleaseController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
+use App\Http\Controllers\Api\TicketCommentController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +90,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('support-tickets/{supportTicket}', [SupportTicketController::class, 'show']);
         Route::middleware('can:support_tickets.create')->post('support-tickets', [SupportTicketController::class, 'store']);
         Route::middleware('can:support_tickets.update')->match(['put', 'patch'], 'support-tickets/{supportTicket}', [SupportTicketController::class, 'update']);
+
+        Route::get('support-tickets/{supportTicket}/comments', [TicketCommentController::class, 'index']);
+        Route::middleware('can:support_tickets.comment')->post('support-tickets/{supportTicket}/comments', [TicketCommentController::class, 'store']);
     });
 
     Route::middleware('can:incidents.view')->group(function () {
