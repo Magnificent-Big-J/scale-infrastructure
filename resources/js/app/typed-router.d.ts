@@ -58,6 +58,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/admin/reference-data': RouteRecordInfo<
+      '/admin/reference-data',
+      '/admin/reference-data',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/admin/support-tiers': RouteRecordInfo<
       '/admin/support-tiers',
       '/admin/support-tiers',
@@ -295,6 +302,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/admin/products.vue': {
       routes:
         | '/admin/products'
+      views:
+        | never
+    }
+    'resources/js/app/pages/admin/reference-data.vue': {
+      routes:
+        | '/admin/reference-data'
       views:
         | never
     }

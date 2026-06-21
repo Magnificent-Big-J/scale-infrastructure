@@ -2,24 +2,31 @@ import { defineStore } from 'pinia';
 
 import { v1 } from '../utils/api';
 
-export const useSupportTicketsStore = defineStore('support-tickets', {
+export const useReferenceDataStore = defineStore('reference-data', {
     state: () => ({
         rows: [],
-        meta: { current_page: 1, last_page: 1, per_page: 10, total: 0 },
-        options: { statuses: [], severities: [], categories: [], clients: [], deployments: [], agreements: [], users: [] },
+        meta: {
+            current_page: 1,
+            last_page: 1,
+            per_page: 15,
+            total: 0,
+        },
+        options: {
+            types: [],
+        },
         loading: false,
     }),
     actions: {
-        async fetch({ page = 1, perPage = 10, search = '', status = '', severity = '' } = {}) {
+        async fetch({ page = 1, perPage = 15, type = '', search = '' } = {}) {
             this.loading = true;
 
             try {
                 const params = new URLSearchParams({ page, per_page: perPage });
-                if (search) params.set('search', search);
-                if (status) params.set('status', status);
-                if (severity) params.set('severity', severity);
 
-                const response = await v1(`support-tickets?${params}`);
+                if (type) params.set('type', type);
+                if (search) params.set('search', search);
+
+                const response = await v1(`reference-data?${params}`);
 
                 this.rows = response?.data?.map((item) => item?.data ?? item) ?? [];
                 this.meta = response?.meta ?? this.meta;
@@ -35,7 +42,7 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
             this.loading = true;
 
             try {
-                const response = await v1('support-tickets', { method: 'POST', body: payload });
+                const response = await v1('reference-data', { method: 'POST', body: payload });
 
                 return response?.data ?? response;
             } finally {
@@ -43,13 +50,23 @@ export const useSupportTicketsStore = defineStore('support-tickets', {
             }
         },
 
-        async update(ticketId, payload) {
+        async update(optionId, payload) {
             this.loading = true;
 
             try {
-                const response = await v1(`support-tickets/${ticketId}`, { method: 'PATCH', body: payload });
+                const response = await v1(`reference-data/${optionId}`, { method: 'PATCH', body: payload });
 
                 return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async remove(optionId) {
+            this.loading = true;
+
+            try {
+                return await v1(`reference-data/${optionId}`, { method: 'DELETE' });
             } finally {
                 this.loading = false;
             }

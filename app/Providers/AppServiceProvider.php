@@ -8,6 +8,7 @@ use App\Contracts\CommercialOperationsServiceInterface;
 use App\Contracts\DeploymentServiceInterface;
 use App\Contracts\ExecutiveDashboardServiceInterface;
 use App\Contracts\FinanceDashboardServiceInterface;
+use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\OperationsDashboardServiceInterface;
 use App\Contracts\PackageServiceInterface;
 use App\Contracts\PayFastCheckoutServiceInterface;
@@ -24,6 +25,7 @@ use App\Services\CommercialOperationsService;
 use App\Services\DeploymentService;
 use App\Services\ExecutiveDashboardService;
 use App\Services\FinanceDashboardService;
+use App\Services\LookupOptionService;
 use App\Services\OperationsDashboardService;
 use App\Services\PackageService;
 use App\Services\PayFastCheckoutService;
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OperationsDashboardServiceInterface::class, OperationsDashboardService::class);
         $this->app->bind(ReportServiceInterface::class, ReportService::class);
         $this->app->bind(ReleaseOperationsServiceInterface::class, ReleaseOperationsService::class);
+        $this->app->bind(LookupOptionServiceInterface::class, LookupOptionService::class);
     }
 
     public function boot(): void

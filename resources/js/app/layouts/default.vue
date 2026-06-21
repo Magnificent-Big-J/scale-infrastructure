@@ -155,6 +155,7 @@ const navGroups = [
             { label: 'Packages', to: '/admin/packages', icon: 'mdi-tag-multiple-outline', permission: 'packages.view' },
             { label: 'Package Features', to: '/admin/catalogue-features', icon: 'mdi-format-list-checks', permission: 'catalogue_features.view' },
             { label: 'Support Tiers', to: '/admin/support-tiers', icon: 'mdi-handshake-outline', permission: 'support_tiers.view' },
+            { label: 'Reference Data', to: '/admin/reference-data', icon: 'mdi-format-list-bulleted-type', permission: 'lookups.view' },
             { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline', permission: 'users.view' },
             { label: 'Profile', to: '/auth/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
         ],

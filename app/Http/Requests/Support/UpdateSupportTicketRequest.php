@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Support;
 
+use App\Enums\LookupType;
 use App\Enums\SupportSeverity;
 use App\Enums\SupportTicketStatus;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +24,7 @@ class UpdateSupportTicketRequest extends FormRequest
             'assigned_user_id' => ['nullable', 'integer', 'exists:users,id'],
             'reference' => ['required', 'string', 'max:64', Rule::unique('support_tickets', 'reference')->ignore($this->route('supportTicket'))],
             'subject' => ['required', 'string', 'max:255'],
-            'category' => ['nullable', 'string', 'max:255'],
+            'category' => ['nullable', 'string', LookupType::TicketCategory->existsRule()],
             'severity' => ['required', Rule::in(SupportSeverity::values())],
             'status' => ['required', Rule::in(SupportTicketStatus::values())],
             'hours_logged' => ['nullable', 'numeric', 'min:0'],
