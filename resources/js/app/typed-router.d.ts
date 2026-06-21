@@ -163,9 +163,23 @@ declare module 'vue-router/auto-routes' {
       { invoice: ParamValue<false> },
       | never
     >,
-    '/commercial/opportunities': RouteRecordInfo<
+    '/commercial/opportunities/': RouteRecordInfo<
+      '/commercial/opportunities/',
       '/commercial/opportunities',
-      '/commercial/opportunities',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/commercial/opportunities/[opportunity]': RouteRecordInfo<
+      '/commercial/opportunities/[opportunity]',
+      '/commercial/opportunities/:opportunity',
+      { opportunity: ParamValue<true> },
+      { opportunity: ParamValue<false> },
+      | never
+    >,
+    '/commercial/opportunities/board': RouteRecordInfo<
+      '/commercial/opportunities/board',
+      '/commercial/opportunities/board',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -430,9 +444,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/commercial/opportunities.vue': {
+    'resources/js/app/pages/commercial/opportunities/index.vue': {
       routes:
-        | '/commercial/opportunities'
+        | '/commercial/opportunities/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/opportunities/[opportunity].vue': {
+      routes:
+        | '/commercial/opportunities/[opportunity]'
+      views:
+        | never
+    }
+    'resources/js/app/pages/commercial/opportunities/board.vue': {
+      routes:
+        | '/commercial/opportunities/board'
       views:
         | never
     }

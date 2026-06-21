@@ -26,6 +26,14 @@ class LookupOptionSeeder extends Seeder
             ['value' => 'deployment', 'label' => 'Deployment & provisioning'],
             ['value' => 'security', 'label' => 'Security'],
         ],
+        LookupType::OpportunitySource->value => [
+            ['value' => 'referral', 'label' => 'Referral'],
+            ['value' => 'inbound', 'label' => 'Inbound enquiry'],
+            ['value' => 'outbound', 'label' => 'Outbound'],
+            ['value' => 'existing_client', 'label' => 'Existing client'],
+            ['value' => 'partner', 'label' => 'Partner'],
+            ['value' => 'event', 'label' => 'Event'],
+        ],
     ];
 
     public function run(): void

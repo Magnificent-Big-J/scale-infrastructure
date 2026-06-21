@@ -14,11 +14,13 @@ use Illuminate\Validation\Rules\Exists;
 enum LookupType: string
 {
     case TicketCategory = 'ticket_category';
+    case OpportunitySource = 'opportunity_source';
 
     public function label(): string
     {
         return match ($this) {
             self::TicketCategory => 'Ticket category',
+            self::OpportunitySource => 'Opportunity source',
         };
     }
 
@@ -29,6 +31,7 @@ enum LookupType: string
     {
         return match ($this) {
             self::TicketCategory => 'Selectable categories used to classify support tickets.',
+            self::OpportunitySource => 'Where a sales opportunity originated.',
         };
     }
 
