@@ -29,6 +29,20 @@ enum SupportSeverity: string
         };
     }
 
+    /**
+     * Multiplier applied to an agreement's response SLA hours: higher severity
+     * tightens the target, lower severity relaxes it.
+     */
+    public function slaFactor(): float
+    {
+        return match ($this) {
+            self::Critical => 0.25,
+            self::High => 0.5,
+            self::Medium => 1.0,
+            self::Low => 2.0,
+        };
+    }
+
     public static function options(): array
     {
         return array_map(fn (self $severity) => ['value' => $severity->value, 'label' => $severity->label()], self::cases());

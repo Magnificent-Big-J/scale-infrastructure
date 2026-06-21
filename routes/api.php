@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\ProfitabilityController;
 use App\Http\Controllers\Api\ProvisioningTemplateController;
 use App\Http\Controllers\Api\ReleaseController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\SlaController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\TicketCommentController;
@@ -93,6 +94,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
         Route::get('support-tickets/{supportTicket}/comments', [TicketCommentController::class, 'index']);
         Route::middleware('can:support_tickets.comment')->post('support-tickets/{supportTicket}/comments', [TicketCommentController::class, 'store']);
+
+        Route::get('support/sla', [SlaController::class, 'index']);
     });
 
     Route::middleware('can:incidents.view')->group(function () {
