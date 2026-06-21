@@ -78,9 +78,9 @@ const chartOptions = computed(() => ({
     display: grid;
     gap: 1rem;
     padding: 1.15rem 1.2rem;
-    background: rgba(255, 253, 248, 0.96);
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 1.1rem;
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .chart-card__header {

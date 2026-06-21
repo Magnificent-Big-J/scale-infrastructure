@@ -17,9 +17,9 @@
     gap: 0.9rem;
     flex-wrap: wrap;
     padding: 1rem 1.1rem;
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    border: 1px solid var(--rw-border);
     border-radius: 1rem;
-    background: rgba(255, 253, 248, 0.9);
+    background: var(--rw-surface-2);
 }
 
 .filter-bar__primary,

@@ -72,7 +72,7 @@ const totalLabel = computed(() => {
 }
 
 .pagination-bar__muted {
-    color: var(--starter-muted, rgba(17, 34, 51, 0.7));
+    color: var(--starter-muted, rgba(15, 23, 42, 0.7));
     font-size: 0.88rem;
 }
 </style>

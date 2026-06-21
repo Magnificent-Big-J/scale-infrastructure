@@ -41,7 +41,7 @@ const chartOptions = computed(() => ({
         width: 3,
     },
     grid: {
-        borderColor: 'rgba(17, 34, 51, 0.08)',
+        borderColor: 'rgba(15, 23, 42, 0.08)',
         strokeDashArray: 4,
     },
     xaxis: {
@@ -49,12 +49,12 @@ const chartOptions = computed(() => ({
         axisBorder: { show: false },
         axisTicks: { show: false },
         labels: {
-            style: { colors: 'rgba(17, 34, 51, 0.6)' },
+            style: { colors: 'rgba(15, 23, 42, 0.6)' },
         },
     },
     yaxis: {
         labels: {
-            style: { colors: 'rgba(17, 34, 51, 0.6)' },
+            style: { colors: 'rgba(15, 23, 42, 0.6)' },
         },
     },
     tooltip: {
@@ -78,9 +78,9 @@ const chartOptions = computed(() => ({
     gap: 1rem;
     min-height: 320px;
     padding: 1.15rem 1.2rem;
-    background: rgba(255, 253, 248, 0.96);
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 1.1rem;
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .chart-card__header {

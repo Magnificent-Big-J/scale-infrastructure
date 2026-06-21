@@ -11,7 +11,7 @@
             <div class="guest-shell__body">
                 <header class="guest-header">
                     <RouterLink to="/" class="guest-logo">
-                        <span class="guest-logo__badge">SI</span>
+                        <img :src="'/logo-mark.png'" alt="Scale Infrastructure" class="guest-logo__img">
                         <span class="guest-logo__name">Scale Infrastructure</span>
                     </RouterLink>
                     <nav class="guest-links">
@@ -110,19 +110,10 @@
     text-decoration: none;
 }
 
-.guest-logo__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 8px;
-    background: linear-gradient(145deg, #1c3a6e, #3b82f6);
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 2px 8px rgba(0,0,0,0.4);
+.guest-logo__img {
+    height: 2.3rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .guest-logo__name {

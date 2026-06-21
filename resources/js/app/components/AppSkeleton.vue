@@ -14,9 +14,9 @@ defineProps({
     border-radius: 0.75rem;
     background: linear-gradient(
         90deg,
-        rgba(17, 34, 51, 0.06),
-        rgba(17, 34, 51, 0.11),
-        rgba(17, 34, 51, 0.06)
+        rgba(15, 23, 42, 0.06),
+        rgba(15, 23, 42, 0.11),
+        rgba(15, 23, 42, 0.06)
     );
     background-size: 200% 100%;
     animation: shimmer 1.4s ease-in-out infinite;

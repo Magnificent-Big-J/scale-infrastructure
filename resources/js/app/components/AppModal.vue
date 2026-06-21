@@ -40,8 +40,8 @@ defineEmits(['update:modelValue']);
 
 <style scoped>
 .app-modal {
-    background: rgba(255, 253, 248, 0.98);
-    border: 1px solid rgba(17, 34, 51, 0.08);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .app-modal__header {

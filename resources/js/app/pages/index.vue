@@ -4,7 +4,7 @@
         <section class="landing-hero">
             <div class="landing-hero__kicker">
                 <span class="landing-kicker-badge">
-                    <v-icon size="13" color="rgba(0,200,140,0.9)">mdi-check-circle-outline</v-icon>
+                    <v-icon size="13" color="rgba(37,99,235,0.9)">mdi-check-circle-outline</v-icon>
                     Internal operations platform
                 </span>
             </div>
@@ -172,7 +172,7 @@ const stack = [
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: rgba(0, 200, 140, 0.8);
+    color: rgba(37, 99, 235, 0.8);
 }
 
 /* ── Hero ──────────────────────────────────────────── */
@@ -190,7 +190,7 @@ const stack = [
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: 600;
-    color: rgba(0, 200, 140, 0.9);
+    color: rgba(37, 99, 235, 0.9);
     letter-spacing: 0.02em;
 }
 
@@ -354,7 +354,7 @@ const stack = [
 .stack-item__ver {
     font-size: 0.72rem;
     font-weight: 600;
-    color: rgba(0, 200, 140, 0.9);
+    color: rgba(37, 99, 235, 0.9);
     background: rgba(37, 99, 235, 0.18);
     border: 1px solid rgba(37, 99, 235, 0.3);
     padding: 0.1rem 0.45rem;

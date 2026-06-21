@@ -7,9 +7,7 @@
 
                     <div class="sidebar__brand">
                         <RouterLink to="/" class="brand-mark" @click="mobileOpen = false">
-                            <span class="brand-mark__badge">
-                                <span class="brand-mark__letters">SI</span>
-                            </span>
+                            <img :src="'/logo-mark.png'" alt="Scale Infrastructure" class="brand-mark__logo">
                             <div class="brand-mark__text">
                                 <span class="brand-mark__name">Scale</span>
                                 <span class="brand-mark__sub">Infrastructure</span>
@@ -75,7 +73,7 @@
                 <!-- Guest topbar -->
                 <header v-else class="guest-bar">
                     <RouterLink to="/" class="guest-brand">
-                        <span class="guest-brand__badge">SI</span>
+                        <img :src="'/logo-mark.png'" alt="Scale Infrastructure" class="guest-brand__logo">
                         <span class="guest-brand__name">Scale <em>Infrastructure</em></span>
                     </RouterLink>
                     <nav class="guest-nav">
@@ -277,23 +275,11 @@ const NavItem = defineComponent({
     color: var(--rw-ink);
 }
 
-.brand-mark__badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
+.brand-mark__logo {
     height: 2.5rem;
-    border-radius: 10px;
-    background: linear-gradient(145deg, var(--rw-700), var(--rw-500));
+    width: auto;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-}
-
-.brand-mark__letters {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 0.05em;
+    object-fit: contain;
 }
 
 .brand-mark__text {
@@ -566,18 +552,10 @@ const NavItem = defineComponent({
     color: var(--rw-ink);
 }
 
-.guest-brand__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 8px;
-    background: linear-gradient(145deg, var(--rw-700), var(--rw-500));
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
+.guest-brand__logo {
+    height: 2.1rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .guest-brand__name {
