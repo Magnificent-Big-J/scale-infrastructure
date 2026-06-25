@@ -28,11 +28,14 @@ class ClientTest extends TestCase
         $this->seed();
 
         $client = Client::where('code', 'AURECON-PMO')->firstOrFail();
+        $procurementClient = Client::where('code', 'UBUNTU-METRO')->firstOrFail();
 
-        $this->assertSame(3, Client::count());
+        $this->assertSame(4, Client::count());
         $this->assertSame('enterprise', $client->tier->value);
         $this->assertSame('Thandi Mbeki', $client->primaryContact()->first()?->name);
         $this->assertSame(1, $client->contacts()->where('is_primary', true)->count());
+        $this->assertSame('PROCUREMENT-ENTERPRISE', $procurementClient->package?->code);
+        $this->assertSame('Naledi Mokoena', $procurementClient->primaryContact()->first()?->name);
     }
 
     public function test_admin_can_list_clients(): void

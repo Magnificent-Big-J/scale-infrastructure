@@ -67,6 +67,43 @@ class CatalogueTest extends TestCase
         ]);
     }
 
+    public function test_catalogue_seeder_creates_procurement_product_packages_and_features(): void
+    {
+        $this->seed();
+
+        $product = Product::where('code', 'PROCUREMENT-VISIBILITY')->firstOrFail();
+        $enterprise = Package::where('code', 'PROCUREMENT-ENTERPRISE')->firstOrFail();
+
+        $this->assertSame('Procurement Visibility Platform', $product->name);
+        $this->assertSame(3, $product->packages()->count());
+        $this->assertDatabaseHas('packages', [
+            'code' => 'PROCUREMENT-FOUNDATION',
+            'product_id' => $product->id,
+            'billing_interval' => 'once_off',
+            'price_min' => '450000.00',
+            'price_max' => '700000.00',
+        ]);
+        $this->assertDatabaseHas('packages', [
+            'code' => 'PROCUREMENT-GOVERNANCE',
+            'product_id' => $product->id,
+            'price_min' => '750000.00',
+            'price_max' => '1250000.00',
+        ]);
+        $this->assertDatabaseHas('packages', [
+            'code' => 'PROCUREMENT-ENTERPRISE',
+            'product_id' => $product->id,
+            'price_min' => '1500000.00',
+            'price_max' => null,
+        ]);
+
+        $this->assertSame(15, CatalogueFeature::where('product_id', $product->id)->count());
+        $this->assertDatabaseHas('catalogue_features', [
+            'code' => 'PROCUREMENT-FEATURE-DOCUMENTS-RETENTION',
+            'product_id' => $product->id,
+            'minimum_package_id' => $enterprise->id,
+        ]);
+    }
+
     public function test_admin_can_list_products(): void
     {
         $this->seed();
@@ -75,6 +112,7 @@ class CatalogueTest extends TestCase
 
         $response->assertOk()
             ->assertJsonFragment(['code' => 'SCALELENS'])
+            ->assertJsonFragment(['code' => 'PROCUREMENT-VISIBILITY'])
             ->assertJsonPath('options.statuses.0.value', 'active');
     }
 

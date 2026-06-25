@@ -106,6 +106,98 @@ class CatalogueSeeder extends Seeder
             );
         }
 
+        $procurement = Product::updateOrCreate(
+            ['code' => 'PROCUREMENT-VISIBILITY'],
+            [
+                'name' => 'Procurement Visibility Platform',
+                'description' => 'Governed source-to-pay visibility platform for supplier compliance, procurement approvals, finance controls, audit evidence, and POPIA-aware document retention.',
+                'status' => CatalogueStatus::Active,
+            ],
+        );
+
+        // Procurement is materially heavier than ScaleLens: regulated supplier
+        // onboarding, separation of duties, finance matching, evidence retention,
+        // and audit/POPIA controls drive higher implementation ranges.
+        $procurementPackages = [
+            [
+                'code' => 'PROCUREMENT-FOUNDATION',
+                'name' => 'Foundation',
+                'description' => 'Smaller procurement teams needing controlled supplier, requisition, purchase order, delivery, invoice, payment, dashboard, notification, reporting, and audit visibility.',
+                'price_min' => 450000.00,
+                'price_max' => 700000.00,
+                'sort_order' => 1,
+            ],
+            [
+                'code' => 'PROCUREMENT-GOVERNANCE',
+                'name' => 'Governance',
+                'description' => 'Procurement departments needing governed RFQs, supplier eligibility, quotations, evaluations, awards, policies, delegations, escalations, exceptions, compliance, spend analysis, and three-way invoice matching.',
+                'price_min' => 750000.00,
+                'price_max' => 1250000.00,
+                'sort_order' => 2,
+            ],
+            [
+                'code' => 'PROCUREMENT-ENTERPRISE',
+                'name' => 'Enterprise',
+                'description' => 'Regulated or multi-entity environments needing banking proof controls, versioned documents, inline previews, retention review, activity timelines, advanced automation, custom workflows, custom reports, and integration APIs.',
+                'price_min' => 1500000.00,
+                'price_max' => null,
+                'sort_order' => 3,
+            ],
+        ];
+
+        foreach ($procurementPackages as $package) {
+            Package::updateOrCreate(
+                ['code' => $package['code']],
+                [
+                    'product_id' => $procurement->id,
+                    'name' => $package['name'],
+                    'description' => $package['description'],
+                    'billing_interval' => BillingInterval::OnceOff,
+                    'price_min' => $package['price_min'],
+                    'price_max' => $package['price_max'],
+                    'currency' => config('catalogue.default_currency'),
+                    'status' => CatalogueStatus::Active,
+                    'sort_order' => $package['sort_order'],
+                ],
+            );
+        }
+
+        $procurementPackageIds = Package::query()
+            ->whereIn('code', ['PROCUREMENT-FOUNDATION', 'PROCUREMENT-GOVERNANCE', 'PROCUREMENT-ENTERPRISE'])
+            ->pluck('id', 'code');
+
+        $procurementFeatures = [
+            ['code' => 'PROCUREMENT-FEATURE-ORG-ADMIN', 'name' => 'Organisation setup, users, roles, departments, business units, cost centres', 'minimum_package_code' => 'PROCUREMENT-FOUNDATION', 'sort_order' => 101],
+            ['code' => 'PROCUREMENT-FEATURE-SUPPLIERS', 'name' => 'Supplier registry, contacts, addresses, compliance status, health scoring', 'minimum_package_code' => 'PROCUREMENT-FOUNDATION', 'sort_order' => 102],
+            ['code' => 'PROCUREMENT-FEATURE-REQUISITIONS-APPROVALS', 'name' => 'Requisitions, approval queue, configurable approval matrices', 'minimum_package_code' => 'PROCUREMENT-FOUNDATION', 'sort_order' => 103],
+            ['code' => 'PROCUREMENT-FEATURE-PURCHASING-FINANCE-BASIC', 'name' => 'Purchase orders, deliveries, GRNs, invoice capture, payment tracking', 'minimum_package_code' => 'PROCUREMENT-FOUNDATION', 'sort_order' => 104],
+            ['code' => 'PROCUREMENT-FEATURE-DASHBOARDS-REPORTS', 'name' => 'Dashboard metrics, notifications, search, standard reports, exports', 'minimum_package_code' => 'PROCUREMENT-FOUNDATION', 'sort_order' => 105],
+            ['code' => 'PROCUREMENT-FEATURE-RFQ-QUOTATIONS', 'name' => 'RFQs, invitations, supplier eligibility, quotations', 'minimum_package_code' => 'PROCUREMENT-GOVERNANCE', 'sort_order' => 106],
+            ['code' => 'PROCUREMENT-FEATURE-EVALUATIONS-AWARDS', 'name' => 'Evaluation scoring, award recommendations, quotation comparison', 'minimum_package_code' => 'PROCUREMENT-GOVERNANCE', 'sort_order' => 107],
+            ['code' => 'PROCUREMENT-FEATURE-GOVERNANCE-RULES', 'name' => 'Policies, method rules, delegations, escalations, exceptions', 'minimum_package_code' => 'PROCUREMENT-GOVERNANCE', 'sort_order' => 108],
+            ['code' => 'PROCUREMENT-FEATURE-MATCHING-SPEND', 'name' => 'Three-way invoice matching and spend analysis', 'minimum_package_code' => 'PROCUREMENT-GOVERNANCE', 'sort_order' => 109],
+            ['code' => 'PROCUREMENT-FEATURE-COMPLIANCE-AUDIT', 'name' => 'Compliance dashboard and sensitive-action audit coverage', 'minimum_package_code' => 'PROCUREMENT-GOVERNANCE', 'sort_order' => 110],
+            ['code' => 'PROCUREMENT-FEATURE-BANKING-PROOF', 'name' => 'Banking proof-of-account controls and document version history', 'minimum_package_code' => 'PROCUREMENT-ENTERPRISE', 'sort_order' => 111],
+            ['code' => 'PROCUREMENT-FEATURE-DOCUMENTS-RETENTION', 'name' => 'Entity document management, inline previews, retention review', 'minimum_package_code' => 'PROCUREMENT-ENTERPRISE', 'sort_order' => 112],
+            ['code' => 'PROCUREMENT-FEATURE-ACTIVITY-TIMELINES', 'name' => 'Activity timelines across key records', 'minimum_package_code' => 'PROCUREMENT-ENTERPRISE', 'sort_order' => 113],
+            ['code' => 'PROCUREMENT-FEATURE-AUTOMATION-CUSTOM', 'name' => 'Advanced automation, custom workflows, custom reports, integration APIs', 'minimum_package_code' => 'PROCUREMENT-ENTERPRISE', 'sort_order' => 114],
+            ['code' => 'PROCUREMENT-FEATURE-MULTI-ENTITY', 'name' => 'Multi-entity, white-label, and regulated deployment patterns', 'minimum_package_code' => 'PROCUREMENT-ENTERPRISE', 'sort_order' => 115],
+        ];
+
+        foreach ($procurementFeatures as $feature) {
+            CatalogueFeature::updateOrCreate(
+                ['code' => $feature['code']],
+                [
+                    'product_id' => $procurement->id,
+                    'minimum_package_id' => $procurementPackageIds[$feature['minimum_package_code']] ?? null,
+                    'name' => $feature['name'],
+                    'description' => 'Procurement Visibility Platform package capability from Documentation 28.',
+                    'status' => CatalogueStatus::Active,
+                    'sort_order' => $feature['sort_order'],
+                ],
+            );
+        }
+
         $supportTiers = [
             [
                 'code' => 'SUPPORT-STANDARD',

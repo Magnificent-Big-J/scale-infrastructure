@@ -64,6 +64,21 @@ class ClientSeeder extends Seeder
                     ['name' => 'Michael Jacobs', 'email' => 'michael.jacobs@example.test', 'phone' => '+27 84 555 0301', 'role' => 'Managing Consultant', 'is_primary' => true],
                 ],
             ],
+            [
+                'code' => 'UBUNTU-METRO',
+                'name' => 'Ubuntu Metropolitan Municipality',
+                'legal_name' => 'Ubuntu Metropolitan Municipality (Demo)',
+                'tier' => ClientTier::Enterprise,
+                'status' => ClientStatus::Onboarding,
+                'health_score' => 78,
+                'package_code' => 'PROCUREMENT-ENTERPRISE',
+                'owner_user_id' => $admin?->id,
+                'notes' => 'Enterprise Procurement Visibility Platform onboarding with supplier governance, POPIA, audit, and retention controls.',
+                'contacts' => [
+                    ['name' => 'Naledi Mokoena', 'email' => 'naledi.mokoena@example.test', 'phone' => '+27 82 555 0401', 'role' => 'Chief Procurement Officer', 'is_primary' => true],
+                    ['name' => 'Sibusiso Dube', 'email' => 'sibusiso.dube@example.test', 'phone' => '+27 82 555 0402', 'role' => 'Compliance & Records Manager', 'is_primary' => false],
+                ],
+            ],
         ];
 
         foreach ($clients as $item) {
