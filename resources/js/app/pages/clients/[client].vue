@@ -163,7 +163,7 @@ const tabs = reactive({
     profitability: { rows: [] },
 });
 
-const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
+const noMeta = { current_page: 1, last_page: 1, per_page: 100 };
 
 const contactColumns = [{ key: 'name', label: 'Name' }, { key: 'email', label: 'Email' }, { key: 'phone', label: 'Phone' }, { key: 'primary', label: '' }];
 const deploymentColumns = [{ key: 'name', label: 'Deployment' }, { key: 'offering', label: 'Offering' }, { key: 'status', label: 'Status' }];

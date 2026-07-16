@@ -61,7 +61,7 @@ const rows = ref([]);
 const summary = reactive({ breached: 0, at_risk: 0, on_track: 0, met: 0 });
 const loading = ref(false);
 
-const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
+const noMeta = { current_page: 1, last_page: 1, per_page: 100 };
 const columns = [
     { key: 'ticket', label: 'Ticket' },
     { key: 'severity', label: 'Severity' },

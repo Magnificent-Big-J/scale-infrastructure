@@ -89,7 +89,7 @@ const loading = ref(false);
 
 const payments = computed(() => invoice.value?.payments ?? []);
 
-const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
+const noMeta = { current_page: 1, last_page: 1, per_page: 100 };
 const paymentColumns = [{ key: 'amount', label: 'Amount' }, { key: 'method', label: 'Method' }, { key: 'date', label: 'Paid on' }];
 
 const formatAmount = (value) => (value ? `ZAR ${Number(value).toLocaleString(undefined, { maximumFractionDigits: 0 })}` : '-');

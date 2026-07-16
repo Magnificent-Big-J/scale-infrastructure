@@ -178,7 +178,7 @@ const assets = computed(() => deployment.value?.infrastructure_assets ?? []);
 const checks = computed(() => deployment.value?.monitoring_checks ?? []);
 const releases = computed(() => deployment.value?.releases ?? []);
 
-const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
+const noMeta = { current_page: 1, last_page: 1, per_page: 100 };
 
 const assetColumns = [{ key: 'asset', label: 'Asset' }, { key: 'location', label: 'Provider' }, { key: 'size', label: 'Size' }, { key: 'cost', label: 'Monthly' }];
 const checkColumns = [{ key: 'check', label: 'Check' }, { key: 'target', label: 'Target' }, { key: 'status', label: 'Status' }];

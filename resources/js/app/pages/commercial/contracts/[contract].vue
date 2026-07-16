@@ -102,7 +102,7 @@ const loading = ref(false);
 const billingRecords = computed(() => contract.value?.billing_records ?? []);
 const invoices = computed(() => contract.value?.invoices ?? []);
 
-const noMeta = { current_page: 1, last_page: 1, per_page: 100, total: 0 };
+const noMeta = { current_page: 1, last_page: 1, per_page: 100 };
 const billingColumns = [{ key: 'record', label: 'Record' }, { key: 'amount', label: 'Amount' }, { key: 'status', label: 'Status' }];
 const invoiceColumns = [{ key: 'invoice', label: 'Invoice' }, { key: 'amount', label: 'Amount' }, { key: 'outstanding', label: 'Outstanding' }, { key: 'status', label: 'Status' }];
 
