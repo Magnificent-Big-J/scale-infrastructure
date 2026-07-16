@@ -95,7 +95,7 @@ onMounted(load);
 }
 
 .operations__search {
-    min-width: min(320px, 100%);
+    flex: 0 1 320px; min-width: 240px;
 }
 
 .operations__filter {

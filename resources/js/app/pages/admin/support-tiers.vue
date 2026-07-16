@@ -367,7 +367,7 @@ onMounted(load);
 }
 
 .admin-catalogue__search {
-    min-width: min(320px, 100%);
+    flex: 0 1 320px; min-width: 240px;
 }
 
 .admin-catalogue__status-filter {
