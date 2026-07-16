@@ -30,7 +30,7 @@
                         <td><span class="text-sm">{{ formatAmount(row.monthly_value) }}</span></td>
                         <td><span class="text-sm">{{ row.renewal_date || '-' }}</span></td>
                         <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>

@@ -32,7 +32,7 @@
                         <td><span class="text-sm">{{ row.due_on || '-' }}</span></td>
                         <td class="text-right">
                             <v-btn icon="mdi-cash-plus" size="small" variant="text" title="Record payment" @click.stop="openPayment(row)" />
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>

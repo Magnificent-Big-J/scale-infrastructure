@@ -39,7 +39,7 @@
                         <td><span class="text-sm">{{ formatAmount(row.total_cost) }}</span></td>
                         <td><span class="text-sm">{{ formatAmount(row.profit) }}</span></td>
                         <td><AppStatusBadge :status="Number(row.margin) >= 0 ? 'active' : 'suspended'" :label="`${Number(row.margin).toFixed(1)}%`" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>

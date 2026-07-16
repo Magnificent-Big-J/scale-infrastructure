@@ -22,7 +22,7 @@
                         <td><span class="text-sm">{{ (row.steps || []).length }} steps</span></td>
                         <td><span class="text-sm">{{ row.automation_runs_count ?? 0 }}</span></td>
                         <td><AppStatusBadge :status="row.is_active ? 'active' : 'inactive'" :label="row.is_active ? 'Active' : 'Inactive'" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>

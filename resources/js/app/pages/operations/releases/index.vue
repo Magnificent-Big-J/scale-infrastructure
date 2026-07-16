@@ -26,7 +26,7 @@
                             <v-btn v-if="['draft', 'pending_approval'].includes(row.status)" size="small" variant="text" color="primary" @click.stop="act(row, 'approve')">Approve</v-btn>
                             <v-btn v-if="row.status === 'approved'" size="small" variant="text" color="primary" @click.stop="act(row, 'deploy')">Deploy</v-btn>
                             <v-btn v-if="row.status === 'deployed'" size="small" variant="text" color="error" @click.stop="openRollback(row)">Rollback</v-btn>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>

@@ -30,7 +30,7 @@
                         <td><span class="text-sm">{{ row.included_hours ?? '-' }}</span></td>
                         <td><span class="text-sm">{{ row.response_sla_hours ? `${row.response_sla_hours}h` : '-' }}</span></td>
                         <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>

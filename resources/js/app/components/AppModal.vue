@@ -12,7 +12,7 @@
                     <p v-if="subtitle" class="app-modal__subtitle">{{ subtitle }}</p>
                     <slot name="header" />
                 </div>
-                <v-btn icon="mdi-close" variant="text" @click="$emit('update:modelValue', false)" />
+                <v-btn icon="mdi-close" variant="text" title="Close" @click="$emit('update:modelValue', false)" />
             </div>
 
             <v-card-text class="app-modal__body">

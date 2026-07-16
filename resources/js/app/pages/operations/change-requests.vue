@@ -27,7 +27,7 @@
                                 <v-btn size="small" variant="text" color="primary" @click.stop="decide(row, 'approve')">Approve</v-btn>
                                 <v-btn size="small" variant="text" color="error" @click.stop="decide(row, 'reject')">Reject</v-btn>
                             </template>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>

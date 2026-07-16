@@ -42,7 +42,7 @@
                         <td><span class="text-sm">{{ row.expected_close_date || '—' }}</span></td>
                         <td class="row-actions">
                             <v-btn v-if="!['won', 'lost'].includes(row.stage)" size="small" variant="text" color="primary" :loading="inlineBusy === row.id" @click.stop="markWon(row)">Win</v-btn>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>

@@ -83,7 +83,7 @@
                             <AppStatusBadge :status="row.status" :label="row.status_label || row.status" />
                         </td>
                         <td>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>

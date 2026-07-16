@@ -12,7 +12,7 @@
                 <h3 v-if="title" class="app-drawer__title">{{ title }}</h3>
                 <p v-if="subtitle" class="app-drawer__subtitle">{{ subtitle }}</p>
             </div>
-            <v-btn icon="mdi-close" variant="text" @click="$emit('update:modelValue', false)" />
+            <v-btn icon="mdi-close" variant="text" title="Close" @click="$emit('update:modelValue', false)" />
         </div>
         <div class="app-drawer__body">
             <slot />
