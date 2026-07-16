@@ -39,7 +39,7 @@
                     </nav>
 
                     <div class="sidebar__footer">
-                        <RouterLink to="/auth/profile" class="user-card" @click="mobileOpen = false">
+                        <RouterLink to="/profile" class="user-card" @click="mobileOpen = false">
                             <span class="user-card__avatar">{{ userInitials }}</span>
                             <div class="user-card__info">
                                 <span class="user-card__name">{{ session.user?.name }}</span>

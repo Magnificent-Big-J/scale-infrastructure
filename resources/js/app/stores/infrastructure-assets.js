@@ -10,6 +10,19 @@ export const useInfrastructureAssetsStore = defineStore('infrastructure-assets',
         loading: false,
     }),
     actions: {
+        upsertRow(record) {
+            if (!record?.id) return;
+
+            const index = this.rows.findIndex((row) => row.id === record.id);
+
+            if (index === -1) {
+                this.rows.unshift(record);
+                this.meta.total += 1;
+            } else {
+                this.rows.splice(index, 1, { ...this.rows[index], ...record });
+            }
+        },
+
         async fetch({ page = 1, perPage = 10, search = '', type = '' } = {}) {
             this.loading = true;
 
@@ -25,6 +38,30 @@ export const useInfrastructureAssetsStore = defineStore('infrastructure-assets',
                 this.options = response?.options ?? this.options;
 
                 return response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async create(deploymentId, payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1(`deployments/${deploymentId}/infrastructure-assets`, { method: 'POST', body: payload });
+
+                return response?.data ?? response;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async update(assetId, payload) {
+            this.loading = true;
+
+            try {
+                const response = await v1(`infrastructure-assets/${assetId}`, { method: 'PATCH', body: payload });
+
+                return response?.data ?? response;
             } finally {
                 this.loading = false;
             }

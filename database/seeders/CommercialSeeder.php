@@ -78,9 +78,9 @@ class CommercialSeeder extends Seeder
 
         $invoices = [
             ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'number' => 'INV-2026-0001', 'status' => InvoiceStatus::Paid, 'amount' => 180000, 'amount_paid' => 180000, 'issued_on' => '2026-06-01', 'due_on' => '2026-06-15'],
-            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'number' => 'INV-2026-0002', 'status' => InvoiceStatus::PartiallyPaid, 'amount' => 180000, 'amount_paid' => 90000, 'issued_on' => '2026-06-10', 'due_on' => '2026-06-24'],
-            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'number' => 'INV-2026-0003', 'status' => InvoiceStatus::Overdue, 'amount' => 66000, 'amount_paid' => 0, 'issued_on' => '2026-05-15', 'due_on' => '2026-05-31'],
-            ['client_code' => 'KOPANO-CONSULTING', 'contract_code' => 'CON-KOPANO-2026', 'number' => 'INV-2026-0004', 'status' => InvoiceStatus::Sent, 'amount' => 24000, 'amount_paid' => 0, 'issued_on' => '2026-06-12', 'due_on' => '2026-06-26'],
+            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'number' => 'INV-2026-0002', 'status' => InvoiceStatus::PartiallyPaid, 'amount' => 180000, 'amount_paid' => 90000, 'issued_on' => now()->subDays(15)->toDateString(), 'due_on' => now()->addDays(14)->toDateString()],
+            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'number' => 'INV-2026-0003', 'status' => InvoiceStatus::Overdue, 'amount' => 66000, 'amount_paid' => 0, 'issued_on' => now()->subDays(60)->toDateString(), 'due_on' => now()->subDays(30)->toDateString()],
+            ['client_code' => 'KOPANO-CONSULTING', 'contract_code' => 'CON-KOPANO-2026', 'number' => 'INV-2026-0004', 'status' => InvoiceStatus::Sent, 'amount' => 24000, 'amount_paid' => 0, 'issued_on' => now()->subDays(5)->toDateString(), 'due_on' => now()->addDays(10)->toDateString()],
         ];
 
         foreach ($invoices as $invoice) {

@@ -26,7 +26,7 @@
                             <v-btn v-if="['draft', 'pending_approval'].includes(row.status)" size="small" variant="text" color="primary" @click.stop="act(row, 'approve')">Approve</v-btn>
                             <v-btn v-if="row.status === 'approved'" size="small" variant="text" color="primary" @click.stop="act(row, 'deploy')">Deploy</v-btn>
                             <v-btn v-if="row.status === 'deployed'" size="small" variant="text" color="error" @click.stop="openRollback(row)">Rollback</v-btn>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>
@@ -181,7 +181,7 @@ onMounted(load);
 <style scoped>
 .ops-page { padding: 2.25rem 2rem 4rem; }
 .page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
-.ops__search { min-width: min(320px, 100%); }
+.ops__search { flex: 0 1 320px; min-width: 240px; }
 .ops__filter { min-width: 190px; }
 .ops-cell { display: grid; gap: 0.1rem; }
 .ops-cell small { color: var(--rw-muted); font-size: 0.78rem; }

@@ -36,15 +36,16 @@ use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\TicketCommentController;
 use App\Http\Resources\AuthUserResource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Public, token-authenticated external ticket intake (inbound create only).
 Route::middleware(['intake.token', 'throttle:60,1'])->post('intake/tickets', [IntakeTicketController::class, 'store']);
 
-Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
+Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(function () {
     Route::get('ping', fn () => response()->json(['status' => 'ok']));
 
-    Route::get('me', fn ($request) => new AuthUserResource($request->user()));
+    Route::get('me', fn (Request $request) => new AuthUserResource($request->user()));
 
     Route::get('profile', [ProfileController::class, 'show']);
     Route::patch('profile', [ProfileController::class, 'update']);
@@ -85,7 +86,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     });
 
     Route::middleware('can:infrastructure.view')->get('infrastructure-assets', [InfrastructureAssetController::class, 'index']);
+    Route::middleware('can:infrastructure.update')->match(['put', 'patch'], 'infrastructure-assets/{infrastructureAsset}', [InfrastructureAssetController::class, 'update']);
     Route::middleware('can:monitoring.view')->get('monitoring-checks', [MonitoringCheckController::class, 'index']);
+    Route::middleware('can:monitoring.update')->match(['put', 'patch'], 'monitoring-checks/{monitoringCheck}', [MonitoringCheckController::class, 'update']);
 
     Route::middleware('can:support_agreements.view')->group(function () {
         Route::get('support-agreements', [SupportAgreementController::class, 'index']);

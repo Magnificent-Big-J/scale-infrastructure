@@ -74,7 +74,7 @@ body,
 
 body {
     font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     line-height: 1.6;
     background-color: var(--rw-bg);
     color: var(--rw-ink);
@@ -90,4 +90,10 @@ a {
 /* ─── Vuetify overrides ──────────────────────────────── */
 .v-application {
     font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif !important;
+}
+
+/* Small icon buttons (row actions, close buttons) default to a 40px tap
+   target; nudge to 44px to meet the common accessibility minimum. */
+.v-btn--icon.v-btn--size-small {
+    --v-btn-height: 32px;
 }

@@ -83,7 +83,7 @@
                             <AppStatusBadge :status="row.status" :label="row.status_label || row.status" />
                         </td>
                         <td>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>
@@ -367,7 +367,7 @@ onMounted(load);
 }
 
 .admin-catalogue__search {
-    min-width: min(320px, 100%);
+    flex: 0 1 320px; min-width: 240px;
 }
 
 .admin-catalogue__status-filter {

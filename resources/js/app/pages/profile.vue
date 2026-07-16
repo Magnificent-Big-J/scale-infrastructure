@@ -15,6 +15,13 @@
         </AppPageHeader>
 
         <AppBanner
+            v-if="require2fa"
+            title="Two-factor authentication is required for your role"
+            message="Set up an authenticator app or email code below before you can continue using the rest of the app."
+            type="warning"
+        />
+
+        <AppBanner
             title="Account surface baseline"
             message="Profile, password, identity, and two-factor management now sit in the same sectional composition as the catalog and dashboard instead of using a separate page style."
             type="info"
@@ -215,20 +222,20 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 
-import AppBanner from '../../components/AppBanner.vue';
-import AppPageHeader from '../../components/AppPageHeader.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppStatusBadge from '../../components/AppStatusBadge.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import FormActions from '../../components/FormActions.vue';
-import FormStatusAlert from '../../components/FormStatusAlert.vue';
-import MediaUploader from '../../components/MediaUploader.vue';
-import RecoveryCodesPanel from '../../components/RecoveryCodesPanel.vue';
-import TwoFactorSetupPanel from '../../components/TwoFactorSetupPanel.vue';
-import { useProfileStore } from '../../stores/profile';
-import { useSessionStore } from '../../stores/session';
-import { useTwoFactorStore } from '../../stores/two-factor';
+import AppBanner from '../components/AppBanner.vue';
+import AppPageHeader from '../components/AppPageHeader.vue';
+import AppSectionCard from '../components/AppSectionCard.vue';
+import AppStatCard from '../components/AppStatCard.vue';
+import AppStatusBadge from '../components/AppStatusBadge.vue';
+import AppTextField from '../components/AppTextField.vue';
+import FormActions from '../components/FormActions.vue';
+import FormStatusAlert from '../components/FormStatusAlert.vue';
+import MediaUploader from '../components/MediaUploader.vue';
+import RecoveryCodesPanel from '../components/RecoveryCodesPanel.vue';
+import TwoFactorSetupPanel from '../components/TwoFactorSetupPanel.vue';
+import { useProfileStore } from '../stores/profile';
+import { useSessionStore } from '../stores/session';
+import { useTwoFactorStore } from '../stores/two-factor';
 
 const session = useSessionStore();
 const profileStore = useProfileStore();
@@ -250,6 +257,7 @@ const twoFaPassword = ref('');
 const totpCode = ref('');
 const emailCode = ref('');
 const showDisableConfirm = ref(false);
+const require2fa = ref(new URLSearchParams(window.location.search).get('require2fa') === '1');
 
 const syncProfileForm = () => {
     profileForm.name = session.user?.name || '';

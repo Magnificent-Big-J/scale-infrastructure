@@ -54,7 +54,7 @@ export const navGroups = [
             { label: 'Support Tiers', to: '/admin/support-tiers', icon: 'mdi-handshake-outline', permission: 'support_tiers.view' },
             { label: 'Reference Data', to: '/admin/reference-data', icon: 'mdi-format-list-bulleted-type', permission: 'lookups.view' },
             { label: 'Users', to: '/admin/users', icon: 'mdi-account-group-outline', permission: 'users.view' },
-            { label: 'Profile', to: '/auth/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
+            { label: 'Profile', to: '/profile', icon: 'mdi-account-circle-outline', permission: 'profile.view' },
         ],
     },
 ];

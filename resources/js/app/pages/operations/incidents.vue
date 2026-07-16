@@ -28,7 +28,7 @@
                         <td class="row-actions">
                             <v-btn v-if="canResolve(row)" size="small" variant="text" color="primary" :loading="inlineBusy === row.id" @click.stop="setStatus(row, 'resolved')">Resolve</v-btn>
                             <v-btn v-if="row.status === 'resolved'" size="small" variant="text" :loading="inlineBusy === row.id" @click.stop="setStatus(row, 'closed')">Close</v-btn>
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>
@@ -210,7 +210,7 @@ onMounted(load);
 .support-page { padding: 2.25rem 2rem 4rem; }
 .page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .support__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
-.support__search { min-width: min(320px, 100%); }
+.support__search { flex: 0 1 320px; min-width: 240px; }
 .support__filter { min-width: 190px; }
 .support-cell { display: grid; gap: 0.1rem; }
 .support-cell small { color: var(--rw-muted); font-size: 0.78rem; }

@@ -31,7 +31,7 @@
                         <td><span class="text-sm">{{ row.cadence_label }}</span></td>
                         <td><span class="text-sm">{{ formatAmount(row.amount) }}</span></td>
                         <td><AppStatusBadge :status="row.is_active ? 'active' : 'inactive'" :label="row.is_active ? 'Active' : 'Inactive'" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>
@@ -181,7 +181,7 @@ onMounted(() => { load(); finance.fetchMetrics(); });
 .page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .commercial__stats--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.commercial__search { min-width: min(320px, 100%); }
+.commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 180px; }
 .commercial-cell { display: grid; gap: 0.1rem; }
 .commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }

@@ -93,13 +93,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/auth/profile': RouteRecordInfo<
-      '/auth/profile',
-      '/auth/profile',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/auth/reset-password': RouteRecordInfo<
       '/auth/reset-password',
       '/auth/reset-password',
@@ -275,6 +268,13 @@ declare module 'vue-router/auto-routes' {
       { release: ParamValue<false> },
       | never
     >,
+    '/profile': RouteRecordInfo<
+      '/profile',
+      '/profile',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/reports': RouteRecordInfo<
       '/reports',
       '/reports',
@@ -381,12 +381,6 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/auth/login.vue': {
       routes:
         | '/auth/login'
-      views:
-        | never
-    }
-    'resources/js/app/pages/auth/profile.vue': {
-      routes:
-        | '/auth/profile'
       views:
         | never
     }
@@ -537,6 +531,12 @@ declare module 'vue-router/auto-routes' {
     'resources/js/app/pages/operations/releases/[release].vue': {
       routes:
         | '/operations/releases/[release]'
+      views:
+        | never
+    }
+    'resources/js/app/pages/profile.vue': {
+      routes:
+        | '/profile'
       views:
         | never
     }

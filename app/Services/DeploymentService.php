@@ -105,6 +105,18 @@ class DeploymentService implements DeploymentServiceInterface
         });
     }
 
+    public function updateInfrastructureAsset(InfrastructureAsset $asset, array $data): InfrastructureAsset
+    {
+        return DB::transaction(function () use ($asset, $data) {
+            $asset->fill($data);
+            $asset->save();
+
+            $this->log($asset->deployment, 'infrastructure_updated', 'Updated infrastructure asset', ['asset_id' => $asset->id]);
+
+            return $asset->refresh()->load(['deployment.client']);
+        });
+    }
+
     public function createMonitoringCheck(Deployment $deployment, array $data): MonitoringCheck
     {
         return DB::transaction(function () use ($deployment, $data) {
@@ -113,6 +125,18 @@ class DeploymentService implements DeploymentServiceInterface
             $this->log($deployment, 'monitoring_created', 'Created monitoring check', ['check_id' => $check->id]);
 
             return $check->load(['deployment.client']);
+        });
+    }
+
+    public function updateMonitoringCheck(MonitoringCheck $check, array $data): MonitoringCheck
+    {
+        return DB::transaction(function () use ($check, $data) {
+            $check->fill($data);
+            $check->save();
+
+            $this->log($check->deployment, 'monitoring_updated', 'Updated monitoring check', ['check_id' => $check->id]);
+
+            return $check->refresh()->load(['deployment.client']);
         });
     }
 

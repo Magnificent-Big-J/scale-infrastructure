@@ -30,7 +30,7 @@
                         <td><span class="text-sm">{{ formatAmount(row.monthly_value) }}</span></td>
                         <td><span class="text-sm">{{ row.renewal_date || '-' }}</span></td>
                         <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
-                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" /></td>
+                        <td><v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" /></td>
                     </template>
                 </AppDataTable>
             </AppSectionCard>
@@ -189,7 +189,7 @@ onMounted(load);
 .commercial-page { padding: 2.25rem 2rem 4rem; }
 .page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
-.commercial__search { min-width: min(320px, 100%); }
+.commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 190px; }
 .commercial-cell { display: grid; gap: 0.1rem; }
 .commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }

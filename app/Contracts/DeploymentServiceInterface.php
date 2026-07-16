@@ -23,5 +23,9 @@ interface DeploymentServiceInterface
 
     public function createInfrastructureAsset(Deployment $deployment, array $data): InfrastructureAsset;
 
+    public function updateInfrastructureAsset(InfrastructureAsset $asset, array $data): InfrastructureAsset;
+
     public function createMonitoringCheck(Deployment $deployment, array $data): MonitoringCheck;
+
+    public function updateMonitoringCheck(MonitoringCheck $check, array $data): MonitoringCheck;
 }

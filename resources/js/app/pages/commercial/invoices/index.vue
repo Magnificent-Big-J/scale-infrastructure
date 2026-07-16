@@ -32,7 +32,7 @@
                         <td><span class="text-sm">{{ row.due_on || '-' }}</span></td>
                         <td class="text-right">
                             <v-btn icon="mdi-cash-plus" size="small" variant="text" title="Record payment" @click.stop="openPayment(row)" />
-                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" @click.stop="openEdit(row)" />
+                            <v-btn icon="mdi-pencil-outline" size="small" variant="text" title="Edit" @click.stop="openEdit(row)" />
                         </td>
                     </template>
                 </AppDataTable>
@@ -272,7 +272,7 @@ onMounted(() => { load(); finance.fetchMetrics(); });
 .commercial-page { padding: 2.25rem 2rem 4rem; }
 .page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
-.commercial__search { min-width: min(320px, 100%); }
+.commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 190px; }
 .commercial-cell { display: grid; gap: 0.1rem; }
 .commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }

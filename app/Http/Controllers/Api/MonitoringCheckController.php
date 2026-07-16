@@ -6,8 +6,10 @@ use App\Contracts\DeploymentServiceInterface;
 use App\Enums\MonitoringCheckStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreMonitoringCheckRequest;
+use App\Http\Requests\Operations\UpdateMonitoringCheckRequest;
 use App\Http\Resources\MonitoringCheckResource;
 use App\Models\Deployment;
+use App\Models\MonitoringCheck;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -50,5 +52,12 @@ class MonitoringCheckController extends Controller
         $check = $this->service->createMonitoringCheck($deployment, $request->validated());
 
         return response()->json(new MonitoringCheckResource($check), 201);
+    }
+
+    public function update(UpdateMonitoringCheckRequest $request, MonitoringCheck $monitoringCheck): JsonResponse
+    {
+        $check = $this->service->updateMonitoringCheck($monitoringCheck, $request->validated());
+
+        return response()->json(new MonitoringCheckResource($check));
     }
 }
