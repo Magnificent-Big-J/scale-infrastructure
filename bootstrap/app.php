@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureTwoFactorEnrolled;
 use App\Http\Middleware\ResolveIntakeToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -31,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'intake.token' => ResolveIntakeToken::class,
+            'two_factor.required' => EnsureTwoFactorEnrolled::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
