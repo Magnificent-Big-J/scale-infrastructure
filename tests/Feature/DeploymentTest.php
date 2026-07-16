@@ -88,4 +88,76 @@ class DeploymentTest extends TestCase
             ->assertCreated()
             ->assertJsonFragment(['name' => 'Object storage health']);
     }
+
+    public function test_admin_can_update_infrastructure_asset_and_monitoring_check(): void
+    {
+        $this->seed();
+
+        $deployment = Deployment::where('name', 'ScaleLens Production')->firstOrFail();
+
+        $asset = $this->actingAs($this->admin(), 'sanctum')
+            ->postJson("/api/v1/deployments/{$deployment->id}/infrastructure-assets", [
+                'name' => 'Object storage bucket',
+                'type' => 'storage',
+                'provider' => 'AWS',
+                'monthly_cost' => 180,
+            ])
+            ->assertCreated()
+            ->json();
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->patchJson("/api/v1/infrastructure-assets/{$asset['id']}", [
+                'name' => 'Object storage bucket (resized)',
+                'type' => 'storage',
+                'provider' => 'AWS',
+                'monthly_cost' => 240,
+            ])
+            ->assertOk()
+            ->assertJsonFragment(['name' => 'Object storage bucket (resized)']);
+
+        $this->assertDatabaseHas('infrastructure_assets', ['id' => $asset['id'], 'monthly_cost' => 240]);
+
+        $check = $this->actingAs($this->admin(), 'sanctum')
+            ->postJson("/api/v1/deployments/{$deployment->id}/monitoring-checks", [
+                'name' => 'Object storage health',
+                'check_type' => 'storage',
+                'target' => 'aurecon-media',
+                'status' => 'passing',
+            ])
+            ->assertCreated()
+            ->json();
+
+        $this->actingAs($this->admin(), 'sanctum')
+            ->patchJson("/api/v1/monitoring-checks/{$check['id']}", [
+                'name' => 'Object storage health',
+                'check_type' => 'storage',
+                'target' => 'aurecon-media',
+                'status' => 'warning',
+            ])
+            ->assertOk()
+            ->assertJsonFragment(['status' => 'warning']);
+
+        $this->assertDatabaseHas('monitoring_checks', ['id' => $check['id'], 'status' => 'warning']);
+    }
+
+    public function test_user_without_infrastructure_update_permission_cannot_edit_asset(): void
+    {
+        $this->seed();
+
+        $deployment = Deployment::where('name', 'ScaleLens Production')->firstOrFail();
+
+        $asset = $this->actingAs($this->admin(), 'sanctum')
+            ->postJson("/api/v1/deployments/{$deployment->id}/infrastructure-assets", [
+                'name' => 'Object storage bucket',
+                'type' => 'storage',
+            ])
+            ->assertCreated()
+            ->json();
+
+        $viewer = User::where('email', 'sales@codescaletech.test')->firstOrFail();
+
+        $this->actingAs($viewer, 'sanctum')
+            ->patchJson("/api/v1/infrastructure-assets/{$asset['id']}", ['name' => 'Renamed', 'type' => 'storage'])
+            ->assertForbidden();
+    }
 }

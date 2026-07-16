@@ -6,8 +6,10 @@ use App\Contracts\DeploymentServiceInterface;
 use App\Enums\InfrastructureAssetType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreInfrastructureAssetRequest;
+use App\Http\Requests\Operations\UpdateInfrastructureAssetRequest;
 use App\Http\Resources\InfrastructureAssetResource;
 use App\Models\Deployment;
+use App\Models\InfrastructureAsset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -50,5 +52,12 @@ class InfrastructureAssetController extends Controller
         $asset = $this->service->createInfrastructureAsset($deployment, $request->validated());
 
         return response()->json(new InfrastructureAssetResource($asset), 201);
+    }
+
+    public function update(UpdateInfrastructureAssetRequest $request, InfrastructureAsset $infrastructureAsset): JsonResponse
+    {
+        $asset = $this->service->updateInfrastructureAsset($infrastructureAsset, $request->validated());
+
+        return response()->json(new InfrastructureAssetResource($asset));
     }
 }

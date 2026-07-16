@@ -86,7 +86,9 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
     });
 
     Route::middleware('can:infrastructure.view')->get('infrastructure-assets', [InfrastructureAssetController::class, 'index']);
+    Route::middleware('can:infrastructure.update')->match(['put', 'patch'], 'infrastructure-assets/{infrastructureAsset}', [InfrastructureAssetController::class, 'update']);
     Route::middleware('can:monitoring.view')->get('monitoring-checks', [MonitoringCheckController::class, 'index']);
+    Route::middleware('can:monitoring.update')->match(['put', 'patch'], 'monitoring-checks/{monitoringCheck}', [MonitoringCheckController::class, 'update']);
 
     Route::middleware('can:support_agreements.view')->group(function () {
         Route::get('support-agreements', [SupportAgreementController::class, 'index']);
