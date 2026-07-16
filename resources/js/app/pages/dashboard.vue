@@ -42,7 +42,7 @@
         </div>
 
         <div class="dashboard__body">
-            <AppSectionCard title="Build sequence" subtitle="The registry will be built in complete operational slices.">
+            <AppSectionCard title="Operational areas" subtitle="Jump into any part of the platform.">
                 <div class="module-grid">
                     <RouterLink
                         v-for="mod in modules"
@@ -54,7 +54,6 @@
                             <span class="module-card__icon">
                                 <v-icon size="20" :color="mod.color">{{ mod.icon }}</v-icon>
                             </span>
-                            <span class="module-card__status">{{ mod.status }}</span>
                         </div>
                         <h3 class="module-card__title">{{ mod.title }}</h3>
                         <p class="module-card__text">{{ mod.text }}</p>
@@ -86,9 +85,9 @@
                     <AppActivityFeed :per-page="8" />
                 </AppSectionCard>
 
-                <AppSectionCard v-else title="Foundation status">
+                <AppSectionCard v-else title="Getting started">
                     <ul class="stack-list">
-                        <li v-for="item in foundationItems" :key="item.name" class="stack-list__item">
+                        <li v-for="item in gettingStartedTips" :key="item.name" class="stack-list__item">
                             <span class="stack-list__name">{{ item.name }}</span>
                             <span class="stack-list__ver">{{ item.status }}</span>
                         </li>
@@ -172,7 +171,6 @@ const modules = [
         text: 'Account master data, contacts, client status, and ownership.',
         icon: 'mdi-domain',
         color: 'var(--rw-600)',
-        status: 'Module 01',
     },
     {
         to: '/operations/deployments',
@@ -180,7 +178,6 @@ const modules = [
         text: 'Product environments, hosting assets, domains, versions, and status.',
         icon: 'mdi-server-network',
         color: '#0284c7',
-        status: 'Module 02',
     },
     {
         to: '/support/tickets',
@@ -188,7 +185,6 @@ const modules = [
         text: 'Retainers, support work, severity, incidents, and SLA visibility.',
         icon: 'mdi-ticket-confirmation-outline',
         color: 'var(--rw-amber)',
-        status: 'Module 03',
     },
     {
         to: '/commercial/billing',
@@ -196,17 +192,14 @@ const modules = [
         text: 'Contracts, billing records, invoices, payments, and revenue visibility.',
         icon: 'mdi-cash-multiple',
         color: '#7c3aed',
-        status: 'Module 04',
     },
 ];
 
-const foundationItems = [
-    { name: 'Laravel', status: '13' },
-    { name: 'Vue and Vuetify', status: 'Ready' },
-    { name: 'Sanctum auth', status: 'Ready' },
-    { name: 'Permission model', status: 'Seeded' },
-    { name: 'Activity log', status: 'Ready' },
-    { name: 'Horizon', status: 'Ready' },
+const gettingStartedTips = [
+    { name: 'Jump anywhere', status: '⌘K' },
+    { name: 'Update your details', status: 'Profile' },
+    { name: 'Secure your account', status: '2FA in Profile' },
+    { name: 'Notifications', status: 'Bell, top right' },
 ];
 </script>
 
@@ -276,13 +269,6 @@ const foundationItems = [
     border-radius: 10px;
     background: #fff;
     border: 1px solid var(--rw-border);
-}
-
-.module-card__status {
-    color: var(--rw-muted);
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
 .module-card__title {

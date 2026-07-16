@@ -4,7 +4,7 @@
             <AppPageHeader
                 eyebrow="Administration"
                 title="Users"
-                subtitle="Manage starter accounts, assign roles, and shape access before application-specific modules are added."
+                subtitle="Manage staff accounts and assign the roles that control what they can see and do."
             >
                 <template #metrics>
                     <AppStatusBadge status="active" :label="`${store.meta.total} seeded users`" />
@@ -20,12 +20,6 @@
                     </v-btn>
                 </template>
             </AppPageHeader>
-
-            <AppBanner
-                title="Starter account baseline"
-                message="This page now follows the component-catalog style too: stat cards, sectional surfaces, shared form controls, and reusable table patterns instead of one-off admin markup."
-                type="info"
-            />
 
             <div class="admin-users__stats">
                 <AppStatCard
@@ -51,7 +45,7 @@
                 />
             </div>
 
-            <AppSectionCard title="User directory" subtitle="Filter starter accounts and update role assignments from the reusable admin table surface.">
+            <AppSectionCard title="User directory" subtitle="Search, filter, and update role assignments for every staff account.">
                 <AppFilterBar>
                     <AppTextField
                         v-model="filters.search"
@@ -229,7 +223,6 @@ import { onMounted, reactive } from 'vue';
 
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
-import AppBanner from '../../components/AppBanner.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppSkeleton from '../../components/AppSkeleton.vue';
