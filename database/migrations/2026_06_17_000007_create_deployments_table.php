@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\DeploymentEnvironment;
 use App\Enums\DeploymentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
             $table->foreignUuid('package_id')->nullable()->constrained('packages')->nullOnDelete();
             $table->string('name');
-            $table->string('environment')->default(DeploymentEnvironment::Production->value);
+            $table->string('environment')->default('production');
             $table->string('domain')->nullable();
             $table->string('app_url')->nullable();
             $table->string('current_version')->nullable();

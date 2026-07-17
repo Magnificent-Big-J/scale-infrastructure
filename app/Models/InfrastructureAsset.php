@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\InfrastructureAssetType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,7 +29,6 @@ class InfrastructureAsset extends Model
     protected function casts(): array
     {
         return [
-            'type' => InfrastructureAssetType::class,
             'monthly_cost' => 'decimal:2',
             'metadata' => 'array',
         ];

@@ -30,7 +30,7 @@ class ClientTest extends TestCase
         $client = Client::where('code', 'AURECON-PMO')->firstOrFail();
 
         $this->assertSame(3, Client::count());
-        $this->assertSame('enterprise', $client->tier->value);
+        $this->assertSame('enterprise', $client->tier);
         $this->assertSame('Thandi Mbeki', $client->primaryContact()->first()?->name);
         $this->assertSame(1, $client->contacts()->where('is_primary', true)->count());
     }

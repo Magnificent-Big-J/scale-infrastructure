@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Operations;
 
-use App\Enums\InfrastructureAssetType;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateInfrastructureAssetRequest extends FormRequest
 {
@@ -18,7 +17,7 @@ class UpdateInfrastructureAssetRequest extends FormRequest
         return [
             'deployment_id' => ['sometimes', 'uuid', 'exists:deployments,id'],
             'name' => ['required', 'string', 'max:255'],
-            'type' => ['required', Rule::in(InfrastructureAssetType::values())],
+            'type' => ['required', 'string', LookupType::InfrastructureAssetType->existsRule()],
             'provider' => ['nullable', 'string', 'max:255'],
             'region' => ['nullable', 'string', 'max:255'],
             'size' => ['nullable', 'string', 'max:255'],

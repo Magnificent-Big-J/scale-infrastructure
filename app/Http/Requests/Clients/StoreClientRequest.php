@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Clients;
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,7 +22,7 @@ class StoreClientRequest extends FormRequest
             'code' => ['required', 'string', 'max:64', 'unique:clients,code'],
             'name' => ['required', 'string', 'max:255'],
             'legal_name' => ['nullable', 'string', 'max:255'],
-            'tier' => ['required', Rule::in(ClientTier::values())],
+            'tier' => ['required', 'string', LookupType::ClientTier->existsRule()],
             'status' => ['required', Rule::in(ClientStatus::values())],
             'health_score' => ['required', 'integer', 'min:0', 'max:100'],
             'notes' => ['nullable', 'string', 'max:3000'],

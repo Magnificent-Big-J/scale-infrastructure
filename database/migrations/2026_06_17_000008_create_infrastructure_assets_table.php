@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\InfrastructureAssetType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('deployment_id')->constrained('deployments')->cascadeOnDelete();
             $table->string('name');
-            $table->string('type')->default(InfrastructureAssetType::AppServer->value);
+            $table->string('type')->default('app_server');
             $table->string('provider')->nullable();
             $table->string('region')->nullable();
             $table->string('size')->nullable();

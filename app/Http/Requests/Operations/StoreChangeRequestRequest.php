@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Operations;
 
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,7 +22,7 @@ class StoreChangeRequestRequest extends FormRequest
             'reference' => ['required', 'string', 'max:64', 'unique:change_requests,reference'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:5000'],
-            'risk' => ['required', Rule::in(ChangeRisk::values())],
+            'risk' => ['required', 'string', LookupType::ChangeRisk->existsRule()],
             'status' => ['nullable', Rule::in(ChangeRequestStatus::values())],
             'scheduled_for' => ['nullable', 'date'],
             'notes' => ['nullable', 'string', 'max:3000'],

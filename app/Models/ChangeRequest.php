@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -33,7 +32,6 @@ class ChangeRequest extends Model
     protected function casts(): array
     {
         return [
-            'risk' => ChangeRisk::class,
             'status' => ChangeRequestStatus::class,
             'approved_at' => 'datetime',
             'scheduled_for' => 'date',

@@ -3,7 +3,8 @@
 namespace App\Http\Resources;
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
+use App\Enums\LookupType;
+use App\Models\LookupOption;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,7 +13,6 @@ class ClientResource extends JsonResource
     public function toArray(Request $request): array
     {
         $status = $this->status instanceof ClientStatus ? $this->status : null;
-        $tier = $this->tier instanceof ClientTier ? $this->tier : null;
 
         return [
             'id' => $this->id,
@@ -24,9 +24,9 @@ class ClientResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'legal_name' => $this->legal_name,
-            'tier' => $tier?->value,
-            'tier_label' => $tier?->label(),
-            'tier_color' => $tier?->color(),
+            'tier' => $this->tier,
+            'tier_label' => $this->tier ? (LookupOption::labelMapFor(LookupType::ClientTier)[$this->tier] ?? $this->tier) : null,
+            'tier_color' => $this->tier ? (LookupOption::metadataMapFor(LookupType::ClientTier, 'color')[$this->tier] ?? null) : null,
             'status' => $status?->value,
             'status_label' => $status?->label(),
             'status_color' => $status?->color(),

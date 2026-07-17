@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\CommercialOperationsServiceInterface;
+use App\Contracts\LookupOptionServiceInterface;
 use App\Enums\BillingCadence;
-use App\Enums\BillingRecordType;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Commercial\StoreBillingRecordRequest;
 use App\Http\Requests\Commercial\UpdateBillingRecordRequest;
@@ -12,12 +13,16 @@ use App\Http\Resources\BillingRecordResource;
 use App\Models\BillingRecord;
 use App\Models\Client;
 use App\Models\Contract;
+use App\Models\LookupOption;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BillingRecordController extends Controller
 {
-    public function __construct(private readonly CommercialOperationsServiceInterface $service) {}
+    public function __construct(
+        private readonly CommercialOperationsServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
+    ) {}
 
     public function index(Request $request): JsonResponse
     {
@@ -54,7 +59,9 @@ class BillingRecordController extends Controller
     private function options(): array
     {
         return [
-            'types' => BillingRecordType::options(),
+            'types' => $this->lookups->optionsFor(LookupType::BillingRecordType)
+                ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                ->all(),
             'cadences' => BillingCadence::options(),
             'clients' => Client::query()->orderBy('name')->get(['id', 'name'])->map(fn (Client $client) => ['value' => $client->id, 'label' => $client->name])->all(),
             'contracts' => Contract::query()->orderBy('name')->get(['id', 'name'])->map(fn (Contract $contract) => ['value' => $contract->id, 'label' => $contract->name])->all(),

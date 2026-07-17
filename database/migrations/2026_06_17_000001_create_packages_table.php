@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('billing_interval')->default(BillingInterval::Monthly->value);
+            $table->string('billing_interval')->default('monthly');
             // Indicative pricing is a range; max is null for open-ended "from" tiers.
             $table->decimal('price_min', 12, 2)->nullable();
             $table->decimal('price_max', 12, 2)->nullable();

@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->string('legal_name')->nullable();
-            $table->string('tier')->default(ClientTier::Starter->value);
+            $table->string('tier')->default('starter');
             $table->string('status')->default(ClientStatus::Prospect->value);
             $table->unsignedTinyInteger('health_score')->default(75);
             $table->text('notes')->nullable();

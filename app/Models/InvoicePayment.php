@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\PaymentMethod;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +24,6 @@ class InvoicePayment extends Model
     {
         return [
             'amount' => 'decimal:2',
-            'method' => PaymentMethod::class,
             'paid_on' => 'date',
         ];
     }

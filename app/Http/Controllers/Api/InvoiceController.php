@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\CommercialOperationsServiceInterface;
+use App\Contracts\LookupOptionServiceInterface;
 use App\Enums\InvoiceStatus;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Commercial\StoreInvoiceRequest;
 use App\Http\Requests\Commercial\UpdateInvoiceRequest;
@@ -11,12 +13,16 @@ use App\Http\Resources\InvoiceResource;
 use App\Models\Client;
 use App\Models\Contract;
 use App\Models\Invoice;
+use App\Models\LookupOption;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    public function __construct(private readonly CommercialOperationsServiceInterface $service) {}
+    public function __construct(
+        private readonly CommercialOperationsServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
+    ) {}
 
     public function index(Request $request): JsonResponse
     {
@@ -58,6 +64,9 @@ class InvoiceController extends Controller
     {
         return [
             'statuses' => InvoiceStatus::options(),
+            'payment_methods' => $this->lookups->optionsFor(LookupType::PaymentMethod)
+                ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                ->all(),
             'clients' => Client::query()->orderBy('name')->get(['id', 'name'])->map(fn (Client $client) => ['value' => $client->id, 'label' => $client->name])->all(),
             'contracts' => Contract::query()->orderBy('name')->get(['id', 'name'])->map(fn (Contract $contract) => ['value' => $contract->id, 'label' => $contract->name])->all(),
         ];

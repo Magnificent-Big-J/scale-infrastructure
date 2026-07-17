@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\BillingCadence;
-use App\Enums\BillingRecordType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +30,6 @@ class BillingRecord extends Model
     protected function casts(): array
     {
         return [
-            'type' => BillingRecordType::class,
             'cadence' => BillingCadence::class,
             'amount' => 'decimal:2',
             'starts_on' => 'date',

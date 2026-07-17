@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\PackageServiceInterface;
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Catalogue\StorePackageRequest;
 use App\Http\Requests\Catalogue\UpdatePackageRequest;
 use App\Http\Resources\PackageResource;
+use App\Models\LookupOption;
 use App\Models\Package;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +20,8 @@ use Illuminate\Http\Response;
 class PackageController extends Controller
 {
     public function __construct(
-        private readonly PackageServiceInterface $service
+        private readonly PackageServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
     ) {}
 
     public function index(Request $request, ?Product $product = null): JsonResponse
@@ -43,7 +46,9 @@ class PackageController extends Controller
             ],
             'options' => [
                 'statuses' => CatalogueStatus::options(),
-                'billing_intervals' => BillingInterval::options(),
+                'billing_intervals' => $this->lookups->optionsFor(LookupType::BillingInterval)
+                    ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                    ->all(),
                 'default_currency' => config('catalogue.default_currency'),
                 'products' => Product::query()
                     ->orderBy('name')

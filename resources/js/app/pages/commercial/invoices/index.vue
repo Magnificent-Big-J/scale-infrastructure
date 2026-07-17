@@ -128,14 +128,6 @@ const goToDetail = (row) => router.push(`/commercial/invoices/${row.id}`);
 const store = useInvoicesStore();
 const finance = useFinanceStore();
 const filters = reactive({ search: '', status: '', page: 1 });
-const paymentMethods = [
-    { value: 'eft', label: 'EFT' },
-    { value: 'card', label: 'Card' },
-    { value: 'payfast', label: 'PayFast' },
-    { value: 'debit_order', label: 'Debit order' },
-    { value: 'cash', label: 'Cash' },
-    { value: 'other', label: 'Other' },
-];
 const columns = [
     { key: 'invoice', label: 'Invoice' },
     { key: 'status', label: 'Status' },
@@ -151,7 +143,7 @@ const statusItems = computed(() => store.options.statuses.map((item) => ({ title
 const statusFilterItems = computed(() => [{ title: 'All statuses', value: '' }, ...statusItems.value]);
 const clientItems = computed(() => toSelect(store.options.clients, 'Select a client'));
 const contractItems = computed(() => toSelect(store.options.contracts, 'No contract'));
-const methodItems = computed(() => paymentMethods.map((item) => ({ title: item.label, value: item.value })));
+const methodItems = computed(() => (store.options.payment_methods || []).map((item) => ({ title: item.label, value: item.value })));
 
 const formatAmount = (value) => `ZAR ${Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 

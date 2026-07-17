@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Commercial;
 
-use App\Enums\PaymentMethod;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StorePaymentRequest extends FormRequest
 {
@@ -17,7 +16,7 @@ class StorePaymentRequest extends FormRequest
     {
         return [
             'amount' => ['required', 'numeric', 'min:0.01'],
-            'method' => ['required', Rule::in(PaymentMethod::values())],
+            'method' => ['required', 'string', LookupType::PaymentMethod->existsRule()],
             'reference' => ['nullable', 'string', 'max:128'],
             'paid_on' => ['required', 'date'],
             'notes' => ['nullable', 'string', 'max:3000'],

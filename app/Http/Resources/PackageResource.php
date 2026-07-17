@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
+use App\Enums\LookupType;
+use App\Models\LookupOption;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,7 +13,6 @@ class PackageResource extends JsonResource
     public function toArray(Request $request): array
     {
         $status = $this->status instanceof CatalogueStatus ? $this->status : null;
-        $interval = $this->billing_interval instanceof BillingInterval ? $this->billing_interval : null;
 
         return [
             'id' => $this->id,
@@ -21,8 +21,8 @@ class PackageResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'description' => $this->description,
-            'billing_interval' => $interval?->value,
-            'billing_interval_label' => $interval?->label(),
+            'billing_interval' => $this->billing_interval,
+            'billing_interval_label' => $this->billing_interval ? (LookupOption::labelMapFor(LookupType::BillingInterval)[$this->billing_interval] ?? $this->billing_interval) : null,
             'price_min' => $this->price_min,
             'price_max' => $this->price_max,
             'currency' => $this->currency,

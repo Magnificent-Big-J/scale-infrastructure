@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\DeploymentServiceInterface;
-use App\Enums\InfrastructureAssetType;
+use App\Contracts\LookupOptionServiceInterface;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreInfrastructureAssetRequest;
 use App\Http\Requests\Operations\UpdateInfrastructureAssetRequest;
 use App\Http\Resources\InfrastructureAssetResource;
 use App\Models\Deployment;
 use App\Models\InfrastructureAsset;
+use App\Models\LookupOption;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InfrastructureAssetController extends Controller
 {
     public function __construct(
-        private readonly DeploymentServiceInterface $service
+        private readonly DeploymentServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -36,7 +39,9 @@ class InfrastructureAssetController extends Controller
                 'total' => $assets->total(),
             ],
             'options' => [
-                'types' => InfrastructureAssetType::options(),
+                'types' => $this->lookups->optionsFor(LookupType::InfrastructureAssetType)
+                    ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                    ->all(),
                 'default_currency' => config('catalogue.default_currency'),
                 'deployments' => Deployment::query()
                     ->orderBy('name')

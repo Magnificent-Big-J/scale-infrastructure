@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Operations;
 
-use App\Enums\DeploymentEnvironment;
 use App\Enums\DeploymentStatus;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -21,7 +21,7 @@ class StoreDeploymentRequest extends FormRequest
             'product_id' => ['required', 'uuid', 'exists:products,id'],
             'package_id' => ['nullable', 'uuid', 'exists:packages,id'],
             'name' => ['required', 'string', 'max:255'],
-            'environment' => ['required', Rule::in(DeploymentEnvironment::values())],
+            'environment' => ['required', 'string', LookupType::DeploymentEnvironment->existsRule()],
             'domain' => ['nullable', 'string', 'max:255'],
             'app_url' => ['nullable', 'url', 'max:255'],
             'current_version' => ['nullable', 'string', 'max:64'],
