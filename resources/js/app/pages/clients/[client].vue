@@ -40,7 +40,7 @@
                             <div><dt>Owner</dt><dd>{{ client?.owner_name || '-' }}</dd></div>
                             <div><dt>Health score</dt><dd>{{ client?.health_score ?? '-' }}%</dd></div>
                             <div><dt>Primary contact</dt><dd>{{ client?.primary_contact?.name || '-' }}<small v-if="client?.primary_contact?.email"> · {{ client.primary_contact.email }}</small></dd></div>
-                            <div class="detail-grid__wide"><dt>Notes</dt><dd>{{ client?.notes || '-' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Notes</dt><dd><AppRichTextDisplay :content="client?.notes" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -136,6 +136,7 @@
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import { useSessionStore } from '../../stores/session';

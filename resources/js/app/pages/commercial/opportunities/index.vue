@@ -68,7 +68,7 @@
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.probability" label="Probability %" type="number" :error-messages="dialog.errors.probability" /></v-col>
                         <v-col cols="12" sm="4"><AppSelect v-model="dialog.form.source" :items="sourceItems" label="Source" :error-messages="dialog.errors.source" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.expected_close_date" label="Expected close" type="date" :error-messages="dialog.errors.expected_close_date" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -95,7 +95,7 @@ import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';
 import { useOpportunitiesStore } from '../../../stores/opportunities';

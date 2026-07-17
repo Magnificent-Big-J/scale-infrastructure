@@ -184,7 +184,7 @@
                             />
                         </v-col>
                         <v-col cols="12">
-                            <AppTextField v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" />
+                            <AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" />
                         </v-col>
                     </v-row>
 
@@ -259,6 +259,7 @@ import { useRouter } from 'vue-router';
 
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';

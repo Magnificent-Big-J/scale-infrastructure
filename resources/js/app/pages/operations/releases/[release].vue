@@ -33,8 +33,8 @@
                             <div><dt>Approved</dt><dd>{{ formatDate(release?.approved_at) }}</dd></div>
                             <div><dt>Deployed</dt><dd>{{ formatDate(release?.deployed_at) }}</dd></div>
                             <div><dt>Rolled back</dt><dd>{{ formatDate(release?.rolled_back_at) }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Notes</dt><dd>{{ release?.notes || '-' }}</dd></div>
-                            <div v-if="release?.rollback_notes" class="detail-grid__wide"><dt>Rollback notes</dt><dd>{{ release.rollback_notes }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Notes</dt><dd><AppRichTextDisplay :content="release?.notes" /></dd></div>
+                            <div v-if="release?.rollback_notes" class="detail-grid__wide"><dt>Rollback notes</dt><dd><AppRichTextDisplay :content="release.rollback_notes" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -61,6 +61,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import { useSessionStore } from '../../../stores/session';

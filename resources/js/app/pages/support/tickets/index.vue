@@ -69,7 +69,7 @@
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.hours_logged" label="Hours logged" type="number" :error-messages="dialog.errors.hours_logged" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.opened_at" label="Opened at" type="datetime-local" :error-messages="dialog.errors.opened_at" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.resolved_at" label="Resolved at" type="datetime-local" :error-messages="dialog.errors.resolved_at" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.summary" label="Summary" :error-messages="dialog.errors.summary" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.summary" label="Summary" :error-messages="dialog.errors.summary" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -92,7 +92,7 @@ import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';
 import { useSupportTicketsStore } from '../../../stores/support-tickets';

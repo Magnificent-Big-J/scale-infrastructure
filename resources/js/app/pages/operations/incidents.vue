@@ -53,8 +53,8 @@
                         <v-col cols="12" sm="4"><AppSelect v-model="dialog.form.severity" :items="severityItems" label="Severity" :error-messages="dialog.errors.severity" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.started_at" label="Started at" type="datetime-local" :error-messages="dialog.errors.started_at" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.resolved_at" label="Resolved at" type="datetime-local" :error-messages="dialog.errors.resolved_at" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.root_cause" label="Root cause" :error-messages="dialog.errors.root_cause" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.resolution_summary" label="Resolution summary" :error-messages="dialog.errors.resolution_summary" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.root_cause" label="Root cause" :error-messages="dialog.errors.root_cause" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.resolution_summary" label="Resolution summary" :error-messages="dialog.errors.resolution_summary" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -75,7 +75,7 @@ import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../composables/useToast';
 import { useIncidentsStore } from '../../stores/incidents';

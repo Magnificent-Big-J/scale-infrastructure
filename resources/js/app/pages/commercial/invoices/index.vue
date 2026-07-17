@@ -57,7 +57,7 @@
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.issued_on" label="Issued on" type="date" :error-messages="dialog.errors.issued_on" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.due_on" label="Due on" type="date" :error-messages="dialog.errors.due_on" /></v-col>
                         <v-col cols="12"><AppTextField v-model="dialog.form.external_reference" label="External reference" :error-messages="dialog.errors.external_reference" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -82,7 +82,7 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="payment.form.method" :items="methodItems" label="Method" :error-messages="payment.errors.method" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="payment.form.paid_on" label="Paid on" type="date" :error-messages="payment.errors.paid_on" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="payment.form.reference" label="Reference" :error-messages="payment.errors.reference" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="payment.form.notes" label="Notes" :error-messages="payment.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="payment.form.notes" label="Notes" :error-messages="payment.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
 
@@ -116,7 +116,7 @@ import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast } from '../../../composables/useToast';
 import { useFinanceStore } from '../../../stores/finance';

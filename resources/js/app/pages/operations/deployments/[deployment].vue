@@ -35,7 +35,7 @@
                             <div><dt>App URL</dt><dd>{{ deployment?.app_url || '-' }}</dd></div>
                             <div><dt>Go-live date</dt><dd>{{ deployment?.go_live_date || '-' }}</dd></div>
                             <div><dt>Status</dt><dd>{{ deployment?.status_label || '-' }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Notes</dt><dd>{{ deployment?.notes || '-' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Notes</dt><dd><AppRichTextDisplay :content="deployment?.notes" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -121,6 +121,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';

@@ -35,7 +35,7 @@
                             <div><dt>Ends</dt><dd>{{ contract?.ends_on || '-' }}</dd></div>
                             <div><dt>Renewal</dt><dd>{{ contract?.renewal_date || '-' }}</dd></div>
                             <div><dt>Status</dt><dd>{{ contract?.status_label || '-' }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Notes</dt><dd>{{ contract?.notes || '-' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Notes</dt><dd><AppRichTextDisplay :content="contract?.notes" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -83,6 +83,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import { useSessionStore } from '../../../stores/session';

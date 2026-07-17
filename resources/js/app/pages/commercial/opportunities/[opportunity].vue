@@ -37,7 +37,7 @@
                             <div><dt>Lost</dt><dd>{{ formatDate(deal?.lost_at) }}</dd></div>
                             <div v-if="deal?.contract_id"><dt>Contract</dt><dd><RouterLink class="detail-link" :to="`/commercial/contracts/${deal.contract_id}`">{{ deal.contract_name || 'View contract' }}</RouterLink></dd></div>
                             <div v-if="deal?.lost_reason"><dt>Lost reason</dt><dd>{{ deal.lost_reason }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Description</dt><dd>{{ deal?.description || '—' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Description</dt><dd><AppRichTextDisplay :content="deal?.description" empty-text="—" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -65,6 +65,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';

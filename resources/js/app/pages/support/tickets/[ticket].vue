@@ -37,7 +37,7 @@
                             <div v-if="ticket"><dt>SLA</dt><dd><AppStatusBadge :status="ticket.sla_status_color" :label="ticket.sla_status_label" /></dd></div>
                             <div><dt>Opened</dt><dd>{{ formatDate(ticket?.opened_at) }}</dd></div>
                             <div><dt>Resolved</dt><dd>{{ formatDate(ticket?.resolved_at) }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Summary</dt><dd>{{ ticket?.summary || '-' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Summary</dt><dd><AppRichTextDisplay :content="ticket?.summary" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -68,6 +68,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import AppTicketComments from '../../../components/AppTicketComments.vue';

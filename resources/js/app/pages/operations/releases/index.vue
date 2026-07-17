@@ -41,7 +41,7 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.deployment_id" :items="deploymentItems" label="Deployment" :error-messages="dialog.errors.deployment_id" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.version" label="Version" placeholder="2026.07.0" :error-messages="dialog.errors.version" /></v-col>
                         <v-col cols="12"><AppSelect v-model="dialog.form.change_request_id" :items="changeRequestItems" label="Change request" :error-messages="dialog.errors.change_request_id" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -55,7 +55,7 @@
         <AppModal v-model="rollback.open" title="Roll back release" subtitle="Rollback is restricted and recorded against the release." persistent>
             <div class="dialog-form">
                 <FormStatusAlert :message="rollback.message" :type="rollback.messageType" />
-                <AppTextarea v-model="rollback.notes" label="Rollback notes" />
+                <AppRichTextEditor v-model="rollback.notes" label="Rollback notes" />
             </div>
             <template #actions>
                 <v-spacer />
@@ -76,7 +76,7 @@ import { useRouter } from 'vue-router';
 import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';
 import { useReleasesStore } from '../../../stores/releases';

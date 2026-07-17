@@ -45,8 +45,8 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.client_id" :items="clientItems" label="Client" :error-messages="dialog.errors.client_id" /></v-col>
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.deployment_id" :items="deploymentItems" label="Deployment" :error-messages="dialog.errors.deployment_id" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.scheduled_for" label="Scheduled for" type="date" :error-messages="dialog.errors.scheduled_for" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -68,7 +68,7 @@ import { computed, onMounted, reactive } from 'vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../composables/useToast';
 import { useChangeRequestsStore } from '../../stores/change-requests';

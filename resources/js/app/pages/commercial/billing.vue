@@ -56,7 +56,7 @@
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.starts_on" label="Starts on" type="date" :error-messages="dialog.errors.starts_on" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.ends_on" label="Ends on" type="date" :error-messages="dialog.errors.ends_on" /></v-col>
                         <v-col cols="12"><v-switch v-model="dialog.form.is_active" color="primary" label="Active" hide-details inset /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -79,7 +79,7 @@ import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useBillingRecordsStore } from '../../stores/billing-records';
 import { useFinanceStore } from '../../stores/finance';

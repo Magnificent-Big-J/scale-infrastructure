@@ -136,7 +136,7 @@
                             />
                         </v-col>
                         <v-col cols="12">
-                            <AppTextField
+                            <AppRichTextEditor
                                 v-model="dialog.form.description"
                                 label="Description"
                                 :error-messages="dialog.errors.description"
@@ -176,6 +176,7 @@ import { computed, onMounted, reactive, watch } from 'vue';
 
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';
