@@ -221,6 +221,7 @@
 
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 import AppBanner from '../components/AppBanner.vue';
 import AppPageHeader from '../components/AppPageHeader.vue';
@@ -237,6 +238,7 @@ import { useProfileStore } from '../stores/profile';
 import { useSessionStore } from '../stores/session';
 import { useTwoFactorStore } from '../stores/two-factor';
 
+const route = useRoute();
 const session = useSessionStore();
 const profileStore = useProfileStore();
 const twoFactor = useTwoFactorStore();
@@ -257,7 +259,7 @@ const twoFaPassword = ref('');
 const totpCode = ref('');
 const emailCode = ref('');
 const showDisableConfirm = ref(false);
-const require2fa = ref(new URLSearchParams(window.location.search).get('require2fa') === '1');
+const require2fa = ref(route.query.require2fa === '1');
 
 const syncProfileForm = () => {
     profileForm.name = session.user?.name || '';

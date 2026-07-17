@@ -46,29 +46,23 @@
 </route>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { reactive, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import { api } from '../../utils/api';
 import { PASSWORD_BASE } from '../../stores/auth-shared';
 
+const route = useRoute();
 const router = useRouter();
 const submitting = ref(false);
 const message = ref('');
 const messageType = ref('success');
 
 const form = reactive({
-    email: '',
-    token: '',
+    email: route.query.email || '',
+    token: route.query.token || '',
     password: '',
     password_confirmation: '',
-});
-
-onMounted(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    form.email = params.get('email') || '';
-    form.token = params.get('token') || '';
 });
 
 const submit = async () => {
