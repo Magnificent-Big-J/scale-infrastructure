@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Catalogue;
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -23,7 +23,7 @@ class UpdatePackageRequest extends FormRequest
             'code' => ['sometimes', 'string', 'max:64', Rule::unique('packages', 'code')->ignore($packageId)],
             'name' => ['sometimes', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:2000'],
-            'billing_interval' => ['sometimes', Rule::in(BillingInterval::values())],
+            'billing_interval' => ['sometimes', 'string', LookupType::BillingInterval->existsRule()],
             'price_min' => ['nullable', 'numeric', 'min:0'],
             'price_max' => ['nullable', 'numeric', 'min:0', 'gte:price_min'],
             'currency' => ['sometimes', 'string', 'size:3'],

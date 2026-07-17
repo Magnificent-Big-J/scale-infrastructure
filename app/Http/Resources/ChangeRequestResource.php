@@ -3,7 +3,8 @@
 namespace App\Http\Resources;
 
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
+use App\Enums\LookupType;
+use App\Models\LookupOption;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,7 +13,6 @@ class ChangeRequestResource extends JsonResource
     public function toArray(Request $request): array
     {
         $status = $this->status instanceof ChangeRequestStatus ? $this->status : null;
-        $risk = $this->risk instanceof ChangeRisk ? $this->risk : null;
 
         return [
             'id' => $this->id,
@@ -23,9 +23,9 @@ class ChangeRequestResource extends JsonResource
             'reference' => $this->reference,
             'title' => $this->title,
             'description' => $this->description,
-            'risk' => $risk?->value,
-            'risk_label' => $risk?->label(),
-            'risk_color' => $risk?->color(),
+            'risk' => $this->risk,
+            'risk_label' => $this->risk ? (LookupOption::labelMapFor(LookupType::ChangeRisk)[$this->risk] ?? $this->risk) : null,
+            'risk_color' => $this->risk ? (LookupOption::metadataMapFor(LookupType::ChangeRisk, 'color')[$this->risk] ?? null) : null,
             'status' => $status?->value,
             'status_label' => $status?->label(),
             'status_color' => $status?->color(),

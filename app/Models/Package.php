@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
 use App\Models\Concerns\HasCatalogueFilters;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,7 +32,6 @@ class Package extends Model
     protected function casts(): array
     {
         return [
-            'billing_interval' => BillingInterval::class,
             'status' => CatalogueStatus::class,
             'price_min' => 'decimal:2',
             'price_max' => 'decimal:2',

@@ -93,8 +93,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.reports-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .reports__layout { display: grid; grid-template-columns: minmax(280px, 340px) 1fr; gap: 1.25rem; align-items: start; }
 .reports__list { display: grid; gap: 0.6rem; }
 .report-card { display: flex; gap: 0.75rem; align-items: flex-start; width: 100%; text-align: left; padding: 0.85rem 1rem; border: 1px solid var(--rw-border); border-radius: 14px; background: transparent; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
@@ -110,5 +108,5 @@ onMounted(async () => {
 .reports__table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
 .reports__table th, .reports__table td { text-align: left; padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--rw-border); white-space: nowrap; }
 .reports__table th { color: var(--rw-muted); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; }
-@media (max-width: 960px) { .reports-page { padding: 1.75rem 1rem 3rem; } .reports__layout { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .reports__layout { grid-template-columns: 1fr; } }
 </style>

@@ -5,12 +5,14 @@ namespace App\Services;
 use App\Contracts\ReportServiceInterface;
 use App\Enums\ClientStatus;
 use App\Enums\IncidentStatus;
+use App\Enums\LookupType;
 use App\Enums\MonitoringCheckStatus;
 use App\Enums\ReportType;
 use App\Enums\SupportAgreementStatus;
 use App\Enums\SupportTicketStatus;
 use App\Models\Client;
 use App\Models\Deployment;
+use App\Models\LookupOption;
 use App\Models\ProfitabilityRecord;
 
 class ReportService implements ReportServiceInterface
@@ -38,6 +40,8 @@ class ReportService implements ReportServiceInterface
 
     private function clientPortfolio(): array
     {
+        $tierLabels = LookupOption::labelMapFor(LookupType::ClientTier);
+
         $rows = Client::query()
             ->with('package.product')
             ->where('status', '!=', ClientStatus::Archived->value)
@@ -47,7 +51,7 @@ class ReportService implements ReportServiceInterface
                 $client->name,
                 $client->code,
                 $client->status?->label(),
-                $client->tier?->label(),
+                $tierLabels[$client->tier] ?? $client->tier,
                 $client->health_score,
                 $client->package ? trim("{$client->package->product?->name} {$client->package->name}") : '-',
             ])
@@ -58,6 +62,8 @@ class ReportService implements ReportServiceInterface
 
     private function operationsHealth(): array
     {
+        $environmentLabels = LookupOption::labelMapFor(LookupType::DeploymentEnvironment);
+
         $rows = Deployment::query()
             ->with('client')
             ->withCount([
@@ -69,7 +75,7 @@ class ReportService implements ReportServiceInterface
             ->map(fn (Deployment $deployment) => [
                 $deployment->name,
                 $deployment->client?->name,
-                $deployment->environment?->label(),
+                $environmentLabels[$deployment->environment] ?? $deployment->environment,
                 $deployment->status?->label(),
                 $deployment->infrastructure_assets_count,
                 $deployment->failing_checks_count,

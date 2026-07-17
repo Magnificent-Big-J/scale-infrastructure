@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Clients;
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +24,7 @@ class UpdateClientRequest extends FormRequest
             'code' => ['sometimes', 'string', 'max:64', Rule::unique('clients', 'code')->ignore($clientId)],
             'name' => ['sometimes', 'string', 'max:255'],
             'legal_name' => ['nullable', 'string', 'max:255'],
-            'tier' => ['sometimes', Rule::in(ClientTier::values())],
+            'tier' => ['sometimes', 'string', LookupType::ClientTier->existsRule()],
             'status' => ['sometimes', Rule::in(ClientStatus::values())],
             'health_score' => ['sometimes', 'integer', 'min:0', 'max:100'],
             'notes' => ['nullable', 'string', 'max:3000'],

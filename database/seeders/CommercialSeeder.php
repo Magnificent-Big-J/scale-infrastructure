@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Enums\BillingCadence;
-use App\Enums\BillingRecordType;
 use App\Enums\ContractStatus;
 use App\Enums\InvoiceStatus;
-use App\Enums\PaymentMethod;
 use App\Models\BillingRecord;
 use App\Models\Client;
 use App\Models\Contract;
@@ -50,11 +48,11 @@ class CommercialSeeder extends Seeder
         $contractIds = Contract::query()->pluck('id', 'code');
 
         $billingRecords = [
-            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'type' => BillingRecordType::Implementation, 'cadence' => BillingCadence::OnceOff, 'description' => 'ScaleLens Growth implementation', 'amount' => 360000, 'starts_on' => '2026-06-01'],
-            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'type' => BillingRecordType::Support, 'cadence' => BillingCadence::Monthly, 'description' => 'Priority support retainer', 'amount' => 35000, 'starts_on' => '2026-06-01'],
-            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'type' => BillingRecordType::Support, 'cadence' => BillingCadence::Monthly, 'description' => 'Strategic support retainer', 'amount' => 60000, 'starts_on' => '2026-05-15'],
-            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'type' => BillingRecordType::Hosting, 'cadence' => BillingCadence::Monthly, 'description' => 'Production hosting', 'amount' => 6000, 'starts_on' => '2026-05-15'],
-            ['client_code' => 'KOPANO-CONSULTING', 'contract_code' => 'CON-KOPANO-2026', 'type' => BillingRecordType::Hosting, 'cadence' => BillingCadence::Annual, 'description' => 'Annual hosting & maintenance', 'amount' => 24000, 'starts_on' => '2026-05-20'],
+            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'type' => 'implementation', 'cadence' => BillingCadence::OnceOff, 'description' => 'ScaleLens Growth implementation', 'amount' => 360000, 'starts_on' => '2026-06-01'],
+            ['client_code' => 'NALA-PROJECTS', 'contract_code' => 'CON-NALA-2026', 'type' => 'support', 'cadence' => BillingCadence::Monthly, 'description' => 'Priority support retainer', 'amount' => 35000, 'starts_on' => '2026-06-01'],
+            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'type' => 'support', 'cadence' => BillingCadence::Monthly, 'description' => 'Strategic support retainer', 'amount' => 60000, 'starts_on' => '2026-05-15'],
+            ['client_code' => 'AURECON-PMO', 'contract_code' => 'CON-AURECON-2026', 'type' => 'hosting', 'cadence' => BillingCadence::Monthly, 'description' => 'Production hosting', 'amount' => 6000, 'starts_on' => '2026-05-15'],
+            ['client_code' => 'KOPANO-CONSULTING', 'contract_code' => 'CON-KOPANO-2026', 'type' => 'hosting', 'cadence' => BillingCadence::Annual, 'description' => 'Annual hosting & maintenance', 'amount' => 24000, 'starts_on' => '2026-05-20'],
         ];
 
         foreach ($billingRecords as $record) {
@@ -68,7 +66,7 @@ class CommercialSeeder extends Seeder
                     ...$record,
                     'client_id' => $clients[$clientCode] ?? null,
                     'contract_id' => $contractIds[$contractCode] ?? null,
-                    'type' => $record['type']->value,
+                    'type' => $record['type'],
                     'cadence' => $record['cadence']->value,
                     'is_active' => true,
                     'notes' => 'Seeded Module 04 billing commitment.',
@@ -105,7 +103,7 @@ class CommercialSeeder extends Seeder
                     [
                         'client_id' => $clients[$clientCode] ?? null,
                         'amount' => $invoice['amount_paid'],
-                        'method' => PaymentMethod::Eft->value,
+                        'method' => 'eft',
                         'paid_on' => $invoice['issued_on'],
                         'notes' => 'Seeded Module 04 payment.',
                     ],

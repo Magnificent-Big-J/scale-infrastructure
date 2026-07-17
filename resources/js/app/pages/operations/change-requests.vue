@@ -45,8 +45,8 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.client_id" :items="clientItems" label="Client" :error-messages="dialog.errors.client_id" /></v-col>
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.deployment_id" :items="deploymentItems" label="Deployment" :error-messages="dialog.errors.deployment_id" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.scheduled_for" label="Scheduled for" type="date" :error-messages="dialog.errors.scheduled_for" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.description" label="Description" :error-messages="dialog.errors.description" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -68,10 +68,12 @@ import { computed, onMounted, reactive } from 'vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../composables/useToast';
 import { useChangeRequestsStore } from '../../stores/change-requests';
 
+const toast = useToast();
 const store = useChangeRequestsStore();
 const filters = reactive({ search: '', status: '', page: 1 });
 const columns = [
@@ -146,8 +148,9 @@ const decide = async (row, action) => {
     try {
         await store.decide(row.id, action);
         await load();
+        toast.success(action === 'approve' ? 'Change request approved.' : 'Change request rejected.');
     } catch (error) {
-        window.alert(error?.data?.message || `Could not ${action} the change request.`);
+        toast.error(errorMessage(error, `Could not ${action} the change request.`));
     }
 };
 
@@ -159,14 +162,7 @@ onMounted(load);
 </script>
 
 <style scoped>
-.ops-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .ops__search { flex: 0 1 320px; min-width: 240px; }
 .ops__filter { min-width: 190px; }
-.ops-cell { display: grid; gap: 0.1rem; }
-.ops-cell small { color: var(--rw-muted); font-size: 0.78rem; }
 .ops-actions { white-space: nowrap; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .ops-page { padding: 1.75rem 1rem 3rem; } }
 </style>

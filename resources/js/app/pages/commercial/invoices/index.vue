@@ -57,7 +57,7 @@
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.issued_on" label="Issued on" type="date" :error-messages="dialog.errors.issued_on" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.due_on" label="Due on" type="date" :error-messages="dialog.errors.due_on" /></v-col>
                         <v-col cols="12"><AppTextField v-model="dialog.form.external_reference" label="External reference" :error-messages="dialog.errors.external_reference" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -82,7 +82,7 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="payment.form.method" :items="methodItems" label="Method" :error-messages="payment.errors.method" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="payment.form.paid_on" label="Paid on" type="date" :error-messages="payment.errors.paid_on" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="payment.form.reference" label="Reference" :error-messages="payment.errors.reference" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="payment.form.notes" label="Notes" :error-messages="payment.errors.notes" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="payment.form.notes" label="Notes" :error-messages="payment.errors.notes" /></v-col>
                     </v-row>
                 </v-form>
 
@@ -116,7 +116,7 @@ import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast } from '../../../composables/useToast';
 import { useFinanceStore } from '../../../stores/finance';
@@ -128,14 +128,6 @@ const goToDetail = (row) => router.push(`/commercial/invoices/${row.id}`);
 const store = useInvoicesStore();
 const finance = useFinanceStore();
 const filters = reactive({ search: '', status: '', page: 1 });
-const paymentMethods = [
-    { value: 'eft', label: 'EFT' },
-    { value: 'card', label: 'Card' },
-    { value: 'payfast', label: 'PayFast' },
-    { value: 'debit_order', label: 'Debit order' },
-    { value: 'cash', label: 'Cash' },
-    { value: 'other', label: 'Other' },
-];
 const columns = [
     { key: 'invoice', label: 'Invoice' },
     { key: 'status', label: 'Status' },
@@ -151,7 +143,7 @@ const statusItems = computed(() => store.options.statuses.map((item) => ({ title
 const statusFilterItems = computed(() => [{ title: 'All statuses', value: '' }, ...statusItems.value]);
 const clientItems = computed(() => toSelect(store.options.clients, 'Select a client'));
 const contractItems = computed(() => toSelect(store.options.contracts, 'No contract'));
-const methodItems = computed(() => paymentMethods.map((item) => ({ title: item.label, value: item.value })));
+const methodItems = computed(() => (store.options.payment_methods || []).map((item) => ({ title: item.label, value: item.value })));
 
 const formatAmount = (value) => `ZAR ${Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
@@ -269,15 +261,9 @@ onMounted(() => { load(); finance.fetchMetrics(); });
 </script>
 
 <style scoped>
-.commercial-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 190px; }
-.commercial-cell { display: grid; gap: 0.1rem; }
-.commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
 .payment-history h4 { font-size: 0.85rem; margin-bottom: 0.5rem; }
 .payment-history ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
 .payment-history li { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.85rem; border-top: 1px solid var(--rw-border, rgba(255, 255, 255, 0.08)); padding-top: 0.4rem; }

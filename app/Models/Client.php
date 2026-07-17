@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -32,7 +31,6 @@ class Client extends Model
     protected function casts(): array
     {
         return [
-            'tier' => ClientTier::class,
             'status' => ClientStatus::class,
             'health_score' => 'integer',
         ];

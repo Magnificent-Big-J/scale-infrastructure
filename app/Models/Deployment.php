@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\DeploymentEnvironment;
 use App\Enums\DeploymentStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -35,7 +34,6 @@ class Deployment extends Model
     protected function casts(): array
     {
         return [
-            'environment' => DeploymentEnvironment::class,
             'status' => DeploymentStatus::class,
             'go_live_date' => 'date',
         ];

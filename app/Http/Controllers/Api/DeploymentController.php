@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\DeploymentServiceInterface;
-use App\Enums\DeploymentEnvironment;
+use App\Contracts\LookupOptionServiceInterface;
 use App\Enums\DeploymentStatus;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreDeploymentRequest;
 use App\Http\Requests\Operations\UpdateDeploymentRequest;
 use App\Http\Resources\DeploymentResource;
 use App\Models\Client;
 use App\Models\Deployment;
+use App\Models\LookupOption;
 use App\Models\Package;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +22,8 @@ use Illuminate\Http\Response;
 class DeploymentController extends Controller
 {
     public function __construct(
-        private readonly DeploymentServiceInterface $service
+        private readonly DeploymentServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -90,7 +93,9 @@ class DeploymentController extends Controller
     {
         return [
             'statuses' => DeploymentStatus::options(),
-            'environments' => DeploymentEnvironment::options(),
+            'environments' => $this->lookups->optionsFor(LookupType::DeploymentEnvironment)
+                ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                ->all(),
             'clients' => Client::query()
                 ->orderBy('name')
                 ->get(['id', 'name'])

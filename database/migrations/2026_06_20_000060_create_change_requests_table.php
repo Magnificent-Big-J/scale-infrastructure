@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->string('reference')->unique();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('risk')->default(ChangeRisk::Low->value);
+            $table->string('risk')->default('low');
             $table->string('status')->default(ChangeRequestStatus::Draft->value);
             $table->foreignId('requested_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();

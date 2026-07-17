@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Enums\DeploymentEnvironment;
 use App\Enums\DeploymentStatus;
+use App\Enums\LookupType;
+use App\Models\LookupOption;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,7 +12,6 @@ class DeploymentResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $environment = $this->environment instanceof DeploymentEnvironment ? $this->environment : null;
         $status = $this->status instanceof DeploymentStatus ? $this->status : null;
 
         return [
@@ -23,8 +23,8 @@ class DeploymentResource extends JsonResource
             'package_id' => $this->package_id,
             'package_name' => $this->whenLoaded('package', fn () => $this->package?->name),
             'name' => $this->name,
-            'environment' => $environment?->value,
-            'environment_label' => $environment?->label(),
+            'environment' => $this->environment,
+            'environment_label' => $this->environment ? (LookupOption::labelMapFor(LookupType::DeploymentEnvironment)[$this->environment] ?? $this->environment) : null,
             'domain' => $this->domain,
             'app_url' => $this->app_url,
             'current_version' => $this->current_version,

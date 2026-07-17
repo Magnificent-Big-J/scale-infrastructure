@@ -69,7 +69,7 @@
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.hours_logged" label="Hours logged" type="number" :error-messages="dialog.errors.hours_logged" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.opened_at" label="Opened at" type="datetime-local" :error-messages="dialog.errors.opened_at" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.resolved_at" label="Resolved at" type="datetime-local" :error-messages="dialog.errors.resolved_at" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.summary" label="Summary" :error-messages="dialog.errors.summary" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.summary" label="Summary" :error-messages="dialog.errors.summary" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -92,7 +92,7 @@ import AppFilterBar from '../../../components/AppFilterBar.vue';
 import AppModal from '../../../components/AppModal.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTextarea from '../../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
 import AppTextField from '../../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../../composables/useToast';
 import { useSupportTicketsStore } from '../../../stores/support-tickets';
@@ -246,15 +246,9 @@ const onPage = (page) => { filters.page = page; load(); };
 onMounted(load);
 </script>
 <style scoped>
-.support-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .support__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .support__search { flex: 0 1 320px; min-width: 240px; }
 .support__filter { min-width: 190px; }
-.support-cell { display: grid; gap: 0.1rem; }
-.support-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
 .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .support-page { padding: 1.75rem 1rem 3rem; } .support__stats { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .support__stats { grid-template-columns: 1fr; } }
 </style>

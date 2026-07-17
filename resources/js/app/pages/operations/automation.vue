@@ -37,7 +37,7 @@
                         <v-col cols="12" sm="6"><AppSelect v-model="dialog.form.status" :items="statusItems" label="Status" :error-messages="dialog.errors.status" /></v-col>
                         <v-col cols="12"><AppSelect v-model="dialog.form.change_request_id" :items="changeRequestItems" label="Change request" :error-messages="dialog.errors.change_request_id" /></v-col>
                         <v-col cols="12"><AppSelect v-model="dialog.form.provisioning_template_id" :items="templateItems" label="Provisioning template" :error-messages="dialog.errors.provisioning_template_id" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.output_summary" label="Output summary" :error-messages="dialog.errors.output_summary" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.output_summary" label="Output summary" :error-messages="dialog.errors.output_summary" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -59,7 +59,7 @@ import { computed, onMounted, reactive } from 'vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useAutomationRunsStore } from '../../stores/automation-runs';
 
@@ -118,13 +118,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.ops-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .ops__search { flex: 0 1 320px; min-width: 240px; }
 .ops__filter { min-width: 190px; }
-.ops-cell { display: grid; gap: 0.1rem; }
-.ops-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .ops-page { padding: 1.75rem 1rem 3rem; } }
 </style>

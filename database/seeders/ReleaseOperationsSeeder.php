@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\AutomationRunStatus;
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
 use App\Enums\ReleaseStatus;
 use App\Models\AutomationRun;
 use App\Models\ChangeRequest;
@@ -47,7 +46,7 @@ class ReleaseOperationsSeeder extends Seeder
                 'client_id' => $clients['AURECON-PMO'] ?? null,
                 'title' => 'Production reporting hotfix release',
                 'description' => 'Approved change to deploy the reporting latency hotfix to production.',
-                'risk' => ChangeRisk::Medium->value,
+                'risk' => 'medium',
                 'status' => ChangeRequestStatus::Approved->value,
                 'requested_by' => $admin?->id,
                 'approved_by' => $admin?->id,
@@ -64,7 +63,7 @@ class ReleaseOperationsSeeder extends Seeder
                 'client_id' => $clients['NALA-PROJECTS'] ?? null,
                 'title' => 'Staging queue tuning',
                 'description' => 'Requested change to adjust staging worker counts.',
-                'risk' => ChangeRisk::Low->value,
+                'risk' => 'low',
                 'status' => ChangeRequestStatus::Submitted->value,
                 'requested_by' => $admin?->id,
                 'notes' => 'Seeded Module 06 change request.',

@@ -121,17 +121,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.operations-page {
-    padding: 2.25rem 2rem 4rem;
-}
-
-.page-wrap {
-    max-width: var(--rw-content-max);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.5rem;
-}
-
 .operations__stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -146,25 +135,7 @@ onMounted(load);
     min-width: 190px;
 }
 
-.ops-cell {
-    display: grid;
-    gap: 0.1rem;
-}
-
-.ops-cell small {
-    color: var(--rw-muted);
-    font-size: 0.78rem;
-}
-
-.text-sm {
-    font-size: 0.85rem;
-}
-
 @media (max-width: 960px) {
-    .operations-page {
-        padding: 1.75rem 1rem 3rem;
-    }
-
     .operations__stats {
         grid-template-columns: 1fr;
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Operations;
 
-use App\Enums\DeploymentEnvironment;
 use App\Enums\DeploymentStatus;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -21,7 +21,7 @@ class UpdateDeploymentRequest extends FormRequest
             'product_id' => ['sometimes', 'uuid', 'exists:products,id'],
             'package_id' => ['nullable', 'uuid', 'exists:packages,id'],
             'name' => ['sometimes', 'string', 'max:255'],
-            'environment' => ['sometimes', Rule::in(DeploymentEnvironment::values())],
+            'environment' => ['sometimes', 'string', LookupType::DeploymentEnvironment->existsRule()],
             'domain' => ['nullable', 'string', 'max:255'],
             'app_url' => ['nullable', 'url', 'max:255'],
             'current_version' => ['nullable', 'string', 'max:64'],

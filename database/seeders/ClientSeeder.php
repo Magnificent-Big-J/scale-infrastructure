@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
 use App\Models\Client;
 use App\Models\Package;
 use App\Models\User;
@@ -24,7 +23,7 @@ class ClientSeeder extends Seeder
                 'code' => 'AURECON-PMO',
                 'name' => 'Aurecon Programme Office',
                 'legal_name' => 'Aurecon Programme Office (Demo)',
-                'tier' => ClientTier::Enterprise,
+                'tier' => 'enterprise',
                 'status' => ClientStatus::Active,
                 'health_score' => 82,
                 'package_code' => 'SCALELENS-ENTERPRISE',
@@ -39,7 +38,7 @@ class ClientSeeder extends Seeder
                 'code' => 'NALA-PROJECTS',
                 'name' => 'Nala Projects',
                 'legal_name' => 'Nala Projects (Pty) Ltd',
-                'tier' => ClientTier::Growth,
+                'tier' => 'growth',
                 'status' => ClientStatus::Onboarding,
                 'health_score' => 74,
                 'package_code' => 'SCALELENS-GROWTH',
@@ -54,7 +53,7 @@ class ClientSeeder extends Seeder
                 'code' => 'KOPANO-CONSULTING',
                 'name' => 'Kopano Consulting',
                 'legal_name' => 'Kopano Consulting CC',
-                'tier' => ClientTier::Starter,
+                'tier' => 'starter',
                 'status' => ClientStatus::Active,
                 'health_score' => 91,
                 'package_code' => 'SCALELENS-STARTER',

@@ -28,7 +28,7 @@
             </AppSectionCard>
         </div>
 
-        <AppModal v-model="dialog.open" :title="dialog.mode === 'create' ? 'New template' : 'Edit template'" subtitle="List one provisioning step per line." persistent>
+        <AppModal v-model="dialog.open" :title="dialog.mode === 'create' ? 'New template' : 'Edit template'" subtitle="Describe the template and list its provisioning steps in order." persistent>
             <div class="dialog-form">
                 <FormStatusAlert :message="dialog.message" :type="dialog.messageType" />
                 <v-form @submit.prevent="submitDialog">
@@ -36,8 +36,8 @@
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.code" label="Code" :error-messages="dialog.errors.code" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.provider" label="Provider" placeholder="DigitalOcean" :error-messages="dialog.errors.provider" /></v-col>
                         <v-col cols="12"><AppTextField v-model="dialog.form.name" label="Name" :error-messages="dialog.errors.name" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.summary" label="Summary" :error-messages="dialog.errors.summary" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.stepsText" label="Steps (one per line)" :error-messages="dialog.errors.steps" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.summary" label="Summary" placeholder="What this template sets up, and when to use it." :error-messages="dialog.errors.summary" /></v-col>
+                        <v-col cols="12"><AppStepListInput v-model="dialog.form.steps" label="Provisioning steps" :error-messages="dialog.errors.steps" /></v-col>
                         <v-col cols="12"><v-switch v-model="dialog.form.is_active" color="primary" label="Active" hide-details inset /></v-col>
                     </v-row>
                 </v-form>
@@ -59,8 +59,9 @@
 import { onMounted, reactive } from 'vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppStepListInput from '../../components/AppStepListInput.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useProvisioningTemplatesStore } from '../../stores/provisioning-templates';
 
@@ -75,7 +76,7 @@ const columns = [
     { key: 'actions', label: '', class: 'text-right' },
 ];
 
-const emptyForm = () => ({ code: '', name: '', provider: '', summary: '', stepsText: '', is_active: true });
+const emptyForm = () => ({ code: '', name: '', provider: '', summary: '', steps: [], is_active: true });
 const dialog = reactive({ open: false, mode: 'create', editId: null, form: emptyForm(), errors: {}, message: '', messageType: 'error' });
 
 const openCreate = () => { Object.assign(dialog, { open: true, mode: 'create', editId: null, form: emptyForm(), errors: {}, message: '' }); };
@@ -90,7 +91,7 @@ const openEdit = (row) => {
             name: row.name ?? '',
             provider: row.provider ?? '',
             summary: row.summary ?? '',
-            stepsText: (row.steps || []).join('\n'),
+            steps: [...(row.steps || [])],
             is_active: row.is_active ?? true,
         },
         errors: {},
@@ -100,8 +101,7 @@ const openEdit = (row) => {
 
 const normalizePayload = () => {
     const payload = { ...dialog.form };
-    payload.steps = payload.stepsText.split('\n').map((line) => line.trim()).filter(Boolean);
-    delete payload.stepsText;
+    payload.steps = payload.steps.map((step) => step.trim()).filter(Boolean);
     if (payload.provider === '') payload.provider = null;
     if (payload.summary === '') payload.summary = null;
     return payload;
@@ -132,12 +132,5 @@ onMounted(load);
 </script>
 
 <style scoped>
-.ops-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .ops__search { flex: 0 1 320px; min-width: 240px; }
-.ops-cell { display: grid; gap: 0.1rem; }
-.ops-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .ops-page { padding: 1.75rem 1rem 3rem; } }
 </style>

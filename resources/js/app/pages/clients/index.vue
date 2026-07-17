@@ -184,7 +184,7 @@
                             />
                         </v-col>
                         <v-col cols="12">
-                            <AppTextField v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" />
+                            <AppRichTextEditor v-model="dialog.form.notes" label="Notes" :error-messages="dialog.errors.notes" />
                         </v-col>
                     </v-row>
 
@@ -259,6 +259,7 @@ import { useRouter } from 'vue-router';
 
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';
@@ -435,17 +436,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.clients-page {
-    padding: 2.25rem 2rem 4rem;
-}
-
-.page-wrap {
-    max-width: var(--rw-content-max);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.5rem;
-}
-
 .clients__stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -502,11 +492,6 @@ onMounted(load);
     font-weight: 800;
 }
 
-.dialog-form {
-    display: grid;
-    gap: 1rem;
-}
-
 .primary-contact-form {
     display: grid;
     gap: 0.75rem;
@@ -527,10 +512,6 @@ onMounted(load);
 }
 
 @media (max-width: 960px) {
-    .clients-page {
-        padding: 1.75rem 1rem 3rem;
-    }
-
     .clients__stats {
         grid-template-columns: 1fr;
     }

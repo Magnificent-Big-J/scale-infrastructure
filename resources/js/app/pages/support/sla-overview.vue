@@ -101,12 +101,7 @@ onMounted(load);
 </script>
 
 <style scoped>
-.sla-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .sla__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
-.sla-cell { display: grid; gap: 0.1rem; }
-.sla-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
 @media (max-width: 1200px) { .sla__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 720px) { .sla-page { padding: 1.5rem 1rem 3rem; } .sla__stats { grid-template-columns: 1fr; } }
 </style>

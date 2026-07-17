@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
 use App\Models\CatalogueFeature;
 use App\Models\Package;
@@ -60,7 +59,7 @@ class CatalogueSeeder extends Seeder
                     'product_id' => $scaleLens->id,
                     'name' => $package['name'],
                     'description' => $package['description'],
-                    'billing_interval' => BillingInterval::OnceOff,
+                    'billing_interval' => 'once_off',
                     'price_min' => $package['price_min'],
                     'price_max' => $package['price_max'],
                     'currency' => config('catalogue.default_currency'),

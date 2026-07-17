@@ -34,7 +34,7 @@
                             <div><dt>Due</dt><dd>{{ invoice?.due_on || '-' }}</dd></div>
                             <div><dt>Status</dt><dd>{{ invoice?.status_label || '-' }}</dd></div>
                             <div><dt>External reference</dt><dd>{{ invoice?.external_reference || '-' }}</dd></div>
-                            <div class="detail-grid__wide"><dt>Notes</dt><dd>{{ invoice?.notes || '-' }}</dd></div>
+                            <div class="detail-grid__wide"><dt>Notes</dt><dd><AppRichTextDisplay :content="invoice?.notes" /></dd></div>
                         </dl>
                     </v-window-item>
 
@@ -71,6 +71,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
 import { useSessionStore } from '../../../stores/session';
@@ -110,19 +111,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.detail-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
-.back-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--rw-muted); font-size: 0.85rem; text-decoration: none; }
-.back-link:hover { color: var(--rw-700); }
 .detail__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
-.detail-tabs { border-bottom: 1px solid var(--rw-border); margin-bottom: 1.25rem; }
-.detail-window { padding-top: 0.25rem; }
-.detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; margin: 0; }
-.detail-grid__wide { grid-column: 1 / -1; }
-.detail-grid dt { color: var(--rw-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.detail-grid dd { margin: 0.2rem 0 0; font-size: 0.92rem; }
-.detail-cell { display: grid; gap: 0.1rem; }
-.detail-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-@media (max-width: 960px) { .detail-page { padding: 1.75rem 1rem 3rem; } .detail__stats { grid-template-columns: 1fr; } .detail-grid { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .detail__stats { grid-template-columns: 1fr; } }
 </style>

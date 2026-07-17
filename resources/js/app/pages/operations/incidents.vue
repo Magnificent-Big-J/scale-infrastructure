@@ -53,8 +53,8 @@
                         <v-col cols="12" sm="4"><AppSelect v-model="dialog.form.severity" :items="severityItems" label="Severity" :error-messages="dialog.errors.severity" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.started_at" label="Started at" type="datetime-local" :error-messages="dialog.errors.started_at" /></v-col>
                         <v-col cols="12" sm="4"><AppTextField v-model="dialog.form.resolved_at" label="Resolved at" type="datetime-local" :error-messages="dialog.errors.resolved_at" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.root_cause" label="Root cause" :error-messages="dialog.errors.root_cause" /></v-col>
-                        <v-col cols="12"><AppTextarea v-model="dialog.form.resolution_summary" label="Resolution summary" :error-messages="dialog.errors.resolution_summary" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.root_cause" label="Root cause" :error-messages="dialog.errors.root_cause" /></v-col>
+                        <v-col cols="12"><AppRichTextEditor v-model="dialog.form.resolution_summary" label="Resolution summary" :error-messages="dialog.errors.resolution_summary" /></v-col>
                     </v-row>
                 </v-form>
             </div>
@@ -75,7 +75,7 @@ import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
-import AppTextarea from '../../components/AppTextarea.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppTextField from '../../components/AppTextField.vue';
 import { useToast, errorMessage } from '../../composables/useToast';
 import { useIncidentsStore } from '../../stores/incidents';
@@ -207,15 +207,9 @@ const onPage = (page) => { filters.page = page; load(); };
 onMounted(load);
 </script>
 <style scoped>
-.support-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .support__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .support__search { flex: 0 1 320px; min-width: 240px; }
 .support__filter { min-width: 190px; }
-.support-cell { display: grid; gap: 0.1rem; }
-.support-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
 .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .support-page { padding: 1.75rem 1rem 3rem; } .support__stats { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .support__stats { grid-template-columns: 1fr; } }
 </style>

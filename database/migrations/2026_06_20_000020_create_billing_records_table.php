@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\BillingCadence;
-use App\Enums\BillingRecordType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +13,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('client_id')->constrained('clients')->cascadeOnDelete();
             $table->foreignUuid('contract_id')->nullable()->constrained('contracts')->nullOnDelete();
-            $table->string('type')->default(BillingRecordType::Implementation->value);
+            $table->string('type')->default('implementation');
             $table->string('cadence')->default(BillingCadence::OnceOff->value);
             $table->string('description');
             $table->decimal('amount', 14, 2);

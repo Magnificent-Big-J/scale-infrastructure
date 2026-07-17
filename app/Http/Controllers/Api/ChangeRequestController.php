@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\ReleaseOperationsServiceInterface;
 use App\Enums\ChangeRequestStatus;
-use App\Enums\ChangeRisk;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreChangeRequestRequest;
 use App\Http\Requests\Operations\UpdateChangeRequestRequest;
@@ -12,12 +13,16 @@ use App\Http\Resources\ChangeRequestResource;
 use App\Models\ChangeRequest;
 use App\Models\Client;
 use App\Models\Deployment;
+use App\Models\LookupOption;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ChangeRequestController extends Controller
 {
-    public function __construct(private readonly ReleaseOperationsServiceInterface $service) {}
+    public function __construct(
+        private readonly ReleaseOperationsServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
+    ) {}
 
     public function index(Request $request): JsonResponse
     {
@@ -37,7 +42,9 @@ class ChangeRequestController extends Controller
             ],
             'options' => [
                 'statuses' => ChangeRequestStatus::options(),
-                'risks' => ChangeRisk::options(),
+                'risks' => $this->lookups->optionsFor(LookupType::ChangeRisk)
+                    ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                    ->all(),
                 'clients' => Client::query()->orderBy('name')->get(['id', 'name'])->map(fn (Client $client) => ['value' => $client->id, 'label' => $client->name])->all(),
                 'deployments' => Deployment::query()->orderBy('name')->get(['id', 'name'])->map(fn (Deployment $deployment) => ['value' => $deployment->id, 'label' => $deployment->name])->all(),
             ],

@@ -165,7 +165,7 @@
                             <AppTextField v-model="dialog.form.currency" label="Currency" :error-messages="dialog.errors.currency" />
                         </v-col>
                         <v-col cols="12">
-                            <AppTextField
+                            <AppRichTextEditor
                                 v-model="dialog.form.description"
                                 label="Description"
                                 :error-messages="dialog.errors.description"
@@ -206,6 +206,7 @@ import { computed, onMounted, reactive } from 'vue';
 import AppBanner from '../../components/AppBanner.vue';
 import AppFilterBar from '../../components/AppFilterBar.vue';
 import AppModal from '../../components/AppModal.vue';
+import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';
@@ -362,17 +363,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.admin-catalogue-page {
-    padding: 2.25rem 2rem 4rem;
-}
-
-.page-wrap {
-    max-width: var(--rw-content-max);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.5rem;
-}
-
 .admin-catalogue__stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -401,20 +391,11 @@ onMounted(load);
     color: var(--rw-muted);
 }
 
-.text-sm {
-    font-size: 0.85rem;
-}
-
 .dialog-form {
-    display: grid;
     gap: 0.5rem;
 }
 
 @media (max-width: 960px) {
-    .admin-catalogue-page {
-        padding: 1.75rem 1rem 3rem;
-    }
-
     .admin-catalogue__stats {
         grid-template-columns: 1fr;
     }

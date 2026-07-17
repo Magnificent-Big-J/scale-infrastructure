@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Catalogue;
 
-use App\Enums\BillingInterval;
 use App\Enums\CatalogueStatus;
+use App\Enums\LookupType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,7 +20,7 @@ class StorePackageRequest extends FormRequest
             'code' => ['required', 'string', 'max:64', 'unique:packages,code'],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:2000'],
-            'billing_interval' => ['required', Rule::in(BillingInterval::values())],
+            'billing_interval' => ['required', 'string', LookupType::BillingInterval->existsRule()],
             'price_min' => ['nullable', 'numeric', 'min:0'],
             'price_max' => ['nullable', 'numeric', 'min:0', 'gte:price_min'],
             'currency' => ['sometimes', 'string', 'size:3'],

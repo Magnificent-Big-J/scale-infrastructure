@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\ClientServiceInterface;
+use App\Contracts\LookupOptionServiceInterface;
 use App\Enums\ClientStatus;
-use App\Enums\ClientTier;
+use App\Enums\LookupType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clients\StoreClientRequest;
 use App\Http\Requests\Clients\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
+use App\Models\LookupOption;
 use App\Models\Package;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +21,8 @@ use Illuminate\Http\Response;
 class ClientController extends Controller
 {
     public function __construct(
-        private readonly ClientServiceInterface $service
+        private readonly ClientServiceInterface $service,
+        private readonly LookupOptionServiceInterface $lookups,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -76,7 +79,9 @@ class ClientController extends Controller
     {
         return [
             'statuses' => ClientStatus::options(),
-            'tiers' => ClientTier::options(),
+            'tiers' => $this->lookups->optionsFor(LookupType::ClientTier)
+                ->map(fn (LookupOption $option) => ['value' => $option->value, 'label' => $option->label])
+                ->all(),
             'packages' => Package::query()
                 ->with('product')
                 ->orderBy('sort_order')
