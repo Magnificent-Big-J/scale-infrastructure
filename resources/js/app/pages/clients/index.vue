@@ -435,17 +435,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.clients-page {
-    padding: 2.25rem 2rem 4rem;
-}
-
-.page-wrap {
-    max-width: var(--rw-content-max);
-    margin: 0 auto;
-    display: grid;
-    gap: 1.5rem;
-}
-
 .clients__stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -502,11 +491,6 @@ onMounted(load);
     font-weight: 800;
 }
 
-.dialog-form {
-    display: grid;
-    gap: 1rem;
-}
-
 .primary-contact-form {
     display: grid;
     gap: 0.75rem;
@@ -527,10 +511,6 @@ onMounted(load);
 }
 
 @media (max-width: 960px) {
-    .clients-page {
-        padding: 1.75rem 1rem 3rem;
-    }
-
     .clients__stats {
         grid-template-columns: 1fr;
     }

@@ -163,9 +163,6 @@ onMounted(load);
 </script>
 
 <style scoped>
-.board-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
-
 .board {
     display: grid;
     grid-auto-flow: column;

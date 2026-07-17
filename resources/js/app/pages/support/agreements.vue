@@ -176,14 +176,8 @@ onMounted(load);
 </script>
 
 <style scoped>
-.support-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .support__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .support__search { flex: 0 1 320px; min-width: 240px; }
 .support__filter { min-width: 190px; }
-.support-cell { display: grid; gap: 0.1rem; }
-.support-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
-@media (max-width: 960px) { .support-page { padding: 1.75rem 1rem 3rem; } .support__stats { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .support__stats { grid-template-columns: 1fr; } }
 </style>

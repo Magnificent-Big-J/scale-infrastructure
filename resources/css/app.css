@@ -87,6 +87,134 @@ a {
     text-decoration: none;
 }
 
+/* ─── Shared page shell ──────────────────────────────── */
+/* Every authenticated page root uses this same padding recipe under a
+   page-specific class (ops-page, clients-page, detail-page, ...) — kept
+   here once instead of copy-pasted into 30+ scoped style blocks. */
+.admin-catalogue-page,
+.admin-users-page,
+.board-page,
+.clients-page,
+.commercial-page,
+.detail-page,
+.operations-page,
+.ops-page,
+.profile-page,
+.reports-page,
+.sla-page,
+.support-page {
+    padding: 2.25rem 2rem 4rem;
+}
+
+/* board-page and sla-page collapse at their own 720px breakpoint (kept
+   locally in those files); commercial-page collapses at 960px everywhere
+   except opportunities/index.vue, which also keeps its own local override —
+   so none of the three join this shared list. */
+@media (max-width: 960px) {
+    .admin-catalogue-page,
+    .admin-users-page,
+    .clients-page,
+    .detail-page,
+    .operations-page,
+    .ops-page,
+    .profile-page,
+    .reports-page,
+    .support-page {
+        padding: 1.75rem 1rem 3rem;
+    }
+}
+
+.page-wrap {
+    max-width: var(--rw-content-max);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.text-sm {
+    font-size: 0.85rem;
+}
+
+/* Dialog forms default to a 1rem row gap; admin catalogue dialogs override
+   to 0.5rem locally since their fields are shorter. */
+.dialog-form {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Two-line table cells: a bold primary line with a muted caption under it. */
+.ops-cell,
+.detail-cell,
+.support-cell,
+.commercial-cell,
+.sla-cell {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.ops-cell small,
+.detail-cell small,
+.support-cell small,
+.commercial-cell small,
+.sla-cell small {
+    color: var(--rw-muted);
+    font-size: 0.78rem;
+}
+
+/* Shared shell for the seven "detail" pages (client/contract/invoice/
+   opportunity/deployment/release/ticket): a back link, a tabbed workspace,
+   and a definition-list layout for the overview tab. */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--rw-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--rw-700);
+}
+
+.detail-tabs {
+    border-bottom: 1px solid var(--rw-border);
+    margin-bottom: 1.25rem;
+}
+
+.detail-window {
+    padding-top: 0.25rem;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 2rem;
+    margin: 0;
+}
+
+.detail-grid__wide {
+    grid-column: 1 / -1;
+}
+
+.detail-grid dt {
+    color: var(--rw-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.detail-grid dd {
+    margin: 0.2rem 0 0;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 960px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ─── Vuetify overrides ──────────────────────────────── */
 .v-application {
     font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif !important;

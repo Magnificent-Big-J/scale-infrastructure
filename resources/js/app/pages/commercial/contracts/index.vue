@@ -186,14 +186,8 @@ onMounted(load);
 </script>
 
 <style scoped>
-.commercial-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 190px; }
-.commercial-cell { display: grid; gap: 0.1rem; }
-.commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
 @media (max-width: 960px) { .commercial-page { padding: 1.75rem 1rem 3rem; } .commercial__stats { grid-template-columns: 1fr; } }
 </style>

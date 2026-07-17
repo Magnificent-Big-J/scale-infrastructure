@@ -96,13 +96,11 @@ onMounted(() => store.fetchOperations());
 </script>
 
 <style scoped>
-.ops-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .ops__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
 .ops__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
 .ops__monitor { display: grid; gap: 0.75rem; }
 .ops__footnote { color: var(--rw-muted); font-size: 0.82rem; padding-left: 0.25rem; }
 .ops__empty { margin: 0; color: var(--rw-muted); font-size: 0.88rem; }
 @media (max-width: 1100px) { .ops__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 960px) { .ops-page { padding: 1.75rem 1rem 3rem; } .ops__stats, .ops__grid { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .ops__stats, .ops__grid { grid-template-columns: 1fr; } }
 </style>

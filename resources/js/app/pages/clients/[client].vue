@@ -250,22 +250,9 @@ onMounted(loadClient);
 </script>
 
 <style scoped>
-.clients-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
-.back-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--rw-muted); font-size: 0.85rem; text-decoration: none; }
-.back-link:hover { color: var(--rw-700); }
 .clients__stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.9rem; }
-.detail-tabs { border-bottom: 1px solid var(--rw-border); margin-bottom: 1.25rem; }
-.detail-window { padding-top: 0.25rem; }
-.detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; margin: 0; }
-.detail-grid__wide { grid-column: 1 / -1; }
-.detail-grid dt { color: var(--rw-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.detail-grid dd { margin: 0.2rem 0 0; font-size: 0.92rem; }
 .detail-grid dd small { color: var(--rw-muted); }
-.detail-cell { display: grid; gap: 0.1rem; }
-.detail-cell small { color: var(--rw-muted); font-size: 0.78rem; }
 .detail-stacked { margin-top: 1.25rem; }
-.text-sm { font-size: 0.85rem; }
 @media (max-width: 1200px) { .clients__stats--five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 960px) { .clients-page { padding: 1.75rem 1rem 3rem; } .clients__stats, .clients__stats--five { grid-template-columns: 1fr; } .detail-grid { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .clients__stats, .clients__stats--five { grid-template-columns: 1fr; } }
 </style>

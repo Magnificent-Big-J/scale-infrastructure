@@ -269,15 +269,9 @@ onMounted(() => { load(); finance.fetchMetrics(); });
 </script>
 
 <style scoped>
-.commercial-page { padding: 2.25rem 2rem 4rem; }
-.page-wrap { max-width: var(--rw-content-max); margin: 0 auto; display: grid; gap: 1.5rem; }
 .commercial__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; }
 .commercial__search { flex: 0 1 320px; min-width: 240px; }
 .commercial__filter { min-width: 190px; }
-.commercial-cell { display: grid; gap: 0.1rem; }
-.commercial-cell small { color: var(--rw-muted); font-size: 0.78rem; }
-.text-sm { font-size: 0.85rem; }
-.dialog-form { display: grid; gap: 1rem; }
 .payment-history h4 { font-size: 0.85rem; margin-bottom: 0.5rem; }
 .payment-history ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
 .payment-history li { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.85rem; border-top: 1px solid var(--rw-border, rgba(255, 255, 255, 0.08)); padding-top: 0.4rem; }

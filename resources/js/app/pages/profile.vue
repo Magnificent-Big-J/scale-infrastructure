@@ -392,7 +392,6 @@ onMounted(async () => {
 
 <style scoped>
 .profile-page {
-    padding: 2.25rem 2rem 4rem;
     max-width: var(--rw-content-max);
     margin: 0 auto;
     display: grid;
@@ -419,10 +418,6 @@ onMounted(async () => {
 }
 
 @media (max-width: 960px) {
-    .profile-page {
-        padding: 1.75rem 1rem 3rem;
-    }
-
     .profile-stats,
     .profile-grid {
         grid-template-columns: 1fr;
