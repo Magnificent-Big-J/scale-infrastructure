@@ -63,42 +63,6 @@ const onUpdate = (html) => {
     color: var(--rw-muted);
 }
 
-.app-rich-text__editor {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.app-rich-text__editor :deep(.ql-toolbar) {
-    border-color: var(--rw-border);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background: var(--rw-surface-2);
-}
-
-.app-rich-text__editor :deep(.ql-container) {
-    border-color: var(--rw-border);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    min-height: 6rem;
-}
-
-.app-rich-text__editor :deep(.ql-editor) {
-    min-height: 6rem;
-    color: var(--rw-ink);
-}
-
-.app-rich-text__editor :deep(.ql-editor.ql-blank::before) {
-    color: var(--rw-dim);
-    font-style: normal;
-}
-
-.app-rich-text--error .app-rich-text__editor :deep(.ql-toolbar),
-.app-rich-text--error .app-rich-text__editor :deep(.ql-container) {
-    border-color: var(--rw-error, #dc2626);
-}
-
 .app-rich-text__messages {
     min-height: 1rem;
     font-size: 0.75rem;
@@ -111,5 +75,47 @@ const onUpdate = (html) => {
 
 .app-rich-text__hint {
     color: var(--rw-muted);
+}
+</style>
+
+<!--
+    Quill takes ownership of the DOM node it mounts into and rebuilds it with
+    its own JS, which strips the Vue scoped-style attribute (the class survives,
+    the data-v-* attribute doesn't) — so scoped :deep() selectors targeting
+    .ql-toolbar/.ql-container/.ql-editor never actually match. Style Quill's
+    internals here instead, in a plain global block anchored on the stable
+    .app-rich-text wrapper (which Quill never touches).
+-->
+<style>
+.app-rich-text .ql-toolbar {
+    border-color: var(--rw-border);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background: var(--rw-surface-2);
+}
+
+.app-rich-text .ql-container {
+    border-color: var(--rw-border);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    height: auto;
+}
+
+.app-rich-text .ql-editor {
+    height: auto;
+    min-height: 16rem;
+    color: var(--rw-ink);
+}
+
+.app-rich-text .ql-editor.ql-blank::before {
+    color: var(--rw-dim);
+    font-style: normal;
+}
+
+.app-rich-text--error .ql-toolbar,
+.app-rich-text--error .ql-container {
+    border-color: var(--rw-error, #dc2626);
 }
 </style>
