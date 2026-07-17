@@ -70,8 +70,10 @@ import AppModal from '../../components/AppModal.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppTextarea from '../../components/AppTextarea.vue';
 import AppTextField from '../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../composables/useToast';
 import { useChangeRequestsStore } from '../../stores/change-requests';
 
+const toast = useToast();
 const store = useChangeRequestsStore();
 const filters = reactive({ search: '', status: '', page: 1 });
 const columns = [
@@ -146,8 +148,9 @@ const decide = async (row, action) => {
     try {
         await store.decide(row.id, action);
         await load();
+        toast.success(action === 'approve' ? 'Change request approved.' : 'Change request rejected.');
     } catch (error) {
-        window.alert(error?.data?.message || `Could not ${action} the change request.`);
+        toast.error(errorMessage(error, `Could not ${action} the change request.`));
     }
 };
 

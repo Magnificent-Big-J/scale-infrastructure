@@ -124,9 +124,11 @@ const onDrop = async (stage) => {
     busyId.value = deal.id;
 
     try {
-        const updated = await v1(`opportunities/${deal.id}`, { method: 'PATCH', body: { stage } });
+        const updated = stage === 'won'
+            ? await v1(`opportunities/${deal.id}/win`, { method: 'POST' })
+            : await v1(`opportunities/${deal.id}`, { method: 'PATCH', body: { stage } });
         Object.assign(deal, updated?.data ?? updated);
-        toast.success(`Moved to ${columns.value.find((c) => c.value === stage)?.label ?? stage}.`);
+        toast.success(stage === 'won' ? 'Marked won — a draft contract was created for clients.' : `Moved to ${columns.value.find((c) => c.value === stage)?.label ?? stage}.`);
     } catch (error) {
         deal.stage = previousStage; // revert
         toast.error(errorMessage(error, 'Could not move the opportunity.'));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\ReleaseOperationsServiceInterface;
 use App\Enums\AutomationRunStatus;
+use App\Enums\ChangeRequestStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreAutomationRunRequest;
 use App\Http\Resources\AutomationRunResource;
@@ -35,7 +36,7 @@ class AutomationRunController extends Controller
             'options' => [
                 'statuses' => AutomationRunStatus::options(),
                 'templates' => ProvisioningTemplate::query()->where('is_active', true)->orderBy('name')->get(['id', 'name'])->map(fn (ProvisioningTemplate $template) => ['value' => $template->id, 'label' => $template->name])->all(),
-                'change_requests' => ChangeRequest::query()->orderByDesc('created_at')->get(['id', 'reference', 'title'])->map(fn (ChangeRequest $cr) => ['value' => $cr->id, 'label' => "{$cr->reference} · {$cr->title}"])->all(),
+                'change_requests' => ChangeRequest::query()->where('status', ChangeRequestStatus::Approved->value)->orderByDesc('created_at')->get(['id', 'reference', 'title'])->map(fn (ChangeRequest $cr) => ['value' => $cr->id, 'label' => "{$cr->reference} · {$cr->title}"])->all(),
             ],
         ]);
     }
