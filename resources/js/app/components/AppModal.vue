@@ -31,7 +31,7 @@ defineProps({
     modelValue: { type: Boolean, default: false },
     title: { type: String, default: null },
     subtitle: { type: String, default: null },
-    maxWidth: { type: [Number, String], default: 520 },
+    maxWidth: { type: [Number, String], default: 640 },
     persistent: { type: Boolean, default: false },
 });
 
