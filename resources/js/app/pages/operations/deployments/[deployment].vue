@@ -82,18 +82,28 @@
                                 <code class="intake__value">POST {{ intakeUrl }}</code>
                             </div>
 
+                            <v-alert v-if="newToken" type="success" variant="tonal" density="comfortable" class="intake__new-token">
+                                <div class="intake__new-token-lead">Copy this now — it won't be shown again.</div>
+                                <div class="intake__field">
+                                    <code class="intake__value intake__value--token">{{ newToken }}</code>
+                                    <v-btn icon="mdi-content-copy" size="x-small" variant="text" title="Copy token" @click="copyToken" />
+                                </div>
+                            </v-alert>
+
                             <div class="intake__field">
-                                <span class="intake__label">Token</span>
-                                <code v-if="deployment?.intake_token" class="intake__value intake__value--token">{{ deployment.intake_token }}</code>
+                                <span class="intake__label">Status</span>
+                                <span v-if="credential" class="intake__muted">
+                                    Configured · last used {{ credential.last_used_at ? formatDate(credential.last_used_at) : 'never' }}
+                                    <template v-if="credential.expires_at"> · expires {{ formatDate(credential.expires_at) }}</template>
+                                </span>
                                 <span v-else class="intake__muted">No token configured — generate one to enable intake.</span>
-                                <v-btn v-if="deployment?.intake_token" icon="mdi-content-copy" size="x-small" variant="text" title="Copy token" @click="copyToken" />
                             </div>
 
                             <div class="intake__actions">
                                 <v-btn color="primary" size="small" :loading="intakeBusy" prepend-icon="mdi-key-variant" @click="generateToken">
-                                    {{ deployment?.intake_token ? 'Rotate token' : 'Generate token' }}
+                                    {{ credential ? 'Rotate token' : 'Generate token' }}
                                 </v-btn>
-                                <v-btn v-if="deployment?.intake_token" color="error" variant="text" size="small" :loading="intakeBusy" @click="revokeToken">Revoke</v-btn>
+                                <v-btn v-if="credential" color="error" variant="text" size="small" :loading="intakeBusy" @click="revokeToken">Revoke</v-btn>
                             </div>
                         </div>
                     </v-window-item>
@@ -141,13 +151,18 @@ const tab = ref('overview');
 const deployment = ref(null);
 const loading = ref(false);
 const intakeBusy = ref(false);
+const newToken = ref(null);
+
+const credential = computed(() => deployment.value?.intake_credential ?? null);
 
 const generateToken = async () => {
     intakeBusy.value = true;
 
     try {
         const response = await v1(`deployments/${deploymentId}/intake-token`, { method: 'POST' });
-        deployment.value.intake_token = (response?.data ?? response)?.intake_token;
+        const data = response?.data ?? response;
+        newToken.value = data?.token ?? null;
+        deployment.value.intake_credential = data?.credential ?? null;
         toast.success('Intake token generated.');
     } catch (error) {
         toast.error(errorMessage(error, 'Could not generate the token.'));
@@ -161,7 +176,8 @@ const revokeToken = async () => {
 
     try {
         await v1(`deployments/${deploymentId}/intake-token`, { method: 'DELETE' });
-        deployment.value.intake_token = null;
+        deployment.value.intake_credential = null;
+        newToken.value = null;
         toast.success('Intake token revoked.');
     } catch (error) {
         toast.error(errorMessage(error, 'Could not revoke the token.'));
@@ -171,7 +187,7 @@ const revokeToken = async () => {
 };
 
 const copyToken = () => {
-    navigator.clipboard?.writeText(deployment.value?.intake_token ?? '');
+    navigator.clipboard?.writeText(newToken.value ?? '');
     toast.success('Token copied.');
 };
 
@@ -209,6 +225,8 @@ onMounted(load);
 .intake__lead { margin: 0; color: var(--rw-muted); line-height: 1.6; font-size: 0.9rem; }
 .intake__lead code { background: var(--rw-surface-2); padding: 0.05rem 0.35rem; border-radius: 5px; font-size: 0.82rem; }
 .intake__field { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.intake__new-token { display: grid; gap: 0.5rem; }
+.intake__new-token-lead { font-weight: 600; font-size: 0.85rem; }
 .intake__label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--rw-muted); min-width: 5rem; }
 .intake__value { background: var(--rw-surface-2); border: 1px solid var(--rw-border); border-radius: 6px; padding: 0.3rem 0.55rem; font-size: 0.82rem; word-break: break-all; }
 .intake__value--token { color: var(--rw-700); font-weight: 600; }

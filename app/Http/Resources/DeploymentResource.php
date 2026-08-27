@@ -32,7 +32,7 @@ class DeploymentResource extends JsonResource
             'status' => $status?->value,
             'status_label' => $status?->label(),
             'status_color' => $status?->color(),
-            'intake_token' => $this->intake_token,
+            'intake_credential' => $this->whenLoaded('activeIntakeCredential', fn () => $this->activeIntakeCredential ? new IntakeCredentialResource($this->activeIntakeCredential) : null),
             'notes' => $this->notes,
             'infrastructure_assets_count' => $this->whenCounted('infrastructureAssets'),
             'monitoring_checks_count' => $this->whenCounted('monitoringChecks'),

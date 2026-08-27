@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\DeploymentServiceInterface;
+use App\Contracts\IntakeCredentialServiceInterface;
 use App\Contracts\LookupOptionServiceInterface;
 use App\Enums\DeploymentStatus;
 use App\Enums\LookupType;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Operations\StoreDeploymentRequest;
 use App\Http\Requests\Operations\UpdateDeploymentRequest;
 use App\Http\Resources\DeploymentResource;
+use App\Http\Resources\IntakeCredentialResource;
 use App\Models\Client;
 use App\Models\Deployment;
 use App\Models\LookupOption;
@@ -24,6 +26,7 @@ class DeploymentController extends Controller
     public function __construct(
         private readonly DeploymentServiceInterface $service,
         private readonly LookupOptionServiceInterface $lookups,
+        private readonly IntakeCredentialServiceInterface $intakeCredentials,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -50,24 +53,33 @@ class DeploymentController extends Controller
 
     public function show(Deployment $deployment): JsonResponse
     {
-        $deployment->load(['client', 'product', 'package', 'infrastructureAssets', 'monitoringChecks', 'releases'])
+        $deployment->load(['client', 'product', 'package', 'infrastructureAssets', 'monitoringChecks', 'releases', 'activeIntakeCredential'])
             ->loadCount(['infrastructureAssets', 'monitoringChecks', 'releases']);
 
         return response()->json(['data' => new DeploymentResource($deployment)]);
     }
 
-    public function generateIntakeToken(Deployment $deployment): JsonResponse
+    public function generateIntakeToken(Request $request, Deployment $deployment): JsonResponse
     {
-        $token = $deployment->regenerateIntakeToken();
+        $validated = $request->validate([
+            'expires_at' => ['nullable', 'date', 'after:now'],
+        ]);
 
-        return response()->json(['data' => ['intake_token' => $token]]);
+        $issued = $this->intakeCredentials->issue($deployment, $request->user(), $validated['expires_at'] ?? null);
+
+        return response()->json([
+            'data' => [
+                'token' => $issued['plaintext'],
+                'credential' => new IntakeCredentialResource($issued['credential']),
+            ],
+        ]);
     }
 
     public function revokeIntakeToken(Deployment $deployment): JsonResponse
     {
-        $deployment->forceFill(['intake_token' => null])->save();
+        $this->intakeCredentials->revoke($deployment);
 
-        return response()->json(['data' => ['intake_token' => null]]);
+        return response()->json(['data' => null]);
     }
 
     public function store(StoreDeploymentRequest $request): JsonResponse
