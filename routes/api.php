@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\SlaController;
 use App\Http\Controllers\Api\SupportAgreementController;
 use App\Http\Controllers\Api\SupportTicketController;
 use App\Http\Controllers\Api\TicketCommentController;
+use App\Http\Controllers\PayFastController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -166,6 +167,11 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
         Route::middleware('can:invoices.create')->post('invoices', [InvoiceController::class, 'store']);
         Route::middleware('can:invoices.update')->match(['put', 'patch'], 'invoices/{invoice}', [InvoiceController::class, 'update']);
         Route::middleware('can:payments.create')->post('invoices/{invoice}/payments', [PaymentController::class, 'store']);
+    });
+
+    Route::middleware(['can:payments.create', 'throttle:10,1'])->prefix('payments/payfast')->group(function () {
+        Route::post('initiate', [PayFastController::class, 'initiateOneTime']);
+        Route::post('subscriptions/initiate', [PayFastController::class, 'initiateSubscription']);
     });
 
     Route::middleware('can:billing.view')->get('dashboard/finance', [FinanceDashboardController::class, 'show']);
