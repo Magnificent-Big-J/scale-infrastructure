@@ -144,7 +144,7 @@ const stack = [
     { name: 'Laravel',              version: '13', role: 'Backend framework' },
     { name: 'Sanctum',              version: '4',  role: 'Session / API auth' },
     { name: 'lara-auth-suite',      version: '2',  role: 'Auth, 2FA, password reset' },
-    { name: 'payfast-payment',      version: '1',  role: 'PayFast checkout' },
+    { name: 'payfast-payment',      version: '2',  role: 'PayFast checkout' },
     { name: 'laravel-permission',   version: '7',  role: 'Roles & permissions' },
     { name: 'laravel-medialibrary', version: '11', role: 'File / media management' },
     { name: 'laravel-activitylog',  version: '5',  role: 'Audit trail' },
