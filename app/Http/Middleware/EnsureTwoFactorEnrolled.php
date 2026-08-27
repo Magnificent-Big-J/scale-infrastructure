@@ -23,7 +23,11 @@ class EnsureTwoFactorEnrolled
             return $next($request);
         }
 
-        if (! $user->hasAnyRole(config('security.two_factor_required_roles', []))) {
+        $riskyByRole = $user->hasAnyRole(config('security.two_factor_required_roles', []));
+        $riskyByPermission = method_exists($user, 'hasAnyPermission')
+            && $user->hasAnyPermission(config('security.two_factor_required_permissions', []));
+
+        if (! $riskyByRole && ! $riskyByPermission) {
             return $next($request);
         }
 

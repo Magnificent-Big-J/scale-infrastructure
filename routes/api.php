@@ -79,8 +79,8 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
         Route::get('deployments', [DeploymentController::class, 'index']);
         Route::get('deployments/{deployment}', [DeploymentController::class, 'show']);
         Route::middleware('can:deployments.create')->post('deployments', [DeploymentController::class, 'store']);
-        Route::middleware('can:deployments.update')->post('deployments/{deployment}/intake-token', [DeploymentController::class, 'generateIntakeToken']);
-        Route::middleware('can:deployments.update')->delete('deployments/{deployment}/intake-token', [DeploymentController::class, 'revokeIntakeToken']);
+        Route::middleware(['can:deployments.update', 'password.confirmed'])->post('deployments/{deployment}/intake-token', [DeploymentController::class, 'generateIntakeToken']);
+        Route::middleware(['can:deployments.update', 'password.confirmed'])->delete('deployments/{deployment}/intake-token', [DeploymentController::class, 'revokeIntakeToken']);
         Route::middleware('can:deployments.update')->match(['put', 'patch'], 'deployments/{deployment}', [DeploymentController::class, 'update']);
         Route::middleware('can:deployments.delete')->delete('deployments/{deployment}', [DeploymentController::class, 'destroy']);
         Route::middleware('can:infrastructure.create')->post('deployments/{deployment}/infrastructure-assets', [InfrastructureAssetController::class, 'store']);
@@ -121,9 +121,9 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
         Route::get('releases/{release}', [ReleaseController::class, 'show']);
         Route::middleware('can:releases.create')->post('releases', [ReleaseController::class, 'store']);
         Route::middleware('can:releases.update')->match(['put', 'patch'], 'releases/{release}', [ReleaseController::class, 'update']);
-        Route::middleware('can:releases.approve')->post('releases/{release}/approve', [ReleaseController::class, 'approve']);
-        Route::middleware('can:releases.deploy')->post('releases/{release}/deploy', [ReleaseController::class, 'deploy']);
-        Route::middleware('can:releases.rollback')->post('releases/{release}/rollback', [ReleaseController::class, 'rollback']);
+        Route::middleware(['can:releases.approve', 'password.confirmed'])->post('releases/{release}/approve', [ReleaseController::class, 'approve']);
+        Route::middleware(['can:releases.deploy', 'password.confirmed'])->post('releases/{release}/deploy', [ReleaseController::class, 'deploy']);
+        Route::middleware(['can:releases.rollback', 'password.confirmed'])->post('releases/{release}/rollback', [ReleaseController::class, 'rollback']);
 
         Route::get('change-requests', [ChangeRequestController::class, 'index']);
         Route::middleware('can:releases.create')->post('change-requests', [ChangeRequestController::class, 'store']);
@@ -136,7 +136,7 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
         Route::middleware('can:deployments.provision')->match(['put', 'patch'], 'provisioning-templates/{provisioningTemplate}', [ProvisioningTemplateController::class, 'update']);
 
         Route::get('automation-runs', [AutomationRunController::class, 'index']);
-        Route::middleware('can:deployments.provision')->post('automation-runs', [AutomationRunController::class, 'store']);
+        Route::middleware(['can:deployments.provision', 'password.confirmed'])->post('automation-runs', [AutomationRunController::class, 'store']);
     });
 
     Route::middleware('can:opportunities.view')->group(function () {
@@ -187,13 +187,13 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
     Route::middleware('can:reports.view')->group(function () {
         Route::get('reports', [ReportController::class, 'index']);
         Route::get('reports/{type}', [ReportController::class, 'show']);
-        Route::middleware('can:reports.export')->get('reports/{type}/export', [ReportController::class, 'export']);
+        Route::middleware(['can:reports.export', 'password.confirmed'])->get('reports/{type}/export', [ReportController::class, 'export']);
     });
 
     Route::middleware('can:users.view')->group(function () {
         Route::get('users', [UserAdminController::class, 'index']);
         Route::middleware('can:users.create')->post('users', [UserAdminController::class, 'store']);
-        Route::middleware('can:users.update')->patch('users/{user}', [UserAdminController::class, 'update']);
+        Route::middleware(['can:users.update', 'password.confirmed'])->patch('users/{user}', [UserAdminController::class, 'update']);
     });
 
     Route::middleware('can:products.view')->group(function () {

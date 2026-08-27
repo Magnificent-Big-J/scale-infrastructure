@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureRecentPasswordConfirmation;
 use App\Http\Middleware\EnsureTwoFactorEnrolled;
 use App\Http\Middleware\ResolveIntakeToken;
 use Illuminate\Foundation\Application;
@@ -33,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'intake.token' => ResolveIntakeToken::class,
             'two_factor.required' => EnsureTwoFactorEnrolled::class,
+            'password.confirmed' => EnsureRecentPasswordConfirmation::class,
         ]);
 
         // This is an SPA with no server-rendered login route. Left at the

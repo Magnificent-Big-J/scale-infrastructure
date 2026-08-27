@@ -9,6 +9,7 @@ use App\Models\ProvisioningTemplate;
 use App\Models\Release;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class ReleaseOperationsTest extends TestCase
@@ -28,6 +29,14 @@ class ReleaseOperationsTest extends TestCase
     private function executive(): User
     {
         return User::where('email', 'executive@codescaletech.test')->firstOrFail();
+    }
+
+    private function actingAsWithStepUp(User $user): void
+    {
+        Auth::forgetGuards();
+        $this->actingAs($user, 'web');
+        $this->actingAs($user, 'sanctum');
+        $this->postJson('/auth/session/password/confirm', ['password' => 'password'])->assertOk();
     }
 
     public function test_seeder_creates_release_operations_records(): void
@@ -66,8 +75,8 @@ class ReleaseOperationsTest extends TestCase
         $deployment = Deployment::where('name', 'Client Sandbox')->firstOrFail();
         $release = Release::where('deployment_id', $deployment->id)->where('version', '2026.05.3')->firstOrFail();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson("/api/v1/releases/{$release->id}/approve")
+        $this->actingAsWithStepUp($this->admin());
+        $this->postJson("/api/v1/releases/{$release->id}/approve")
             ->assertOk()
             ->assertJsonFragment(['status' => 'approved']);
 
@@ -75,8 +84,8 @@ class ReleaseOperationsTest extends TestCase
         $this->assertNotNull($release->approved_at);
         $this->assertSame($this->admin()->id, $release->approved_by);
 
-        $this->actingAs($this->technical(), 'sanctum')
-            ->postJson("/api/v1/releases/{$release->id}/deploy")
+        $this->actingAsWithStepUp($this->technical());
+        $this->postJson("/api/v1/releases/{$release->id}/deploy")
             ->assertOk()
             ->assertJsonFragment(['status' => 'deployed']);
 
@@ -92,8 +101,8 @@ class ReleaseOperationsTest extends TestCase
         $deployment = Deployment::where('name', 'Client Sandbox')->firstOrFail();
         $release = Release::where('deployment_id', $deployment->id)->where('version', '2026.05.3')->firstOrFail();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson("/api/v1/releases/{$release->id}/deploy")
+        $this->actingAsWithStepUp($this->admin());
+        $this->postJson("/api/v1/releases/{$release->id}/deploy")
             ->assertStatus(422)
             ->assertJsonValidationErrorFor('status');
     }
@@ -104,8 +113,8 @@ class ReleaseOperationsTest extends TestCase
 
         $release = Release::where('version', '2026.06.1')->firstOrFail();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson("/api/v1/releases/{$release->id}/rollback", ['rollback_notes' => 'Regression in reporting.'])
+        $this->actingAsWithStepUp($this->admin());
+        $this->postJson("/api/v1/releases/{$release->id}/rollback", ['rollback_notes' => 'Regression in reporting.'])
             ->assertOk()
             ->assertJsonFragment(['status' => 'rolled_back']);
 
@@ -161,24 +170,23 @@ class ReleaseOperationsTest extends TestCase
         $approved = ChangeRequest::where('reference', 'CR-3001')->firstOrFail();
         $template = ProvisioningTemplate::firstOrFail();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson('/api/v1/automation-runs', [
-                'provisioning_template_id' => $template->id,
-                'change_request_id' => $submitted->id,
-                'reference' => 'RUN-4002',
-                'status' => 'running',
-            ])
+        $this->actingAsWithStepUp($this->admin());
+        $this->postJson('/api/v1/automation-runs', [
+            'provisioning_template_id' => $template->id,
+            'change_request_id' => $submitted->id,
+            'reference' => 'RUN-4002',
+            'status' => 'running',
+        ])
             ->assertStatus(422)
             ->assertJsonValidationErrorFor('change_request_id');
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson('/api/v1/automation-runs', [
-                'provisioning_template_id' => $template->id,
-                'change_request_id' => $approved->id,
-                'reference' => 'RUN-4003',
-                'status' => 'succeeded',
-                'output_summary' => 'Completed provisioning.',
-            ])
+        $this->postJson('/api/v1/automation-runs', [
+            'provisioning_template_id' => $template->id,
+            'change_request_id' => $approved->id,
+            'reference' => 'RUN-4003',
+            'status' => 'succeeded',
+            'output_summary' => 'Completed provisioning.',
+        ])
             ->assertCreated()
             ->assertJsonFragment(['reference' => 'RUN-4003']);
 

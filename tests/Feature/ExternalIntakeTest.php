@@ -25,13 +25,21 @@ class ExternalIntakeTest extends TestCase
         return $issued['plaintext'];
     }
 
+    private function actingAsAdminWithStepUp(): void
+    {
+        $admin = $this->admin();
+        $this->actingAs($admin, 'web');
+        $this->actingAs($admin, 'sanctum');
+        $this->postJson('/auth/session/password/confirm', ['password' => 'password'])->assertOk();
+    }
+
     public function test_admin_can_generate_and_revoke_an_intake_token(): void
     {
         $this->seed();
         $deployment = Deployment::query()->firstOrFail();
+        $this->actingAsAdminWithStepUp();
 
-        $token = $this->actingAs($this->admin(), 'sanctum')
-            ->postJson("/api/v1/deployments/{$deployment->id}/intake-token")
+        $token = $this->postJson("/api/v1/deployments/{$deployment->id}/intake-token")
             ->assertOk()
             ->json('data.token');
 
@@ -43,8 +51,7 @@ class ExternalIntakeTest extends TestCase
             ->postJson('/api/intake/tickets', ['subject' => 'Works before revoke'])
             ->assertCreated();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->deleteJson("/api/v1/deployments/{$deployment->id}/intake-token")
+        $this->deleteJson("/api/v1/deployments/{$deployment->id}/intake-token")
             ->assertOk();
 
         $this->assertDatabaseMissing('intake_credentials', ['deployment_id' => $deployment->id, 'revoked_at' => null]);
@@ -59,9 +66,9 @@ class ExternalIntakeTest extends TestCase
         $this->seed();
         $deployment = Deployment::query()->firstOrFail();
         $first = $this->issueToken($deployment);
+        $this->actingAsAdminWithStepUp();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->postJson("/api/v1/deployments/{$deployment->id}/intake-token")
+        $this->postJson("/api/v1/deployments/{$deployment->id}/intake-token")
             ->assertOk();
 
         $this->withHeader('X-Intake-Token', $first)

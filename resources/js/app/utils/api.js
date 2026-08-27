@@ -19,6 +19,12 @@ export const v1 = ofetch.create({
 
         if (response.status === 403 && response._data?.code === 'two_factor_setup_required' && path !== '/profile') {
             window.location.assign('/profile?require2fa=1');
+
+            return;
+        }
+
+        if (response.status === 428 && response._data?.code === 'password_confirmation_required') {
+            import('../stores/step-up').then(({ useStepUpStore }) => useStepUpStore().require());
         }
     },
 });

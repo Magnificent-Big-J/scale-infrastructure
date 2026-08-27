@@ -12,7 +12,7 @@
 
             <div class="operations__stats">
                 <AppStatCard label="Assets" :value="String(store.meta.total)" helper="Tracked infrastructure records" icon="mdi-server-network" status="active" />
-                <AppStatCard label="Monthly cost" :value="monthlyCost" helper="Current result set" icon="mdi-cash-multiple" status="processing" />
+                <AppStatCard v-if="canViewCosts" label="Monthly cost" :value="monthlyCost" helper="Current result set" icon="mdi-cash-multiple" status="processing" />
                 <AppStatCard label="Deployments" :value="String(store.options.deployments.length)" helper="Available environments" icon="mdi-rocket-launch-outline" status="active" />
             </div>
 
@@ -52,7 +52,7 @@
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.provider" label="Provider" placeholder="AWS, DigitalOcean, Hetzner…" :error-messages="dialog.errors.provider" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.region" label="Region" :error-messages="dialog.errors.region" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.size" label="Size" placeholder="2 vCPU / 4GB" :error-messages="dialog.errors.size" /></v-col>
-                        <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.monthly_cost" label="Monthly cost" type="number" :error-messages="dialog.errors.monthly_cost" /></v-col>
+                        <v-col v-if="canViewCosts" cols="12" sm="6"><AppTextField v-model="dialog.form.monthly_cost" label="Monthly cost" type="number" :error-messages="dialog.errors.monthly_cost" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.public_ip" label="Public IP" :error-messages="dialog.errors.public_ip" /></v-col>
                         <v-col cols="12" sm="6"><AppTextField v-model="dialog.form.private_ip" label="Private IP" :error-messages="dialog.errors.private_ip" /></v-col>
                     </v-row>
@@ -83,9 +83,12 @@ import AppTextField from '../../components/AppTextField.vue';
 import FormStatusAlert from '../../components/FormStatusAlert.vue';
 import { useToast } from '../../composables/useToast';
 import { useInfrastructureAssetsStore } from '../../stores/infrastructure-assets';
+import { useSessionStore } from '../../stores/session';
 
 const toast = useToast();
 const store = useInfrastructureAssetsStore();
+const session = useSessionStore();
+const canViewCosts = computed(() => session.user?.permissions?.includes('profitability.view') ?? false);
 const filters = reactive({ search: '', type: '', page: 1 });
 const columns = [
     { key: 'asset', label: 'Asset' },
@@ -137,7 +140,15 @@ const normalizePayload = () => {
     ['provider', 'region', 'size', 'public_ip', 'private_ip'].forEach((key) => {
         if (payload[key] === '') payload[key] = null;
     });
-    payload.monthly_cost = payload.monthly_cost === '' ? null : Number(payload.monthly_cost);
+
+    if (canViewCosts.value) {
+        payload.monthly_cost = payload.monthly_cost === '' ? null : Number(payload.monthly_cost);
+    } else {
+        // Never shown the current value, so never submit one - see the
+        // matching `sometimes` rule on UpdateInfrastructureAssetRequest.
+        delete payload.monthly_cost;
+    }
+
     return payload;
 };
 
