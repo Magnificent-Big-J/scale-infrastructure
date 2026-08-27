@@ -18,7 +18,7 @@ class PayFastController extends Controller
     {
         $result = $this->checkout->initiateOneTimePayment(
             $request->validated(),
-            $request->user()?->id
+            $request->user()->id
         );
 
         return response($result['html'], 200)->header('Content-Type', 'text/html');
@@ -28,7 +28,7 @@ class PayFastController extends Controller
     {
         $result = $this->checkout->initiateSubscriptionPayment(
             $request->validated(),
-            $request->user()?->id
+            $request->user()->id
         );
 
         return response($result['html'], 200)->header('Content-Type', 'text/html');
@@ -49,23 +49,19 @@ class PayFastController extends Controller
         return response($result['duplicate'] ? 'duplicate' : 'ok', 200);
     }
 
-    public function handleReturn(Request $request): Response
+    /**
+     * PayFast's browser return/cancel redirects are navigational only — the
+     * user's browser landing here proves nothing about whether payment
+     * actually succeeded. Only a validated ITN (see itn() above) is ever
+     * allowed to change payment/subscription state.
+     */
+    public function handleReturn(): Response
     {
-        $this->checkout->markReturn(
-            $request->query('m_payment_id'),
-            $request->query('token')
-        );
-
         return response('Payment completed');
     }
 
-    public function handleCancel(Request $request): Response
+    public function handleCancel(): Response
     {
-        $this->checkout->markCancelled(
-            $request->query('m_payment_id'),
-            $request->query('token')
-        );
-
         return response('Payment canceled');
     }
 }

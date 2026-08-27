@@ -34,6 +34,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'intake.token' => ResolveIntakeToken::class,
             'two_factor.required' => EnsureTwoFactorEnrolled::class,
         ]);
+
+        // This is an SPA with no server-rendered login route. Left at the
+        // framework default (route('login')), any unauthenticated request
+        // that doesn't ask for JSON 500s with "Route [login] not defined"
+        // instead of a clean 401.
+        $middleware->redirectGuestsTo(fn () => null);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
