@@ -2,8 +2,8 @@
 
 use App\Http\Resources\AuthUserResource;
 use App\Models\User;
-use Rainwaves\LaraAuthSuite\Support\Enums\AuthMode;
 use Rainwaves\LaraAuthSuite\Support\Enums\AuthFeature;
+use Rainwaves\LaraAuthSuite\Support\Enums\AuthMode;
 use Rainwaves\LaraAuthSuite\Support\Enums\TwoFactorChannel;
 
 return [
@@ -15,11 +15,23 @@ return [
     'frontend' => [
         'password_reset_url' => env('AUTHX_FRONTEND_RESET_URL', '/auth/reset-password'),
     ],
+    'password_reset' => [
+        'revoke_tokens' => true,       // revoke all Sanctum personal access tokens on reset
+        'invalidate_sessions' => true, // remove other database-backed sessions on reset (no-op on non-database session drivers)
+        'notify_user' => true,         // send a "your password was changed" notification (best-effort; never blocks reset success)
+    ],
+    'branding' => [
+        // Closing signature line on every package-sent email. Left null, it
+        // derives from app.name ("— The Scale Infrastructure Security Team").
+        'email_signature' => env('AUTHX_EMAIL_SIGNATURE'),
+    ],
+    // v2.1: Devices removed from the package's own default set (trusted-device
+    // management was never implemented, v2.2 scope) — dropped here too since
+    // this app never had that feature either.
     'features' => [
         AuthFeature::PasswordReset->value,
         AuthFeature::TwoFactor->value,
         AuthFeature::Tokens->value,
-        AuthFeature::Devices->value,
     ],
     '2fa' => [
         'channels' => [TwoFactorChannel::Email->value, TwoFactorChannel::Totp->value], // allowed: email, totp
@@ -37,15 +49,27 @@ return [
         'recovery_codes_count' => 8,
         'require_password_on_manage' => true,  // gates disable + regenerate recovery codes
         'require_password_on_enable' => false, // enabling 2FA is security-positive; no password needed
+        'recent_password_ttl_seconds' => 300,  // how long a POST /auth/password/confirm stays valid
     ],
     'tokens' => [
-        'default_abilities' => ['*'],
-        'expiry_minutes' => null,
+        // v2.1 secure defaults (was ['*'] / null): scoped, finite. Nothing in
+        // this app depends on unlimited-ability, non-expiring tokens.
+        'default_abilities' => ['auth:read'],
+        'expiry_minutes' => 10080, // 7 days
+        'default_name' => 'authx-client',
+        'ability_resolver' => null,
     ],
+    // v2.1: independent per-account/per-IP buckets (was one combined-key
+    // limiter that an attacker could bypass by rotating either dimension).
     'throttle' => [
-        'login' => 5,
-        'two_factor' => 5,
-        'reset' => 5,
+        'login_per_account' => 5,
+        'login_per_ip' => 20,
+        'password_reset_per_account' => 3,
+        'password_reset_per_ip' => 10,
+        'otp_send_per_account' => 3,
+        'otp_send_per_ip' => 10,
+        'two_factor_per_account' => 5,
+        'two_factor_per_ip' => 20,
         'decay_seconds' => 60,
     ],
     'registration' => [
