@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 
 class Deployment extends Model
 {
@@ -27,7 +27,6 @@ class Deployment extends Model
         'current_version',
         'go_live_date',
         'status',
-        'intake_token',
         'notes',
     ];
 
@@ -39,11 +38,19 @@ class Deployment extends Model
         ];
     }
 
-    public function regenerateIntakeToken(): string
+    public function intakeCredentials(): HasMany
     {
-        $this->forceFill(['intake_token' => 'dit_'.Str::random(40)])->save();
+        return $this->hasMany(IntakeCredential::class);
+    }
 
-        return $this->intake_token;
+    public function activeIntakeCredential(): HasOne
+    {
+        // At most one non-revoked credential exists per deployment at a time
+        // (IntakeCredentialService::issue() revokes the prior one atomically
+        // before creating the next), so a plain hasOne is correct here and
+        // avoids latestOfMany()'s MAX(id) aggregate, which Postgres rejects
+        // outright for a uuid primary key.
+        return $this->hasOne(IntakeCredential::class)->whereNull('revoked_at');
     }
 
     public function client(): BelongsTo

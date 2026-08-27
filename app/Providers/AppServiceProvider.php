@@ -9,6 +9,7 @@ use App\Contracts\CommercialOperationsServiceInterface;
 use App\Contracts\DeploymentServiceInterface;
 use App\Contracts\ExecutiveDashboardServiceInterface;
 use App\Contracts\FinanceDashboardServiceInterface;
+use App\Contracts\IntakeCredentialServiceInterface;
 use App\Contracts\IntakeServiceInterface;
 use App\Contracts\LookupOptionServiceInterface;
 use App\Contracts\OperationsDashboardServiceInterface;
@@ -31,6 +32,7 @@ use App\Services\CommercialOperationsService;
 use App\Services\DeploymentService;
 use App\Services\ExecutiveDashboardService;
 use App\Services\FinanceDashboardService;
+use App\Services\IntakeCredentialService;
 use App\Services\IntakeService;
 use App\Services\LookupOptionService;
 use App\Services\OperationsDashboardService;
@@ -73,6 +75,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TicketCommentServiceInterface::class, TicketCommentService::class);
         $this->app->bind(SlaServiceInterface::class, SlaService::class);
         $this->app->bind(IntakeServiceInterface::class, IntakeService::class);
+        $this->app->bind(IntakeCredentialServiceInterface::class, IntakeCredentialService::class);
         $this->app->bind(OpportunityServiceInterface::class, OpportunityService::class);
     }
 

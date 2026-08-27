@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\IntakeScope;
 use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\Admin\CatalogueFeatureController;
 use App\Http\Controllers\Api\Admin\LookupOptionController;
@@ -40,7 +41,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Public, token-authenticated external ticket intake (inbound create only).
-Route::middleware(['intake.token', 'throttle:60,1'])->post('intake/tickets', [IntakeTicketController::class, 'store']);
+Route::middleware(['intake.token:'.IntakeScope::TicketsCreate->value, 'throttle:60,1'])->post('intake/tickets', [IntakeTicketController::class, 'store']);
 
 Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(function () {
     Route::get('ping', fn () => response()->json(['status' => 'ok']));
