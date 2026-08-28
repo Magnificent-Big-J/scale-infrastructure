@@ -43,14 +43,34 @@ enum ReportType: string
         };
     }
 
+    /**
+     * These two summaries surface the same revenue/cost/invoice figures the
+     * billing and profitability modules already gate behind a dedicated
+     * permission - a report is just another view onto that data, so it
+     * shouldn't bypass the gate the underlying records are protected by.
+     */
+    public function requiredPermission(): ?string
+    {
+        return match ($this) {
+            self::FinanceSummary => 'billing.view',
+            self::ProfitabilitySummary => 'profitability.view',
+            default => null,
+        };
+    }
+
+    public function toOption(): array
+    {
+        return [
+            'value' => $this->value,
+            'label' => $this->label(),
+            'description' => $this->description(),
+            'icon' => $this->icon(),
+        ];
+    }
+
     public static function options(): array
     {
-        return array_map(fn (self $type) => [
-            'value' => $type->value,
-            'label' => $type->label(),
-            'description' => $type->description(),
-            'icon' => $type->icon(),
-        ], self::cases());
+        return array_map(fn (self $type) => $type->toOption(), self::cases());
     }
 
     public static function values(): array
