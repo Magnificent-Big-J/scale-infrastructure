@@ -125,6 +125,7 @@ const session = useSessionStore();
 const dashboards = useDashboardsStore();
 
 const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
+const canViewBilling = computed(() => session.user?.permissions?.includes('billing.view') ?? false);
 
 const formatAmount = (value) => `ZAR ${Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
@@ -158,7 +159,9 @@ const hasCharts = computed(() => deploymentDist.value.series.length > 0 || ticke
 const stats = computed(() => [
     { label: 'Active clients', value: String(exec.value.active_clients), helper: `${exec.value.at_risk_clients} at risk · ${exec.value.average_client_health}% avg health`, icon: 'mdi-domain', bg: 'rgba(37,99,235,0.08)', iconColor: 'var(--rw-600)' },
     { label: 'Active deployments', value: String(exec.value.active_deployments), helper: 'Live product environments', icon: 'mdi-server-network', bg: 'rgba(2,132,199,0.08)', iconColor: '#0284c7' },
-    { label: 'MRR', value: formatAmount(exec.value.mrr), helper: `ARR ${formatAmount(exec.value.arr)} · ${formatAmount(exec.value.outstanding_total)} outstanding`, icon: 'mdi-cash-multiple', bg: 'rgba(2,132,199,0.08)', iconColor: 'var(--rw-amber)' },
+    ...(canViewBilling.value
+        ? [{ label: 'MRR', value: formatAmount(exec.value.mrr), helper: `ARR ${formatAmount(exec.value.arr)} · ${formatAmount(exec.value.outstanding_total)} outstanding`, icon: 'mdi-cash-multiple', bg: 'rgba(2,132,199,0.08)', iconColor: 'var(--rw-amber)' }]
+        : []),
     { label: 'Open work', value: String(exec.value.open_tickets + exec.value.open_incidents), helper: `${exec.value.open_tickets} tickets · ${exec.value.open_incidents} incidents`, icon: 'mdi-lifebuoy', bg: 'rgba(101,16,147,0.08)', iconColor: '#6510a3' },
 ]);
 

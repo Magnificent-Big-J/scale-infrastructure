@@ -109,6 +109,21 @@ class ProfitabilityDashboardTest extends TestCase
             ->assertJsonPath('data.mrr', 103000);
     }
 
+    public function test_executive_dashboard_hides_financial_figures_without_billing_permission(): void
+    {
+        $this->seed();
+
+        // operations has dashboard.view (as every role does) but not billing.view.
+        $response = $this->actingAs(User::where('email', 'operations@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson('/api/v1/dashboard/executive')
+            ->assertOk();
+
+        $response->assertJsonMissingPath('data.mrr');
+        $response->assertJsonMissingPath('data.arr');
+        $response->assertJsonMissingPath('data.outstanding_total');
+        $response->assertJsonPath('data.active_clients', Client::query()->where('status', ClientStatus::Active->value)->count());
+    }
+
     public function test_operations_dashboard_aggregates(): void
     {
         $this->seed();

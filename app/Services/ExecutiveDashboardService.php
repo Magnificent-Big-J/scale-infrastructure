@@ -20,7 +20,12 @@ class ExecutiveDashboardService implements ExecutiveDashboardServiceInterface
 
     public function metrics(): array
     {
-        $finance = $this->finance->metrics();
+        // This dashboard is visible to every role via dashboard.view, but
+        // MRR/ARR/outstanding are the same figures billing.view already
+        // gates on the finance dashboard directly - don't let a second
+        // route re-expose them to a role that lacks that permission.
+        $canViewBilling = auth()->user()?->can('billing.view') ?? false;
+        $finance = $canViewBilling ? $this->finance->metrics() : null;
 
         $activeClients = Client::query()->where('status', ClientStatus::Active->value)->count();
 
@@ -32,9 +37,11 @@ class ExecutiveDashboardService implements ExecutiveDashboardServiceInterface
             'active_clients' => $activeClients,
             'at_risk_clients' => Client::query()->where('status', ClientStatus::AtRisk->value)->count(),
             'active_deployments' => Deployment::query()->where('status', DeploymentStatus::Active->value)->count(),
-            'mrr' => $finance['mrr'],
-            'arr' => $finance['arr'],
-            'outstanding_total' => $finance['outstanding_total'],
+            ...($finance !== null ? [
+                'mrr' => $finance['mrr'],
+                'arr' => $finance['arr'],
+                'outstanding_total' => $finance['outstanding_total'],
+            ] : []),
             'open_tickets' => SupportTicket::query()
                 ->whereNotIn('status', [SupportTicketStatus::Resolved->value, SupportTicketStatus::Closed->value])
                 ->count(),
