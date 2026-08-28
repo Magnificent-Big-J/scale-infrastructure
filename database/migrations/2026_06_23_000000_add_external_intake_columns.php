@@ -21,6 +21,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('deployments', function (Blueprint $table) {
+            // Drop the unique index before the column it's built on - SQLite
+            // (unlike Postgres/MySQL) doesn't cascade-drop a dependent index
+            // when its column is dropped, and raises "error in index ...
+            // after drop column" instead. Never exercised until a real
+            // rollback test rolled all the way back to this migration.
+            $table->dropUnique(['intake_token']);
             $table->dropColumn('intake_token');
         });
 
