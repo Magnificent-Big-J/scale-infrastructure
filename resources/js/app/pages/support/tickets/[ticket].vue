@@ -42,7 +42,7 @@
                     </v-window-item>
 
                     <v-window-item value="discussion">
-                        <AppTicketComments v-if="tab === 'discussion'" :ticket-id="ticketId" :can-comment="canComment" />
+                        <AppComments v-if="tab === 'discussion'" :resource-url="`support-tickets/${ticketId}`" :can-comment="canComment" />
                     </v-window-item>
 
                     <v-window-item v-if="canViewActivity" value="activity">
@@ -68,10 +68,10 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppActivityFeed from '../../../components/AppActivityFeed.vue';
+import AppComments from '../../../components/AppComments.vue';
 import AppRichTextDisplay from '../../../components/AppRichTextDisplay.vue';
 import AppSectionCard from '../../../components/AppSectionCard.vue';
 import AppStatCard from '../../../components/AppStatCard.vue';
-import AppTicketComments from '../../../components/AppTicketComments.vue';
 import { useSessionStore } from '../../../stores/session';
 import { v1 } from '../../../utils/api';
 

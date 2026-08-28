@@ -40,7 +40,7 @@ import { useToast, errorMessage } from '../composables/useToast';
 import { v1 } from '../utils/api';
 
 const props = defineProps({
-    ticketId: { type: [String, Number], required: true },
+    resourceUrl: { type: String, required: true },
     canComment: { type: Boolean, default: false },
 });
 
@@ -69,7 +69,7 @@ const load = async () => {
     loading.value = true;
 
     try {
-        const response = await v1(`support-tickets/${props.ticketId}/comments`);
+        const response = await v1(`${props.resourceUrl}/comments`);
         comments.value = response?.data?.map((item) => item?.data ?? item) ?? [];
     } finally {
         loading.value = false;
@@ -81,7 +81,7 @@ const submit = async () => {
     posting.value = true;
 
     try {
-        const response = await v1(`support-tickets/${props.ticketId}/comments`, { method: 'POST', body: { body: body.value } });
+        const response = await v1(`${props.resourceUrl}/comments`, { method: 'POST', body: { body: body.value } });
         comments.value.push(response?.data ?? response);
         body.value = '';
         toast.success('Comment added.');

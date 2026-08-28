@@ -226,11 +226,18 @@ declare module 'vue-router/auto-routes' {
       { deployment: ParamValue<false> },
       | never
     >,
-    '/operations/incidents': RouteRecordInfo<
-      '/operations/incidents',
+    '/operations/incidents/': RouteRecordInfo<
+      '/operations/incidents/',
       '/operations/incidents',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/operations/incidents/[incident]': RouteRecordInfo<
+      '/operations/incidents/[incident]',
+      '/operations/incidents/:incident',
+      { incident: ParamValue<true> },
+      { incident: ParamValue<false> },
       | never
     >,
     '/operations/infrastructure': RouteRecordInfo<
@@ -498,9 +505,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'resources/js/app/pages/operations/incidents.vue': {
+    'resources/js/app/pages/operations/incidents/index.vue': {
       routes:
-        | '/operations/incidents'
+        | '/operations/incidents/'
+      views:
+        | never
+    }
+    'resources/js/app/pages/operations/incidents/[incident].vue': {
+      routes:
+        | '/operations/incidents/[incident]'
       views:
         | never
     }
