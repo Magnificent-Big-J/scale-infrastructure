@@ -46,21 +46,26 @@ class ClientService implements ClientServiceInterface
 
         $contracts = Contract::query()->where('client_id', $client->id)->count();
 
-        $outstanding = (float) Invoice::query()
-            ->where('client_id', $client->id)
-            ->open()
-            ->selectRaw('coalesce(sum(amount - amount_paid), 0) as total')
-            ->value('total');
+        // clients.view is held by every role; a client's invoice balance is
+        // not, so don't let this summary re-expose it to a role that lacks
+        // invoices.view.
+        $canViewInvoices = auth()->user()?->can('invoices.view') ?? false;
 
-        $overdue = Invoice::query()->where('client_id', $client->id)->overdue()->count();
+        $invoiceFigures = $canViewInvoices ? [
+            'outstanding_total' => round((float) Invoice::query()
+                ->where('client_id', $client->id)
+                ->open()
+                ->selectRaw('coalesce(sum(amount - amount_paid), 0) as total')
+                ->value('total'), 2),
+            'overdue_count' => Invoice::query()->where('client_id', $client->id)->overdue()->count(),
+        ] : [];
 
         return [
             'deployments_count' => $deployments,
             'active_agreements' => $activeAgreements,
             'open_tickets' => $openTickets,
             'contracts_count' => $contracts,
-            'outstanding_total' => round($outstanding, 2),
-            'overdue_count' => $overdue,
+            ...$invoiceFigures,
         ];
     }
 

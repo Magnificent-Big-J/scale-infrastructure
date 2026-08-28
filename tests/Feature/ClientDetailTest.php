@@ -37,6 +37,22 @@ class ClientDetailTest extends TestCase
         $this->assertGreaterThanOrEqual(1, $response->json('summary.open_tickets'));
     }
 
+    public function test_client_summary_hides_invoice_figures_without_invoices_permission(): void
+    {
+        $this->seed();
+
+        $client = Client::where('code', 'NALA-PROJECTS')->firstOrFail();
+
+        // operations has clients.view (as every role does) but not invoices.view.
+        $response = $this->actingAs(User::where('email', 'operations@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson("/api/v1/clients/{$client->id}")
+            ->assertOk();
+
+        $response->assertJsonMissingPath('summary.outstanding_total');
+        $response->assertJsonMissingPath('summary.overdue_count');
+        $response->assertJsonPath('summary.contracts_count', 1);
+    }
+
     public function test_contracts_index_filters_by_client(): void
     {
         $this->seed();
