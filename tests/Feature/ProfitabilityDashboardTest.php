@@ -197,13 +197,63 @@ class ProfitabilityDashboardTest extends TestCase
 
         $operations = User::where('email', 'operations@codescaletech.test')->firstOrFail();
 
-        // operations has reports.view but not reports.export.
+        // operations has reports.view but not reports.export - operations_health
+        // carries no additional permission requirement of its own, isolating
+        // this from the finance/profitability report-type gate below.
         $this->actingAs($operations, 'sanctum')
-            ->get('/api/v1/reports/finance_summary')
+            ->get('/api/v1/reports/operations_health')
             ->assertOk();
 
         $this->actingAs($operations, 'sanctum')
-            ->get('/api/v1/reports/finance_summary/export')
+            ->get('/api/v1/reports/operations_health/export')
             ->assertForbidden();
+    }
+
+    public function test_reports_index_hides_report_types_the_user_cannot_view(): void
+    {
+        $this->seed();
+
+        // operations has reports.view but neither billing.view nor
+        // profitability.view - it should see the 3 non-financial reports only.
+        $operations = User::where('email', 'operations@codescaletech.test')->firstOrFail();
+
+        $response = $this->actingAs($operations, 'sanctum')
+            ->getJson('/api/v1/reports')
+            ->assertOk()
+            ->assertJsonCount(3, 'data');
+
+        $values = collect($response->json('data'))->pluck('value');
+        $this->assertFalse($values->contains('finance_summary'));
+        $this->assertFalse($values->contains('profitability_summary'));
+    }
+
+    public function test_user_without_billing_permission_cannot_view_finance_summary(): void
+    {
+        $this->seed();
+
+        // operations has reports.view but not billing.view.
+        $this->actingAs(User::where('email', 'operations@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson('/api/v1/reports/finance_summary')
+            ->assertForbidden();
+    }
+
+    public function test_user_without_profitability_permission_cannot_view_profitability_summary(): void
+    {
+        $this->seed();
+
+        // sales has reports.view but not profitability.view.
+        $this->actingAs(User::where('email', 'sales@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson('/api/v1/reports/profitability_summary')
+            ->assertForbidden();
+    }
+
+    public function test_user_with_billing_permission_can_view_finance_summary(): void
+    {
+        $this->seed();
+
+        // finance has both reports.view and billing.view.
+        $this->actingAs(User::where('email', 'finance@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson('/api/v1/reports/finance_summary')
+            ->assertOk();
     }
 }
