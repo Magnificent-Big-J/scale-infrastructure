@@ -147,7 +147,7 @@ class ProfitabilityDashboardTest extends TestCase
         $this->actingAs($this->admin(), 'sanctum')
             ->getJson('/api/v1/reports')
             ->assertOk()
-            ->assertJsonCount(5, 'data')
+            ->assertJsonCount(6, 'data')
             ->assertJsonFragment(['value' => 'profitability_summary']);
     }
 
@@ -270,5 +270,35 @@ class ProfitabilityDashboardTest extends TestCase
         $this->actingAs(User::where('email', 'finance@codescaletech.test')->firstOrFail(), 'sanctum')
             ->getJson('/api/v1/reports/finance_summary')
             ->assertOk();
+    }
+
+    public function test_user_without_users_permission_cannot_view_access_review(): void
+    {
+        $this->seed();
+
+        // finance has reports.view but not users.view.
+        $this->actingAs(User::where('email', 'finance@codescaletech.test')->firstOrFail(), 'sanctum')
+            ->getJson('/api/v1/reports/access_review')
+            ->assertForbidden();
+    }
+
+    public function test_administrator_can_view_access_review_with_role_and_2fa_columns(): void
+    {
+        $this->seed();
+
+        $admin = $this->admin();
+
+        $response = $this->actingAs($admin, 'sanctum')
+            ->getJson('/api/v1/reports/access_review')
+            ->assertOk()
+            ->assertJsonPath('data.columns', ['User', 'Email', 'Roles', 'Permission count', '2FA required', '2FA enabled']);
+
+        $rows = collect($response->json('data.rows'));
+        $adminRow = $rows->firstWhere('0', $admin->name);
+
+        $this->assertNotNull($adminRow, 'Expected the admin user to appear in the access review rows.');
+        $this->assertSame('administrator', $adminRow[2]);
+        $this->assertSame('Yes', $adminRow[4], 'administrator is a 2FA-required role.');
+        $this->assertSame('No', $adminRow[5], 'seeded demo admin has not enrolled in 2FA.');
     }
 }

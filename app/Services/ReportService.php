@@ -14,9 +14,13 @@ use App\Models\Client;
 use App\Models\Deployment;
 use App\Models\LookupOption;
 use App\Models\ProfitabilityRecord;
+use App\Models\User;
+use Rainwaves\LaraAuthSuite\TwoFactor\Contracts\ITwoFactorAuth;
 
 class ReportService implements ReportServiceInterface
 {
+    public function __construct(private readonly ITwoFactorAuth $twoFactor) {}
+
     public function generate(ReportType $type): array
     {
         [$columns, $rows] = match ($type) {
@@ -25,6 +29,7 @@ class ReportService implements ReportServiceInterface
             ReportType::SupportSummary => $this->supportSummary(),
             ReportType::FinanceSummary => $this->financeSummary(),
             ReportType::ProfitabilitySummary => $this->profitabilitySummary(),
+            ReportType::AccessReview => $this->accessReview(),
         };
 
         return [
@@ -149,5 +154,30 @@ class ReportService implements ReportServiceInterface
             ->all();
 
         return [['Client', 'Period', 'Revenue', 'Cost', 'Profit', 'Margin %'], $rows];
+    }
+
+    private function accessReview(): array
+    {
+        $requiredRoles = config('security.two_factor_required_roles', []);
+        $requiredPermissions = config('security.two_factor_required_permissions', []);
+
+        $rows = User::query()
+            ->orderBy('name')
+            ->get()
+            ->map(function (User $user) use ($requiredRoles, $requiredPermissions) {
+                $twoFactorRequired = $user->hasAnyRole($requiredRoles) || $user->hasAnyPermission($requiredPermissions);
+
+                return [
+                    $user->name,
+                    $user->email,
+                    $user->getRoleNames()->implode(', ') ?: '-',
+                    $user->getAllPermissions()->count(),
+                    $twoFactorRequired ? 'Yes' : 'No',
+                    $this->twoFactor->isEnabled($user) ? 'Yes' : 'No',
+                ];
+            })
+            ->all();
+
+        return [['User', 'Email', 'Roles', 'Permission count', '2FA required', '2FA enabled'], $rows];
     }
 }

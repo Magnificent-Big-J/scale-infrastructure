@@ -9,6 +9,7 @@ enum ReportType: string
     case SupportSummary = 'support_summary';
     case FinanceSummary = 'finance_summary';
     case ProfitabilitySummary = 'profitability_summary';
+    case AccessReview = 'access_review';
 
     public function label(): string
     {
@@ -18,6 +19,7 @@ enum ReportType: string
             self::SupportSummary => 'Support Summary',
             self::FinanceSummary => 'Finance Summary',
             self::ProfitabilitySummary => 'Profitability Summary',
+            self::AccessReview => 'Access Review',
         };
     }
 
@@ -29,6 +31,7 @@ enum ReportType: string
             self::SupportSummary => 'Agreements, open tickets, and incidents per client.',
             self::FinanceSummary => 'Invoiced, paid, outstanding, and overdue amounts per client.',
             self::ProfitabilitySummary => 'Revenue, cost, profit, and margin per client and period.',
+            self::AccessReview => 'Every user, their roles, permission count, and two-factor status.',
         };
     }
 
@@ -40,20 +43,24 @@ enum ReportType: string
             self::SupportSummary => 'mdi-lifebuoy',
             self::FinanceSummary => 'mdi-cash-multiple',
             self::ProfitabilitySummary => 'mdi-finance',
+            self::AccessReview => 'mdi-shield-account-outline',
         };
     }
 
     /**
-     * These two summaries surface the same revenue/cost/invoice figures the
-     * billing and profitability modules already gate behind a dedicated
-     * permission - a report is just another view onto that data, so it
-     * shouldn't bypass the gate the underlying records are protected by.
+     * FinanceSummary/ProfitabilitySummary surface the same revenue/cost/
+     * invoice figures the billing and profitability modules already gate
+     * behind a dedicated permission - a report is just another view onto
+     * that data, so it shouldn't bypass the gate the underlying records are
+     * protected by. AccessReview lists every user's roles and 2FA status,
+     * which is exactly what users.view already gates on the Users page.
      */
     public function requiredPermission(): ?string
     {
         return match ($this) {
             self::FinanceSummary => 'billing.view',
             self::ProfitabilitySummary => 'profitability.view',
+            self::AccessReview => 'users.view',
             default => null,
         };
     }
