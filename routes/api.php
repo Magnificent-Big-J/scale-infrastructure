@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ContractController;
 use App\Http\Controllers\Api\DeploymentController;
 use App\Http\Controllers\Api\ExecutiveDashboardController;
 use App\Http\Controllers\Api\FinanceDashboardController;
+use App\Http\Controllers\Api\HealthController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\IntakeTicketController;
@@ -40,6 +41,11 @@ use App\Http\Controllers\PayFastController;
 use App\Http\Resources\AuthUserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Public, deliberately unauthenticated: a readiness probe for an uptime
+// monitor or load balancer, checking DB/cache/queue/storage/mail - deeper
+// than the framework's own /up, which only proves the app booted.
+Route::middleware('throttle:30,1')->get('health', [HealthController::class, 'show']);
 
 // Public, token-authenticated external ticket intake (inbound create only).
 Route::middleware(['intake.token:'.IntakeScope::TicketsCreate->value, 'throttle:60,1'])->post('intake/tickets', [IntakeTicketController::class, 'store']);

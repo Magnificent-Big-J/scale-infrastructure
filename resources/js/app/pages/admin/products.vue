@@ -154,7 +154,7 @@ import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
 import AppSectionCard from '../../components/AppSectionCard.vue';
 import AppStatCard from '../../components/AppStatCard.vue';
 import AppTextField from '../../components/AppTextField.vue';
-import { useToast, errorMessage } from '../../composables/useToast';
+import { useToast } from '../../composables/useToast';
 import { useProductsStore } from '../../stores/products';
 
 const toast = useToast();
