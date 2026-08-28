@@ -847,6 +847,12 @@ parameters:
 			path: app/Http/Resources/IncidentResource.php
 
 		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$monitoring_check_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
 			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$reference\.$#'
 			identifier: property.notFound
 			count: 1
@@ -2281,9 +2287,21 @@ parameters:
 			path: app/Services/CommercialOperationsService.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 2
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Left side of && is always false\.$#'
+			identifier: booleanAnd.leftAlwaysFalse
+			count: 1
 			path: app/Services/DeploymentService.php
 
 		-
@@ -2299,9 +2317,39 @@ parameters:
 			path: app/Services/DeploymentService.php
 
 		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
 			message: '#^Parameter \#1 \$deployment of method App\\Services\\DeploymentService\:\:log\(\) expects App\\Models\\Deployment, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
 			identifier: argument.type
+			count: 4
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Property App\\Models\\Incident\:\:\$status \(string\) does not accept App\\Enums\\IncidentStatus\:\:Resolved\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\MonitoringCheckStatus\:\:Failing will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
 			count: 2
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\MonitoringCheckStatus\:\:Passing will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
 			path: app/Services/DeploymentService.php
 
 		-
