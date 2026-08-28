@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           extensions: mbstring, dom, fileinfo, pdo, pdo_sqlite, sqlite3, bcmath, intl, zip, gd
           coverage: none
 
@@ -34,6 +34,9 @@ jobs:
 
       - name: Pint (style check)
         run: ./vendor/bin/pint --test
+
+      - name: PHPStan (Larastan)
+        run: ./vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
       - name: Copy environment file
         run: cp .env.example .env
@@ -71,6 +74,12 @@ jobs:
       - name: npm audit
         run: npm audit
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test:unit
+
       - name: Build
         run: npm run build
 
@@ -83,10 +92,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install gitleaks
+        env:
+          GITLEAKS_VERSION: 8.30.1
         run: |
-          latest_tag=$(curl -fsSL https://api.github.com/repos/gitleaks/gitleaks/releases/latest | grep -m1 '"tag_name"' | cut -d '"' -f4)
-          version=${latest_tag#v}
-          curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/${latest_tag}/gitleaks_${version}_linux_x64.tar.gz" -o gitleaks.tar.gz
+          curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" -o gitleaks.tar.gz
           tar -xzf gitleaks.tar.gz gitleaks
           sudo mv gitleaks /usr/local/bin/gitleaks
 

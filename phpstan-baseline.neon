@@ -1,0 +1,2503 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/ClientController.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/IntakeTicketController.php
+
+		-
+			message: '#^Call to function method_exists\(\) with App\\Models\\User and ''hasAnyPermission'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Middleware/EnsureTwoFactorEnrolled.php
+
+		-
+			message: '#^Call to function method_exists\(\) with App\\Models\\User and ''hasAnyRole'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Middleware/EnsureTwoFactorEnrolled.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$causer\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$event\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$log_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$properties\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$subject_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ActivityResource\:\:\$subject_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ActivityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Admin\\UserAdminResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Admin/UserAdminResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Admin\\UserAdminResource\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Admin/UserAdminResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Admin\\UserAdminResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Admin/UserAdminResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Admin\\UserAdminResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Admin/UserAdminResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\Admin\\UserAdminResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Admin/UserAdminResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AuthUserResource\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AuthUserResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AuthUserResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\AuthUserResource\:\:getAllPermissions\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\AuthUserResource\:\:getFirstMediaUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\AuthUserResource\:\:getRoleNames\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/AuthUserResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$changeRequest\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$change_request_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$finished_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$output_summary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$provisioningTemplate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$provisioning_template_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$started_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\AutomationRunResource\:\:\$triggeredBy\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/AutomationRunResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$cadence\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$contract\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$contract_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$ends_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$starts_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\BillingRecordResource\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/BillingRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$minimumPackage\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$minimum_package_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\CatalogueFeatureResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/CatalogueFeatureResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$approved_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$approver\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$risk\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$scheduled_for\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ChangeRequestResource\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ChangeRequestResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$health_score\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$legal_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$owner\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$owner_user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$package\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$package_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ClientResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ClientResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$is_primary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$role\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContactResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContactResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$ends_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$monthly_value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$package\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$package_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$renewal_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$starts_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ContractResource\:\:\$total_value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ContractResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$activeIntakeCredential\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$app_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$current_version\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$domain\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$environment\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$go_live_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$package\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$package_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\DeploymentResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/DeploymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$resolution_summary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$resolved_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$root_cause\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$severity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$started_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$currency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$monthly_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$private_ip\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$provider\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$public_ip\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$region\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$size\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InfrastructureAssetResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InfrastructureAssetResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$allowed_ips\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$expires_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$last_used_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IntakeCredentialResource\:\:\$scopes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IntakeCredentialResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$invoice_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$method\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$paid_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoicePaymentResource\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoicePaymentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$amount_paid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$contract\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$contract_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$due_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$external_reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$issued_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$outstanding\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\InvoiceResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\InvoiceResource\:\:isOverdue\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/InvoiceResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$metadata\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\LookupOptionResource\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/LookupOptionResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$headline\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$page_key\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ModuleDemoRecordResource\:\:\$summary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ModuleDemoRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$check_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$last_checked_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$last_success_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$target\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MonitoringCheckResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MonitoringCheckResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$contract\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$contract_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$expected_close_date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$lost_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$lost_reason\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$owner\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$owner_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$probability\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$prospect_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$source\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$stage\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\OpportunityResource\:\:\$won_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/OpportunityResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$billing_interval\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$currency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$price_max\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$price_min\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\PackageResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/PackageResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProductResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProductResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$email_verified_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfileResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\ProfileResource\:\:getFirstMediaUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Resources/ProfileResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$hosting_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$labour_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$margin\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$monitoring_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$other_cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$period\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$profit\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProfitabilityRecordResource\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\ProfitabilityRecordResource\:\:totalCost\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/ProfitabilityRecordResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$provider\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ProvisioningTemplateResource\:\:\$summary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ProvisioningTemplateResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$approved_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$approver\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$changeRequest\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$change_request_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$deployed_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$deployer\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$rollback_notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$rolled_back_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\ReleaseResource\:\:\$version\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/ReleaseResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$ends_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$included_hours\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$monthly_fee\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$response_sla_hours\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$starts_on\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$supportTier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportAgreementResource\:\:\$support_tier_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportAgreementResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$assignedUser\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$assigned_user_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$category\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$client\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$client_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$deployment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$deployment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$hours_logged\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$opened_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$resolved_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$severity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$source\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$subject\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$summary\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$supportAgreement\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTicketResource\:\:\$support_agreement_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\SupportTicketResource\:\:slaSnapshot\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/SupportTicketResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$best_for\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$currency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$included_hours\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$monthly_fee\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$response_sla_hours\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$service_review\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$sort_order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\SupportTierResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/SupportTierResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$author\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$body\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$is_internal\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\TicketCommentResource\:\:\$support_ticket_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/TicketCommentResource.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ChangeRequestStatus\:\:Approved will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/ChangeRequest.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/IntakeCredential.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Models/IntakeCredential.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Invoice\:\:\$outstanding\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Invoice.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:open\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/Invoice.php
+
+		-
+			message: '#^Cannot call method isOpen\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Invoice.php
+
+		-
+			message: '#^Cannot call method isPast\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/Invoice.php
+
+		-
+			message: '#^Offset string on string\|null on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Models/LookupOption.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$response_sla_hours\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/SupportTicket.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Enums\\SupportTicketStatus\:\:Resolved, App\\Enums\\SupportTicketStatus\:\:Closed\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Models/SupportTicket.php
+
+		-
+			message: '#^Cannot call method copy\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Models/SupportTicket.php
+
+		-
+			message: '#^Instanceof between string and App\\Enums\\SupportSeverity will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Models/SupportTicket.php
+
+		-
+			message: '#^Call to an undefined method Spatie\\Image\\Drivers\\ImageDriver\:\:nonQueued\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Providers/HorizonServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ClientService.php
+
+		-
+			message: '#^Method App\\Services\\ClientService\:\:createContact\(\) should return App\\Models\\Contact but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/ClientService.php
+
+		-
+			message: '#^Parameter \#1 \$client of method App\\Services\\ClientService\:\:clearPrimaryContact\(\) expects App\\Models\\Client, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/ClientService.php
+
+		-
+			message: '#^Parameter \#1 \$client of method App\\Services\\ClientService\:\:log\(\) expects App\\Models\\Client, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Services/ClientService.php
+
+		-
+			message: '#^Parameter \#1 \$contact of method App\\Services\\ClientService\:\:updateContact\(\) expects App\\Models\\Contact, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/ClientService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/CommercialOperationsService.php
+
+		-
+			message: '#^Method App\\Services\\CommercialOperationsService\:\:recordPayment\(\) should return App\\Models\\InvoicePayment but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/CommercialOperationsService.php
+
+		-
+			message: '#^Method App\\Services\\CommercialOperationsService\:\:settleStatus\(\) should return App\\Enums\\InvoiceStatus but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/CommercialOperationsService.php
+
+		-
+			message: '#^Property App\\Models\\Invoice\:\:\$status \(string\) does not accept App\\Enums\\InvoiceStatus\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/CommercialOperationsService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\InvoiceStatus\:\:Cancelled will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Services/CommercialOperationsService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Method App\\Services\\DeploymentService\:\:createInfrastructureAsset\(\) should return App\\Models\\InfrastructureAsset but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Method App\\Services\\DeploymentService\:\:createMonitoringCheck\(\) should return App\\Models\\MonitoringCheck but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Parameter \#1 \$deployment of method App\\Services\\DeploymentService\:\:log\(\) expects App\\Models\\Deployment, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Method App\\Services\\IntakeCredentialService\:\:issue\(\) should return array\{credential\: App\\Models\\IntakeCredential, plaintext\: string\} but returns array\{credential\: Illuminate\\Database\\Eloquent\\Model, plaintext\: non\-falsy\-string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/IntakeCredentialService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Services/OpportunityService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>lost_at" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/OpportunityService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>won_at" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/OpportunityService.php
+
+		-
+			message: '#^Cannot call method isTerminal\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Services/PayFastCheckoutService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\ProfitabilityRecord\:\:\$cost\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ProfitabilityService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isApproved\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Enums\\ChangeRequestStatus\:\:Approved, App\\Enums\\ChangeRequestStatus\:\:Rejected\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Enums\\ReleaseStatus\:\:Draft, App\\Enums\\ReleaseStatus\:\:PendingApproval\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ReleaseStatus\:\:Approved will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Enums\\ReleaseStatus\:\:Deployed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Services/ReleaseOperationsService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Client\:\:\$active_agreements_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Client\:\:\$open_incidents_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Client\:\:\$open_tickets_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Deployment\:\:\$failing_checks_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Client\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 2
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\Deployment\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\ProfitabilityRecord\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Services/ReportService.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Enums\\IncidentStatus\:\:Resolved, App\\Enums\\IncidentStatus\:\:Closed\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Services/SupportOperationsService.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Enums\\SupportTicketStatus\:\:Resolved, App\\Enums\\SupportTicketStatus\:\:Closed\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Services/SupportOperationsService.php
+
+		-
+			message: '#^Cannot call method format\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Services/SupportOperationsService.php
+
+		-
+			message: '#^Method App\\Services\\TicketCommentService\:\:create\(\) should return App\\Models\\TicketComment but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/TicketCommentService.php
+
+		-
+			message: '#^Method App\\Services\\TicketCommentService\:\:forTicket\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\TicketComment\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/TicketCommentService.php
+
+		-
+			message: '#^Parameter \#3 \$comment of method App\\Services\\TicketCommentService\:\:log\(\) expects App\\Models\\TicketComment, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/TicketCommentService.php
+
+		-
+			message: '#^Call to function method_exists\(\) with App\\Models\\User and ''syncPermissions'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: app/Services/UserAdminService.php
+
+		-
+			message: '#^Call to function method_exists\(\) with App\\Models\\User and ''syncRoles'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: app/Services/UserAdminService.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/DatabaseSeeder.php
+
+		-
+			message: '#^Comparison operation "\>" between 22000\|55000\|58000\|90000\|92000 and 0 is always true\.$#'
+			identifier: greater.alwaysTrue
+			count: 1
+			path: database/seeders/ProfitabilitySeeder.php
