@@ -18,6 +18,7 @@ class Incident extends Model
     protected $fillable = [
         'client_id',
         'deployment_id',
+        'monitoring_check_id',
         'reference',
         'title',
         'severity',
@@ -46,6 +47,11 @@ class Incident extends Model
     public function deployment(): BelongsTo
     {
         return $this->belongsTo(Deployment::class);
+    }
+
+    public function monitoringCheck(): BelongsTo
+    {
+        return $this->belongsTo(MonitoringCheck::class);
     }
 
     public function scopeSearch(Builder $query, ?string $term): Builder

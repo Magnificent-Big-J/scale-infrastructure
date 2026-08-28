@@ -3,12 +3,17 @@
 namespace App\Services;
 
 use App\Contracts\DeploymentServiceInterface;
+use App\Enums\IncidentStatus;
+use App\Enums\MonitoringCheckStatus;
+use App\Enums\SupportSeverity;
 use App\Models\Deployment;
+use App\Models\Incident;
 use App\Models\InfrastructureAsset;
 use App\Models\MonitoringCheck;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DeploymentService implements DeploymentServiceInterface
 {
@@ -131,13 +136,89 @@ class DeploymentService implements DeploymentServiceInterface
     public function updateMonitoringCheck(MonitoringCheck $check, array $data): MonitoringCheck
     {
         return DB::transaction(function () use ($check, $data) {
+            $wasFailing = $check->status === MonitoringCheckStatus::Failing;
+
             $check->fill($data);
             $check->save();
 
             $this->log($check->deployment, 'monitoring_updated', 'Updated monitoring check', ['check_id' => $check->id]);
 
+            if (! $wasFailing && $check->status === MonitoringCheckStatus::Failing) {
+                $this->openIncidentForFailingCheck($check);
+            } elseif ($wasFailing && $check->status === MonitoringCheckStatus::Passing) {
+                // Only a return to Passing counts as recovered - a Failing
+                // check moving to Warning/Paused is still unhealthy and
+                // should keep its incident open.
+                $this->resolveIncidentForRecoveredCheck($check);
+            }
+
             return $check->refresh()->load(['deployment.client']);
         });
+    }
+
+    /**
+     * Opens one incident per failing check, not per failure event: a check
+     * that keeps failing (or flaps) should not pile up duplicate open
+     * incidents. Severity/title are fixed, reasonable defaults - actual
+     * triage, escalation, and notification routing are an on-call process
+     * decision outside this service's scope.
+     */
+    private function openIncidentForFailingCheck(MonitoringCheck $check): void
+    {
+        $hasOpenIncident = Incident::query()
+            ->where('monitoring_check_id', $check->id)
+            ->whereNotIn('status', [IncidentStatus::Resolved, IncidentStatus::Closed])
+            ->exists();
+
+        if ($hasOpenIncident) {
+            return;
+        }
+
+        $incident = Incident::query()->create([
+            'client_id' => $check->deployment->client_id,
+            'deployment_id' => $check->deployment_id,
+            'monitoring_check_id' => $check->id,
+            'reference' => $this->uniqueIncidentReference(),
+            'title' => "{$check->name} check is failing",
+            'severity' => SupportSeverity::Medium,
+            'status' => IncidentStatus::Open,
+            'started_at' => now(),
+        ]);
+
+        $this->log($check->deployment, 'incident_auto_opened', 'Auto-opened incident for failing check', [
+            'check_id' => $check->id,
+            'incident_id' => $incident->id,
+        ]);
+    }
+
+    private function resolveIncidentForRecoveredCheck(MonitoringCheck $check): void
+    {
+        $incident = Incident::query()
+            ->where('monitoring_check_id', $check->id)
+            ->whereNotIn('status', [IncidentStatus::Resolved, IncidentStatus::Closed])
+            ->first();
+
+        if (! $incident) {
+            return;
+        }
+
+        $incident->status = IncidentStatus::Resolved;
+        $incident->resolved_at = now();
+        $incident->save();
+
+        $this->log($check->deployment, 'incident_auto_resolved', 'Auto-resolved incident for recovered check', [
+            'check_id' => $check->id,
+            'incident_id' => $incident->id,
+        ]);
+    }
+
+    private function uniqueIncidentReference(): string
+    {
+        do {
+            $reference = 'INC-'.now()->format('ymd').'-'.Str::upper(Str::random(4));
+        } while (Incident::query()->where('reference', $reference)->exists());
+
+        return $reference;
     }
 
     private function log(Deployment $deployment, string $event, string $message, array $properties = []): void

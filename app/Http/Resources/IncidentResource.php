@@ -20,6 +20,7 @@ class IncidentResource extends JsonResource
             'client_name' => $this->whenLoaded('client', fn () => $this->client?->name),
             'deployment_id' => $this->deployment_id,
             'deployment_name' => $this->whenLoaded('deployment', fn () => $this->deployment?->name),
+            'monitoring_check_id' => $this->monitoring_check_id,
             'reference' => $this->reference,
             'title' => $this->title,
             'severity' => $severity?->value,
