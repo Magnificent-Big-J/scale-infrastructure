@@ -118,6 +118,8 @@ class ReleaseOperationsService implements ReleaseOperationsServiceInterface
             'Only approved releases can be deployed.',
         );
 
+        $this->guardSegregationOfDuties($release->approved_by, 'You approved this release and cannot also deploy it.');
+
         return DB::transaction(function () use ($release) {
             $release->forceFill([
                 'status' => ReleaseStatus::Deployed,
@@ -188,6 +190,10 @@ class ReleaseOperationsService implements ReleaseOperationsServiceInterface
             'This change request has already been decided.',
         );
 
+        if ($approved) {
+            $this->guardSegregationOfDuties($changeRequest->requested_by, 'You requested this change and cannot also approve it.');
+        }
+
         return DB::transaction(function () use ($changeRequest, $approved) {
             $changeRequest->forceFill([
                 'status' => $approved ? ChangeRequestStatus::Approved : ChangeRequestStatus::Rejected,
@@ -255,6 +261,23 @@ class ReleaseOperationsService implements ReleaseOperationsServiceInterface
         if (! $passes) {
             throw ValidationException::withMessages([$field => [$message]]);
         }
+    }
+
+    /**
+     * Enforce segregation of duties: the acting user cannot be the same
+     * person as $priorActorId (a change request's requester, or a release's
+     * approver). Administrator is exempt - the one break-glass role, so a
+     * single admin can still ship a release end-to-end when no one else is
+     * available, rather than this becoming an operational deadlock for a
+     * small team.
+     */
+    private function guardSegregationOfDuties(?int $priorActorId, string $message): void
+    {
+        if ($priorActorId === null || auth()->user()?->hasRole('administrator')) {
+            return;
+        }
+
+        $this->guard(auth()->id() !== $priorActorId, 'segregation_of_duties', $message);
     }
 
     private function log(string $domain, Model $subject, string $event, string $message, array $properties = []): void
