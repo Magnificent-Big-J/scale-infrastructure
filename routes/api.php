@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\DeploymentController;
 use App\Http\Controllers\Api\ExecutiveDashboardController;
 use App\Http\Controllers\Api\FinanceDashboardController;
 use App\Http\Controllers\Api\HealthController;
+use App\Http\Controllers\Api\IncidentCommentController;
 use App\Http\Controllers\Api\IncidentController;
 use App\Http\Controllers\Api\InfrastructureAssetController;
 use App\Http\Controllers\Api\IntakeTicketController;
@@ -118,8 +119,12 @@ Route::middleware(['auth:sanctum', 'two_factor.required'])->prefix('v1')->group(
 
     Route::middleware('can:incidents.view')->group(function () {
         Route::get('incidents', [IncidentController::class, 'index']);
+        Route::get('incidents/{incident}', [IncidentController::class, 'show']);
         Route::middleware('can:incidents.create')->post('incidents', [IncidentController::class, 'store']);
         Route::middleware('can:incidents.update')->match(['put', 'patch'], 'incidents/{incident}', [IncidentController::class, 'update']);
+
+        Route::get('incidents/{incident}/comments', [IncidentCommentController::class, 'index']);
+        Route::middleware('can:incidents.comment')->post('incidents/{incident}/comments', [IncidentCommentController::class, 'store']);
     });
 
     Route::middleware('can:releases.view')->group(function () {

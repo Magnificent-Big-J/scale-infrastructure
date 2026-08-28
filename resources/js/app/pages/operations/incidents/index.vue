@@ -18,7 +18,7 @@
                     <AppSelect v-model="filters.status" :items="statusFilterItems" label="Status" class="support__filter" @update:model-value="onFilter" />
                     <AppSelect v-model="filters.severity" :items="severityFilterItems" label="Severity" class="support__filter" @update:model-value="onFilter" />
                 </AppFilterBar>
-                <AppDataTable title="All incidents" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No incidents found" empty-text="Log the first incident." @page-change="onPage" @row-click="openEdit">
+                <AppDataTable title="All incidents" :columns="columns" :rows="store.rows" :meta="store.meta" :loading="store.loading" empty-title="No incidents found" empty-text="Log the first incident." @page-change="onPage" @row-click="goToDetail">
                     <template #row="{ row }">
                         <td><div class="support-cell"><strong>{{ row.title }}</strong><small>{{ row.reference }} · {{ row.client_name }}</small></div></td>
                         <td><span class="text-sm">{{ row.deployment_name || '-' }}</span></td>
@@ -71,15 +71,18 @@
 </route>
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue';
-import AppFilterBar from '../../components/AppFilterBar.vue';
-import AppModal from '../../components/AppModal.vue';
-import AppSectionCard from '../../components/AppSectionCard.vue';
-import AppStatCard from '../../components/AppStatCard.vue';
-import AppRichTextEditor from '../../components/AppRichTextEditor.vue';
-import AppTextField from '../../components/AppTextField.vue';
-import { useToast, errorMessage } from '../../composables/useToast';
-import { useIncidentsStore } from '../../stores/incidents';
+import { useRouter } from 'vue-router';
+import AppFilterBar from '../../../components/AppFilterBar.vue';
+import AppModal from '../../../components/AppModal.vue';
+import AppSectionCard from '../../../components/AppSectionCard.vue';
+import AppStatCard from '../../../components/AppStatCard.vue';
+import AppRichTextEditor from '../../../components/AppRichTextEditor.vue';
+import AppTextField from '../../../components/AppTextField.vue';
+import { useToast, errorMessage } from '../../../composables/useToast';
+import { useIncidentsStore } from '../../../stores/incidents';
 
+const router = useRouter();
+const goToDetail = (row) => router.push(`/operations/incidents/${row.id}`);
 const toast = useToast();
 const store = useIncidentsStore();
 const inlineBusy = ref(null);

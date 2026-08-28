@@ -45,6 +45,13 @@ class IncidentController extends Controller
         ]);
     }
 
+    public function show(Incident $incident): JsonResponse
+    {
+        $incident->load(['client', 'deployment']);
+
+        return response()->json(['data' => new IncidentResource($incident)]);
+    }
+
     public function store(StoreIncidentRequest $request): JsonResponse
     {
         return response()->json(new IncidentResource($this->service->createIncident($request->validated())), 201);

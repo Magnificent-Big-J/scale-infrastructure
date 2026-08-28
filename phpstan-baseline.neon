@@ -817,6 +817,36 @@ parameters:
 			path: app/Http/Resources/DeploymentResource.php
 
 		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentCommentResource\:\:\$author\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentCommentResource\:\:\$body\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentCommentResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentCommentResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentCommentResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentCommentResource\:\:\$incident_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/IncidentCommentResource.php
+
+		-
 			message: '#^Access to an undefined property App\\Http\\Resources\\IncidentResource\:\:\$client\.$#'
 			identifier: property.notFound
 			count: 1
@@ -2351,6 +2381,24 @@ parameters:
 			identifier: identical.alwaysFalse
 			count: 1
 			path: app/Services/DeploymentService.php
+
+		-
+			message: '#^Method App\\Services\\IncidentCommentService\:\:create\(\) should return App\\Models\\IncidentComment but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/IncidentCommentService.php
+
+		-
+			message: '#^Method App\\Services\\IncidentCommentService\:\:forIncident\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\IncidentComment\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/IncidentCommentService.php
+
+		-
+			message: '#^Parameter \#3 \$comment of method App\\Services\\IncidentCommentService\:\:log\(\) expects App\\Models\\IncidentComment, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/IncidentCommentService.php
 
 		-
 			message: '#^Method App\\Services\\IntakeCredentialService\:\:issue\(\) should return array\{credential\: App\\Models\\IntakeCredential, plaintext\: string\} but returns array\{credential\: Illuminate\\Database\\Eloquent\\Model, plaintext\: non\-falsy\-string\}\.$#'

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Incident extends Model
@@ -52,6 +53,11 @@ class Incident extends Model
     public function monitoringCheck(): BelongsTo
     {
         return $this->belongsTo(MonitoringCheck::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(IncidentComment::class);
     }
 
     public function scopeSearch(Builder $query, ?string $term): Builder
