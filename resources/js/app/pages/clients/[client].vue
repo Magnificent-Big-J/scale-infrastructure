@@ -13,12 +13,12 @@
                 </template>
             </AppPageHeader>
 
-            <div class="clients__stats clients__stats--five">
+            <div class="clients__stats" :class="canViewInvoices ? 'clients__stats--five' : 'clients__stats--four'">
                 <AppStatCard label="Deployments" :value="String(summary.deployments_count)" helper="Environments" icon="mdi-rocket-launch-outline" status="active" />
                 <AppStatCard label="Active agreements" :value="String(summary.active_agreements)" helper="Support retainers" icon="mdi-handshake-outline" status="active" />
                 <AppStatCard label="Open tickets" :value="String(summary.open_tickets)" helper="Unresolved support" icon="mdi-ticket-confirmation-outline" status="processing" />
                 <AppStatCard label="Contracts" :value="String(summary.contracts_count)" helper="Commercial agreements" icon="mdi-file-sign" status="active" />
-                <AppStatCard label="Outstanding" :value="formatAmount(summary.outstanding_total)" :helper="`${summary.overdue_count} overdue`" icon="mdi-receipt-text-clock-outline" :status="summary.overdue_count ? 'suspended' : 'processing'" />
+                <AppStatCard v-if="canViewInvoices" label="Outstanding" :value="formatAmount(summary.outstanding_total)" :helper="`${summary.overdue_count} overdue`" icon="mdi-receipt-text-clock-outline" :status="summary.overdue_count ? 'suspended' : 'processing'" />
             </div>
 
             <AppSectionCard title="Client workspace" subtitle="Overview, contacts, deployments, support, and commercial position.">
@@ -27,8 +27,8 @@
                     <v-tab value="contacts">Contacts</v-tab>
                     <v-tab value="deployments">Deployments</v-tab>
                     <v-tab value="support">Support</v-tab>
-                    <v-tab value="commercial">Commercial</v-tab>
-                    <v-tab value="profitability">Profitability</v-tab>
+                    <v-tab v-if="canViewContracts" value="commercial">Commercial</v-tab>
+                    <v-tab v-if="canViewProfitability" value="profitability">Profitability</v-tab>
                     <v-tab v-if="canViewActivity" value="activity">Activity</v-tab>
                 </v-tabs>
 
@@ -91,7 +91,7 @@
                                 <td><AppStatusBadge :status="row.status_color || row.status" :label="row.status_label || row.status" /></td>
                             </template>
                         </AppDataTable>
-                        <AppDataTable title="Invoices" :columns="invoiceColumns" :rows="tabs.invoices.rows" :meta="noMeta" :loading="loading.commercial" empty-title="No invoices" empty-text="No invoices for this client." class="detail-stacked">
+                        <AppDataTable v-if="canViewInvoices" title="Invoices" :columns="invoiceColumns" :rows="tabs.invoices.rows" :meta="noMeta" :loading="loading.commercial" empty-title="No invoices" empty-text="No invoices for this client." class="detail-stacked">
                             <template #row="{ row }">
                                 <td><div class="detail-cell"><strong>{{ row.number }}</strong><small>{{ row.due_on || '-' }}</small></div></td>
                                 <td><span class="text-sm">{{ formatAmount(row.amount) }}</span></td>
@@ -148,6 +148,9 @@ const session = useSessionStore();
 const clientId = route.params.client;
 
 const canViewActivity = computed(() => session.user?.permissions?.includes('activity.view') ?? false);
+const canViewContracts = computed(() => session.user?.permissions?.includes('contracts.view') ?? false);
+const canViewInvoices = computed(() => session.user?.permissions?.includes('invoices.view') ?? false);
+const canViewProfitability = computed(() => session.user?.permissions?.includes('profitability.view') ?? false);
 
 const tab = ref('overview');
 const client = ref(null);
@@ -221,12 +224,14 @@ const loadTab = async (name) => {
     if (name === 'commercial' && !loaded.commercial) {
         loading.commercial = true;
         try {
-            const [contracts, invoices] = await Promise.all([
-                v1(`contracts?client_id=${clientId}&per_page=100`),
-                v1(`invoices?client_id=${clientId}&per_page=100`),
-            ]);
-            tabs.contracts.rows = listRows(contracts);
-            tabs.invoices.rows = listRows(invoices);
+            // Independent calls, not Promise.all: a sales user can see
+            // contracts but not invoices, and one 403 shouldn't blank both.
+            if (canViewContracts.value) {
+                tabs.contracts.rows = listRows(await v1(`contracts?client_id=${clientId}&per_page=100`));
+            }
+            if (canViewInvoices.value) {
+                tabs.invoices.rows = listRows(await v1(`invoices?client_id=${clientId}&per_page=100`));
+            }
             loaded.commercial = true;
         } finally {
             loading.commercial = false;
@@ -252,8 +257,10 @@ onMounted(loadClient);
 
 <style scoped>
 .clients__stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.9rem; }
+.clients__stats--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .detail-grid dd small { color: var(--rw-muted); }
 .detail-stacked { margin-top: 1.25rem; }
 @media (max-width: 1200px) { .clients__stats--five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 960px) { .clients__stats, .clients__stats--five { grid-template-columns: 1fr; } }
+@media (max-width: 1200px) { .clients__stats--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 960px) { .clients__stats, .clients__stats--five, .clients__stats--four { grid-template-columns: 1fr; } }
 </style>
