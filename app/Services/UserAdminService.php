@@ -9,11 +9,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Rainwaves\LaraAuthSuite\Contracts\AuthenticationStateRevoker;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserAdminService implements UserAdminServiceInterface
 {
+    public function __construct(private readonly AuthenticationStateRevoker $revoker) {}
+
     public function paginate(int $perPage = 15, ?string $search = null, ?string $role = null): LengthAwarePaginator
     {
         return User::query()
@@ -84,6 +87,14 @@ class UserAdminService implements UserAdminServiceInterface
 
             if ($this->permissionTablesReady() && is_array($permissions) && method_exists($user, 'syncPermissions')) {
                 $user->syncPermissions($permissions);
+            }
+
+            // A demoted or deprivileged user's existing session/tokens must
+            // not keep working under the old access - the same class of
+            // access-boundary revocation the password-reset flow already
+            // does, applied to admin-driven access changes too.
+            if ($roles !== null || $permissions !== null) {
+                $this->revoker->revoke($user);
             }
 
             if (function_exists('activity')) {

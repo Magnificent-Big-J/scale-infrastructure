@@ -22,7 +22,7 @@ class InfrastructureAssetResource extends JsonResource
             'provider' => $this->provider,
             'region' => $this->region,
             'size' => $this->size,
-            'monthly_cost' => $this->monthly_cost,
+            'monthly_cost' => $this->when($request->user()?->can('profitability.view') ?? false, $this->monthly_cost),
             'currency' => $this->currency,
             'public_ip' => $this->public_ip,
             'private_ip' => $this->private_ip,

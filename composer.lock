@@ -4232,16 +4232,16 @@
         },
         {
             "name": "rainwaves/lara-auth-suite",
-            "version": "v2.1.4",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Magnificent-Big-J/lara-auth-suite.git",
-                "reference": "32dba465680c5a1d2a1bd428c585369721edef6a"
+                "reference": "fb27419858f2ac1a87bc070ef9416ecec2aa352b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Magnificent-Big-J/lara-auth-suite/zipball/32dba465680c5a1d2a1bd428c585369721edef6a",
-                "reference": "32dba465680c5a1d2a1bd428c585369721edef6a",
+                "url": "https://api.github.com/repos/Magnificent-Big-J/lara-auth-suite/zipball/fb27419858f2ac1a87bc070ef9416ecec2aa352b",
+                "reference": "fb27419858f2ac1a87bc070ef9416ecec2aa352b",
                 "shasum": ""
             },
             "require": {
@@ -4281,9 +4281,9 @@
             "description": "Laravel API auth suite: Sanctum tokens & session modes, password reset, and 2FA.",
             "support": {
                 "issues": "https://github.com/Magnificent-Big-J/lara-auth-suite/issues",
-                "source": "https://github.com/Magnificent-Big-J/lara-auth-suite/tree/v2.1.4"
+                "source": "https://github.com/Magnificent-Big-J/lara-auth-suite/tree/v2.1.5"
             },
-            "time": "2026-08-17T08:03:29+00:00"
+            "time": "2026-08-27T22:16:12+00:00"
         },
         {
             "name": "rainwaves/payfast-payment",
@@ -10336,12 +10336,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }

@@ -59,4 +59,21 @@ class TwoFactorEnforcementTest extends TestCase
             ->getJson('/api/v1/clients')
             ->assertOk();
     }
+
+    public function test_user_gated_by_a_directly_granted_sensitive_permission_not_by_role(): void
+    {
+        $this->seed();
+        config(['authx.2fa.enforcement' => 'required']);
+
+        // A support user isn't in two_factor_required_roles, but directly
+        // granting a sensitive permission (independent of role) must still
+        // trigger the gate - that's the whole point of permission-risk MFA.
+        $user = $this->support();
+        $user->givePermissionTo('payments.create');
+
+        $this->actingAs($user, 'sanctum')
+            ->getJson('/api/v1/support-tickets')
+            ->assertStatus(403)
+            ->assertJsonPath('code', 'two_factor_setup_required');
+    }
 }

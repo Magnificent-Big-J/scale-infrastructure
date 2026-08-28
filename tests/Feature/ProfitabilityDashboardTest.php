@@ -152,8 +152,12 @@ class ProfitabilityDashboardTest extends TestCase
         $this->seed();
         Excel::fake();
 
-        $this->actingAs($this->admin(), 'sanctum')
-            ->get('/api/v1/reports/finance_summary/export')
+        $admin = $this->admin();
+        $this->actingAs($admin, 'web');
+        $this->actingAs($admin, 'sanctum');
+        $this->postJson('/auth/session/password/confirm', ['password' => 'password'])->assertOk();
+
+        $this->get('/api/v1/reports/finance_summary/export')
             ->assertOk();
 
         Excel::assertDownloaded(
